@@ -1,4 +1,4 @@
 package ProjectConstructor;
 
-public class Order {
+public class FakeDatabase {
 }

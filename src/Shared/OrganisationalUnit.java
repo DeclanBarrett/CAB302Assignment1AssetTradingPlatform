@@ -1,4 +1,4 @@
-package ProjectConstructor;
+package Shared;
 
 public class OrganisationalUnit {
 }
