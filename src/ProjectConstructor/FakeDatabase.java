@@ -16,13 +16,13 @@ public class FakeDatabase implements IDatabase {
     private ArrayList<Order> orderTable;
 
     /**
-     * TODO TURN INTO REAL DATABASE CONNECTION
+     * TODO TURN INTO REAL DATABASE
      * Populating the mock database with values
      */
     public FakeDatabase() {
         databaseConnected = false;
 
-        userTable = new ArrayList<User>();
+        userTable = new ArrayList<>();
         userTable.add(new User("User 1", "qwerty", AccountType.User, "Sales"));
         userTable.add(new User("User 2", "qwert", AccountType.User, "Sales"));
         userTable.add(new User("User 3", "1234", AccountType.User, "Finance"));
@@ -43,10 +43,15 @@ public class FakeDatabase implements IDatabase {
         userTable.add(new User("User 12", "qwerty", AccountType.UnitLeader, "Research"));
         userTable.add(new User("User 13", "qwerty", AccountType.UnitLeader, "Research"));
 
-        organisationalUnitTable.add(new OrganisationalUnit());
-        organisationalUnitTable.add(new OrganisationalUnit());
-        organisationalUnitTable.add(new OrganisationalUnit());
-        organisationalUnitTable.add(new OrganisationalUnit());
+        HashMap<String, Integer> organisationAssets = new HashMap<>();
+        organisationAssets.put("Paper", 50);
+        organisationAssets.put("CPU hours", 600);
+        organisationAssets.put("Pickles", 50);
+        organisationAssets.put("Casino Chips", 50);
+        organisationalUnitTable.add(new OrganisationalUnit("Sales", 3000.50, organisationAssets));
+        organisationalUnitTable.add(new OrganisationalUnit("Finance", 100, organisationAssets));
+        organisationalUnitTable.add(new OrganisationalUnit("Research", 90, organisationAssets));
+        organisationalUnitTable.add(new OrganisationalUnit("Admin", 0, organisationAssets));
     }
 
     @Override
