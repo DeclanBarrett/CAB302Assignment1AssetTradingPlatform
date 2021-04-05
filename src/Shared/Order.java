@@ -7,6 +7,13 @@ import java.util.Date;
  */
 public class Order {
 
+    OrderType orderType;
+    String assetType;
+    int assetQuantity;
+    double requestPrice;
+    String organisationalUnitName;
+    Date date;
+
     /**
      * Generates an Order using the OrganisationalUnit object
      * @param orderType Buy or Sell order
@@ -18,6 +25,12 @@ public class Order {
      * @param date The Date in milliseconds when the Order was placed
      */
     public Order(OrderType orderType, String assetType, int assetQuantity, double requestPrice, OrganisationalUnit organisationalUnit, Date date) {
+        this.orderType = orderType;
+        this.assetType = assetType;
+        this.assetQuantity = assetQuantity;
+        this.requestPrice = requestPrice;
+        this.organisationalUnitName = organisationalUnit.GetUnitName();
+        this.date = date;
     }
 
     /**
@@ -31,6 +44,12 @@ public class Order {
      * @param date The Date in milliseconds when the Order was placed
      */
     public Order(OrderType orderType, String assetType, int assetQuantity, double requestPrice, String organisationalName, Date date) {
+        this.orderType = orderType;
+        this.assetType = assetType;
+        this.assetQuantity = assetQuantity;
+        this.requestPrice = requestPrice;
+        this.organisationalUnitName = organisationalName;
+        this.date = date;
     }
 
     /**
@@ -38,7 +57,7 @@ public class Order {
      * @return The
      */
     public OrderType GetOrderType() {
-        return null;
+        return orderType;
     }
 
     /**
@@ -46,7 +65,7 @@ public class Order {
      * @return
      */
     public String GetAssetType() {
-        return null;
+        return assetType;
     }
 
     /**
@@ -54,15 +73,15 @@ public class Order {
      * @return
      */
     public int GetAssetQuantity() {
-        return 0;
+        return assetQuantity;
     }
 
     /**
      *
      * @return
      */
-    public float GetRequestPrice() {
-        return 0;
+    public double GetRequestPrice() {
+        return requestPrice;
     }
 
     /**
@@ -70,7 +89,7 @@ public class Order {
      * @return
      */
     public String GetOrganisationalUnit() {
-        return null;
+        return organisationalUnitName;
     }
 
     /**
@@ -78,6 +97,6 @@ public class Order {
      * @return
      */
     public Date GetDate() {
-        return null;
+        return date;
     }
 }

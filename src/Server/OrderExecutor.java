@@ -2,8 +2,11 @@ package Server;
 
 import Shared.Order;
 
+import java.util.ArrayList;
+
 public class OrderExecutor {
 
+    private ArrayList<Order> orderList;
 
     private void UpdateOrders(Order order) {
 

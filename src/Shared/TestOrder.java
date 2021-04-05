@@ -13,7 +13,7 @@ public class TestOrder {
 
     @BeforeEach
     public void ConstructOrder(){
-        order = new Order(OrderType.BUY, "Paper", 50, 3.5, new OrganisationalUnit(), new Date());
+        order = new Order(OrderType.BUY, "Paper", 50, 3.5, "Sales", new Date());
     }
 
     @Test
@@ -36,7 +36,7 @@ public class TestOrder {
 
     @Test
     public void TestRequestPrice() {
-        float price = order.GetRequestPrice();
+        double price = order.GetRequestPrice();
         assertEquals(3.5, price);
     }
 

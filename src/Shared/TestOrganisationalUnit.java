@@ -46,7 +46,7 @@ public class TestOrganisationalUnit {
     }
 
     @Test
-    public void TestGetQuantity(String asset) {
+    public void TestGetQuantity() {
         int quantity = organisationalUnit.GetQuantity("Casino Chips");
         assertEquals(50, quantity);
     }

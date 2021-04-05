@@ -3,22 +3,30 @@ package Shared;
 import java.util.HashMap;
 
 public class OrganisationalUnit {
+
+    String name;
+    double credits;
+    HashMap<String, Integer> organisationAssets;
+
     public OrganisationalUnit(String name, double credits, HashMap<String, Integer> organisationAssets) {
+        this.name = name;
+        this.credits = credits;
+        this.organisationAssets = organisationAssets;
     }
 
     public String GetUnitName() {
-        return null;
+        return name;
     }
 
     public double GetCredits() {
-        return 0;
+        return credits;
     }
 
-    public int GetQuantity(String casino_chips) {
-        return 0;
+    public int GetQuantity(String assetName) {
+        return organisationAssets.get(assetName);
     }
 
     public HashMap<String, Integer> GetAllAssets() {
-        return null;
+        return organisationAssets;
     }
 }
