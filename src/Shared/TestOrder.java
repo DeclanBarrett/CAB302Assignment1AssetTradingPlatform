@@ -18,7 +18,7 @@ public class TestOrder {
 
     @Test
     public void TestOrderType() {
-        OrderType orderType = order.OrderType();
+        OrderType orderType = order.GetOrderType();
         assertEquals(OrderType.BUY, orderType);
     }
 

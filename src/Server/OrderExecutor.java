@@ -4,7 +4,12 @@ import Shared.Order;
 
 public class OrderExecutor {
 
-    private void GenerateTrade() {
+
+    private void UpdateOrders(Order order) {
+
+    }
+
+    private void GenerateTrade(Order buyOrder, Order sellOrder) {
 
     }
 
