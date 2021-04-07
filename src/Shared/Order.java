@@ -54,7 +54,7 @@ public class Order {
 
     /**
      *
-     * @return The
+     * @return The type of order requested. Either Buy or Sell.
      */
     public OrderType GetOrderType() {
         return orderType;
@@ -62,7 +62,7 @@ public class Order {
 
     /**
      *
-     * @return
+     * @return Type of asset requested.
      */
     public String GetAssetType() {
         return assetType;
@@ -70,7 +70,7 @@ public class Order {
 
     /**
      *
-     * @return
+     * @return Quantity of asset requested
      */
     public int GetAssetQuantity() {
         return assetQuantity;
@@ -78,7 +78,7 @@ public class Order {
 
     /**
      *
-     * @return
+     * @return Price attached to order.
      */
     public double GetRequestPrice() {
         return requestPrice;
@@ -86,7 +86,7 @@ public class Order {
 
     /**
      *
-     * @return
+     * @return Organisational unit that has placed the Buy/Sell order.
      */
     public String GetOrganisationalUnit() {
         return organisationalUnitName;
@@ -94,7 +94,7 @@ public class Order {
 
     /**
      *
-     * @return
+     * @return Date on which the Buy/Sell order was placed.
      */
     public Date GetDate() {
         return date;
