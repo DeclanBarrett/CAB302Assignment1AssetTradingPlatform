@@ -1,5 +1,6 @@
-package Client;
+package Server;
 
+import Server.OrderManager;
 import Shared.AccountType;
 import Shared.Order;
 import Shared.OrganisationalUnit;
@@ -14,12 +15,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestClientOrderManager {
 
-    ClientOrderManager orderManager;
+    OrderManager orderManager;
 
     @BeforeEach
     public void ConstructClientOrderManager(){
 
-        orderManager = new ClientOrderManager();
+        orderManager = new OrderManager();
 
     }
 
