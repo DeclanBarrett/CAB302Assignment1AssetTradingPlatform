@@ -11,19 +11,21 @@ public class TradingGUI extends JFrame implements Observer {
 
     //private static final long serialVersionUID = -8851746420097089647L;
 
+    //Global GUI variables
     public static final int WIDTH = 900;
     public static final int HEIGHT = 600;
     private static final int FONT_SIZE = 50;
 
+    //The tabbed pane that all logged in panels are placed in
     private JTabbedPane mainPane;
 
-
-
+    //Non-Admin Panels
     private JPanel userTradePanel;
     private JPanel loginPanel;
     private JPanel resetPanel;
     private JPanel userOrganisationPanel;
 
+    //Admin Panels
     private JPanel serverTradePanel;
     private JPanel serverOrganisationPanel;
     private JPanel serverManageUserPanel;
@@ -35,25 +37,18 @@ public class TradingGUI extends JFrame implements Observer {
 
     private JPanel loginButtonPanel;
     private JButton loginButton;
-    /*
-    private JButton redButton;
 
-    private JButton blueButton;
-
-    private JButton whiteButton;
-
-    private JMenuItem redChoice;
-
-    private JMenuItem blueChoice;
-
-    private JMenuItem whiteChoice;
-
+    /**
+     * Creates the JFrame GUI
      */
     public TradingGUI() {
         super("Unknown Organisation's Trading Platform");
         initComponents();
     }
 
+    /**
+     * Initital components (login screen)
+     */
     private void initComponents() {
 
         setSize(WIDTH, HEIGHT);
@@ -71,94 +66,22 @@ public class TradingGUI extends JFrame implements Observer {
 
         getContentPane().add(initialLoginPanel);
 
-
-
-        /*
-        redPanel = new JPanel();
-        redPanel.setBackground(Color.LIGHT_GRAY);
-        bluePanel = new JPanel();
-        bluePanel.setBackground(Color.LIGHT_GRAY);
-        whitePanel = new JPanel();
-        whitePanel.setBackground(Color.LIGHT_GRAY);
-
-        JPanel biggerPanel = new JPanel();
-        biggerPanel.setLayout(new GridLayout(1, 3));
-        biggerPanel.add(redPanel);
-        biggerPanel.add(bluePanel);
-        biggerPanel.add(whitePanel);
-        add(biggerPanel, BorderLayout.CENTER);
-
-        redButton = new JButton("Red");
-        blueButton = new JButton("Blue");
-        whiteButton = new JButton("White");
-        redButton.setBackground(Color.RED);
-        blueButton.setBackground(Color.BLUE);
-        whiteButton.setBackground(Color.WHITE);
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(Color.LIGHT_GRAY);
-        buttonPanel.setLayout(new FlowLayout());
-        buttonPanel.add(redButton);
-        buttonPanel.add(blueButton);
-        buttonPanel.add(whiteButton);
-        add(buttonPanel, BorderLayout.SOUTH);
-
-        redChoice = new JMenuItem("Red");
-        blueChoice = new JMenuItem("Blue");
-        whiteChoice = new JMenuItem("White");
-        JMenu colourMenu = new JMenu("Add Colours");
-        colourMenu.add(redChoice);
-        colourMenu.add(blueChoice);
-        colourMenu.add(whiteChoice);
-
-         */
-
-        /*
-        JMenuBar bar = new JMenuBar();
-        bar.add(colourMenu);
-        setJMenuBar(bar);
-
-         */
     }
 
+    /**
+     * Gets Login Button JButton
+     * @return The JButton
+     */
     public JButton getLoginButton() {
         return loginButton;
     }
 
-    /*
-    public JButton getBlueButton() {
-        return blueButton;
-    }
-
-    public JMenuItem getBlueChoice() {
-        return blueChoice;
-    }
-
-    public JButton getRedButton() {
-        return redButton;
-    }
-
-    public JMenuItem getRedChoice() {
-        return redChoice;
-    }
-
-    public JButton getWhiteButton() {
-        return whiteButton;
-    }
-
-    public JMenuItem getWhiteChoice() {
-        return whiteChoice;
-    }
+    /**
+     * Adds a listener to the login button
+     * @param listener Listener
      */
-
     public void addActionListener(ActionListener listener) {
         loginButton.addActionListener(listener);
-        //redButton.addActionListener(listener);
-        //blueButton.addActionListener(listener);
-        //whiteButton.addActionListener(listener);
-        //redChoice.addActionListener(listener);
-        //blueChoice.addActionListener(listener);
-        //whiteChoice.addActionListener(listener);
     }
 
     @Override
@@ -167,26 +90,14 @@ public class TradingGUI extends JFrame implements Observer {
         TradingModel model = (TradingModel) s;
 
         if (model.getLoggedInStatus()) {
-            InitiateAfterLoginGUI(false);
+            InitiateAfterLoginGUI(model.getLoggedInStatus());
         }
-        //if (model.getRed()) {
-        //    redPanel.setBackground(Color.RED);
-        //} else {
-        //    redPanel.setBackground(Color.LIGHT_GRAY);
-        //}
-        //if (model.getBlue()) {
-        //    bluePanel.setBackground(Color.BLUE);
-        //} else {
-        //    bluePanel.setBackground(Color.LIGHT_GRAY);
-        //}
-        //if (model.getWhite()) {
-        //    whitePanel.setBackground(Color.WHITE);
-        //} else {
-        //    whitePanel.setBackground(Color.LIGHT_GRAY);
-        //}
-//
     }
 
+    /**
+     * Change from login screen to server/non-server
+     * @param isUser
+     */
     private void InitiateAfterLoginGUI(boolean isUser) {
 
         mainPane = new JTabbedPane();
@@ -215,6 +126,9 @@ public class TradingGUI extends JFrame implements Observer {
         mainPane.add("Login", loginPanel);
     }
 
+    /**
+     * Initiates the tab bar for Non-Server Admins
+     */
     private void layoutClientGUI() {
         userTradePanel = new JPanel();
 
@@ -237,32 +151,40 @@ public class TradingGUI extends JFrame implements Observer {
      */
     private void layoutCentredLogin(JPanel panel) {
 
+        //rows and columns of table formating the login form
         int loginRows = 5;
         int loginColumns = 1;
 
+        //The login box width and height
         int loginBoxWidth = 200;
         int loginBoxHeight = 100;
 
+        //Create an outer panel which will have the login box inside it
         JPanel outerPanel = new JPanel();
         outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
-        //centredLoginPanel.setPreferredSize(new Dimension(loginBoxWidth, loginBoxHeight));
 
+        //Create the inner login box
         JPanel centredLoginPanel = new JPanel();
 
+        //Put spacing around the box
         outerPanel.add(Box.createVerticalGlue());
         outerPanel.add(centredLoginPanel);
         outerPanel.add(Box.createVerticalGlue());
 
+        //Set the size of the box - and make it unchanging
         centredLoginPanel.setMaximumSize(new Dimension(loginBoxWidth, loginBoxHeight));
         centredLoginPanel.setMinimumSize(new Dimension(loginBoxWidth, loginBoxHeight));
 
+        //Set the layout to be a standard grid
         centredLoginPanel.setLayout(new GridLayout(loginRows, loginColumns));
 
+        //Add the "Login" title
         JPanel titleLoginPanel = new JPanel();
         titleLoginPanel.add(new JLabel("LOGIN SCREEN"));
         titleLoginPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         centredLoginPanel.add(titleLoginPanel);
 
+        //
         loginButtonPanel = new JPanel();
         loginButton = new JButton("LOGIN");
         loginButtonPanel.add(loginButton);
