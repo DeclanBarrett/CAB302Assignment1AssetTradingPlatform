@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class TradingController {
 
     private TradingModel model;
@@ -46,6 +47,7 @@ public class TradingController {
             if (source == view.getLoginButton()) {
                 model.Login();
             }
+
             /*
             if (source == view.getRedButton() || source == view.getRedChoice()) {
                 model.changeRed();

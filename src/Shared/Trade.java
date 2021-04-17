@@ -1,4 +1,4 @@
 package Shared;
 
-public class Trade {
+public class  Trade {
 }

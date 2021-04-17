@@ -8,7 +8,6 @@ public class OrganisationalUnit {
     double credits;
     HashMap<String, Integer> organisationAssets;
 
-
     /**
      *
      * @param name Name of organisational unit.

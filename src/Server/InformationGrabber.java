@@ -6,7 +6,7 @@ import Shared.Trade;
 
 import java.util.List;
 
-public class InformationGrabber {
+public class  InformationGrabber {
 
     public List<Order> GetOrderList() {
         return null;
