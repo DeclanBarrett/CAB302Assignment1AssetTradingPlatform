@@ -1,8 +1,8 @@
-package Client;
+package Client.OldGUI;
 
-import Client.GUI.TradingController;
-import Client.GUI.TradingGUI;
-import Client.GUI.TradingModel;
+import Client.OldGUI.TradingController;
+import Client.OldGUI.TradingGUI;
+import Client.OldGUI.TradingModel;
 
 import javax.swing.*;
 

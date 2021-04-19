@@ -1,4 +1,4 @@
-package Client.observer;
+package Client.OldGUI.observer;
 
 import java.util.ArrayList;
 import java.util.List;

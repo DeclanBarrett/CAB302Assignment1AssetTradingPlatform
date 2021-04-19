@@ -1,4 +1,4 @@
-package Client.GUI;
+package Client.OldGUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
