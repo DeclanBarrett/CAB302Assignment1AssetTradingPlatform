@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 public class Server extends Application
 {
     public static void main(String[] args) {
@@ -33,9 +34,9 @@ public class Server extends Application
         // Admin
         //root = FXMLLoader.load(getClass().getResource("AdminScreen.fxml"));
         // User
-        root = FXMLLoader.load(getClass().getResource("UserScreen.fxml"));
+        //root = FXMLLoader.load(getClass().getResource("UserScreen.fxml"));
         // Login
-        //root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        root = FXMLLoader.load(getClass().getResource("login.fxml"));
         // Reset
         //root = FXMLLoader.load(getClass().getResource("PasswordReset.fxml"));
 

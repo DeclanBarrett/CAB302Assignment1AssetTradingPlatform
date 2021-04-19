@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="550.0" spacing="20.0" styleClass="background" stylesheets="@../../rootStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="550.0" spacing="20.0" styleClass="background" stylesheets="@../../rootStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Controller.EventController">
    <children>
       <Label text="UNNAMED ORGANISATIONAL TRADING">
          <font>
@@ -22,7 +22,7 @@
       <TextField maxWidth="300.0" prefHeight="25.0" prefWidth="659.0" />
       <Label text="Password:" />
       <TextField accessibleRole="PASSWORD_FIELD" maxWidth="300.0" />
-      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Login" />
+      <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginPress" prefHeight="25.0" prefWidth="100.0" text="Login" />
       <Button mnemonicParsing="false" text="Reset Password" />
    </children>
 </VBox>
