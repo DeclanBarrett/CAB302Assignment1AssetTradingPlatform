@@ -1,4 +1,4 @@
-package Client.observer;
+package Client.OldGUI.observer;
 
 /**
  * Observer interface as part of the Observer Pattern code 

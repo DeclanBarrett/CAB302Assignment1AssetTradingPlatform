@@ -1,11 +1,11 @@
-package Client.GUI;
+package Client.OldGUI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-import Client.observer.Observer;
-import Client.observer.Subject;
+import Client.OldGUI.observer.Observer;
+import Client.OldGUI.observer.Subject;
 
 public class TradingGUI extends JFrame implements Observer {
 

@@ -1,5 +1,5 @@
-package Client.GUI;
-import Client.observer.Subject;
+package Client.OldGUI;
+import Client.OldGUI.observer.Subject;
 
 public class TradingModel extends Subject{
 
