@@ -13,6 +13,12 @@ public class Server extends Application
         launch(args);
     }
 
+    /**
+     * Creates the UI and makes it visible.
+     * @param primaryStage The stage in which the UI is generated on
+     * @throws Exception
+     *
+     */
     @Override
     public void start(Stage primaryStage) throws Exception
     {
@@ -36,9 +42,9 @@ public class Server extends Application
         // User
         //root = FXMLLoader.load(getClass().getResource("UserScreen.fxml"));
         // Login
-        root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        //root = FXMLLoader.load(getClass().getResource("login.fxml"));
         // Reset
-        //root = FXMLLoader.load(getClass().getResource("PasswordReset.fxml"));
+        root = FXMLLoader.load(getClass().getResource("PasswordReset.fxml"));
 
 
         primaryStage.setScene(new Scene(root));

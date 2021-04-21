@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController implements Initializable {
+public class  LoginController implements Initializable {
 
     // method allowing the login button to progress user to the user login page.
     public void HandleLoginPress (ActionEvent HandleLoginPress) throws IOException {
