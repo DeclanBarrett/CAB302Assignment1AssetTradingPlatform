@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+// Event Controller
 public class EventController implements Initializable {
 
     // method allowing the login button to progress user to the user login page.
