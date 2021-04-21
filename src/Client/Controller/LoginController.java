@@ -32,6 +32,7 @@ public class LoginController implements Initializable {
     // method allowing the login button to progress user to the user login page.
     public void TriggerResetPassword (ActionEvent TriggerResetPassword) throws IOException {
 
+        //Attemptign to help Aidan
         Parent passwordReseter;
         passwordReseter = FXMLLoader.load(getClass().getResource("PasswordReset.fxml"));
         Scene passwordReseterScene = new Scene(passwordReseter);
