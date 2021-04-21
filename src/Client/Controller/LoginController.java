@@ -27,6 +27,7 @@ public class LoginController implements Initializable {
         window.show();
     }
 
+    // test
     // method allowing the login button to progress user to the user login page.
     public void TriggerResetPassword (ActionEvent TriggerResetPassword) throws IOException {
 
