@@ -25,8 +25,6 @@ public class LoginController implements Initializable {
 
         window.setScene(loginViewScene);
         window.show();
-
-
     }
 
     // method allowing the login button to progress user to the user login page.
