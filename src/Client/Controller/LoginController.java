@@ -12,9 +12,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 public class  LoginController implements Initializable {
 
-    // method allowing the login button to progress user to the user login page.
+    /**
+     * Swaps from login screen to user screen when correct password is entered
+     * @param HandleLoginPress
+     * @throws IOException handles error in file entry/output
+     */
     public void HandleLoginPress (ActionEvent HandleLoginPress) throws IOException {
 
         Parent loginView;
@@ -27,11 +32,12 @@ public class  LoginController implements Initializable {
         window.show();
     }
 
-    // test
-    // method allowing the login button to progress user to the user login page.
+    /**
+     * Move from login screen to reset password screen when reset password button is clicked
+     * @param TriggerResetPassword
+     * @throws IOException handles error in file entry/output
+     */
     public void TriggerResetPassword (ActionEvent TriggerResetPassword) throws IOException {
-
-        //Attemptign to help Aidan
         Parent passwordReseter;
         passwordReseter = FXMLLoader.load(getClass().getResource("PasswordReset.fxml"));
         Scene passwordReseterScene = new Scene(passwordReseter);
@@ -43,8 +49,6 @@ public class  LoginController implements Initializable {
 
 
     }
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
