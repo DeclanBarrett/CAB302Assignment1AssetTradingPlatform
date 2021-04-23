@@ -15,7 +15,7 @@
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" rotateGraphic="true" styleClass="background" stylesheets="@../rootStyle.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
-    <Tab style="-fx-background-color: rgb(233, 228, 228);" text="Create User">
+    <Tab text="Create User">
          <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -103,7 +103,7 @@
                </children></AnchorPane>
          </content>
     </Tab>
-      <Tab style="-fx-background-color: rgb(233, 228, 228);" text="Edit User">
+      <Tab text="Edit User">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -202,7 +202,7 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab style="-fx-background-color: rgb(233, 228, 228);" text="Asset Types">
+      <Tab text="Asset Types">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -244,7 +244,7 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab style="-fx-background-color: rgb(233, 228, 228);" text="Create Organisation">
+      <Tab text="Create Organisation">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -297,7 +297,7 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab style="-fx-background-color: rgb(233, 228, 228);" text="Edit Organisation">
+      <Tab text="Edit Organisation">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
