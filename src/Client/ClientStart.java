@@ -13,6 +13,11 @@ public class ClientStart extends Application
         launch(args);
     }
 
+    /**
+     * Initialise GUI screen, make visible
+     * @param primaryStage Handles creation of main GUI screen
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception
     {
