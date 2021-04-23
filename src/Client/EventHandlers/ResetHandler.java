@@ -1,4 +1,4 @@
-package Client.Controller;
+package Client.EventHandlers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ResetController implements Initializable {
+public class ResetHandler implements Initializable {
 
     @FXML
     private TextField UsernameTextArea;
@@ -52,7 +52,7 @@ public class ResetController implements Initializable {
                 UpdatePassword();
 
                 Parent loginView;
-                loginView = FXMLLoader.load(getClass().getResource("login.fxml"));
+                loginView = FXMLLoader.load(getClass().getResource("../FXMLPages/login.fxml"));
                 Scene loginViewScene = new Scene(loginView);
 
                 Stage window = (Stage)((Node)ResetPassword.getSource()).getScene().getWindow();
