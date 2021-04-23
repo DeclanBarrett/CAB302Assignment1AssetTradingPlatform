@@ -1,4 +1,4 @@
-package ProjectConstructor;
+package Server;
 
 import Shared.Order;
 import Shared.OrganisationalUnit;

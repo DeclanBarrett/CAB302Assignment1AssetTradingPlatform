@@ -1,4 +1,4 @@
-package Client.Controller;
+package Client.EventHandlers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -6,19 +6,28 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController implements Initializable {
+public class LoginHandler implements Initializable {
 
-    // method allowing the login button to progress user to the user login page.
+    TextField UsernameTextField;
+
+    PasswordField PasswordField;
+
+    /**
+     * Method allowing the login button to progress user to the user login page.
+      */
+
     public void HandleLoginPress (ActionEvent HandleLoginPress) throws IOException {
 
         Parent loginView;
-        loginView = FXMLLoader.load(getClass().getResource("UserScreen.fxml"));
+        loginView = FXMLLoader.load(getClass().getResource("../FXMLPages/UserScreen.fxml"));
         Scene loginViewScene = new Scene(loginView);
 
         Stage window = (Stage)((Node)HandleLoginPress.getSource()).getScene().getWindow();
@@ -27,13 +36,14 @@ public class LoginController implements Initializable {
         window.show();
     }
 
-    // test
-    // method allowing the login button to progress user to the user login page.
+    /**
+     * method allowing the login button to progress user to the user login page.
+      */
     public void TriggerResetPassword (ActionEvent TriggerResetPassword) throws IOException {
 
         //Attemptign to help Aidan
         Parent passwordReseter;
-        passwordReseter = FXMLLoader.load(getClass().getResource("PasswordReset.fxml"));
+        passwordReseter = FXMLLoader.load(getClass().getResource("../FXMLPages/PasswordReset.fxml"));
         Scene passwordReseterScene = new Scene(passwordReseter);
 
         Stage window = (Stage)((Node)TriggerResetPassword.getSource()).getScene().getWindow();

@@ -5,21 +5,23 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" rotateGraphic="true" styleClass="background" stylesheets="@../rootStyle.css" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" rotateGraphic="true" styleClass="background" stylesheets="@../rootStyle.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
     <Tab style="-fx-background-color: rgb(233, 228, 228);" text="Create User">
          <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <HBox layoutX="254.0" layoutY="88.0" prefHeight="300.0" prefWidth="500.0">
+                  <HBox layoutX="260.0" layoutY="107.0" prefHeight="231.0" prefWidth="487.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="500.0" prefWidth="250.0" spacing="25.0">
+                        <VBox alignment="CENTER" prefHeight="500.0" prefWidth="264.0" spacing="25.0">
                            <children>
                               <Label prefHeight="25.0" prefWidth="140.0" text="Username" textAlignment="CENTER">
                                  <font>
@@ -36,7 +38,7 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="65.0" layoutY="300.0" prefHeight="25.0" prefWidth="140.0" text="Org Unit" textAlignment="CENTER">
+                              <Label layoutX="65.0" layoutY="300.0" prefHeight="25.0" prefWidth="140.0" text="Organisation" textAlignment="CENTER">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -64,12 +66,23 @@
                         <Font name="Cambria" size="42.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="263.0" layoutY="456.0" prefHeight="164.0" prefWidth="531.0" promptText="Change Log " />
-                  <Button alignment="CENTER" layoutX="455.0" layoutY="397.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="97.0" text="Submit">
+                  <Button alignment="CENTER" layoutX="480.0" layoutY="396.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="97.0" text="Submit">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Button>
+                  <TableView layoutX="83.0" layoutY="444.0" prefHeight="193.0" prefWidth="842.0">
+                    <columns>
+                      <TableColumn prefWidth="304.0" text="Username" />
+                      <TableColumn minWidth="0.0" prefWidth="208.0" text="Account Type" />
+                        <TableColumn prefWidth="329.0" text="Organisation Unit" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="326.0" layoutY="346.0" prefHeight="22.0" prefWidth="363.0" text="ErrorText" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
          </content>
     </Tab>
