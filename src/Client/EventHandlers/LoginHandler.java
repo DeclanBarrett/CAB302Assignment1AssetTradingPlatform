@@ -23,7 +23,6 @@ public class LoginHandler implements Initializable {
     /**
      * Method allowing the login button to progress user to the user login page.
       */
-
     public void HandleLoginPress (ActionEvent HandleLoginPress) throws IOException {
 
         Parent loginView;
