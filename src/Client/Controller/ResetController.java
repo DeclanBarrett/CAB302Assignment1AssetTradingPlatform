@@ -37,7 +37,7 @@ public class ResetController implements Initializable {
      * Checks that the correct username/password combination is entered into the reset password screen
      * this then returns the user to the login screen after password reset.
      * @param ResetPassword Perform action on ResetPassword button press
-     * @throws IOException
+     * @throws IOException Handles error in file entry/output
      */
     public void ResetPassword (ActionEvent ResetPassword) throws IOException {
 
@@ -68,7 +68,7 @@ public class ResetController implements Initializable {
     /**
      * Checks that the two 'new' passwords entered are the same.
      * @param CheckPasswordDifference
-     * @throws IOException
+     * @throws IOException handles error in file entry/output
      */
     public void CheckPasswordDifference(KeyEvent CheckPasswordDifference) throws IOException {
         if (!NewPasswordText.getText().equals(NewPassword2Text.getText())) {
