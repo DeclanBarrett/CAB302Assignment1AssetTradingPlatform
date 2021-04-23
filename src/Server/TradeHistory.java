@@ -1,4 +1,4 @@
 package Server;
 
-public class  TradeHistory {
+public class TradeHistory {
 }
