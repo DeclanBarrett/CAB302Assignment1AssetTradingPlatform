@@ -16,7 +16,7 @@ public class ClientStart extends Application
     /**
      * Initialise GUI screen, make visible
      * @param primaryStage Handles creation of main GUI screen
-     * @throws Exception
+     * @throws Exception To stop GUI breaking
      */
     @Override
     public void start(Stage primaryStage) throws Exception
@@ -27,13 +27,13 @@ public class ClientStart extends Application
         Parent root;
 
         // Admin
-        //root = FXMLLoader.load(getClass().getResource("AdminScreen.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/AdminScreen.fxml"));
         // User
-        //root = FXMLLoader.load(getClass().getResource("UserScreen.fxml"));
+        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/UserScreen.fxml"));
         // Login
-        root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/login.fxml"));
+        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/login.fxml"));
         // Reset
-        //root = FXMLLoader.load(getClass().getResource("PasswordReset.fxml"));
+        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/PasswordReset.fxml"));
 
 
         primaryStage.setScene(new Scene(root));
