@@ -17,7 +17,6 @@ import java.util.ResourceBundle;
 public class LoginHandler implements Initializable {
 
     TextField UsernameTextField;
-
     PasswordField PasswordField;
 
     /**
