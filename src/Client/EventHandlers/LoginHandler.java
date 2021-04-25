@@ -28,7 +28,7 @@ public class LoginHandler implements Initializable {
     public void HandleLoginPress (ActionEvent HandleLoginPress) throws IOException {
 
         Parent loginView;
-        loginView = FXMLLoader.load(getClass().getResource("../FXMLPages/UserScreen.fxml"));
+        loginView = FXMLLoader.load(getClass().getResource("../FXMLPages/User/UserScreen.fxml"));
         Scene loginViewScene = new Scene(loginView);
 
         Stage window = (Stage)((Node)HandleLoginPress.getSource()).getScene().getWindow();
