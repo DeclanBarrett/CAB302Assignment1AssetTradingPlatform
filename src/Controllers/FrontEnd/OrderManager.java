@@ -28,18 +28,33 @@ public class OrderManager {
         return null;
     }
 
+    /**
+     * Updates UI with new information
+     */
     private void UpdateUI() {
         
     }
 
+    /**
+     * Set user as 'owner' of the order
+     * @param user User attached to the order
+     */
     public void SetUser(User user) {
         loggedInUser = user;
     }
 
+    /**
+     * Set organisaitonal unit as 'owner' of the Organisational Unit
+     * @param unit Organisational unit attached to the order.
+     */
     public void SetOrgUnit(OrganisationalUnit unit) {
         orgUnit = unit;
     }
 
+    /**
+     * Checks validity of the submitted order
+     * @param order Order to be checked.
+     */
     public void CheckOrderValidity(Order order) {
     }
 }

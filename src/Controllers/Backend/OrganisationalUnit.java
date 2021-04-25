@@ -2,7 +2,9 @@ package Controllers.Backend;
 
 import java.util.HashMap;
 
-
+/**
+ * Contains information
+ */
 public class OrganisationalUnit {
 
     String name;
