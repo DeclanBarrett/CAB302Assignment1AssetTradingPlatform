@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="UserUserAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.EventHandlers.User.UserUserHandler">
+<AnchorPane fx:id="UserUserAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.User.UserUserHandler">
    <children>
-      <Label fx:id="UserName" alignment="CENTER" layoutX="169.0" layoutY="48.0" prefHeight="48.0" prefWidth="553.0" stylesheets="@../../rootStyle.css" text="User Name" textAlignment="CENTER">
+      <Label fx:id="UserName" alignment="CENTER" layoutX="169.0" layoutY="48.0" prefHeight="48.0" prefWidth="553.0" stylesheets="@../StyleSheets/Root.css" text="User Name" textAlignment="CENTER">
          <font>
             <Font name="Bodoni MT" size="34.0" />
          </font>
@@ -32,7 +32,7 @@
       <PasswordField fx:id="UserNewPassword2" layoutX="279.0" layoutY="458.0" prefHeight="25.0" prefWidth="313.0" />
       <PasswordField fx:id="UserOldPassword" layoutX="279.0" layoutY="288.0" prefHeight="25.0" prefWidth="313.0" />
       <Button fx:id="UserLogoutButton" layoutX="338.0" layoutY="144.0" mnemonicParsing="false" onAction="#LogOutUser" prefHeight="25.0" prefWidth="195.0" text="LOG OUT" />
-      <Label alignment="CENTER" layoutX="159.0" layoutY="215.0" prefHeight="48.0" prefWidth="553.0" stylesheets="@../../rootStyle.css" text="Reset Password" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="159.0" layoutY="215.0" prefHeight="48.0" prefWidth="553.0" stylesheets="@../StyleSheets/Root.css" text="Reset Password" textAlignment="CENTER">
          <font>
             <Font name="Bodoni MT" size="34.0" />
          </font>

@@ -1,6 +1,7 @@
-package Client.EventHandlers;
+package Controllers.FrontEnd;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -14,11 +15,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginHandler implements Initializable {
+public class LoginController implements Initializable {
 
-    TextField UsernameTextField;
+    @FXML
+    TextField LoginUsername;
 
-    PasswordField PasswordField;
+    @FXML
+    PasswordField LoginPassword;
 
     /**
      * Handles login button press
@@ -28,7 +31,7 @@ public class LoginHandler implements Initializable {
     public void HandleLoginPress (ActionEvent HandleLoginPress) throws IOException {
 
         Parent loginView;
-        loginView = FXMLLoader.load(getClass().getResource("../FXMLPages/User/UserScreen.fxml"));
+        loginView = FXMLLoader.load(getClass().getResource("/Views/User/UserScreen.fxml"));
         Scene loginViewScene = new Scene(loginView);
 
         Stage window = (Stage)((Node)HandleLoginPress.getSource()).getScene().getWindow();
@@ -45,7 +48,7 @@ public class LoginHandler implements Initializable {
     public void TriggerResetPassword (ActionEvent TriggerResetPassword) throws IOException {
 
         Parent passwordReseter;
-        passwordReseter = FXMLLoader.load(getClass().getResource("../FXMLPages/PasswordReset.fxml"));
+        passwordReseter = FXMLLoader.load(getClass().getResource("/Views/Login/Reset.fxml"));
         Scene passwordReseterScene = new Scene(passwordReseter);
 
         Stage window = (Stage)((Node)TriggerResetPassword.getSource()).getScene().getWindow();

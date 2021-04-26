@@ -6,7 +6,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" rotateGraphic="true" styleClass="background" stylesheets="@../../rootStyle.css" tabClosingPolicy="UNAVAILABLE">
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" rotateGraphic="true" styleClass="background" stylesheets="@../StyleSheets/Root.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Create User">
                <content>

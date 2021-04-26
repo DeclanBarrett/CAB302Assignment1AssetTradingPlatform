@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="UserOrganisationAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.EventHandlers.User.UserOrganisationHandler">
+<AnchorPane fx:id="UserOrganisationAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.User.UserOrganisationHandler">
    <children>
-      <Label fx:id="OrgName" alignment="CENTER" layoutX="159.0" layoutY="49.0" prefHeight="48.0" prefWidth="553.0" stylesheets="@../../rootStyle.css" text="Organisation Name" textAlignment="CENTER">
+      <Label fx:id="OrgName" alignment="CENTER" layoutX="159.0" layoutY="49.0" prefHeight="48.0" prefWidth="553.0" stylesheets="@../StyleSheets/Root.css" text="Organisation Name" textAlignment="CENTER">
          <font>
             <Font name="Bodoni MT" size="34.0" />
          </font>

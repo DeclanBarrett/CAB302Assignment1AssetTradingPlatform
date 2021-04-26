@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="AdminAssetTypeAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.EventHandlers.Admin.AdminAssetTypesHandler">
+<AnchorPane fx:id="AdminAssetTypeAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.Admin.AdminAssetTypesHandler">
    <children>
       <Label alignment="CENTER" layoutX="328.0" layoutY="24.0" prefHeight="74.0" prefWidth="372.0" text="Create Asset Type" textAlignment="CENTER">
          <font>

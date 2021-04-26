@@ -1,4 +1,4 @@
-package Client;
+package App_Start;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +31,7 @@ public class ClientStart extends Application
         // User
         //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/User/UserScreen.fxml"));
         // Login
-        root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/login.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/Views/Login/Login.fxml"));
         // Reset
         //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/PasswordReset.fxml"));
 

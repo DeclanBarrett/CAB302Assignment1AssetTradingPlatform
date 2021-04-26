@@ -1,4 +1,4 @@
-package Client.EventHandlers.Admin;
+package Controllers.FrontEnd.Admin;
 
 import javafx.fxml.Initializable;
 
