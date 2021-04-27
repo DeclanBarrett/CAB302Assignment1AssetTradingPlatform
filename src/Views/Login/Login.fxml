@@ -2,11 +2,12 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="550.0" spacing="20.0" styleClass="background" stylesheets="@../StyleSheets/Root.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.LoginController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="550.0" spacing="20.0" styleClass="background" stylesheets="@../StyleSheets/Root.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.LoginHandler">
    <children>
       <Label text="UNNAMED ORGANISATIONAL TRADING">
          <font>
@@ -19,9 +20,10 @@
          </font>
       </Label>
       <Label text="Username:" />
-      <TextField maxWidth="300.0" prefHeight="25.0" prefWidth="659.0" />
+      <TextField fx:id="LoginUsername" maxWidth="300.0" prefHeight="25.0" prefWidth="659.0" />
       <Label text="Password:" />
-      <TextField accessibleRole="PASSWORD_FIELD" maxWidth="300.0" />
+      <PasswordField fx:id="LoginPassword" maxWidth="300.0" prefHeight="25.0" />
+      <Label fx:id="LoginErrorText" />
       <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#HandleLoginPress" prefHeight="25.0" prefWidth="100.0" text="Login" />
       <Button fx:id="ResetBtn" mnemonicParsing="false" onAction="#TriggerResetPassword" text="Reset Password" />
    </children>

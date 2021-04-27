@@ -30,7 +30,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="BuyErrorText" alignment="CENTER" layoutX="14.0" layoutY="583.0" prefHeight="35.0" prefWidth="406.0" styleClass="text-area" stylesheets="@../../rootStyle.css" text="Order Confirmation" />
+                  <Label fx:id="BuyErrorText" alignment="CENTER" layoutX="14.0" layoutY="583.0" prefHeight="35.0" prefWidth="406.0" styleClass="text-area" stylesheets="@../StyleSheets/Root.css" text="Order Confirmation" />
                   <Button fx:id="BuyButton" layoutX="117.0" layoutY="260.0" mnemonicParsing="false" onAction="#BuyAsset" prefHeight="18.0" prefWidth="203.0" text="BUY" />
                   <TextField fx:id="BuyPriceCredits" layoutX="178.0" layoutY="186.0" prefHeight="26.0" prefWidth="80.0" />
                   <Label alignment="CENTER" layoutX="164.0" layoutY="161.0" prefHeight="25.0" prefWidth="109.0" text="Price" textAlignment="CENTER">
