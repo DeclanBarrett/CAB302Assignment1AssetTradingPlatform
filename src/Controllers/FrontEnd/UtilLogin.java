@@ -4,8 +4,6 @@ import Controllers.Backend.LoginToken;
 import Controllers.Backend.User;
 import Models.MockSocket;
 
-import java.util.Date;
-
 public class UtilLogin {
 
     private static LoginToken currentLogin;
@@ -25,7 +23,7 @@ public class UtilLogin {
             return;
         }
 
-        throw new LoginException("Username or Password Incorrect 1");
+        throw new LoginException("Username or Password Incorrect");
     }
 
     public static User GetUser() {
@@ -37,7 +35,7 @@ public class UtilLogin {
         String nonce = MockSocket.RetrieveNonce(username);
 
         if (nonce == null) {
-            throw new LoginException("Username or Password Incorrect 2");
+            throw new LoginException("Username or Password Incorrect");
         }
 
         String hashedPassword = password; //TODO actually hash and nonce;

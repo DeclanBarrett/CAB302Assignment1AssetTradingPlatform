@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 public class ClientStart extends Application
 {
     public static void main(String[] args) {
+        new MockSocket();
         launch(args);
     }
 
@@ -22,9 +23,6 @@ public class ClientStart extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        new MockSocket();
-
-
         primaryStage.setTitle("Unnamed Client Organisation Trading System");
 
         Parent root;
@@ -37,7 +35,6 @@ public class ClientStart extends Application
         root = FXMLLoader.load(getClass().getResource("/Views/Login/Login.fxml"));
         // Reset
         //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/PasswordReset.fxml"));
-
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
