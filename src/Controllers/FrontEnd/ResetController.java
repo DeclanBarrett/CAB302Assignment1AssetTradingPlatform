@@ -53,7 +53,7 @@ public class ResetController implements Initializable {
                 UpdatePassword();
 
                 Parent loginView;
-                loginView = FXMLLoader.load(getClass().getResource("../FXMLPages/Login.fxml"));
+                loginView = FXMLLoader.load(getClass().getResource("/Views/Login/Login.fxml"));
                 Scene loginViewScene = new Scene(loginView);
 
                 Stage window = (Stage)((Node)ResetPassword.getSource()).getScene().getWindow();

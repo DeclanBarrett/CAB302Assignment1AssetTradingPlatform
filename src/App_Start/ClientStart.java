@@ -1,5 +1,6 @@
 package App_Start;
 
+import Models.MockSocket;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,19 +24,21 @@ public class ClientStart extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
+        new MockSocket();
+
 
         primaryStage.setTitle("Unnamed Client Organisation Trading System");
 
         Parent root;
 
         // Admin
-        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/Admin.fxml"));
+        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/Admin/AdminScreen.fxml"));
         // User
-        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/User.fxml"));
+        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/User/UserScreen.fxml"));
         // Login
         root = FXMLLoader.load(getClass().getResource("/Views/Login/Login.fxml"));
         // Reset
-        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/Reset.fxml"));
+        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/PasswordReset.fxml"));
 
 
         primaryStage.setScene(new Scene(root));
