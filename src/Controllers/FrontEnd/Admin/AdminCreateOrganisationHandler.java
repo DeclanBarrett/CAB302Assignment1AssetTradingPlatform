@@ -11,6 +11,9 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Handles events in admin organisation edit tab.
+ */
 public class AdminCreateOrganisationHandler implements Initializable {
 
     @FXML
@@ -30,6 +33,10 @@ public class AdminCreateOrganisationHandler implements Initializable {
 
     }
 
+    /**
+     * Creates new organisational unit
+     * @param CreateOrganisation Orgnisational unit to be created
+     */
     public void CreateOrganisation(ActionEvent CreateOrganisation) {
         System.out.println(CreateOrganisation.getSource());
     }

@@ -8,6 +8,9 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Handles events in admin edit user tab.
+ */
 public class AdminEditUserHandler implements Initializable {
 
     @FXML

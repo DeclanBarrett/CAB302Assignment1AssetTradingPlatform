@@ -3,7 +3,7 @@ package Controllers.Backend;
 import java.util.HashMap;
 
 /**
- * Contains information
+ * Defines organisational unit objects
  */
 public class OrganisationalUnit {
 

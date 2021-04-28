@@ -6,6 +6,9 @@ import Models.MockSocket;
 
 import java.util.Date;
 
+/**
+ * Used to check for correct login input.
+ */
 public class UtilLogin {
 
     private static LoginToken currentLogin;

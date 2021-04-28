@@ -3,7 +3,9 @@ package Controllers.Socket;
 import java.io.*;
 import java.net.*;
 
-
+/**
+ * Server socket
+ */
 public class Server extends Thread
 {
     private int port = 6066;
@@ -13,6 +15,9 @@ public class Server extends Thread
     private DataOutputStream out;
 
 
+    /**
+     * Creates the server
+     */
     public Server()
     {
         // Create the Server
@@ -27,6 +32,9 @@ public class Server extends Thread
     }
 
 
+    /**
+     * Runs the server
+     */
     public void run()
     {
         // Run the Server

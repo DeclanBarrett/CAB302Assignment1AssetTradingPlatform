@@ -11,6 +11,9 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Handles events in admin asset types tab.
+ */
 public class AdminAssetTypesHandler implements Initializable {
 
     @FXML
@@ -27,10 +30,17 @@ public class AdminAssetTypesHandler implements Initializable {
 
     }
 
+    /**
+     * Creates assets in database
+     * @param CreateAsset Asset to be created
+     */
     public void CreateAsset(ActionEvent CreateAsset) {
         System.out.println(CreateAsset.getSource());
     }
 
+    /**
+     * Updates asset types
+     */
     private void UpdateAssetTypes() {
 
     }

@@ -8,6 +8,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Mock database for testing
+ */
 public class MockSocket {
 
     private static boolean databaseConnected;
