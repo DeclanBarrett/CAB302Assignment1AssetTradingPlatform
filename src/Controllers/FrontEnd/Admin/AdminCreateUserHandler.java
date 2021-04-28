@@ -8,6 +8,9 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Handles events in admin Create User tab.
+ */
 public class AdminCreateUserHandler implements Initializable {
 
     @FXML
@@ -32,6 +35,10 @@ public class AdminCreateUserHandler implements Initializable {
 
     }
 
+    /**
+     * Creates new user
+     * @param CreateUser User to be created
+     */
     public void CreateUser(ActionEvent CreateUser) {
         System.out.println(CreateUser.getSource());
     }

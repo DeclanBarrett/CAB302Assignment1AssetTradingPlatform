@@ -2,7 +2,9 @@ package Controllers.Backend;
 
 import java.util.HashMap;
 
-
+/**
+ * Defines organisational unit objects
+ */
 public class OrganisationalUnit {
 
     String name;

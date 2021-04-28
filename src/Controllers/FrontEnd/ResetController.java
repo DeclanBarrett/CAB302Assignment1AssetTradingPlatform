@@ -17,7 +17,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
+/**
+ * Handles events on the reset password page
+ */
 public class ResetController implements Initializable {
 
     @FXML

@@ -2,6 +2,9 @@ package Controllers.Backend;
 
 import java.util.Date;
 
+/**
+ * Testing for login.
+ */
 public class LoginToken {
 
     private String username;

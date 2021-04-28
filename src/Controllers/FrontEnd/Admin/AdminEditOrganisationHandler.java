@@ -11,6 +11,9 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Handles events in admin edit organisational unit tab.
+ */
 public class AdminEditOrganisationHandler implements Initializable {
 
     @FXML
@@ -35,10 +38,18 @@ public class AdminEditOrganisationHandler implements Initializable {
 
     }
 
+    /**
+     * Changes quantity of asset held by organisational unit
+     * @param SetAssetQuantityToOrg Asset Quantity set
+     */
     public void SetAssetQuantityToOrg(ActionEvent SetAssetQuantityToOrg) {
         System.out.println(SetAssetQuantityToOrg.getSource());
     }
 
+    /**
+     * Changes quantity of credits of an organisational unit
+     * @param SetCreditOfOrg Sets new credits value
+     */
     public void SetCreditOfOrg(ActionEvent SetCreditOfOrg) {
         System.out.println(SetCreditOfOrg.getSource());
     }

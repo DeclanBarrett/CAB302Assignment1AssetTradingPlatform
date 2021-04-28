@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Handles events on the login page.
+ */
 public class LoginHandler implements Initializable {
 
     @FXML
