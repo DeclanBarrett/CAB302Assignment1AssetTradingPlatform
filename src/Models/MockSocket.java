@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Mock database for testing
+ * Mock database for testing.
  */
 public class MockSocket {
 
