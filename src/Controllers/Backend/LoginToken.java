@@ -5,7 +5,6 @@ import java.util.Date;
 public class LoginToken {
 
     private String username;
-
     private Date endDate;
 
     public LoginToken(String username, Date date) {
