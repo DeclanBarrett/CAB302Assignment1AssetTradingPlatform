@@ -1,7 +1,7 @@
 package Controllers.FrontEnd;
 
 import Controllers.Backend.AccountType;
-import Controllers.Backend.User;
+import Controllers.Utils.UtilLogin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,6 +61,8 @@ public class LoginHandler implements Initializable {
             window.setScene(loginViewScene);
             window.show();
         } catch(LoginException e) {
+            LoginErrorText.setText(e.getMessage());
+        } catch (Exception e) {
             LoginErrorText.setText(e.getMessage());
         }
 

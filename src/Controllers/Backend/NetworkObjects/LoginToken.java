@@ -1,11 +1,12 @@
-package Controllers.Backend;
+package Controllers.Backend.NetworkObjects;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Testing for login.
  */
-public class LoginToken {
+public class LoginToken implements Serializable {
 
     private String username;
     private Date endDate;

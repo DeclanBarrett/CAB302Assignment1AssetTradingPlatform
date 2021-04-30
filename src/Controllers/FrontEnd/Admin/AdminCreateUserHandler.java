@@ -30,6 +30,8 @@ public class AdminCreateUserHandler implements Initializable {
     @FXML
     TableView CreateUserTable;
 
+    private boolean passwordsMatch;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -40,7 +42,13 @@ public class AdminCreateUserHandler implements Initializable {
      * @param CreateUser User to be created
      */
     public void CreateUser(ActionEvent CreateUser) {
+
+        /*
+        User newUser = new User()
+        MockSocket.
         System.out.println(CreateUser.getSource());
+
+         */
     }
 
     private void UpdateUserInfoTable() {
