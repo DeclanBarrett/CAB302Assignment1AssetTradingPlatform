@@ -7,6 +7,7 @@ import Models.MockSocket;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 /**
  * Used to check for correct login input.
@@ -57,31 +58,60 @@ public class UtilLogin {
             throw new LoginException("Username or Password Incorrect 2");
         }
 
-        //https://www.javaguides.net/2020/02/java-sha-256-hash-with-salt-example.html
-
-        //Attempts the hash the password
-
         String hashedPassword = null;
 
         try {
-            //Get an instance of the message digester in security
-            MessageDigest messageDigester = MessageDigest.getInstance("SHA-256");
-
-            //Make the message digester use the salt retrieved from the database
-            //It uses bytes so it must be converted to and from it with the help of string builder
-            messageDigester.update(Byte.parseByte(salt));
-            byte[] bytes = messageDigester.digest(password.getBytes());
-
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++) {
-                stringBuilder.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            hashedPassword = stringBuilder.toString();
+            hashedPassword = getPassword(password, salt);
         } catch (NoSuchAlgorithmException e) {
             //In case the algorithm is missing (the SHA-256 in Message Digester)
             e.printStackTrace();
         }
 
         return hashedPassword;
+    }
+
+
+    /**
+     * Generates random 18 character string.
+     * @return returns random generated nonce.
+     */
+    private static String generateNonce()
+    {
+        SecureRandom generateRandNonce = new SecureRandom();
+        StringBuilder storageForNonce = new StringBuilder();
+        for (int i = 0; i < 18; i++)
+        {
+            storageForNonce.append(generateRandNonce.nextInt(10));
+        }
+        String nonce = storageForNonce.toString();
+        return nonce;
+    }
+
+    /**
+     * Generates secure password using md5 framework
+     * @param userInputPassword password inputted by the user
+     * @param salt salt array for security
+     * @return returns a secure hashed string
+     * @throws NoSuchAlgorithmException thrown when cryptographic algorithm is requested but it does
+     * not exist.
+     */
+    public static String getPassword(String userInputPassword, String salt) throws NoSuchAlgorithmException {
+        String securePassword = null;
+        StringBuilder hexaDFormat = new StringBuilder();
+        MessageDigest md5 = MessageDigest.getInstance("MD5");
+
+        md5.update(Byte.parseByte(salt));
+        byte[] getHashBytes = md5.digest(userInputPassword.getBytes());
+
+        // hexadecimal conversion taken from:
+        // https://howtodoinjava.com/java/java-security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
+
+        // convets array from decimal format to hexadecimal.
+        //
+        for (int i = 0; i < getHashBytes.length; i++)
+        {
+            hexaDFormat.append(Integer.toString((getHashBytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        return securePassword = hexaDFormat.toString();
     }
 }
