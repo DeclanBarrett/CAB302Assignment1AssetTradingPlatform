@@ -5,9 +5,14 @@ package Controllers.FrontEnd;
  */
 public class LoginException extends Exception {
 
+    /**
+     * Login exception message.
+     * @param message
+     */
     public LoginException(String message) {
         super(message);
     }
+
 
     public LoginException(String message, Throwable cause) {
         super(message, cause);
