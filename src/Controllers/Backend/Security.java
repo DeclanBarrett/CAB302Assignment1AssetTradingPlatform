@@ -44,6 +44,7 @@ public class Security {
         // hexadecimal conversion taken from:
         // https://howtodoinjava.com/java/java-security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
 
+        // convets array from decimal format to hexadecimal.
         for (int i = 0; i < getHashBytes.length; i++)
         {
             hexaDFormat.append(Integer.toString((getHashBytes[i] & 0xff) + 0x100, 16).substring(1));
