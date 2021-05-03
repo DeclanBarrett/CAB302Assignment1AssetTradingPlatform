@@ -1,5 +1,7 @@
-package Controllers.Backend;
+package Testing.ControllerTest;
 
+import Controllers.Backend.AccountType;
+import Controllers.Backend.NetworkObjects.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
