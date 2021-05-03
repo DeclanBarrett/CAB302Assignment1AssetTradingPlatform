@@ -11,7 +11,7 @@ public class Security {
 
     /**
      * Generates random 18 character string.
-     * @return
+     * @return returns random generated nonce.
      */
     public static String generateNonce()
     {
