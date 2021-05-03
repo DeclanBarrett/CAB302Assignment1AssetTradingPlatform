@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
 /**
@@ -60,7 +61,7 @@ public class LoginHandler implements Initializable {
 
             window.setScene(loginViewScene);
             window.show();
-        } catch(LoginException e) {
+        } catch(LoginException | NoSuchAlgorithmException e) {
             LoginErrorText.setText(e.getMessage());
         }
 
