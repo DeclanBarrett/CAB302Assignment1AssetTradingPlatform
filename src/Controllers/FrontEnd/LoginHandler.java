@@ -61,7 +61,7 @@ public class LoginHandler implements Initializable {
 
             window.setScene(loginViewScene);
             window.show();
-        } catch(LoginException | NoSuchAlgorithmException e) {
+        } catch(LoginException e) {
             LoginErrorText.setText(e.getMessage());
         } catch (Exception e) {
             LoginErrorText.setText(e.getMessage());
