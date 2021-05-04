@@ -1,11 +1,12 @@
 package Controllers.Backend.NetworkObjects;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  * Defines organisational unit objects
  */
-public class OrganisationalUnit {
+public class OrganisationalUnit implements Comparable<OrganisationalUnit>, Serializable {
 
     String name;
     double credits;
@@ -54,5 +55,10 @@ public class OrganisationalUnit {
      */
     public HashMap<String, Integer> GetAllAssets() {
         return organisationAssets;
+    }
+
+    @Override
+    public int compareTo(OrganisationalUnit o) {
+        return this.name.compareTo(o.name);
     }
 }
