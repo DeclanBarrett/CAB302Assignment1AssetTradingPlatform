@@ -1,6 +1,10 @@
 package Models;
 
 import Controllers.Backend.*;
+import Controllers.Backend.NetworkObjects.LoginToken;
+import Controllers.Backend.NetworkObjects.Order;
+import Controllers.Backend.NetworkObjects.OrganisationalUnit;
+import Controllers.Backend.NetworkObjects.User;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -95,6 +99,10 @@ public class MockSocket {
         }
 
         return null;
+    }
+
+    public static void CreateUser(User newUser) {
+
     }
 
     public static User GetUser(String userName) {

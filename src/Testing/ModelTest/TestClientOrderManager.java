@@ -1,10 +1,11 @@
-package Models;
+package Testing.ModelTest;
 
 import Controllers.Backend.AccountType;
-import Controllers.Backend.Order;
+import Controllers.Backend.NetworkObjects.Order;
+import Controllers.Backend.NetworkObjects.OrganisationalUnit;
+import Controllers.Backend.NetworkObjects.User;
 import Controllers.Backend.OrderType;
-import Controllers.Backend.OrganisationalUnit;
-import Controllers.Backend.User;
+import Controllers.FrontEnd.OrderManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

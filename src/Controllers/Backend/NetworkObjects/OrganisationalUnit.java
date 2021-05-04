@@ -1,4 +1,4 @@
-package Controllers.Backend;
+package Controllers.Backend.NetworkObjects;
 
 import java.util.HashMap;
 

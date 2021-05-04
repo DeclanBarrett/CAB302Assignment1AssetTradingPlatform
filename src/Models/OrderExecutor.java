@@ -1,6 +1,6 @@
 package Models;
 
-import Controllers.Backend.Order;
+import Controllers.Backend.NetworkObjects.Order;
 
 import java.util.ArrayList;
 

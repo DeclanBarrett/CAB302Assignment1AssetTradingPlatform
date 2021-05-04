@@ -1,8 +1,8 @@
 package Controllers.FrontEnd;
 
-import Controllers.Backend.Order;
-import Controllers.Backend.OrganisationalUnit;
-import Controllers.Backend.User;
+import Controllers.Backend.NetworkObjects.Order;
+import Controllers.Backend.NetworkObjects.OrganisationalUnit;
+import Controllers.Backend.NetworkObjects.User;
 
 /**
  * Generates an order from UI data and attempts to send it to the Server to execute

@@ -1,4 +1,4 @@
-package ControllerTest;
+package Testing.ControllerTest;
 
 public class ControlTest
 {

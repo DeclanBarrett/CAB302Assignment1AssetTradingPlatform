@@ -1,5 +1,7 @@
 package Controllers.FrontEnd;
 
+import Controllers.Utils.UtilFieldCheckers;
+import Controllers.Utils.UtilLogin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -74,15 +76,9 @@ public class ResetController implements Initializable {
      * @throws IOException handles error in file entry/output
      */
     public void CheckPasswordDifference(KeyEvent CheckPasswordDifference) throws IOException {
-        if (!NewPasswordText.getText().equals(NewPassword2Text.getText())) {
-            ErrorText.setText("PASSWORDS DO NOT MATCH");
-            passwordsMatch = false;
-            System.out.println(passwordsMatch);
-        } else {
-            ErrorText.setText("ALL GOOD");
-            passwordsMatch = true;
-            System.out.println(passwordsMatch);
-        }
+        passwordsMatch = UtilFieldCheckers.CheckTwoStrings(NewPasswordText, NewPassword2Text, ErrorText, "PASSWORDS");
+        System.out.println(passwordsMatch);
+        System.out.println(passwordsMatch);
     }
 
     @Override
@@ -100,7 +96,12 @@ public class ResetController implements Initializable {
         /**TODO GO TO THE DATBASE AND CHECK
          *
          */
+        try {
+            UtilLogin.AttemptLogin(username, password);
 
+        } catch (Exception e) {
+
+        }
         return username.equals("ANDY") && password.equals("123");
     }
 
@@ -108,6 +109,7 @@ public class ResetController implements Initializable {
         /**TODO GO TO THE DATBASE AND UPDATE
          *
          */
+        UtilLogin.Logout();
     }
 
 

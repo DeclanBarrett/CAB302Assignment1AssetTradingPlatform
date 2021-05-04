@@ -1,4 +1,6 @@
-package Controllers.Backend;
+package Controllers.Backend.NetworkObjects;
+
+import Controllers.Backend.AccountType;
 
 /**
  * User data object that allows the interaction of a single users account information

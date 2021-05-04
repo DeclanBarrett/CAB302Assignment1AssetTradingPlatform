@@ -1,4 +1,4 @@
-package Models;
+package Testing.ModelTest;
 
 public class TestOrderExecutor {
 }

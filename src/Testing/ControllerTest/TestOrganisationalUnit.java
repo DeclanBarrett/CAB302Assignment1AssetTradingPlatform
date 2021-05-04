@@ -1,5 +1,6 @@
-package Controllers.Backend;
+package Testing.ControllerTest;
 
+import Controllers.Backend.NetworkObjects.OrganisationalUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
