@@ -11,6 +11,11 @@ public class LoginToken implements Serializable {
     private String username;
     private Date endDate;
 
+    /**
+     * Login token used to signify an existing login
+     * @param username
+     * @param date
+     */
     public LoginToken(String username, Date date) {
         this.username = username;
         this.endDate = date;
