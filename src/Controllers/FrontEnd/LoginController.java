@@ -1,25 +1,37 @@
 package Controllers.FrontEnd;
 
-import Controllers.Backend.LoginToken;
-import Controllers.Backend.User;
+
+import Controllers.Backend.NetworkObjects.LoginToken;
+import Controllers.Backend.NetworkObjects.User;
 import Models.MockSocket;
-import Controllers.Backend.Security;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 
 /**
  * Used to check for correct login input.
  */
-public class UtilLogin {
+public class LoginController {
 
     private static LoginToken currentLogin;
     private static User currentUser;
 
+    public static User GetUser() {
+        return currentUser;
+    }
+
+    public static LoginToken GetToken() {
+        return currentLogin;
+    }
+
+    public void Logout() {
+        currentLogin = null;
+        currentUser = null;
+    }
+
     /**
      * Global Utility for attempting to login to the server
      */
-    public static void AttemptLogin(String username, String password) throws LoginException, NoSuchAlgorithmException {
+    public void AttemptLogin(String username, String password) throws LoginException, NoSuchAlgorithmException {
 
         String hashPassword = ReceiveNonceAndHash(username, password);
 
@@ -33,12 +45,10 @@ public class UtilLogin {
         throw new LoginException("Username or Password Incorrect 1");
     }
 
-    public static User GetUser() {
-        return currentUser;
-    }
 
 
-    private static String ReceiveNonceAndHash(String username, String password) throws LoginException, NoSuchAlgorithmException {
+
+    private String ReceiveNonceAndHash(String username, String password) throws LoginException, NoSuchAlgorithmException {
 
         String nonce = MockSocket.RetrieveNonce(username);
 
@@ -46,12 +56,16 @@ public class UtilLogin {
             throw new LoginException("Username or Password Incorrect 2");
         }
 
+        ClientSecurity securityManager = new ClientSecurity();
+
         // Generates salted and hashed password using md5 algorithm.
-        byte[]salt = Security.getSalt();
-        String hashedPassword = Security.getPassword(password, salt); //TODO actually hash and nonce;
+        String salt = securityManager.generateSalt();
+        String hashedPassword = securityManager.hashPassword(password, salt);
 
         return hashedPassword;
     }
+
+
 
 
 }

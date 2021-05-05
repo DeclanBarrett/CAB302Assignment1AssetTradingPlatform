@@ -1,4 +1,4 @@
-package Controllers.Utils;
+package Controllers.FrontEnd;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -7,22 +7,25 @@ import java.security.SecureRandom;
 /**
  * Large class for potential password storage,
  */
-public class Security {
+public class ClientSecurity {
+
+    public ClientSecurity() {
+    }
 
     /**
      * Generates random 18 character string.
      * @return returns random generated nonce.
      */
-    public static String generateNonce()
+    public String generateSalt()
     {
-        SecureRandom generateRandNonce = new SecureRandom();
-        StringBuilder storageForNonce = new StringBuilder();
+        SecureRandom generateRandSalt = new SecureRandom();
+        StringBuilder storageForSalt = new StringBuilder();
         for (int i = 0; i < 18; i++)
         {
-            storageForNonce.append(generateRandNonce.nextInt(10));
+            storageForSalt.append(generateRandSalt.nextInt(10));
         }
-        String nonce = storageForNonce.toString();
-        return nonce;
+        String salt = storageForSalt.toString();
+        return salt;
     }
 
     /**
@@ -33,12 +36,12 @@ public class Security {
      * @throws NoSuchAlgorithmException thrown when cryptographic algorithm is requested but it does
      * not exist.
      */
-    public static String getPassword(String userInputPassword, byte[]salt) throws NoSuchAlgorithmException {
+    public String hashPassword(String userInputPassword, String salt) throws NoSuchAlgorithmException {
         String securePassword = null;
         StringBuilder hexaDFormat = new StringBuilder();
         MessageDigest md5 = MessageDigest.getInstance("MD5");
 
-        md5.update(salt);
+        md5.update(Byte.parseByte(salt));
         byte[] getHashBytes = md5.digest(userInputPassword.getBytes());
 
         // hexadecimal conversion taken from:
@@ -52,31 +55,4 @@ public class Security {
         }
         return securePassword = hexaDFormat.toString();
     }
-
-
-    /**
-     * Generates salt for additional security
-     * @return returns byte array
-     * @throws NoSuchAlgorithmException thrown when requested algorithm does not exist.
-     */
-    public static byte[] getSalt() throws NoSuchAlgorithmException
-    {
-        // use SecureRandom for random generation
-        SecureRandom secureSalt = SecureRandom.getInstance("SHA1PRNG");
-
-        //array to store salt
-        byte[] salt = new byte[16];
-
-        //add salt to array
-        secureSalt.nextBytes(salt);
-
-        return salt;
-    }
-
-
-
-
-
-
-
 }

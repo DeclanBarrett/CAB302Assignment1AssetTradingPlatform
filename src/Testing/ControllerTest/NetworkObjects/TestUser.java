@@ -1,4 +1,4 @@
-package Testing.ControllerTest;
+package Testing.ControllerTest.NetworkObjects;
 
 import Controllers.Backend.AccountType;
 import Controllers.Backend.NetworkObjects.User;
