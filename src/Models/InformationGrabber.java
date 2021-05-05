@@ -3,7 +3,11 @@ package Models;
 import Controllers.Backend.NetworkObjects.Order;
 import Controllers.Backend.NetworkObjects.OrganisationalUnit;
 
+import javax.xml.crypto.Data;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -32,6 +36,23 @@ public class  InformationGrabber {
     private PreparedStatement getPassword;
 
     private PreparedStatement getUser;
+
+    private Connection connection;
+
+    public void retrievePassword(String username)
+    {
+        try
+        {
+            connection = DatabaseConnection.getInstance();
+            getPassword = connection.prepareStatement(GET_PASSWORD);
+            getPassword.setString(1, username);
+            ResultSet rs = getPassword.executeQuery();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+    }
 
     /**
      * Get the list of Orders
