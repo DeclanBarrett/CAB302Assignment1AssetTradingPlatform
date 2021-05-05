@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class  InformationGrabber {
 
-
     //SQL queries for user, login and reset password
 
     private static final String INSERT_NEW_USER = "INSERT INTO user (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES (?, ?, ?, ?, ?)";

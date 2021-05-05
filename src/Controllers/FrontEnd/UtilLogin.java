@@ -1,7 +1,8 @@
 package Controllers.FrontEnd;
 
-import Controllers.Backend.LoginToken;
-import Controllers.Backend.User;
+import Controllers.Backend.NetworkObjects.LoginToken;
+
+import Controllers.Backend.NetworkObjects.User;
 import Models.MockSocket;
 import Controllers.Backend.Security;
 
