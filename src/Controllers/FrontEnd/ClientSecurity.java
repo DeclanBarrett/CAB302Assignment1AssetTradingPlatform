@@ -36,22 +36,27 @@ public class ClientSecurity {
      * @throws NoSuchAlgorithmException thrown when cryptographic algorithm is requested but it does
      * not exist.
      */
-    public String hashPassword(String userInputPassword, String salt) throws NoSuchAlgorithmException {
+    public String hashPassword(String userInputPassword, String salt) throws LoginException {
+
         String securePassword = null;
         StringBuilder hexaDFormat = new StringBuilder();
-        MessageDigest md5 = MessageDigest.getInstance("MD5");
 
-        md5.update(Byte.parseByte(salt));
-        byte[] getHashBytes = md5.digest(userInputPassword.getBytes());
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
 
-        // hexadecimal conversion taken from:
-        // https://howtodoinjava.com/java/java-security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
+            md5.update(salt.getBytes());
+            byte[] getHashBytes = md5.digest(userInputPassword.getBytes());
 
-        // convets array from decimal format to hexadecimal.
-        //
-        for (int i = 0; i < getHashBytes.length; i++)
-        {
-            hexaDFormat.append(Integer.toString((getHashBytes[i] & 0xff) + 0x100, 16).substring(1));
+            // hexadecimal conversion taken from:
+            // https://howtodoinjava.com/java/java-security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
+
+            // convets array from decimal format to hexadecimal.
+            //
+            for (int i = 0; i < getHashBytes.length; i++) {
+                hexaDFormat.append(Integer.toString((getHashBytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+        } catch (Exception e) {
+            throw new LoginException("Password Hashing has Failed");
         }
         return securePassword = hexaDFormat.toString();
     }

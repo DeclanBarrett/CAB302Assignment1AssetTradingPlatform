@@ -2,11 +2,14 @@ package Testing.ControllerTest.FrontEndTest;
 
 import Controllers.Backend.NetworkObjects.LoginToken;
 import Controllers.FrontEnd.ClientSecurity;
+import Controllers.FrontEnd.LoginException;
+import com.mysql.cj.log.Log;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,26 +34,28 @@ public class TestClientSecurity {
 
     @Test
     public void TestNullHashPassword() throws NoSuchAlgorithmException {
-        assertEquals(null, clientSecurity.hashPassword(null, null));
+        assertThrows(LoginException.class, () -> {
+            clientSecurity.hashPassword(null, null);
+        });
     }
 
     @Test
-    public void TestHashPasswordIsntSame() throws NoSuchAlgorithmException {
+    public void TestHashPasswordIsntSame() throws LoginException {
         assertNotEquals(clientSecurity.hashPassword("Garry", "GARRY"), clientSecurity.hashPassword("Garry", "12345"));
     }
 
     @Test
-    public void TestTwoHashPasswords() throws NoSuchAlgorithmException {
+    public void TestTwoHashPasswords() throws LoginException {
         assertEquals(clientSecurity.hashPassword("Garry", "123"), clientSecurity.hashPassword("Garry", "123"));
     }
 
     @Test
-    public void TestTwoDifferentPasswords() throws NoSuchAlgorithmException {
+    public void TestTwoDifferentPasswords() throws LoginException {
         assertNotEquals(clientSecurity.hashPassword("JerementClarksonsBumFluff", "123"), clientSecurity.hashPassword("JeremenyClarksonsBumFluff", "123"));
     }
 
     @Test
-    public void TestTwoDifferentHashes() throws NoSuchAlgorithmException {
+    public void TestTwoDifferentHashes() throws LoginException {
         assertNotEquals(clientSecurity.hashPassword("jbcddksfj2423j434jh234jl3h", clientSecurity.generateSalt()), clientSecurity.hashPassword("jbcddksfj2423j434jh234jl3h", clientSecurity.generateSalt()));
     }
 
