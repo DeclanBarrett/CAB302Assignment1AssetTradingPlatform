@@ -3,13 +3,15 @@ package Controllers.Backend.NetworkObjects;
 
 import Controllers.Backend.OrderType;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * A data structure that stores all information for an Order
  */
-public class Order {
+public class Order implements Comparable<Order>, Serializable  {
 
+    int orderID;
     OrderType orderType;
     String assetType;
     int assetQuantity;
@@ -101,5 +103,10 @@ public class Order {
      */
     public Date GetDate() {
         return date;
+    }
+
+    @Override
+    public int compareTo(Order o) {
+        return ((Integer) orderID).compareTo(o.orderID);
     }
 }

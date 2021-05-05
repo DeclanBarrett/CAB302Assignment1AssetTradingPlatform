@@ -2,10 +2,12 @@ package Controllers.Backend.NetworkObjects;
 
 import Controllers.Backend.AccountType;
 
+import java.io.Serializable;
+
 /**
  * User data object that allows the interaction of a single users account information
  */
-public class User {
+public class User implements Comparable<User>, Serializable {
 
     private String username;
     private String password;
@@ -56,5 +58,21 @@ public class User {
      */
     public String GetOrganisationalUnit() {
         return organisationalType;
+    }
+
+    /**
+     * Compares this object with the specified object. Returns a
+     * negative integer, zero, or a positive integer as this object is less than,
+     * equal to, or greater than the specified object.
+     *
+     * @param other The other User object to compare against.
+     * @return a negative integer, zero, or a positive integer as this object is
+     *         less than, equal to, or greater than the specified object.
+     * @throws ClassCastException if the specified object's type prevents it from
+     *            being compared to this object.
+     */
+    @Override
+    public int compareTo(User other) {
+        return this.username.compareTo(other.username);
     }
 }
