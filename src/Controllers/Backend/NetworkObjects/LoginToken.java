@@ -16,4 +16,12 @@ public class LoginToken implements Serializable {
         this.endDate = date;
     }
 
+    public String GetUsername() {
+        return username;
+    }
+
+    public Date GetDate() {
+        return endDate;
+    }
+
 }
