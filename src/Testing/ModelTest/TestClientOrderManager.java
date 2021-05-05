@@ -27,7 +27,7 @@ public class TestClientOrderManager {
 
     @Test
     public void TestSetUser() {
-        User user = new User("Jack", "qwerty", AccountType.User, "Sales");
+        User user = new User("Jack", AccountType.User, "Sales");
         orderManager.SetUser(user);
     }
 
@@ -44,7 +44,7 @@ public class TestClientOrderManager {
 
     @Test
     public void TestCheckOrderNormal() {
-        User user = new User("Jack", "qwerty", AccountType.User, "Sales");
+        User user = new User("Jack", AccountType.User, "Sales");
 
         Order order = new Order(OrderType.BUY, "Paper", 50, 3.5, "Sales", new Date());
 

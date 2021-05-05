@@ -31,14 +31,16 @@ public class LoginController {
     /**
      * Global Utility for attempting to login to the server
      */
-    public void AttemptLogin(String username, String password) throws LoginException, NoSuchAlgorithmException {
-
+    public void AttemptLogin(String username, String password) throws LoginException{
+        System.out.println("\nUsername: " + username);
         String hashPassword = ReceiveNonceAndHash(username, password);
 
         currentLogin = MockSocket.Login(username, hashPassword);
 
+
+
         if (currentLogin != null) {
-            currentUser = MockSocket.GetUser(username);
+            currentUser = new User(MockSocket.GetUser(username).GetUsername(), MockSocket.GetUser(username).GetAccountType(), MockSocket.GetUser(username).GetOrganisationalUnit());
             return;
         }
 
@@ -48,19 +50,24 @@ public class LoginController {
 
 
 
-    private String ReceiveNonceAndHash(String username, String password) throws LoginException, NoSuchAlgorithmException {
+    private String ReceiveNonceAndHash(String username, String password) throws LoginException {
 
-        String nonce = MockSocket.RetrieveNonce(username);
+        String salt = MockSocket.RetrieveNonce(username);
 
-        if (nonce == null) {
+
+
+        if (salt == null) {
             throw new LoginException("Username or Password Incorrect 2");
         }
 
         ClientSecurity securityManager = new ClientSecurity();
 
         // Generates salted and hashed password using md5 algorithm.
-        String salt = securityManager.generateSalt();
+        //String salt = securityManager.generateSalt();
         String hashedPassword = securityManager.hashPassword(password, salt);
+
+        System.out.println("Password: " + password + ", Salt: " + salt);
+        System.out.println("Hashed Password: " + hashedPassword);
 
         return hashedPassword;
     }

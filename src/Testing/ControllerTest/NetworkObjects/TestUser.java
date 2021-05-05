@@ -13,7 +13,7 @@ public class TestUser {
 
     @BeforeEach
     public void ConstructUser(){
-         user = new User("Jack", "qwerty", AccountType.User, "Sales");
+         user = new User("Jack", AccountType.User, "Sales");
     }
 
     @Test
@@ -22,11 +22,13 @@ public class TestUser {
         assertEquals("Jack", username);
     }
 
+    /*
     @Test
     public void TestGetPassword() {
         String password = user.GetPassword();
         assertEquals("qwerty", password);
     }
+    */
 
     @Test
     public void TestGetAccountType() {

@@ -10,20 +10,20 @@ import java.io.Serializable;
 public class User implements Comparable<User>, Serializable {
 
     private String username;
-    private String password;
+    //private String password;
     private AccountType accountType;
     private String organisationalType;
 
     /**
      *
      * @param username Username of the user
-     * @param password Password of the user
+     * //@param password Password of the user
      * @param accountType Account type of the use
      * @param organisationalUnit Organisational Unit that the user belongs to
      */
-    public User(String username, String password, AccountType accountType, String organisationalUnit) {
+    public User(String username, AccountType accountType, String organisationalUnit) {
         this.username = username;
-        this.password = password;
+        //this.password = password;
         this.accountType = accountType;
         this.organisationalType = organisationalUnit;
     }
@@ -40,9 +40,7 @@ public class User implements Comparable<User>, Serializable {
      *
      * @return password of the User
      */
-    public String GetPassword() {
-        return password;
-    }
+    //public String GetPassword() { return password; }
 
     /**
      *
@@ -74,5 +72,25 @@ public class User implements Comparable<User>, Serializable {
     @Override
     public int compareTo(User other) {
         return this.username.compareTo(other.username);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // If the object is compared with itself then return true
+        if (o == this) {
+            return true;
+        }
+
+        /* Check if o is an instance of Complex or not
+          "null instanceof [type]" also returns false */
+        if (!(o instanceof User)) {
+            return false;
+        }
+
+        // typecast o to Complex so that we can compare data members
+        User u = (User) o;
+
+        // Compare the data members and return accordingly
+        return GetUsername().equals(u.GetUsername());
     }
 }
