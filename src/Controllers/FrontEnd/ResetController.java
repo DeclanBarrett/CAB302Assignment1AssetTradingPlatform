@@ -1,7 +1,6 @@
 package Controllers.FrontEnd;
 
 import Controllers.Utils.UtilFieldCheckers;
-import Controllers.Utils.UtilLogin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +36,8 @@ public class ResetController implements Initializable {
     private Label ErrorText;
 
     private boolean passwordsMatch;
+
+    LoginController loginController;
 
     /**
      * Checks that the correct username/password combination is entered into the reset password screen
@@ -76,14 +77,14 @@ public class ResetController implements Initializable {
      * @throws IOException handles error in file entry/output
      */
     public void CheckPasswordDifference(KeyEvent CheckPasswordDifference) throws IOException {
-        passwordsMatch = UtilFieldCheckers.CheckTwoStrings(NewPasswordText, NewPassword2Text, ErrorText, "PASSWORDS");
-        System.out.println(passwordsMatch);
+        UtilFieldCheckers checker = new UtilFieldCheckers();
+        passwordsMatch = checker.CheckTwoStrings(NewPasswordText, NewPassword2Text, ErrorText, "PASSWORDS");
         System.out.println(passwordsMatch);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        loginController = new LoginController();
     }
 
     /**
@@ -96,8 +97,10 @@ public class ResetController implements Initializable {
         /**TODO GO TO THE DATBASE AND CHECK
          *
          */
+
+
         try {
-            UtilLogin.AttemptLogin(username, password);
+            loginController.AttemptLogin(username, password);
 
         } catch (Exception e) {
 
@@ -109,7 +112,7 @@ public class ResetController implements Initializable {
         /**TODO GO TO THE DATBASE AND UPDATE
          *
          */
-        UtilLogin.Logout();
+        loginController.Logout();
     }
 
 

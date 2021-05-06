@@ -1,7 +1,6 @@
 package Controllers.FrontEnd;
 
 import Controllers.Backend.AccountType;
-import Controllers.Utils.UtilLogin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +15,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
 /**
@@ -41,14 +39,15 @@ public class LoginHandler implements Initializable {
     public void HandleLoginPress (ActionEvent HandleLoginPress) throws IOException {
 
         try {
-            UtilLogin.AttemptLogin(LoginUsername.getText(), LoginPassword.getText());
+            LoginController loginController = new LoginController();
+            loginController.AttemptLogin(LoginUsername.getText(), LoginPassword.getText());
 
             Parent loginView;
 
-            if (UtilLogin.GetUser().GetAccountType() == AccountType.SystemAdmin) {
+            if (LoginController.GetUser().GetAccountType() == AccountType.SystemAdmin) {
                 loginView = FXMLLoader.load(getClass().getResource("/Views/Admin/AdminScreen.fxml"));
-            } else if (UtilLogin.GetUser().GetAccountType() == AccountType.User ||
-                    UtilLogin.GetUser().GetAccountType() == AccountType.UnitLeader) {
+            } else if (LoginController.GetUser().GetAccountType() == AccountType.User ||
+                    LoginController.GetUser().GetAccountType() == AccountType.UnitLeader) {
                 loginView = FXMLLoader.load(getClass().getResource("/Views/User/UserScreen.fxml"));
             } else {
                 throw new LoginException("Unexpected Error");

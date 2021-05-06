@@ -23,6 +23,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="mysql:mysql-connector-java:8.0.24" level="project" />
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="lib1" level="project" />
     <orderEntry type="library" name="org.mariadb.jdbc:mariadb-java-client:2.7.21" level="project" />
