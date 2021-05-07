@@ -39,6 +39,10 @@ public class  InformationGrabber {
 
     private Connection connection;
 
+    /**
+     *
+     * @param username
+     */
     public void retrievePassword(String username)
     {
         try
@@ -47,12 +51,26 @@ public class  InformationGrabber {
             getPassword = connection.prepareStatement(GET_PASSWORD);
             getPassword.setString(1, username);
             ResultSet rs = getPassword.executeQuery();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-
     }
+
+    public void retrieveSalt(String username)
+    {
+        try
+        {
+            connection = DatabaseConnection.getInstance();
+            getNonce = connection.prepareStatement(GET_NONCE);
+            getNonce.setString(1, username);
+            ResultSet rs = getNonce.executeQuery();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
 
     /**
      * Get the list of Orders
