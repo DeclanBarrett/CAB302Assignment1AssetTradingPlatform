@@ -52,7 +52,6 @@ public class MockSocket implements IDataSource {
         userTable.add(new User("User 12", "086e1b7e1c12ba37cd473670b3a15214", AccountType.UnitLeader, "Research", "123456"));
         userTable.add(new User("User 13", "086e1b7e1c12ba37cd473670b3a15214", AccountType.UnitLeader, "Research", "123456"));
 
-
         organisationAssets.put("Paper", 50);
         organisationAssets.put("CPU hours", 600);
         organisationAssets.put("Pickles", 50);
