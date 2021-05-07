@@ -2,10 +2,8 @@ package Controllers.FrontEnd;
 
 
 import Controllers.Backend.NetworkObjects.LoginToken;
-import Controllers.Backend.NetworkObjects.User;
-import Models.MockSocket;
-
-import java.security.NoSuchAlgorithmException;
+import Controllers.Backend.NetworkObjects.UserInfo;
+import Controllers.Socket.MockSocket;
 
 /**
  * Used to check for correct login input.
@@ -13,10 +11,10 @@ import java.security.NoSuchAlgorithmException;
 public class LoginController {
 
     private static LoginToken currentLogin;
-    private static User currentUser;
+    private static UserInfo currentUserInfo;
 
-    public static User GetUser() {
-        return currentUser;
+    public static UserInfo GetUser() {
+        return currentUserInfo;
     }
 
     public static LoginToken GetToken() {
@@ -25,7 +23,7 @@ public class LoginController {
 
     public void Logout() {
         currentLogin = null;
-        currentUser = null;
+        currentUserInfo = null;
     }
 
     /**
@@ -40,7 +38,7 @@ public class LoginController {
 
 
         if (currentLogin != null) {
-            currentUser = new User(MockSocket.GetUser(username).GetUsername(), MockSocket.GetUser(username).GetAccountType(), MockSocket.GetUser(username).GetOrganisationalUnit());
+            currentUserInfo = new UserInfo(MockSocket.GetUser(username).GetUsername(), MockSocket.GetUser(username).GetAccountType(), MockSocket.GetUser(username).GetOrganisationalUnit());
             return;
         }
 

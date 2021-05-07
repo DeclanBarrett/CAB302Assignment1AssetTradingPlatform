@@ -29,7 +29,8 @@ public class Order implements Comparable<Order>, Serializable  {
      * @param organisationalUnit The OrganisationalUnit object for the Organisation the Order is made on behalf of
      * @param date The Date in milliseconds when the Order was placed
      */
-    public Order(OrderType orderType, String assetType, int assetQuantity, double requestPrice, OrganisationalUnit organisationalUnit, Date date) {
+    public Order(int orderID, OrderType orderType, String assetType, int assetQuantity, double requestPrice, OrganisationalUnit organisationalUnit, Date date) {
+        this.orderID = orderID;
         this.orderType = orderType;
         this.assetType = assetType;
         this.assetQuantity = assetQuantity;
@@ -48,13 +49,22 @@ public class Order implements Comparable<Order>, Serializable  {
      * @param organisationalName The OrganisationalUnit name for the Organisation the Order is made on behalf of
      * @param date The Date in milliseconds when the Order was placed
      */
-    public Order(OrderType orderType, String assetType, int assetQuantity, double requestPrice, String organisationalName, Date date) {
+    public Order(int orderID, OrderType orderType, String assetType, int assetQuantity, double requestPrice, String organisationalName, Date date) {
+        this.orderID = orderID;
         this.orderType = orderType;
         this.assetType = assetType;
         this.assetQuantity = assetQuantity;
         this.requestPrice = requestPrice;
         this.organisationalUnitName = organisationalName;
         this.date = date;
+    }
+
+    /**
+     *
+     * @return The type of order requested. Either Buy or Sell.
+     */
+    public int GetOrderID() {
+        return orderID;
     }
 
     /**
@@ -108,5 +118,25 @@ public class Order implements Comparable<Order>, Serializable  {
     @Override
     public int compareTo(Order o) {
         return ((Integer) orderID).compareTo(o.orderID);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // If the object is compared with itself then return true
+        if (o == this) {
+            return true;
+        }
+
+        /* Check if o is an instance of Complex or not
+          "null instanceof [type]" also returns false */
+        if (!(o instanceof Order)) {
+            return false;
+        }
+
+        // typecast o to Complex so that we can compare data members
+        Order u = (Order) o;
+
+        // Compare the data members and return accordingly
+        return ((Integer)GetOrderID()).equals(u.GetOrderID());
     }
 }

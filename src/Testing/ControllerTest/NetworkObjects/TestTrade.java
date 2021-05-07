@@ -1,8 +1,6 @@
 package Testing.ControllerTest.NetworkObjects;
 
-import Controllers.Backend.AccountType;
 import Controllers.Backend.NetworkObjects.Trade;
-import Controllers.Backend.NetworkObjects.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

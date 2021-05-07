@@ -1,24 +1,24 @@
 package Testing.ControllerTest.NetworkObjects;
 
 import Controllers.Backend.AccountType;
-import Controllers.Backend.NetworkObjects.User;
+import Controllers.Backend.NetworkObjects.UserInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestUser {
+public class TestUserInfo {
 
-    User user;
+    UserInfo userInfo;
 
     @BeforeEach
     public void ConstructUser(){
-         user = new User("Jack", AccountType.User, "Sales");
+         userInfo = new UserInfo("Jack", AccountType.User, "Sales");
     }
 
     @Test
     public void TestGetUsername() {
-        String username = user.GetUsername();
+        String username = userInfo.GetUsername();
         assertEquals("Jack", username);
     }
 
@@ -32,13 +32,13 @@ public class TestUser {
 
     @Test
     public void TestGetAccountType() {
-        AccountType type = user.GetAccountType();
+        AccountType type = userInfo.GetAccountType();
         assertEquals(AccountType.User, type);
     }
 
     @Test
     public void TestGetOrganisationalUnit() {
-        String unit = user.GetOrganisationalUnit();
+        String unit = userInfo.GetOrganisationalUnit();
         assertEquals("Sales", unit);
     }
 }
