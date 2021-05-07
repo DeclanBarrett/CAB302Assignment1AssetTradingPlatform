@@ -7,9 +7,11 @@ import Controllers.Backend.NetworkObjects.User;
 import java.util.Date;
 import java.util.List;
 
-public interface IDatabase {
+public interface IDataSource {
 
     void OpenConnection();
+
+    public String RetrieveNonce(String username);
 
     User GetUser(String userName);
 

@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Mock database for testing.
  */
-public class MockSocket {
+public class MockSocket implements IDataSource {
 
     private static boolean databaseConnected;
 
@@ -65,11 +65,11 @@ public class MockSocket {
         System.out.println("HELL");
     }
 
-    public static void OpenConnection() {
+    public void OpenConnection() {
         databaseConnected = true;
     }
 
-    public static String RetrieveNonce(String username) {
+    public String RetrieveNonce(String username) {
 
         OpenConnection();
 
@@ -83,7 +83,7 @@ public class MockSocket {
         return null;
     }
 
-    public static LoginToken Login(String username, String password) {
+    public LoginToken Login(String username, String password) {
         OpenConnection();
         for (User currentUser: userTable) {
             if (currentUser.GetUsername().equals(username) && currentUser.GetPassword().equals(password)) {
@@ -101,22 +101,22 @@ public class MockSocket {
         return null;
     }
 
-    public static void CreateUser(User newUser) {
+    public void CreateUser(User newUser) {
 
     }
 
-    public static User GetUser(String userName) {
+    public Controllers.Backend.NetworkObjects.User GetUser(String userName) {
         OpenConnection();
         for (User currentUser: userTable) {
             if (currentUser.GetUsername().equals(userName)) {
-                return currentUser;
+                return new Controllers.Backend.NetworkObjects.User(currentUser.GetUsername(), currentUser.GetAccountType(), currentUser.GetOrganisationalUnit());
             }
         }
         CloseConnection();
         return null;
     }
 
-    public static Order GetOrder(String organisationName, Date date) {
+    public Order GetOrder(String organisationName, Date date) {
         OpenConnection();
         for (Order currentOrder: orderTable) {
             if (currentOrder.GetOrganisationalUnit().equals(organisationName) &&
@@ -128,14 +128,14 @@ public class MockSocket {
         return null;
     }
 
-    public static List<Order> GetOrderList() {
+    public List<Order> GetOrderList() {
         OpenConnection();
         ArrayList<Order> orders = orderTable;
         CloseConnection();
         return orders;
     }
 
-    public static OrganisationalUnit GetOrganisationalUnit(String unitName) {
+    public OrganisationalUnit GetOrganisationalUnit(String unitName) {
         OpenConnection();
         for (OrganisationalUnit organisationalUnit: organisationalUnitTable) {
             if (organisationalUnit.GetUnitName().equals(unitName)) {
@@ -146,7 +146,7 @@ public class MockSocket {
         return null;
     }
 
-    public static void CloseConnection() {
+    public void CloseConnection() {
 
         databaseConnected = false;
     }
