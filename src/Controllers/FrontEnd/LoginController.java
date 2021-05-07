@@ -37,6 +37,8 @@ public class LoginController {
 
         currentLogin = MockSocket.Login(username, hashPassword);
 
+
+
         if (currentLogin != null) {
             currentUser = new User(MockSocket.GetUser(username).GetUsername(), MockSocket.GetUser(username).GetAccountType(), MockSocket.GetUser(username).GetOrganisationalUnit());
             return;
@@ -45,16 +47,14 @@ public class LoginController {
         throw new LoginException("Username or Password Incorrect 1");
     }
 
-    /**
-     * Generates hashed password based off entered  password
-     * @param username - the username attached to the password
-     * @param password - the unhashed password used as input
-     * @return - hashed password in string form.
-     * @throws LoginException - exception thrown when login fails
-     */
+
+
+
     private String ReceiveNonceAndHash(String username, String password) throws LoginException {
 
         String salt = MockSocket.RetrieveNonce(username);
+
+
 
         if (salt == null) {
             throw new LoginException("Username or Password Incorrect 2");
