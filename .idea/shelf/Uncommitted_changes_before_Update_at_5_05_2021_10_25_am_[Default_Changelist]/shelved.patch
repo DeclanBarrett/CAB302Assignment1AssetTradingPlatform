@@ -1,0 +1,69 @@
+Index: .idea/libraries/lib.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><component name=\"libraryTable\">\r\n  <library name=\"lib\">\r\n    <CLASSES>\r\n      <root url=\"file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib\" />\r\n    </CLASSES>\r\n    <JAVADOC />\r\n    <SOURCES>\r\n      <root url=\"file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib\" />\r\n    </SOURCES>\r\n    <jarDirectory url=\"file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib\" recursive=\"false\" />\r\n    <jarDirectory url=\"file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib\" recursive=\"false\" type=\"SOURCES\" />\r\n  </library>\r\n</component>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/lib.xml b/.idea/libraries/lib.xml
+--- a/.idea/libraries/lib.xml	(revision 95d00dc2944cac04d5f580b7b54d6c6eaa2b523d)
++++ b/.idea/libraries/lib.xml	(date 1619744584904)
+@@ -1,13 +1,13 @@
+ <component name="libraryTable">
+   <library name="lib">
+     <CLASSES>
+-      <root url="file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib" />
++      <root url="file://$PROJECT_DIR$/../../../../Tools/JavaFX/lib" />
+     </CLASSES>
+     <JAVADOC />
+     <SOURCES>
+-      <root url="file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib" />
++      <root url="file://$PROJECT_DIR$/../../../../Tools/JavaFX/lib" />
+     </SOURCES>
+-    <jarDirectory url="file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib" recursive="false" />
+-    <jarDirectory url="file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
++    <jarDirectory url="file://$PROJECT_DIR$/../../../../Tools/JavaFX/lib" recursive="false" />
++    <jarDirectory url="file://$PROJECT_DIR$/../../../../Tools/JavaFX/lib" recursive="false" type="SOURCES" />
+   </library>
+ </component>
+\ No newline at end of file
+Index: src/App_Start/ClientStart.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package App_Start;\r\n\r\nimport Models.MockSocket;\r\nimport javafx.application.Application;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.stage.Stage;\r\n\r\n/**\r\n * Creates stage for the UI, contains basic stage information\r\n */\r\npublic class ClientStart extends Application\r\n{\r\n    public static void main(String[] args) {\r\n        launch(args);\r\n    }\r\n\r\n    /**\r\n     * Initialise GUI screen, make visible\r\n     * @param primaryStage Handles creation of main GUI screen\r\n     * @throws Exception To stop GUI breaking\r\n     */\r\n    @Override\r\n    public void start(Stage primaryStage) throws Exception\r\n    {\r\n        new MockSocket();\r\n\r\n\r\n        primaryStage.setTitle(\"Unnamed Client Organisation Trading System\");\r\n\r\n        Parent root;\r\n\r\n        // Admin\r\n        //root = FXMLLoader.load(getClass().getResource(\"/Client/FXMLPages/Admin/AdminScreen.fxml\"));\r\n        // User\r\n        //root = FXMLLoader.load(getClass().getResource(\"/Client/FXMLPages/User/UserScreen.fxml\"));\r\n        // Login\r\n        root = FXMLLoader.load(getClass().getResource(\"/Views/Login/Login.fxml\"));\r\n        // Reset\r\n        //root = FXMLLoader.load(getClass().getResource(\"/Client/FXMLPages/PasswordReset.fxml\"));\r\n\r\n\r\n        primaryStage.setScene(new Scene(root));\r\n        primaryStage.show();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/App_Start/ClientStart.java b/src/App_Start/ClientStart.java
+--- a/src/App_Start/ClientStart.java	(revision 95d00dc2944cac04d5f580b7b54d6c6eaa2b523d)
++++ b/src/App_Start/ClientStart.java	(date 1620173777454)
+@@ -1,6 +1,5 @@
+ package App_Start;
+ 
+-import Models.MockSocket;
+ import javafx.application.Application;
+ import javafx.fxml.FXMLLoader;
+ import javafx.scene.Parent;
+@@ -24,7 +23,7 @@
+     @Override
+     public void start(Stage primaryStage) throws Exception
+     {
+-        new MockSocket();
++      //  new MockSocket();
+ 
+ 
+         primaryStage.setTitle("Unnamed Client Organisation Trading System");
+@@ -32,11 +31,11 @@
+         Parent root;
+ 
+         // Admin
+-        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/Admin/AdminScreen.fxml"));
++        root = FXMLLoader.load(getClass().getResource("/Views/Admin/AdminScreen.fxml"));
+         // User
+         //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/User/UserScreen.fxml"));
+         // Login
+-        root = FXMLLoader.load(getClass().getResource("/Views/Login/Login.fxml"));
++       // root = FXMLLoader.load(getClass().getResource("/Views/Login/Login.fxml"));
+         // Reset
+         //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/PasswordReset.fxml"));
+ 

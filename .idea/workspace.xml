@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :).">
+      <change beforePath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Aidan-Branch" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Models/IDatabase.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Models/InformationGrabber.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Controllers/FrontEnd/OrderManager.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Controllers/FrontEnd/LoginController.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="1qoyBDtoSUT10ozznKhI69mkQcv" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mariadb" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/.gitignore" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Tools/JavaFX/lib" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Battl\IdeaProjects\CAB302Assignment1AssetTradingPlatform\src\main\Controller" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Battl\IdeaProjects\CAB302Assignment1AssetTradingPlatform\src\Testing\BlackBox\Model" />
+      <recent name="C:\Users\Battl\IdeaProjects\CAB302Assignment1AssetTradingPlatform\src\Testing\BlackBox\Controller" />
+      <recent name="C:\Users\Battl\IdeaProjects\CAB302Assignment1AssetTradingPlatform\src\Testing\ControllerTest" />
+      <recent name="C:\Users\Battl\IdeaProjects\CAB302Assignment1AssetTradingPlatform\src\Testing\ModelTest" />
+      <recent name="C:\Users\Battl\IdeaProjects\CAB302Assignment1AssetTradingPlatform\src\Testing" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ClientStart">
+    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Controllers.Socket.Client" />
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controllers.Socket.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientStart" type="Application" factoryName="Application" activateToolWindowBeforeRun="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="App_Start.ClientStart" />
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <option name="VM_PARAMETERS" value="--module-path C:\Tools\JavaFX\lib --add-modules javafx.controls,javafx.fxml --add-exports javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED " />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="App_Start.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Controllers.Socket.Server" />
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controllers.Socket.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="App_Start.Test" />
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="App_Start.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ModelTest.testReq" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test.model" />
+      <option name="MAIN_CLASS_NAME" value="test.model.ModelTest" />
+      <option name="METHOD_NAME" value="testReq" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.ClientStart" />
+      <item itemvalue="JUnit.ModelTest.testReq" />
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Application.Client" />
+      <item itemvalue="Application.Test" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ModelTest.testReq" />
+        <item itemvalue="Application.Test" />
+        <item itemvalue="Application.Client" />
+        <item itemvalue="Application.Server" />
+        <item itemvalue="Application.ClientStart" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="" />
+      <created>1617760099571</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1617760099571</updated>
+      <workItem from="1617760100725" duration="286000" />
+      <workItem from="1618358517512" duration="1563000" />
+      <workItem from="1618531459240" duration="1813000" />
+      <workItem from="1618534605228" duration="1119000" />
+      <workItem from="1618535852187" duration="359000" />
+      <workItem from="1618536229242" duration="233000" />
+      <workItem from="1618536481339" duration="3222000" />
+      <workItem from="1618622721412" duration="1311000" />
+      <workItem from="1618634362390" duration="3213000" />
+      <workItem from="1618890159330" duration="833000" />
+      <workItem from="1618891796505" duration="152000" />
+      <workItem from="1618891968722" duration="160000" />
+      <workItem from="1618892152152" duration="291000" />
+      <workItem from="1618964068260" duration="584000" />
+      <workItem from="1618964699912" duration="1426000" />
+      <workItem from="1618966269280" duration="1064000" />
+      <workItem from="1619231766816" duration="1586000" />
+      <workItem from="1619233396871" duration="1904000" />
+      <workItem from="1619235364978" duration="863000" />
+      <workItem from="1619236516030" duration="218000" />
+      <workItem from="1619236750209" duration="101000" />
+      <workItem from="1619236867576" duration="3179000" />
+      <workItem from="1619346588405" duration="517000" />
+      <workItem from="1619347125300" duration="116000" />
+      <workItem from="1619347253230" duration="4408000" />
+      <workItem from="1619353060325" duration="2912000" />
+      <workItem from="1619356714352" duration="51000" />
+      <workItem from="1619356779679" duration="594000" />
+      <workItem from="1619400378435" duration="2309000" />
+      <workItem from="1619402738784" duration="1379000" />
+      <workItem from="1619414126336" duration="1000" />
+      <workItem from="1619741203841" duration="444000" />
+      <workItem from="1619741716100" duration="1146000" />
+      <workItem from="1619743512348" duration="1004000" />
+      <workItem from="1619744549223" duration="70000" />
+      <workItem from="1620173194188" duration="762000" />
+      <workItem from="1620174060356" duration="2235000" />
+      <workItem from="1620177056140" duration="601000" />
+      <workItem from="1620346122909" duration="1032000" />
+      <workItem from="1620347174441" duration="1696000" />
+      <workItem from="1620366595148" duration="595000" />
+      <workItem from="1620430594175" duration="158000" />
+      <workItem from="1620430907587" duration="156000" />
+      <workItem from="1620444955429" duration="2494000" />
+    </task>
+    <task id="LOCAL-00001" summary="Initial Commit (Brad Barebones)">
+      <created>1617760354635</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1617760354635</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Project Setup w/ Test Folder">
+      <created>1618359924035</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1618359924035</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Project Setup w/ MVC &amp; Test Folder">
+      <created>1618531659163</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1618531659163</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Project Setup w/ MVC &amp; Test Folder">
+      <created>1618531677739</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1618531677739</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Project Setup w/ MVC &amp; Test Folder">
+      <created>1618532162644</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1618532162644</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Entire GUI Built, Just needs events to be added &amp; backend">
+      <created>1618640229227</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1618640229227</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Entire Project Refactored back to MVC, App_Start &amp; Testing; Architecture. &#10;&#10;&#10;I reverted the entire project to conform to MVC design pattern. This will allow for Team Development, Scalable code and logical organisation. &#10;&#10;Please use the testing folder for all tests and testing, i have linked it with a ID within IntelliJ so it knows all unit test are in this folder.&#10;&#10;Thanks,&#10;Brad.">
+      <created>1619351894023</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1619351894023</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Entire Project Refactored back to MVC, App_Start &amp; Testing; Architecture. &#10;&#10;&#10;I reverted the entire project to conform to MVC design pattern. This will allow for Team Development, Scalable code and logical organisation. &#10;&#10;Please use the testing folder for all tests and testing, i have linked it with a ID within IntelliJ so it knows all unit test are in this folder.&#10;&#10;Thanks,&#10;Brad.">
+      <created>1619352581055</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1619352581055</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Basic Networking is now Live with Sockets. I will just expand from the current code once we get Backend and Frontend Pathing organised.">
+      <created>1619355855110</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1619355855110</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Updated Testing Directory Structure to Organise into BlackBox &amp; ClearBox.&#10;&#10;Notes:&#10; - Deleted Un-Used Test Classes with no Tests &#10; - No Clearbox tests yet :(">
+      <created>1620445300421</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1620445300421</updated>
+    </task>
+    <task id="LOCAL-00011" summary="H">
+      <created>1620446704165</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1620446704165</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :).">
+      <created>1620447292878</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1620447292878</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Brads-Branch" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Initial Commit (Brad Barebones)" />
+    <MESSAGE value="Project Setup w/ Test Folder" />
+    <MESSAGE value="Project Setup w/ MVC &amp; Test Folder" />
+    <MESSAGE value="Entire GUI Built, Just needs events to be added &amp; backend" />
+    <MESSAGE value="Entire Project Refactored back to MVC, App_Start &amp; Testing; Architecture. &#10;&#10;&#10;I reverted the entire project to conform to MVC design pattern. This will allow for Team Development, Scalable code and logical organisation. &#10;&#10;Please use the testing folder for all tests and testing, i have linked it with a ID within IntelliJ so it knows all unit test are in this folder.&#10;&#10;Thanks,&#10;Brad." />
+    <MESSAGE value="Basic Networking is now Live with Sockets. I will just expand from the current code once we get Backend and Frontend Pathing organised." />
+    <MESSAGE value="Updated Testing Directory Structure to Organise into BlackBox &amp; ClearBox.&#10;&#10;Notes:&#10; - Deleted Un-Used Test Classes with no Tests &#10; - No Clearbox tests yet :(" />
+    <MESSAGE value="H" />
+    <MESSAGE value="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :)." />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$ClientStart.ic" NAME="ClientStart Coverage Results" MODIFIED="1619236936087" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Client.*</FILTER>
+    </SUITE>
+  </component>
+</project>
