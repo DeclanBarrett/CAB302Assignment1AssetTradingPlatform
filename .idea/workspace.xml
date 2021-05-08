@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :).">
-      <change beforePath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" afterDir="false" />
-    </list>
+    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :)." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -97,11 +95,11 @@
   </component>
   <component name="RunManager" selected="Application.ClientStart">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Controllers.Socket.Client" />
+      <option name="MAIN_CLASS_NAME" value="Controllers.Backend.Client" />
       <module name="CAB302Assignment1AssetTradingPlatform" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Controllers.Socket.*" />
+          <option name="PATTERN" value="Controllers.Backend.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -124,11 +122,11 @@
       </method>
     </configuration>
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Controllers.Socket.Server" />
+      <option name="MAIN_CLASS_NAME" value="Controllers.Backend.Server" />
       <module name="CAB302Assignment1AssetTradingPlatform" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Controllers.Socket.*" />
+          <option name="PATTERN" value="Controllers.Backend.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -244,7 +242,7 @@
       <workItem from="1620366595148" duration="595000" />
       <workItem from="1620430594175" duration="158000" />
       <workItem from="1620430907587" duration="156000" />
-      <workItem from="1620444955429" duration="2494000" />
+      <workItem from="1620444955429" duration="2805000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit (Brad Barebones)">
       <created>1617760354635</created>
@@ -330,7 +328,21 @@
       <option name="project" value="LOCAL" />
       <updated>1620447292878</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :).">
+      <created>1620447493972</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1620447493972</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :).">
+      <created>1620447553226</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1620447553226</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
