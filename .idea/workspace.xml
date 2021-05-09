@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :)." />
+    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Refactored Server Code to backed end controller">
+      <change afterPath="$PROJECT_DIR$/src/Controllers/Backend/ClientHandle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controllers/BradsPacket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App_Start/ClientStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Start/ClientStart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/AccountType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/_Dump/AccountType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/ClientSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/_Dump/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/OrderType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/_Dump/OrderType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/OrganisationalUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/_Dump/OrganisationalUnit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/_Dump/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/OrderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/OrderManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/FakeDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/FakeDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/IDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/IDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/InformationGrabber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/InformationGrabber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/OrderExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/OrderExecutor.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -73,6 +90,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Tools/JavaFX/lib" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -93,24 +111,19 @@
       <recent name="" />
     </key>
   </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="ServerStart" />
+      <command value="Server" />
+      <command value="client" />
+      <command value="ClientStart" />
+    </option>
+  </component>
   <component name="RunManager" selected="Application.ClientStart">
-    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Controllers.Backend.Client" />
-      <module name="CAB302Assignment1AssetTradingPlatform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Controllers.Backend.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ClientStart" type="Application" factoryName="Application" activateToolWindowBeforeRun="false" temporary="true" nameIsGenerated="true">
+    <configuration name="ClientStart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="App_Start.ClientStart" />
       <module name="CAB302Assignment1AssetTradingPlatform" />
-      <option name="VM_PARAMETERS" value="--module-path C:\Tools\JavaFX\lib --add-modules javafx.controls,javafx.fxml --add-exports javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED " />
+      <option name="VM_PARAMETERS" value="--module-path C:\Tools\JavaFX\lib --add-modules javafx.controls,javafx.fxml --add-exports javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="App_Start.*" />
@@ -134,8 +147,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="App_Start.Test" />
+    <configuration name="ServerStart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="App_Start.ServerStart" />
       <module name="CAB302Assignment1AssetTradingPlatform" />
       <extension name="coverage">
         <pattern>
@@ -147,13 +160,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -175,19 +190,17 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.ServerStart" />
       <item itemvalue="Application.ClientStart" />
       <item itemvalue="JUnit.ModelTest.testReq" />
       <item itemvalue="Application.Server" />
-      <item itemvalue="Application.Client" />
-      <item itemvalue="Application.Test" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ModelTest.testReq" />
-        <item itemvalue="Application.Test" />
-        <item itemvalue="Application.Client" />
-        <item itemvalue="Application.Server" />
         <item itemvalue="Application.ClientStart" />
+        <item itemvalue="Application.Server" />
+        <item itemvalue="Application.ServerStart" />
+        <item itemvalue="JUnit.ModelTest.testReq" />
       </list>
     </recent_temporary>
   </component>
@@ -242,7 +255,8 @@
       <workItem from="1620366595148" duration="595000" />
       <workItem from="1620430594175" duration="158000" />
       <workItem from="1620430907587" duration="156000" />
-      <workItem from="1620444955429" duration="2805000" />
+      <workItem from="1620444955429" duration="4400000" />
+      <workItem from="1620520182340" duration="8628000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit (Brad Barebones)">
       <created>1617760354635</created>
@@ -342,7 +356,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620447553226</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Refactored Server Code to backed end controller">
+      <created>1620447940931</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1620447940931</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,7 +404,8 @@
     <MESSAGE value="Updated Testing Directory Structure to Organise into BlackBox &amp; ClearBox.&#10;&#10;Notes:&#10; - Deleted Un-Used Test Classes with no Tests &#10; - No Clearbox tests yet :(" />
     <MESSAGE value="H" />
     <MESSAGE value="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :)." />
+    <MESSAGE value="Refactored Server Code to backed end controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored Server Code to backed end controller" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

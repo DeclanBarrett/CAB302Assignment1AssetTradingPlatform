@@ -1,68 +1,56 @@
 package Controllers.Backend;
 
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 
-
-public class Server extends Thread
+/**
+ * @author Brad Kent
+ * @author n10632999@qut.edu.au
+ * @version 1.0
+ * @since 0.1
+ */
+public class Server
 {
-    private int port = 6066;
-    private ServerSocket serverSock;
-    private Socket server;
-    private DataInputStream in;
-    private DataOutputStream out;
+    final private int PORT = 6066;
+    final private int BACKLOG = 50;
 
-
-    public Server()
-    {
-        // Create the Server
-        try {
-            serverSock = new ServerSocket(port);
-            serverSock.setSoTimeout(10000);
-        } catch (IOException i) {
-            System.out.println("Server failed to Create :(");
-            i.printStackTrace();
-            System.exit(1);
-        }
-    }
-
-
-    public void run()
-    {
-        // Run the Server
-        while (true)
-        {
-            try {
-                // Server Port
-                System.out.println("Waiting for a Client on port: " + serverSock.getLocalPort());
-
-                // Wait for Client
-                server = serverSock.accept();
-
-                // Client Connected
-                in  = new DataInputStream (server.getInputStream() );
-                out = new DataOutputStream(server.getOutputStream());
-                System.out.println("Accepted!, clientAddr: " + server.getRemoteSocketAddress());
-
-                // Read Msg & Respond to Client
-                System.out.println(in.readUTF());
-                out.writeUTF("Hello There Client! Nice to meet you");
-
-                // Close the Connection to Client
-                server.close();
-
-            } catch (SocketTimeoutException s) {
-                System.out.println("Socket Timed out :(");
-                break;
-            } catch (IOException i) {
-                i.printStackTrace();
-            }
-        }
-    }
-
+    // Start and run the Server
     public static void main(String[] args)
     {
-        Thread t = new Server();
-        t.start();
+        Server server = new Server();
+        try {
+            server.startServer();
+        } catch (IOException | ClassNotFoundException i) {
+            i.printStackTrace();
+        }
     }
-} // End of Class-
+
+    public void startServer() throws IOException, ClassNotFoundException
+    {
+        // Create ENDPOINT
+        ServerSocket serverSocket = new ServerSocket(PORT, BACKLOG);
+
+        System.out.println("Starting Loop");
+
+        while (true) {
+            // Accept new Endpoint for single Client
+            Socket socket = serverSocket.accept();
+            System.out.println("Client Connected" + socket.getRemoteSocketAddress());
+
+            // Get client MSG
+            System.out.println(socket.getInputStream().available());
+            //TODO: Put socket.getInputStream().available in a while for threads!
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+            System.out.println("Received: " + in.readObject());
+            // BufferedInputStream
+
+            // End of Communication
+            //in.close();
+            System.out.println("End Server");
+            socket.close();
+            //serverSocket.close();
+        }
+    }
+} // End of Class
