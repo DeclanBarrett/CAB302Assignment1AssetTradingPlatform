@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Handles all user buy
+ */
 public class UserBuyHandler implements Initializable {
 
     @FXML

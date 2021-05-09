@@ -47,11 +47,17 @@ public class  InformationGrabber {
     {
         try
         {
+            // check for null;
+
+
             connection = DatabaseConnection.getInstance();
             getPassword = connection.prepareStatement(GET_PASSWORD);
             getPassword.setString(1, username);
             ResultSet rs = getPassword.executeQuery();
+            if(rs == null)
+            {
 
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -65,6 +71,26 @@ public class  InformationGrabber {
             getNonce = connection.prepareStatement(GET_NONCE);
             getNonce.setString(1, username);
             ResultSet rs = getNonce.executeQuery();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
+    public void insertUser(String username, String orgUnit, String accType, String hashedPW, String salt)
+    {
+        try
+        {
+            connection = DatabaseConnection.getInstance();
+            addUser = connection.prepareStatement(INSERT_NEW_USER);
+            addUser.setString(1, username);
+            addUser.setString(2, orgUnit);
+            addUser.setString(3, accType);
+            addUser.setString(4,hashedPW);
+            addUser.setString(5, salt);
+
+            addUser.executeQuery();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
