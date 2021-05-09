@@ -40,7 +40,7 @@ public class  InformationGrabber {
     private Connection connection;
 
     /**
-     *
+     * Retrieves password from database
      * @param username
      */
     public void retrievePassword(String username)

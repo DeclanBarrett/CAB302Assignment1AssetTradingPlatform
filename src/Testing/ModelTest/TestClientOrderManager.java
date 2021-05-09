@@ -3,7 +3,7 @@ package Testing.ModelTest;
 import Controllers.Backend.AccountType;
 import Controllers.Backend.NetworkObjects.Order;
 import Controllers.Backend.NetworkObjects.OrganisationalUnit;
-import Controllers.Backend.NetworkObjects.User;
+import Controllers.Backend.NetworkObjects.UserInfo;
 import Controllers.Backend.OrderType;
 import Controllers.FrontEnd.OrderManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,8 +27,8 @@ public class TestClientOrderManager {
 
     @Test
     public void TestSetUser() {
-        User user = new User("Jack", AccountType.User, "Sales");
-        orderManager.SetUser(user);
+        UserInfo userInfo = new UserInfo("Jack", AccountType.User, "Sales");
+        orderManager.SetUser(userInfo);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class TestClientOrderManager {
 
     @Test
     public void TestCheckOrderNormal() {
-        User user = new User("Jack", AccountType.User, "Sales");
+        UserInfo userInfo = new UserInfo("Jack", AccountType.User, "Sales");
 
         Order order = new Order(OrderType.BUY, "Paper", 50, 3.5, "Sales", new Date());
 
@@ -55,7 +55,7 @@ public class TestClientOrderManager {
         organisationAssets.put("Casino Chips", 50);
         OrganisationalUnit unit = new OrganisationalUnit("Sales", 3000.50, organisationAssets);
 
-        orderManager.SetUser(user);
+        orderManager.SetUser(userInfo);
         orderManager.SetOrgUnit(unit);
         orderManager.CheckOrderValidity(order);
 

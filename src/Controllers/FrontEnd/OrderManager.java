@@ -2,7 +2,7 @@ package Controllers.FrontEnd;
 
 import Controllers.Backend.NetworkObjects.Order;
 import Controllers.Backend.NetworkObjects.OrganisationalUnit;
-import Controllers.Backend.NetworkObjects.User;
+import Controllers.Backend.NetworkObjects.UserInfo;
 
 /**
  * Generates an order from UI data and attempts to send it to the Server to execute
@@ -11,7 +11,7 @@ import Controllers.Backend.NetworkObjects.User;
 // TODO Figure out why this is here
 public class OrderManager {
 
-    private User loggedInUser;
+    private UserInfo loggedInUserInfo;
     private OrganisationalUnit orgUnit;
 
     /**
@@ -39,10 +39,10 @@ public class OrderManager {
 
     /**
      * Set user as 'owner' of the order
-     * @param user User attached to the order
+     * @param userInfo User attached to the order
      */
-    public void SetUser(User user) {
-        loggedInUser = user;
+    public void SetUser(UserInfo userInfo) {
+        loggedInUserInfo = userInfo;
     }
 
     /**

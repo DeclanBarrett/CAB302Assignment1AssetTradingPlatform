@@ -1,6 +1,6 @@
 package App_Start;
 
-import Models.MockSocket;
+import Controllers.Socket.MockSocket;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  */
 public class ClientStart extends Application
 {
-    public static void main(String[] args) {
+    public void main(String[] args) {
         new MockSocket();
         launch(args);
     }

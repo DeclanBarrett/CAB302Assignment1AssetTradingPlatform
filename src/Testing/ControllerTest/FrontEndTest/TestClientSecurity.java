@@ -3,7 +3,6 @@ package Testing.ControllerTest.FrontEndTest;
 import Controllers.Backend.NetworkObjects.LoginToken;
 import Controllers.FrontEnd.ClientSecurity;
 import Controllers.FrontEnd.LoginException;
-import com.mysql.cj.log.Log;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

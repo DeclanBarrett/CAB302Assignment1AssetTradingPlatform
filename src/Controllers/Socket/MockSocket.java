@@ -1,12 +1,9 @@
-package Models;
+package Controllers.Socket;
 
 import Controllers.Backend.*;
-import Controllers.Backend.NetworkObjects.LoginToken;
-import Controllers.Backend.NetworkObjects.Order;
-import Controllers.Backend.NetworkObjects.OrganisationalUnit;
-import Controllers.Backend.NetworkObjects.User;
+import Controllers.Backend.NetworkObjects.*;
+import Models.IDataSource;
 
-import java.io.Serializable;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,14 +13,14 @@ import java.util.List;
 /**
  * Mock database for testing.
  */
-public class MockSocket {
+public class MockSocket implements IDataSource {
 
-    private static boolean databaseConnected;
+    private boolean databaseConnected;
 
-    private static ArrayList<User> userTable = new ArrayList<>();
-    private static ArrayList<OrganisationalUnit> organisationalUnitTable = new ArrayList<>();
-    private static HashMap<String, Integer> organisationAssets = new HashMap<>();
-    private static ArrayList<Order> orderTable = new ArrayList<>();
+    private ArrayList<User> userTable = new ArrayList<>();
+    private ArrayList<OrganisationalUnit> organisationalUnitTable = new ArrayList<>();
+    private HashMap<String, Integer> organisationAssets = new HashMap<>();
+    private ArrayList<Order> orderTable = new ArrayList<>();
 
     /**
      * TODO TURN INTO REAL DATABASE
@@ -64,11 +61,12 @@ public class MockSocket {
         System.out.println("HELL");
     }
 
-    public static void OpenConnection() {
+    public void OpenConnection() {
         databaseConnected = true;
     }
 
-    public static String RetrieveNonce(String username) {
+    //Login Methods
+    public String RetrieveNonce(String username) {
 
         OpenConnection();
 
@@ -82,7 +80,7 @@ public class MockSocket {
         return null;
     }
 
-    public static LoginToken Login(String username, String password) {
+    public LoginToken Login(String username, String password) {
         OpenConnection();
         for (User currentUser: userTable) {
             if (currentUser.GetUsername().equals(username) && currentUser.GetPassword().equals(password)) {
@@ -100,26 +98,35 @@ public class MockSocket {
         return null;
     }
 
-    public static void CreateUser(User newUser) {
+    public void CreateUser(User newUser) {
 
     }
 
-    public static User GetUser(String userName) {
+    public UserInfo GetUser(String userName) {
         OpenConnection();
         for (User currentUser: userTable) {
             if (currentUser.GetUsername().equals(userName)) {
-                return currentUser;
+                return new UserInfo(currentUser.GetUsername(), currentUser.GetAccountType(), currentUser.GetOrganisationalUnit());
             }
         }
         CloseConnection();
         return null;
     }
 
-    public static Order GetOrder(String organisationName, Date date) {
+    @Override
+    public void CreateUser(UserInfo newUserInfo) {
+
+    }
+
+    @Override
+    public Order GetOrder() {
+        return null;
+    }
+
+    public Order GetOrder(int orderID) {
         OpenConnection();
         for (Order currentOrder: orderTable) {
-            if (currentOrder.GetOrganisationalUnit().equals(organisationName) &&
-                currentOrder.GetDate().equals(date)) {
+            if (currentOrder.GetOrganisationalUnit().equals(orderID)){
                 return currentOrder;
             }
         }
@@ -127,14 +134,14 @@ public class MockSocket {
         return null;
     }
 
-    public static List<Order> GetOrderList() {
+    public List<Order> GetOrderList() {
         OpenConnection();
         ArrayList<Order> orders = orderTable;
         CloseConnection();
         return orders;
     }
 
-    public static OrganisationalUnit GetOrganisationalUnit(String unitName) {
+    public OrganisationalUnit GetOrganisationalUnit(String unitName) {
         OpenConnection();
         for (OrganisationalUnit organisationalUnit: organisationalUnitTable) {
             if (organisationalUnit.GetUnitName().equals(unitName)) {
@@ -145,108 +152,9 @@ public class MockSocket {
         return null;
     }
 
-    public static void CloseConnection() {
+    public void CloseConnection() {
 
         databaseConnected = false;
     }
 
-    public class User implements Comparable<User>, Serializable {
-
-        private String username;
-        private String password;
-        private AccountType accountType;
-        private String organisationalType;
-        private String salt;
-
-        /**
-         *
-         * @param username Username of the user
-         * @param password Password of the user
-         * @param accountType Account type of the use
-         * @param organisationalUnit Organisational Unit that the user belongs to
-         */
-        public User(String username, String password, AccountType accountType, String organisationalUnit, String salt) {
-            this.username = username;
-            this.password = password;
-            this.accountType = accountType;
-            this.organisationalType = organisationalUnit;
-            this.salt = salt;
-        }
-
-        /**
-         *
-         * @return username of the User
-         */
-        public String GetUsername() {
-            return username;
-        }
-
-        /**
-         *
-         * @return password of the User
-         */
-        public String GetPassword() { return password; }
-
-        /**
-         *
-         * @return account type of the User
-         */
-        public AccountType GetAccountType() {
-            return accountType;
-        }
-
-        /**
-         *
-         * @return organisational unit of the User
-         */
-        public String GetOrganisationalUnit() {
-            return organisationalType;
-        }
-
-        public String GetSalt() {
-            return salt;
-        }
-
-
-        /**
-         * Compares this object with the specified object. Returns a
-         * negative integer, zero, or a positive integer as this object is less than,
-         * equal to, or greater than the specified object.
-         *
-         * @param other The other User object to compare against.
-         * @return a negative integer, zero, or a positive integer as this object is
-         *         less than, equal to, or greater than the specified object.
-         * @throws ClassCastException if the specified object's type prevents it from
-         *            being compared to this object.
-         */
-        @Override
-        public int compareTo(User other) {
-            return this.username.compareTo(other.username);
-        }
-
-        /**
-         * Used to compare two obejcts to each other
-         * @param o
-         * @return
-         */
-        @Override
-        public boolean equals(Object o) {
-            // If the object is compared with itself then return true
-            if (o == this) {
-                return true;
-            }
-
-        /* Check if o is an instance of Complex or not
-          "null instanceof [type]" also returns false */
-            if (!(o instanceof User)) {
-                return false;
-            }
-
-            // typecast o to Complex so that we can compare data members
-            User u = (User) o;
-
-            // Compare the data members and return accordingly
-            return GetUsername().equals(u.GetUsername());
-        }
-    }
 }

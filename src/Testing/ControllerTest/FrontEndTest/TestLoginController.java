@@ -2,11 +2,10 @@ package Testing.ControllerTest.FrontEndTest;
 
 import Controllers.Backend.AccountType;
 import Controllers.Backend.NetworkObjects.LoginToken;
-import Controllers.Backend.NetworkObjects.User;
-import Controllers.FrontEnd.ClientSecurity;
+import Controllers.Backend.NetworkObjects.UserInfo;
 import Controllers.FrontEnd.LoginController;
 import Controllers.FrontEnd.LoginException;
-import Models.MockSocket;
+import Controllers.Socket.MockSocket;
 import com.mysql.cj.log.Log;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,9 +45,9 @@ public class TestLoginController {
 
         loginController.AttemptLogin("User 1", "qwerty");
 
-        User user = new User("User 1", AccountType.User, "Sales");
+        UserInfo userInfo = new UserInfo("User 1", AccountType.User, "Sales");
 
-        assertEquals(user, LoginController.GetUser());
+        assertEquals(userInfo, LoginController.GetUser());
     }
 
     @Test
@@ -115,9 +114,9 @@ public class TestLoginController {
         loginController.AttemptLogin("User 1", "qwerty");
         loginController.AttemptLogin("User 4", "1234");
 
-        User user = new User("User 4", AccountType.User, "Finance");
+        UserInfo userInfo = new UserInfo("User 4", AccountType.User, "Finance");
 
-        assertEquals(user, LoginController.GetUser());
+        assertEquals(userInfo, LoginController.GetUser());
     }
 
     @Test
