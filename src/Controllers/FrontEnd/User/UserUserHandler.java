@@ -10,6 +10,9 @@ import javafx.scene.control.PasswordField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Handles User tab
+ */
 public class UserUserHandler implements Initializable {
 
     @FXML
@@ -27,15 +30,28 @@ public class UserUserHandler implements Initializable {
     @FXML
     Button UserResetButton;
 
+    /**
+     * Initialises User Handler
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
+    /**
+     * Logs user out when requested
+     * @param LogOutUser
+     */
     public void LogOutUser(ActionEvent LogOutUser) {
         System.out.println(LogOutUser.getSource());
     }
 
+    /**
+     * Handles reset password events.
+     * @param ResetPassword
+     */
     public void ResetPassword (ActionEvent ResetPassword) {
         System.out.println(ResetPassword.getSource());
     }

@@ -8,6 +8,9 @@ import javafx.scene.control.TableView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Handles user's organisation tab
+ */
 public class UserOrganisationHandler implements Initializable {
 
     @FXML
@@ -22,11 +25,19 @@ public class UserOrganisationHandler implements Initializable {
     private TableView OrgSellOrdersTable;
 
 
+    /**
+     * Initialise User Organisation Handler
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
+    /**
+     * Updates orgnisation information
+     */
     private void UpdateOrganisationInformation() {
 
     }

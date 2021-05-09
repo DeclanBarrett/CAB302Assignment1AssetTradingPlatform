@@ -39,45 +39,16 @@ public class  InformationGrabber {
 
     private Connection connection;
 
+
+
     /**
-     * Retrieves password from database
-     * @param username
+     * Inserts user into the database.
+     * @param username - users username
+     * @param orgUnit - organisational unit user belongs too
+     * @param accType - Account type user has
+     * @param hashedPW - hashed password attached to the user
+     * @param salt - salt attached to users password
      */
-    public void retrievePassword(String username)
-    {
-        try
-        {
-            // check for null;
-
-
-            connection = DatabaseConnection.getInstance();
-            getPassword = connection.prepareStatement(GET_PASSWORD);
-            getPassword.setString(1, username);
-            ResultSet rs = getPassword.executeQuery();
-            if(rs == null)
-            {
-
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    public void retrieveSalt(String username)
-    {
-        try
-        {
-            connection = DatabaseConnection.getInstance();
-            getNonce = connection.prepareStatement(GET_NONCE);
-            getNonce.setString(1, username);
-            ResultSet rs = getNonce.executeQuery();
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-
     public void insertUser(String username, String orgUnit, String accType, String hashedPW, String salt)
     {
         try
@@ -90,12 +61,106 @@ public class  InformationGrabber {
             addUser.setString(4,hashedPW);
             addUser.setString(5, salt);
 
-            addUser.executeQuery();
+            if(addUser != null)
+            {
+                addUser.executeQuery();
+            }
+
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
+
+    /**
+     * Retrieves password from database
+     * @param username
+     */
+    public void retrievePassword(String username)
+    {
+        ResultSet rs = null;
+        try
+        {
+            // check for null;
+            connection = DatabaseConnection.getInstance();
+            getPassword = connection.prepareStatement(GET_PASSWORD);
+            getPassword.setString(1, username);
+            rs = getPassword.executeQuery();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    /**
+     * Retrieve salt from database
+     * @param username salt attached to this users password
+     */
+    public void retrieveSalt(String username)
+    {
+        try
+        {
+            connection = DatabaseConnection.getInstance();
+            getNonce = connection.prepareStatement(GET_NONCE);
+            getNonce.setString(1, username);
+
+
+            if(getNonce != null)
+            {
+                ResultSet rs = getNonce.executeQuery();
+            }
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    /**
+     * Update users password
+     * @param username - users username
+     * @param password - users password
+     * @param salt - salt attached to users password
+     */
+    public void updatePassword(String username, String password, String salt){
+        try
+        {
+            updatePassword = connection.prepareStatement(UPDATE_PASSWORD);
+            updatePassword.setString(1, password);
+            updatePassword.setString(2, salt);
+            updatePassword.setString(3, username);
+
+            if(updatePassword != null)
+            {
+                updatePassword.executeQuery();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    /**
+     * Gets user from the database
+     * @param username - username of requested user.
+     */
+    public void getUser(String username)
+    {
+        try
+        {
+            getUser = connection.prepareStatement(GET_USER);
+            getUser.setString(1,username);
+
+            if(getUser != null)
+            {
+                getUser.executeQuery();
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
 
 
     /**

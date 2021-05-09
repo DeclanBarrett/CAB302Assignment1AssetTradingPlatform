@@ -14,6 +14,11 @@ public class LoginException extends Exception {
     }
 
 
+    /**
+     * Handles login exceptions
+     * @param message
+     * @param cause
+     */
     public LoginException(String message, Throwable cause) {
         super(message, cause);
     }
