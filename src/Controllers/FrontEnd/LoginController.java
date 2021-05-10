@@ -49,14 +49,17 @@ public class LoginController {
     }
 
 
-
-
+    /**
+     * Recieve salt and hashed password from database to allow for user login.
+     * @param username
+     * @param password
+     * @return
+     * @throws LoginException
+     */
     private String ReceiveNonceAndHash(String username, String password) throws LoginException {
 
         IDataSource dataSource = MockSocket.getInstance();
         String salt = dataSource.GetSalt(username);
-
-
 
         if (salt == null) {
             throw new LoginException("Username or Password Incorrect 2");

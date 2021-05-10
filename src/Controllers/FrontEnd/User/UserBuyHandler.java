@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Handles all user buy orders.
+ */
 public class UserBuyHandler implements Initializable {
 
     @FXML
@@ -29,23 +32,43 @@ public class UserBuyHandler implements Initializable {
     @FXML
     private TableView BuyOrdersTable;
 
+    /**
+     * Initializes User buy handler
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
+    /**
+     * Handles buy asset events
+     * @param BuyAsset
+     * @throws IOException - thrown if in/out exception occurs
+     */
     public void BuyAsset(ActionEvent BuyAsset) throws IOException {
         System.out.println(BuyAsset.getSource());
     }
 
+    /**
+     * Updates change of asset type.
+     * @param AssetTypeChanged
+     */
     public void AssetTypeChanged(ActionEvent AssetTypeChanged) {
 
     }
 
+    /**
+     * Updates asset type textbox
+     */
     private void UpdateAssetTypeText() {
 
     }
 
+    /**
+     * Updates buy information
+     */
     private void UpdateBuyInformation() {
 
     }
