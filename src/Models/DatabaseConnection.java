@@ -34,7 +34,7 @@ public class DatabaseConnection {
         }
     }
 
-    
+
     /**
      * Provides global access to the singleton instance of the UrlSet.
      *

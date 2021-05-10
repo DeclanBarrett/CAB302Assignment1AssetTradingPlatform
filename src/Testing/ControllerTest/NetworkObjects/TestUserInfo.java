@@ -13,7 +13,7 @@ public class TestUserInfo {
 
     @BeforeEach
     public void ConstructUser(){
-         userInfo = new UserInfo("Jack", AccountType.User, "Sales");
+        userInfo = new UserInfo("Jack", AccountType.User, "Sales");
     }
 
     @Test

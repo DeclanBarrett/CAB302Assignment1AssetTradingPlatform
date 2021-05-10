@@ -16,6 +16,7 @@ public class OrderManager {
 
     /**
      * Sends an Order to the server
+     *
      * @param order The Order object to be sent
      */
     private void SendOrder(Order order) {
@@ -24,6 +25,7 @@ public class OrderManager {
 
     /**
      * Gets organisational unit object associated with the current
+     *
      * @return
      */
     private OrganisationalUnit GetOrgUnit() {
@@ -34,11 +36,12 @@ public class OrderManager {
      * Updates UI with new information
      */
     private void UpdateUI() {
-        
+
     }
 
     /**
      * Set user as 'owner' of the order
+     *
      * @param userInfo User attached to the order
      */
     public void SetUser(UserInfo userInfo) {
@@ -47,6 +50,7 @@ public class OrderManager {
 
     /**
      * Set organisaitonal unit as 'owner' of the Organisational Unit
+     *
      * @param unit Organisational unit attached to the order.
      */
     public void SetOrgUnit(OrganisationalUnit unit) {
@@ -55,6 +59,7 @@ public class OrderManager {
 
     /**
      * Checks validity of the submitted order
+     *
      * @param order Order to be checked.
      */
     public void CheckOrderValidity(Order order) {
