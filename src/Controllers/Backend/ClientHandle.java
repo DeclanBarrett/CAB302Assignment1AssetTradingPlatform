@@ -5,6 +5,12 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.SocketException;
 
+/**
+ * @author Brad Kent
+ * @author n10632999@qut.edu.au
+ * @version 1.2
+ * @since 0.3
+ */
 public class ClientHandle implements Runnable
 {
     static int id = 0;

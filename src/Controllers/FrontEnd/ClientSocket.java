@@ -5,6 +5,12 @@ import Controllers.BradsPacket;
 import java.net.*;
 import java.io.*;
 
+/**
+ * @author Brad Kent
+ * @author n10632999@qut.edu.au
+ * @version 1.1
+ * @since 0.5
+ */
 public class ClientSocket
 {
     public void startClient()
