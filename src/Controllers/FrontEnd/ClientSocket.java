@@ -17,15 +17,21 @@ public class ClientSocket
             Socket client = new Socket(serverName, port);
             System.out.println("Client Connected: " + client.getRemoteSocketAddress());
 
-            // Write to Sever
+            // Communication with server
             ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
-            out.writeObject(new BradsPacket());
+            ObjectInputStream in  = new ObjectInputStream(client.getInputStream());
 
-            // Send to Server
+            for (int i = 0; i < 10; i++) {
+                if (in.available() > 0) {
+                    System.out.println(in.readObject());
+                }
+                out.writeObject(new BradsPacket());
+            }
+            Thread.sleep(500);
+            // Close Connections
             out.close();
             client.close();
-
-        } catch (IOException i){
+        } catch (IOException | ClassNotFoundException | InterruptedException i){
             i.printStackTrace();
         }
 

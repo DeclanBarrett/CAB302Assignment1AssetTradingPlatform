@@ -1,9 +1,7 @@
 package Controllers.Backend;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.ServerSocket;
-import java.net.Socket;
 
 /**
  * @author Brad Kent
@@ -36,21 +34,7 @@ public class Server
 
         while (true) {
             // Accept new Endpoint for single Client
-            Socket socket = serverSocket.accept();
-            System.out.println("Client Connected" + socket.getRemoteSocketAddress());
-
-            // Get client MSG
-            System.out.println(socket.getInputStream().available());
-            //TODO: Put socket.getInputStream().available in a while for threads!
-            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-            System.out.println("Received: " + in.readObject());
-            // BufferedInputStream
-
-            // End of Communication
-            //in.close();
-            System.out.println("End Server");
-            socket.close();
-            //serverSocket.close();
+            new Thread(new ClientHandle(serverSocket.accept())).start();
         }
     }
 } // End of Class

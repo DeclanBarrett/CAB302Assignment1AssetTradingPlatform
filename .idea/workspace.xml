@@ -4,23 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Refactored Server Code to backed end controller">
-      <change afterPath="$PROJECT_DIR$/src/Controllers/Backend/ClientHandle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controllers/BradsPacket.java" afterDir="false" />
+    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="New Sub-Branch. Added BradsPacket.java to experiment with using a class as a packet for seamless transition :)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App_Start/ClientStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Start/ClientStart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/AccountType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/_Dump/AccountType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/ClientSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/_Dump/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/OrderType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/_Dump/OrderType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/OrganisationalUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/_Dump/OrganisationalUnit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/ClientHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/ClientHandle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/_Dump/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/OrderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/OrderManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/FakeDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/FakeDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/IDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/IDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/InformationGrabber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/InformationGrabber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/OrderExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/OrderExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/_Dump/AccountType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/_Dump/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/_Dump/OrderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/_Dump/OrganisationalUnit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/_Dump/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/ClientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/ClientSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/OrderManager.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +59,6 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Models/IDatabase.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Models/InformationGrabber.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/Controllers/FrontEnd/OrderManager.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Controllers/FrontEnd/LoginController.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1qoyBDtoSUT10ozznKhI69mkQcv" />
@@ -119,7 +112,7 @@
       <command value="ClientStart" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.ClientStart">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="ClientStart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="App_Start.ClientStart" />
       <module name="CAB302Assignment1AssetTradingPlatform" />
@@ -192,8 +185,8 @@
     <list>
       <item itemvalue="Application.ServerStart" />
       <item itemvalue="Application.ClientStart" />
-      <item itemvalue="JUnit.ModelTest.testReq" />
       <item itemvalue="Application.Server" />
+      <item itemvalue="JUnit.ModelTest.testReq" />
     </list>
     <recent_temporary>
       <list>
@@ -256,7 +249,10 @@
       <workItem from="1620430594175" duration="158000" />
       <workItem from="1620430907587" duration="156000" />
       <workItem from="1620444955429" duration="4400000" />
-      <workItem from="1620520182340" duration="8628000" />
+      <workItem from="1620520182340" duration="10549000" />
+      <workItem from="1620547155796" duration="670000" />
+      <workItem from="1620605750889" duration="2145000" />
+      <workItem from="1620607941513" duration="2950000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit (Brad Barebones)">
       <created>1617760354635</created>
@@ -363,7 +359,21 @@
       <option name="project" value="LOCAL" />
       <updated>1620447940931</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Added Networking structure and intermediate socket program( client &amp; server">
+      <created>1620538905715</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1620538905715</updated>
+    </task>
+    <task id="LOCAL-00017" summary="New Sub-Branch. Added BradsPacket.java to experiment with using a class as a packet for seamless transition :)">
+      <created>1620538973860</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1620538973860</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -405,7 +415,9 @@
     <MESSAGE value="H" />
     <MESSAGE value="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :)." />
     <MESSAGE value="Refactored Server Code to backed end controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored Server Code to backed end controller" />
+    <MESSAGE value="Added Networking structure and intermediate socket program( client &amp; server" />
+    <MESSAGE value="New Sub-Branch. Added BradsPacket.java to experiment with using a class as a packet for seamless transition :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="New Sub-Branch. Added BradsPacket.java to experiment with using a class as a packet for seamless transition :)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
