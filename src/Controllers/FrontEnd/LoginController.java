@@ -4,6 +4,7 @@ package Controllers.FrontEnd;
 import Controllers.Backend.NetworkObjects.LoginToken;
 import Controllers.Backend.NetworkObjects.UserInfo;
 import Controllers.Socket.MockSocket;
+import Models.IDataSource;
 
 /**
  * Used to check for correct login input.
@@ -33,12 +34,14 @@ public class LoginController {
         System.out.println("\nUsername: " + username);
         String hashPassword = ReceiveNonceAndHash(username, password);
 
-        currentLogin = MockSocket.Login(username, hashPassword);
+        IDataSource dataSource = MockSocket.getInstance();
+
+        currentLogin = dataSource.AttemptLogin(username, hashPassword);
 
 
 
         if (currentLogin != null) {
-            currentUserInfo = new UserInfo(MockSocket.GetUser(username).GetUsername(), MockSocket.GetUser(username).GetAccountType(), MockSocket.GetUser(username).GetOrganisationalUnit());
+            currentUserInfo = null;//new UserInfo(dataSource.GetUser(username).GetUsername(), MockSocket.GetUser(username).GetAccountType(), MockSocket.GetUser(username).GetOrganisationalUnit());
             return;
         }
 
@@ -50,7 +53,8 @@ public class LoginController {
 
     private String ReceiveNonceAndHash(String username, String password) throws LoginException {
 
-        String salt = MockSocket.RetrieveNonce(username);
+        IDataSource dataSource = MockSocket.getInstance();
+        String salt = dataSource.GetSalt(username);
 
 
 

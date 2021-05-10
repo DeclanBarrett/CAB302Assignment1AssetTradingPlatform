@@ -63,7 +63,7 @@ public class Order implements Comparable<Order>, Serializable  {
      *
      * @return The type of order requested. Either Buy or Sell.
      */
-    public int GetOrderID() {
+    public int getOrderID() {
         return orderID;
     }
 
@@ -71,7 +71,7 @@ public class Order implements Comparable<Order>, Serializable  {
      *
      * @return The type of order requested. Either Buy or Sell.
      */
-    public OrderType GetOrderType() {
+    public OrderType getOrderType() {
         return orderType;
     }
 
@@ -79,7 +79,7 @@ public class Order implements Comparable<Order>, Serializable  {
      *
      * @return Type of asset requested.
      */
-    public String GetAssetType() {
+    public String getAssetType() {
         return assetType;
     }
 
@@ -87,7 +87,7 @@ public class Order implements Comparable<Order>, Serializable  {
      *
      * @return Quantity of asset requested
      */
-    public int GetAssetQuantity() {
+    public int getAssetQuantity() {
         return assetQuantity;
     }
 
@@ -95,7 +95,7 @@ public class Order implements Comparable<Order>, Serializable  {
      *
      * @return Price attached to order.
      */
-    public double GetRequestPrice() {
+    public double getRequestPrice() {
         return requestPrice;
     }
 
@@ -103,7 +103,7 @@ public class Order implements Comparable<Order>, Serializable  {
      *
      * @return Organisational unit that has placed the Buy/Sell order.
      */
-    public String GetOrganisationalUnit() {
+    public String getOrganisationalUnit() {
         return organisationalUnitName;
     }
 
@@ -111,7 +111,7 @@ public class Order implements Comparable<Order>, Serializable  {
      *
      * @return Date on which the Buy/Sell order was placed.
      */
-    public Date GetDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -137,6 +137,6 @@ public class Order implements Comparable<Order>, Serializable  {
         Order u = (Order) o;
 
         // Compare the data members and return accordingly
-        return ((Integer)GetOrderID()).equals(u.GetOrderID());
+        return ((Integer) getOrderID()).equals(u.getOrderID());
     }
 }

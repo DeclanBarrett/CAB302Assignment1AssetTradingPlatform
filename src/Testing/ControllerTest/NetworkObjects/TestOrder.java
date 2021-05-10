@@ -20,37 +20,37 @@ public class TestOrder {
 
     @Test
     public void TestOrderType() {
-        OrderType orderType = order.GetOrderType();
+        OrderType orderType = order.getOrderType();
         assertEquals(OrderType.BUY, orderType);
     }
 
     @Test
     public void TestAssetType() {
-        String assetType = order.GetAssetType();
+        String assetType = order.getAssetType();
         assertEquals("Paper", assetType);
     }
 
     @Test
     public void TestAssetQuantity() {
-        int quantity = order.GetAssetQuantity();
+        int quantity = order.getAssetQuantity();
         assertEquals(50, quantity);
     }
 
     @Test
     public void TestRequestPrice() {
-        double price = order.GetRequestPrice();
+        double price = order.getRequestPrice();
         assertEquals(3.5, price);
     }
 
     @Test
     public void TestGetOrganisationalUnit() {
-        String unit = order.GetOrganisationalUnit();
+        String unit = order.getOrganisationalUnit();
         assertEquals("Sales", unit);
     }
 
     @Test
     public void TestGetDate() {
-        Date date = order.GetDate();
+        Date date = order.getDate();
         assertEquals(new Date(), date);
     }
 

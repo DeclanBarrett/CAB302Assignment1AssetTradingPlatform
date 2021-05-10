@@ -19,11 +19,11 @@ public class TestLoginToken {
 
     @Test
     public void TestUsername() {
-        assertEquals("User 1", loginToken.GetUsername());
+        assertEquals("User 1", loginToken.getUsername());
     }
 
     @Test
     public void TestDate() {
-        assertEquals(new Date(), loginToken.GetDate());
+        assertEquals(new Date(), loginToken.getDate());
     }
 }

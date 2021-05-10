@@ -42,5 +42,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="com.auth0:java-jwt:3.9.0" level="project" />
   </component>
 </module>

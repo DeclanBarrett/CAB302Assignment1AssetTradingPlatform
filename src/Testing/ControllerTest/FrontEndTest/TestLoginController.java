@@ -6,7 +6,6 @@ import Controllers.Backend.NetworkObjects.UserInfo;
 import Controllers.FrontEnd.LoginController;
 import Controllers.FrontEnd.LoginException;
 import Controllers.Socket.MockSocket;
-import com.mysql.cj.log.Log;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,7 @@ public class TestLoginController {
     @BeforeAll
     public static void ConstructMock() {
         //Create socket information
-        MockSocket mockSocket = new MockSocket();
+        MockSocket mockSocket = MockSocket.getInstance();
     }
 
     @BeforeEach
@@ -37,7 +36,7 @@ public class TestLoginController {
 
         LoginToken loginToken = new LoginToken("User 1", new Date());
 
-        assertEquals(loginToken.GetUsername(), LoginController.GetToken().GetUsername());
+        assertEquals(loginToken.getUsername(), LoginController.GetToken().getUsername());
     }
 
     @Test

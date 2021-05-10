@@ -25,7 +25,7 @@ public class LoginToken implements Serializable {
      * Gathers username of the token
      * @return String for username
      */
-    public String GetUsername() {
+    public String getUsername() {
         return username;
     }
 
@@ -33,7 +33,7 @@ public class LoginToken implements Serializable {
      * Gathers expiration date of the token
      * @return Date of expiration
      */
-    public Date GetDate() {
+    public Date getDate() {
         return endDate;
     }
 

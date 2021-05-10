@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 public class ClientStart extends Application
 {
     public void main(String[] args) {
-        new MockSocket();
         launch(args);
     }
 

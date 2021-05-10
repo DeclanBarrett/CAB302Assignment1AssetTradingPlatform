@@ -13,7 +13,7 @@ public class MockClientSocketConstructor {
         this.dataSource = dataSource;
     }
 
-    public IDataSource GetDataSource() {
+    public IDataSource getDataSource() {
         return dataSource;
     }
 }
