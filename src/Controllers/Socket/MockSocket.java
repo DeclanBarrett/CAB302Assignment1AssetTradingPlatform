@@ -24,7 +24,7 @@ public class MockSocket implements IDataSource {
     private ArrayList<Order> orderTable = new ArrayList<>();
 
     /**
-     * TODO TURN INTO REAL DATABASE
+     * TODO finish implementing IDataSource
      * Populating the mock database with values
      */
     protected MockSocket() {
@@ -62,13 +62,38 @@ public class MockSocket implements IDataSource {
         System.out.println("HELL");
     }
 
+    private static class MockSocketHolder {
+        private final static MockSocket INSTANCE = new MockSocket();
+    }
+
+    public static MockSocket getInstance() {
+        return MockSocketHolder.INSTANCE;
+    }
+
     @Override
     public String GetSalt(String username) {
+        for (User currentUser: userTable) {
+            if (currentUser.GetUsername().equals(username)) {
+                return currentUser.GetSalt();
+            }
+        }
+
         return null;
     }
 
     @Override
     public LoginToken AttemptLogin(String username, String password) {
+        for (User currentUser: userTable) {
+            if (currentUser.GetUsername().equals(username) && currentUser.GetPassword().equals(password)) {
+                Date actualDate = new Date();
+
+                actualDate.toInstant().plus(Duration.ofHours(2));
+
+                LoginToken login = new LoginToken(currentUser.GetUsername(), new Date());
+
+                return login;
+            }
+        }
         return null;
     }
 
@@ -78,12 +103,22 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public User GetUser(LoginToken token, String username) {
+    public UserInfo GetUser(LoginToken token, String username) {
+        for (User currentUser: userTable) {
+            if (currentUser.GetUsername().equals(username)) {
+                return new UserInfo(currentUser.GetUsername(), currentUser.GetAccountType(), currentUser.GetOrganisationalUnit());
+            }
+        }
         return null;
     }
 
     @Override
     public OrganisationalUnit GetOrganisation(LoginToken token, String orgName) {
+        for (OrganisationalUnit organisationalUnit: organisationalUnitTable) {
+            if (organisationalUnit.GetUnitName().equals(orgName)) {
+                return organisationalUnit;
+            }
+        }
         return null;
     }
 
@@ -94,7 +129,8 @@ public class MockSocket implements IDataSource {
 
     @Override
     public List<Order> GetAllOrders(LoginToken token) {
-        return null;
+        ArrayList<Order> orders = orderTable;
+        return orders;
     }
 
     @Override
@@ -154,107 +190,17 @@ public class MockSocket implements IDataSource {
 
     @Override
     public List<OrganisationalUnit> GetAllOrganisations(LoginToken token) {
+
         return null;
     }
 
     @Override
-    public String UpdateOrganisationAsset(LoginToken token, String AssetType, int AssetQuantity) {
-        return null;
-    }
-
-    private static class MockSocketHolder {
-        private final static MockSocket INSTANCE = new MockSocket();
-    }
-
-    public static MockSocket getInstance() {
-        return MockSocketHolder.INSTANCE;
-    }
-
-    public void OpenConnection() {
-        databaseConnected = true;
-    }
-
-    //Login Methods
-    public String RetrieveNonce(String username) {
-
-        OpenConnection();
-
-        for (User currentUser: userTable) {
-            if (currentUser.GetUsername().equals(username)) {
-                return currentUser.GetSalt();
-            }
-        }
-        CloseConnection();
-
-        return null;
-    }
-
-    public LoginToken Login(String username, String password) {
-        OpenConnection();
-        for (User currentUser: userTable) {
-            if (currentUser.GetUsername().equals(username) && currentUser.GetPassword().equals(password)) {
-                Date actualDate = new Date();
-
-                actualDate.toInstant().plus(Duration.ofHours(2));
-
-                LoginToken login = new LoginToken(currentUser.GetUsername(), new Date());
-
-                CloseConnection();
-                return login;
-            }
-        }
-
-        return null;
-    }
-
-    public void CreateUser(User newUser) {
-
-    }
-
-    public UserInfo GetUser(String userName) {
-        OpenConnection();
-        for (User currentUser: userTable) {
-            if (currentUser.GetUsername().equals(userName)) {
-                return new UserInfo(currentUser.GetUsername(), currentUser.GetAccountType(), currentUser.GetOrganisationalUnit());
-            }
-        }
-        CloseConnection();
+    public String UpdateOrganisationAsset(LoginToken token, String organisationName, String AssetType, int AssetQuantity) {
         return null;
     }
 
 
-    public Order GetOrder(int orderID) {
-        OpenConnection();
-        for (Order currentOrder: orderTable) {
-            if (currentOrder.getOrganisationalUnit().equals(orderID)){
-                return currentOrder;
-            }
-        }
-        CloseConnection();
-        return null;
-    }
 
-    public List<Order> GetOrderList() {
-        OpenConnection();
-        ArrayList<Order> orders = orderTable;
-        CloseConnection();
-        return orders;
-    }
 
-    public OrganisationalUnit GetOrganisationalUnit(String unitName) {
-        OpenConnection();
-        for (OrganisationalUnit organisationalUnit: organisationalUnitTable) {
-            if (organisationalUnit.GetUnitName().equals(unitName)) {
-                return organisationalUnit;
-            }
-        }
-        CloseConnection();
-        return null;
-    }
-
-    public void CloseConnection() {
-
-        databaseConnected = false;
-    }
 
 }
