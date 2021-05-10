@@ -46,7 +46,7 @@ public class TestClientOrderManager {
     public void TestCheckOrderNormal() {
         UserInfo userInfo = new UserInfo("Jack", AccountType.User, "Sales");
 
-        Order order = new Order(OrderType.BUY, "Paper", 50, 3.5, "Sales", new Date());
+        Order order = null;//new Order(OrderType.BUY, "Paper", 50, 3.5, "Sales", new Date());
 
         HashMap<String, Integer> organisationAssets = new HashMap<>();
         organisationAssets.put("Paper", 50);

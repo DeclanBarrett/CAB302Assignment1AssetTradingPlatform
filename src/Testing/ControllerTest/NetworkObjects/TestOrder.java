@@ -15,7 +15,7 @@ public class TestOrder {
 
     @BeforeEach
     public void ConstructOrder(){
-        order = new Order(OrderType.BUY, "Paper", 50, 3.5, "Sales", new Date());
+        order = null;//new Order(OrderType.BUY, "Paper", 50, 3.5, "Sales", new Date());
     }
 
     @Test
