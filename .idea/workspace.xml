@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Added Threading for Server to handle multiple clients.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App_Start/ClientStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Start/ClientStart.java" afterDir="false" />
+    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Fixed issues with GUI not loading, fixed pathing as well.">
+      <change afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/User/User.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/User/User.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -246,7 +245,7 @@
       <workItem from="1620520182340" duration="10549000" />
       <workItem from="1620547155796" duration="670000" />
       <workItem from="1620605750889" duration="2145000" />
-      <workItem from="1620607941513" duration="5702000" />
+      <workItem from="1620607941513" duration="6632000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit (Brad Barebones)">
       <created>1617760354635</created>
@@ -395,7 +394,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620611275414</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Fixed issues with GUI not loading, fixed pathing as well.">
+      <created>1620615567929</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1620615567929</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -441,7 +447,8 @@
     <MESSAGE value="New Sub-Branch. Added BradsPacket.java to experiment with using a class as a packet for seamless transition :)" />
     <MESSAGE value="Sever And Client Sockets Established" />
     <MESSAGE value="Added Threading for Server to handle multiple clients." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Threading for Server to handle multiple clients." />
+    <MESSAGE value="Fixed issues with GUI not loading, fixed pathing as well." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed issues with GUI not loading, fixed pathing as well." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

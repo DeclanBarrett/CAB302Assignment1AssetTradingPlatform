@@ -22,6 +22,7 @@ public class LoginController implements Initializable
     @FXML
     private Button ResetBtn;
 
+
     /**
      * Handles login button press
      *
