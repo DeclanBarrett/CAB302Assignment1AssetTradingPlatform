@@ -9,7 +9,6 @@ public class UserController
     @FXML
     private Button LogoutBtn;
 
-
     public void logUserOut(ActionEvent logout)
     {
         //TODO: Figure out how to log user out

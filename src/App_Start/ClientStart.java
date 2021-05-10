@@ -25,11 +25,11 @@ public class ClientStart extends Application
         Parent root;
 
         // Admin
-        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/Admin/AdminScreen.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/Views/Admin/Admin.fxml"));
         // User
         //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/User/UserScreen.fxml"));
         // Login
-        root = FXMLLoader.load(getClass().getResource("/Views/Login/Login.fxml"));
+        //root = FXMLLoader.load(getClass().getResource("/Views/Login/Login.fxml"));
         // Reset
         //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/PasswordReset.fxml"));
 
