@@ -1,7 +1,7 @@
 package Models;
 
-import Controllers.Backend.NetworkObjects.Order;
-import Controllers.Backend.NetworkObjects.OrganisationalUnit;
+import Controllers.Backend.AccountType;
+import Controllers.Backend.NetworkObjects.*;
 
 import javax.xml.crypto.Data;
 import java.sql.Connection;
@@ -76,7 +76,7 @@ public class  InformationGrabber {
      * Retrieves password from database
      * @param username
      */
-    public void retrievePassword(String username)
+    public void getPassword(String username)
     {
         ResultSet rs = null;
         try
@@ -84,7 +84,7 @@ public class  InformationGrabber {
             connection = DatabaseConnection.getInstance();
             getPassword = connection.prepareStatement(GET_PASSWORD);
             getPassword.setString(1, username);
-            ResultSet rs = getPassword.executeQuery();
+            rs = getPassword.executeQuery();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -95,7 +95,7 @@ public class  InformationGrabber {
      * Retrieve salt from database
      * @param username salt attached to this users password
      */
-    public void retrieveSalt(String username)
+    public void getSalt(String username)
     {
         try
         {
@@ -141,8 +141,9 @@ public class  InformationGrabber {
     /**
      * Gets user from the database
      * @param username - username of requested user.
+     * @return the User with login info included
      */
-    public void getUser(String username)
+    public User getUser(String username)
     {
         try
         {
@@ -157,11 +158,9 @@ public class  InformationGrabber {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+        return null;
     }
-
-
-
-
     /**
      * Get the list of Orders
      * @return the list of orders
@@ -169,26 +168,150 @@ public class  InformationGrabber {
     public List<Order> GetOrderList() {
         return null;
     }
-    public String updatePassword(String username, String password, String salt) {return null;}
-    public User getUser(String username) {return null;}
+
+    /**
+     * Gets user info from the database
+     * @param username - username of requested user.
+     * @return the User with no login info included
+     */
     public UserInfo getUserInfo(String username) {return null;}
+
+    /**
+     * Gets list of user info for all users from the database
+     * @return the list of user information
+     */
     public List<UserInfo> getAllUserInfo() {return null;}
+
+    /**
+     * Gets list of users for all users from the database
+     * @return the list of users with login info
+     */
     public List<User> getAllUsers() {return null;}
-    public String createUser(User user) {return null;}
+
+    /**
+     * Inserts a new user into the database
+     * (Warning - Users cannot be removed from the database)
+     * (BUT they can have their Account Type be changed to inactive)
+     * @param user - the user to be inserted (with login info)
+     * @return a success message
+     */
+    public String insertUser(User user) {return null;}
+
+    /**
+     * Updates the account type of the user in the database
+     * @param username - username of updated user.
+     * @param accountType - account type to change the users account type to
+     * @return a success message
+     */
     public String updateUserAccountType(String username, AccountType accountType) {return null;}
-    public String updateUserOrganisation(String username, String organisaitonName) {return null;}
+
+    /**
+     * Updates the organisation of the user in the database
+     * @param username - username of the updated user.
+     * @param organisationName - organisation to change the users organisation to
+     * @return a success message
+     */
+    public String updateUserOrganisation(String username, String organisationName) {return null;}
+
+    /**
+     * Gets the organisational unit object in the database
+     * @param orgName - organisation name of the organisation
+     * @return the organisation unit object with all included information
+     */
     public OrganisationalUnit getOrganisation(String orgName) {return null;}
+
+    /**
+     * Gets a list of all organisational units with info in the database
+     * @return a list of organisationa unit objects
+     */
     public List<OrganisationalUnit> getAllOrganisations() {return null;}
-    public String createOrganisation(OrganisationalUnit organisation) {return null;}
-    public String updateOrganisationAsset(String assetType, int assetQuantity) {return null;}
+
+    /**
+     * Insert a new organisation into the database
+     * (Warning - Organisations cannot be removed from the database)
+     * (Warning - All asset types must be valid asset types)
+     * @param organisation - organisation with all information to be inserted
+     * @return a success message
+     */
+    public String insertOrganisation(OrganisationalUnit organisation) {return null;}
+
+    /**
+     * Update the quantity of an asset in an organisation, either by inserting a new
+     * asset or updating an existing asset in the database
+     * @param organisationName - organisation to have its asset changed
+     * @param assetType - the asset type to be added or updated
+     * @param assetQuantity - quantity to set the asset to
+     * @return a success message
+     */
+    public String updateOrganisationAsset(String organisationName, String assetType, int assetQuantity) {return null;}
+
+    /**
+     * Gets a list of all orders that an organisation currently has active in the database
+     * @param orgName - the organisation to retrieve orders for
+     * @return a list of orders both buy and sell
+     */
     public List<Order> getOrganisationOrders(String orgName) {return null;}
+
+    /**
+     * Gets all buy orders that are currently active in the database
+     * @return a list of all orders with the orderType BUY
+     */
     public List<Order> getBuyOrders() {return null;}
+
+    /**
+     * Gets all sell orders that are currently active in the database
+     * @return a list of all orders with the orderType SELL
+     */
     public List<Order> getSellOrders() {return null;}
-    public List<Order>  getAllOrders() {return null;}
-    public String createOrder(Order newOrder) {return null;}
+
+    /**
+     * Gets all orders that are currently active in the database
+     * @return a list of all orders, regardless of type
+     */
+    public List<Order> getAllOrders() {return null;}
+
+    /**
+     * Inserts a new order into the database
+     * @param newOrder - the order with all information to be inserted
+     * @return a success message
+     */
+    public String insertOrder(Order newOrder) {return null;}
+
+    /**
+     * Deletes an order in the database
+     * @param OrderID - the orderID of the order to be deleted
+     * @return a success message
+     */
     public String deleteOrder(int OrderID) {return null;}
+
+    /**
+     * Gets a list of all the asset types that are in the database
+     * @return a list of asset types
+     */
     public List<String> getAssetTypes() {return null;}
-    public String createAsset(String assetName) {return null;}
-    public String createTrade(Trade trade) {return null;}
+
+    /**
+     * Inserts a new asset type into the database, so that orders etc
+     * cannot be placed with an invalid asset type
+     * (Warning - asset types cannot be removed from the database)
+     * @param assetName - asset to be added
+     * @return a success message
+     */
+    public String insertAsset(String assetName) {return null;}
+
+    /**
+     * Inserts a new trade into the database
+     * (Warning - a trade is a measure of history thus they cannot
+     * be removed from the database)
+     * @param trade - trade to be added
+     * @return a success message
+     */
+    public String insertTrade(Trade trade) {return null;}
+
+    /**
+     * Gets a list of all previous trades that occurred for an asset type
+     * @param AssetType - asset type of the trades
+     * @return a list of trades
+     */
     public List<Trade> getTradeHistory(String AssetType) {return null;}
 }

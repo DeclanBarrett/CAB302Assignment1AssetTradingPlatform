@@ -6,6 +6,7 @@ import Controllers.Backend.NetworkObjects.*;
 import java.util.List;
 
 public interface IDataSource {
+
     String GetSalt(String username);
     LoginToken AttemptLogin(String username, String password);
 
