@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class SQL implements IDataSource{
+public class SQL {
     // Table and Database Creation
     public static final String CREATE_DATABASE =
             "CREATE DATABASE trading_platform;";
@@ -65,8 +65,8 @@ public class SQL implements IDataSource{
                     "FOREIGN KEY(SellerOrgName) REFERENCES OrganisationalUnit(OrganisationalUnitName)" +
                     ");";
 
-    // Basic SQL Queries (Missing Login/Reset Password)
-    private static final String INSERT_USER = "INSERT INTO Users VALUES ('User 1', 'Sales', 'User', 'b717415eb5e699e4989ef3e2c4e9cbf7', '12345');";
+    // SQL Queries
+    private static final String INSERT_NEW_USER = "INSERT INTO user (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES (?, ?, ?, ?, ?)";
     private static final String INSERT_ASSET = "INSERT INTO Assets VALUES ('?');";
     private static final String INSERT_ORGANISATION = "INSERT INTO OrganisationalUnit VALUES ('?', '?');";
     private static final String INSERT_ORDER = "INSERT INTO Order1 (OrganisationalUnitName, PlaceDateMilSecs, AssetQuantity, AssetName, OrderType) " +
@@ -122,7 +122,7 @@ public class SQL implements IDataSource{
         try {
             Statement st = connection.createStatement();
             st.execute(CREATE_TABLE_Users);
-            AddUser = connection.prepareStatement(INSERT_USER);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER);
             GetUser = connection.prepareStatement(GET_USER);
             GetAllUsers = connection.prepareStatement(GET_ALL_USERS);
             GetSalt = connection.prepareStatement(GET_SALT);
@@ -133,18 +133,27 @@ public class SQL implements IDataSource{
             ex.printStackTrace();
         }
     }
-    public String AddUser(LoginToken token, User u) {
-        try {
-            AddUser.setString(1, u.getUserName());
-            AddUser.setString(2, u.getOrganisationalUnit());
-            AddUser.setString(3, u.getAccountType());
-            AddUser.setString(4, u.getHashedPassword());
-            AddUser.setString(5, u.getSalt());
-            AddUser.execute();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+    public void AddUser(String username, String orgUnit, String accType, String hashedPW, String salt)
+    {
+        try
+        {
+            connection = DatabaseConnection.getInstance();
+            AddUser = connection.prepareStatement(INSERT_NEW_USER);
+            AddUser.setString(1, username);
+            AddUser.setString(2, orgUnit);
+            AddUser.setString(3, accType);
+            AddUser.setString(4,hashedPW);
+            AddUser.setString(5, salt);
+
+            if(AddUser != null)
+            {
+                AddUser.executeQuery();
+            }
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        return null;
     }
 
     public UserInfo GetUser(LoginToken token, String username) {
@@ -167,92 +176,84 @@ public class SQL implements IDataSource{
 
 
 // Methods to be created
-    @Override
     public String GetSalt(String username) {
         return null;
     }
 
-    @Override
     public LoginToken AttemptLogin(String username, String password) {
         return null;
     }
 
-    @Override
     public String AttemptResetPassword(String oldPassword, String newPassword) {
         return null;
     }
 
-    @Override
     public OrganisationalUnit GetOrganisation(LoginToken token, String orgName) {
         return null;
     }
 
-    @Override
     public List<Order> GetOrganisationOrders(LoginToken token, String orgName) {
         return null;
     }
 
-    @Override
+
     public List<Order> GetAllOrders(LoginToken token) {
         return null;
     }
 
-    @Override
+
     public String AddOrder(LoginToken token, Order newOrder) {
         return null;
     }
 
-    @Override
+
     public String RemoveOrder(LoginToken token, int orderID) {
         return null;
     }
 
-    @Override
+
     public List<String> GetAssetTypes(LoginToken token) {
         return null;
     }
 
-    @Override
+
     public List<Trade> GetTradeHistory(LoginToken token, String AssetType) {
         return null;
     }
 
-    @Override
+
     public List<UserInfo> GetAllUsers(LoginToken token) {
         return null;
     }
 
-    @Override
     public String UpdateUserPassword(LoginToken token, String username, String hashedPassword, String salt) {
         return null;
     }
 
-    @Override
+
     public String UpdateUserAccountType(LoginToken token, String username, AccountType accountType) {
         return null;
     }
 
-    @Override
+
     public String UpdateUserOrganisation(LoginToken token, String username, String organisationName) {
         return null;
     }
 
-    @Override
+
     public String AddAsset(LoginToken token, String assetName) {
         return null;
     }
 
-    @Override
+
     public String AddOrganisation(LoginToken token, OrganisationalUnit organisation) {
         return null;
     }
 
-    @Override
     public List<OrganisationalUnit> GetAllOrganisations(LoginToken token) {
         return null;
     }
 
-    @Override
     public String UpdateOrganisationAsset(LoginToken token, String organisationName, String AssetType, int AssetQuantity) {
         return null;
     }
