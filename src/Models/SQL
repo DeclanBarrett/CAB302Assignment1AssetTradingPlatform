@@ -1,7 +1,6 @@
-// Database Creation //
+
 CREATE DATABASE trading_platform;
 
-// Table Creation //
 CREATE TABLE OrgHasQuantity (
 OrganisationalUnitName VARCHAR(60) NOT NULL PRIMARY KEY,
 AssetName VARCHAR(60) NOT NULL,
@@ -50,9 +49,9 @@ FOREIGN KEY(BuyerOrgName) REFERENCES OrganisationalUnit(OrganisationalUnitName),
 FOREIGN KEY(SellerOrgName) REFERENCES OrganisationalUnit(OrganisationalUnitName)
 );
 
-// Inserting //
+
 INSERT INTO Users VALUES ();
 
-// Helpful SQL Statements //
+
 DESCRIBE table;
 SHOW TABLES;
