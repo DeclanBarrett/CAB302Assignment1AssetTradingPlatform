@@ -41,5 +41,10 @@
          </font>
       </Label>
       <ListView fx:id="CreateAssetTable" layoutX="333.0" layoutY="324.0" prefHeight="291.0" prefWidth="363.0" />
+      <Label alignment="CENTER" layoutX="329.0" layoutY="298.0" prefHeight="23.0" prefWidth="372.0" text="Asset Types" textAlignment="CENTER">
+         <font>
+            <Font name="Cambria" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

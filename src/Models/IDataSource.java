@@ -64,6 +64,20 @@ public interface IDataSource {
     List<Order> GetAllOrders(LoginToken token);
 
     /**
+     * Get buy orders from the server
+     * @param token - token to be used for authentication
+     * @return List of all orders
+     */
+    List<Order> GetOrganisationBuyOrders(LoginToken token, String organisationName);
+
+    /**
+     * Get sell orders from the server
+     * @param token - token to be used for authentication
+     * @return List of all orders
+     */
+    List<Order> GetOrganisationSellOrders(LoginToken token, String organisationName);
+
+    /**
      * Attempts to add an order to the server, with it either being executed,
      * stored for later execution or rejected since it would put the organisation
      * at risk of going into negative credits

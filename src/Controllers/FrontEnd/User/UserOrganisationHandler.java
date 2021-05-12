@@ -1,12 +1,22 @@
 package Controllers.FrontEnd.User;
 
+import Controllers.Backend.NetworkObjects.Order;
+import Controllers.Backend.NetworkObjects.OrganisationalUnit;
+import Controllers.FrontEnd.Admin.AdminEditOrganisationHandler;
+import Controllers.FrontEnd.LoginController;
+import Controllers.Socket.MockSocket;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.MapValueFactory;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Handles user's organisation tab
@@ -14,16 +24,33 @@ import java.util.ResourceBundle;
 public class UserOrganisationHandler implements Initializable {
 
     @FXML
-    private Label OrgName;
+    Label OrgName;
     @FXML
-    private Label OrgTotalCredits;
+    Label OrgTotalCredits;
     @FXML
-    private TableView OrgAssetQuantityTable;
+    TableView OrgAssetQuantityTable;
     @FXML
-    private TableView OrgBuyOrdersTable;
+    TableColumn<Map, String> OrgAssetTypeNameColumn;
     @FXML
-    private TableView OrgSellOrdersTable;
+    TableColumn<Map, String> OrgAssetQuantityColumn;
 
+    @FXML
+    TableView OrgBuyOrdersTable;
+    @FXML
+    TableColumn<Order, String> OrgOrderBuyAssetTypeColumn;
+    @FXML
+    TableColumn<Order, String> OrgOrderBuyQuantityColumn;
+    @FXML
+    TableColumn<Order, String> OrgOrderBuyPriceColumn;
+
+    @FXML
+    TableView OrgSellOrdersTable;
+    @FXML
+    TableColumn<Order, String> OrgOrderSellAssetTypeColumn;
+    @FXML
+    TableColumn<Order, String> OrgOrderSellQuantityColumn;
+    @FXML
+    TableColumn<Order, String> OrgOrderSellPriceColumn;
 
     /**
      * Initialise User Organisation Handler
@@ -32,7 +59,18 @@ public class UserOrganisationHandler implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        OrgAssetTypeNameColumn.setCellValueFactory(new MapValueFactory<>("assetName"));
+        OrgAssetQuantityColumn.setCellValueFactory(new MapValueFactory<>("assetQuantity"));
 
+        OrgOrderBuyAssetTypeColumn.setCellValueFactory(new PropertyValueFactory<>("assetType"));
+        OrgOrderBuyQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("assetQuantity"));
+        OrgOrderBuyPriceColumn.setCellValueFactory(new PropertyValueFactory<>("requestPrice"));
+
+        OrgOrderSellAssetTypeColumn.setCellValueFactory(new PropertyValueFactory<>("assetType"));
+        OrgOrderSellQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("assetQuantity"));
+        OrgOrderSellPriceColumn.setCellValueFactory(new PropertyValueFactory<>("requestPrice"));
+
+        UpdateOrganisationInformation();
     }
 
     /**
@@ -40,5 +78,33 @@ public class UserOrganisationHandler implements Initializable {
      */
     private void UpdateOrganisationInformation() {
 
+        //Attempt to set the organisation assets and quantities via casting to a map
+        OrganisationalUnit org = MockSocket.getInstance().GetOrganisation(LoginController.GetToken(), "Sales");//LoginController.GetUser().getOrganisationalUnit()
+
+        OrgName.setText(org.getUnitName());
+
+        OrgTotalCredits.setText(((Double) org.getCredits()).toString());
+
+        ObservableList<Map<String, Object>> items =
+                FXCollections.<Map<String, Object>>observableArrayList();
+
+        //Setting each map to have an as
+        for (Map.Entry<String, Integer> entry : org.GetAllAssets().entrySet()) {
+            String k = entry.getKey();
+            Integer v = entry.getValue();
+            Map<String, Object> item = new HashMap<>();
+            item.put("assetName", k);
+            item.put("assetQuantity", v);
+            items.add(item);
+
+        }
+
+        OrgAssetQuantityTable.getItems().setAll(items);
+
+        List<Order> buyOrders = MockSocket.getInstance().GetOrganisationBuyOrders(LoginController.GetToken(), "Sales");
+        OrgBuyOrdersTable.getItems().addAll(buyOrders);
+
+        List<Order> sellOrders = MockSocket.getInstance().GetOrganisationSellOrders(LoginController.GetToken(), "Sales");
+        OrgSellOrdersTable.getItems().addAll(sellOrders);
     }
 }

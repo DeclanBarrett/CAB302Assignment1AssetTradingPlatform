@@ -62,9 +62,15 @@ public class MockSocket implements IDataSource {
         organisationalUnitTable.add(new OrganisationalUnit("Research", 90, organisationAssets));
         organisationalUnitTable.add(new OrganisationalUnit("Admin", 0, organisationAssets));
 
-        assetTypesTable.add("Sales");
-        assetTypesTable.add("Finance");
-        assetTypesTable.add("Research");
+        assetTypesTable.add("Paper");
+        assetTypesTable.add("CPU hours");
+        assetTypesTable.add("Pickles");
+        assetTypesTable.add("Casino Chips");
+
+        orderTable.add(new Order(123456, OrderType.BUY, "Paper", 3, 3, "Research", new Date()));
+        orderTable.add(new Order(123456, OrderType.SELL, "CPU hours", 3, 3000, "Research", new Date()));
+        orderTable.add(new Order(123456, OrderType.BUY, "Pickles", 3, 3000, "Sales", new Date()));
+        orderTable.add(new Order(123456, OrderType.SELL, "Casino Chips", 3, 3, "Sales", new Date()));
 
         System.out.println("HELL");
     }
@@ -138,6 +144,41 @@ public class MockSocket implements IDataSource {
     public List<Order> GetAllOrders(LoginToken token) {
         ArrayList<Order> orders = orderTable;
         return orders;
+    }
+
+    @Override
+    public List<Order> GetOrganisationBuyOrders(LoginToken token, String organisationName) {
+        ArrayList<Order> orders = new ArrayList<>();
+        for (Order order: orderTable) {
+            if (order.getOrganisationalUnit().equals(organisationName))
+                orders.add(order);
+        }
+
+        ArrayList<Order> buyOrders = new ArrayList<>();
+        for (Order order: orders) {
+            if (order.getOrderType().equals(OrderType.BUY)) {
+                buyOrders.add(order);
+            }
+        }
+        return buyOrders;
+    }
+
+    @Override
+    public List<Order> GetOrganisationSellOrders(LoginToken token, String organisationName) {
+
+        ArrayList<Order> orders = new ArrayList<>();
+        for (Order order: orderTable) {
+            if (order.getOrganisationalUnit().equals(organisationName))
+            orders.add(order);
+        }
+
+        ArrayList<Order> sellOrders = new ArrayList<>();
+        for (Order order: orders) {
+            if (order.getOrderType().equals(OrderType.SELL)) {
+                sellOrders.add(order);
+            }
+        }
+        return sellOrders;
     }
 
     @Override
