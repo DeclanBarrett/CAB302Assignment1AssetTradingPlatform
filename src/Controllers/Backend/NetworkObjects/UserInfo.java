@@ -32,7 +32,7 @@ public class UserInfo implements Comparable<UserInfo>, Serializable {
      *
      * @return username of the User
      */
-    public String GetUsername() {
+    public String getUsername() {
         return username;
     }
 
@@ -46,7 +46,7 @@ public class UserInfo implements Comparable<UserInfo>, Serializable {
      *
      * @return account type of the User
      */
-    public AccountType GetAccountType() {
+    public AccountType getAccountType() {
         return accountType;
     }
 
@@ -54,7 +54,7 @@ public class UserInfo implements Comparable<UserInfo>, Serializable {
      *
      * @return organisational unit of the User
      */
-    public String GetOrganisationalUnit() {
+    public String getOrganisationalUnit() {
         return organisationalType;
     }
 
@@ -91,6 +91,6 @@ public class UserInfo implements Comparable<UserInfo>, Serializable {
         UserInfo u = (UserInfo) o;
 
         // Compare the data members and return accordingly
-        return GetUsername().equals(u.GetUsername());
+        return getUsername().equals(u.getUsername());
     }
 }

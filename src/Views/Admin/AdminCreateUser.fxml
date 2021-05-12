@@ -26,9 +26,9 @@
       </Button>
       <TableView fx:id="CreateUserTable" layoutX="93.0" layoutY="459.0" prefHeight="193.0" prefWidth="842.0">
          <columns>
-            <TableColumn prefWidth="304.0" text="Username" />
-            <TableColumn minWidth="0.0" prefWidth="208.0" text="Account Type" />
-            <TableColumn prefWidth="329.0" text="Organisation Unit" />
+            <TableColumn fx:id="CreateUserNameColumn" prefWidth="304.0" text="Username" />
+            <TableColumn fx:id="CreateUserAccountTypeColumn" minWidth="0.0" prefWidth="208.0" text="Account Type" />
+            <TableColumn fx:id="CreateUserOrgUnitColumn" prefWidth="329.0" text="Organisation Unit" />
          </columns>
       </TableView>
       <Label fx:id="CreateUserErrorText" layoutX="333.0" layoutY="373.0" prefHeight="22.0" prefWidth="363.0" text="ErrorText" textAlignment="CENTER">

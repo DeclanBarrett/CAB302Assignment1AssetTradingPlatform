@@ -18,7 +18,7 @@ public class TestUserInfo {
 
     @Test
     public void TestGetUsername() {
-        String username = userInfo.GetUsername();
+        String username = userInfo.getUsername();
         assertEquals("Jack", username);
     }
 
@@ -32,13 +32,13 @@ public class TestUserInfo {
 
     @Test
     public void TestGetAccountType() {
-        AccountType type = userInfo.GetAccountType();
+        AccountType type = userInfo.getAccountType();
         assertEquals(AccountType.User, type);
     }
 
     @Test
     public void TestGetOrganisationalUnit() {
-        String unit = userInfo.GetOrganisationalUnit();
+        String unit = userInfo.getOrganisationalUnit();
         assertEquals("Sales", unit);
     }
 }

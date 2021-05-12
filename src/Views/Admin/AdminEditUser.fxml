@@ -80,9 +80,9 @@
       </VBox>
       <TableView fx:id="EditUserTable" layoutX="93.0" layoutY="436.0" prefHeight="207.0" prefWidth="843.0">
          <columns>
-            <TableColumn prefWidth="304.0" text="Username" />
-            <TableColumn minWidth="0.0" prefWidth="208.0" text="Account Type" />
-            <TableColumn prefWidth="329.0" text="Organisation Unit" />
+            <TableColumn fx:id="EditUserNameColumn" prefWidth="304.0" text="Username" />
+            <TableColumn fx:id="EditUserAccountTypeColumn" minWidth="0.0" prefWidth="208.0" text="Account Type" />
+            <TableColumn fx:id="EditUserOrgUnitColumn" prefWidth="329.0" text="Organisation Unit" />
          </columns>
       </TableView>
       <Button fx:id="EditUserOrgUnitSubmit" alignment="CENTER" layoutX="795.0" layoutY="319.0" mnemonicParsing="false" onAction="#EditUserOrg" prefHeight="40.0" prefWidth="120.0" text="Change">

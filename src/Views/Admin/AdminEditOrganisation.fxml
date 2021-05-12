@@ -19,10 +19,10 @@
       </Label>
       <TableView fx:id="EditOrgAssetsTable" layoutX="92.0" layoutY="395.0" prefHeight="258.0" prefWidth="843.0">
          <columns>
-            <TableColumn prefWidth="324.0" text="Organsisation Name" />
-            <TableColumn minWidth="0.0" prefWidth="117.0" text="Credits" />
-            <TableColumn minWidth="0.0" prefWidth="284.0" text="Asset Type" />
-            <TableColumn minWidth="0.0" prefWidth="117.0" text="Quantity" />
+            <TableColumn fx:id="EditOrgNameColumn" prefWidth="324.0" text="Organsisation Name" />
+            <TableColumn fx:id="EditOrgCreditColumn" minWidth="0.0" prefWidth="117.0" text="Credits" />
+            <TableColumn fx:id="EditOrgAssetNameColumn" minWidth="0.0" prefWidth="284.0" text="Asset Type" />
+            <TableColumn fx:id="EditOrgAssetQuantityColumn" minWidth="0.0" prefWidth="117.0" text="Quantity" />
          </columns>
       </TableView>
       <Label fx:id="EditOrgErrorText" layoutX="343.0" layoutY="345.0" prefHeight="22.0" prefWidth="363.0" text="ErrorText" textAlignment="CENTER">

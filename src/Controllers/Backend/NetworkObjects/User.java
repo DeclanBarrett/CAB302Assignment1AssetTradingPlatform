@@ -1,7 +1,6 @@
 package Controllers.Backend.NetworkObjects;
 
 import Controllers.Backend.AccountType;
-import Controllers.Socket.MockSocket;
 
 import java.io.Serializable;
 
@@ -30,32 +29,32 @@ public class User implements Comparable<User>, Serializable {
     /**
      * @return username of the User
      */
-    public String GetUsername() {
+    public String getUsername() {
         return username;
     }
 
     /**
      * @return password of the User
      */
-    public String GetPassword() {
+    public String getPassword() {
         return password;
     }
 
     /**
      * @return account type of the User
      */
-    public AccountType GetAccountType() {
+    public AccountType getAccountType() {
         return accountType;
     }
 
     /**
      * @return organisational unit of the User
      */
-    public String GetOrganisationalUnit() {
+    public String getOrganisationalUnit() {
         return organisationalType;
     }
 
-    public String GetSalt() {
+    public String getSalt() {
         return salt;
     }
 
@@ -99,6 +98,6 @@ public class User implements Comparable<User>, Serializable {
         User u = (User) o;
 
         // Compare the data members and return accordingly
-        return GetUsername().equals(u.GetUsername());
+        return getUsername().equals(u.getUsername());
     }
 }

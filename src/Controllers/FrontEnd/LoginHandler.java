@@ -44,10 +44,10 @@ public class LoginHandler implements Initializable {
 
             Parent loginView;
 
-            if (LoginController.GetUser().GetAccountType() == AccountType.SystemAdmin) {
+            if (LoginController.GetUser().getAccountType() == AccountType.SystemAdmin) {
                 loginView = FXMLLoader.load(getClass().getResource("/Views/Admin/AdminScreen.fxml"));
-            } else if (LoginController.GetUser().GetAccountType() == AccountType.User ||
-                    LoginController.GetUser().GetAccountType() == AccountType.UnitLeader) {
+            } else if (LoginController.GetUser().getAccountType() == AccountType.User ||
+                    LoginController.GetUser().getAccountType() == AccountType.UnitLeader) {
                 loginView = FXMLLoader.load(getClass().getResource("/Views/User/UserScreen.fxml"));
             } else {
                 throw new LoginException("Unexpected Error");

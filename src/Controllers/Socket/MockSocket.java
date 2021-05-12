@@ -80,8 +80,8 @@ public class MockSocket implements IDataSource {
     @Override
     public String GetSalt(String username) {
         for (User currentUser: userTable) {
-            if (currentUser.GetUsername().equals(username)) {
-                return currentUser.GetSalt();
+            if (currentUser.getUsername().equals(username)) {
+                return currentUser.getSalt();
             }
         }
 
@@ -91,12 +91,12 @@ public class MockSocket implements IDataSource {
     @Override
     public LoginToken AttemptLogin(String username, String password) {
         for (User currentUser: userTable) {
-            if (currentUser.GetUsername().equals(username) && currentUser.GetPassword().equals(password)) {
+            if (currentUser.getUsername().equals(username) && currentUser.getPassword().equals(password)) {
                 Date actualDate = new Date();
 
                 actualDate.toInstant().plus(Duration.ofHours(2));
 
-                LoginToken login = new LoginToken(currentUser.GetUsername(), new Date());
+                LoginToken login = new LoginToken(currentUser.getUsername(), new Date());
 
                 return login;
             }
@@ -112,8 +112,8 @@ public class MockSocket implements IDataSource {
     @Override
     public UserInfo GetUser(LoginToken token, String username) {
         for (User currentUser: userTable) {
-            if (currentUser.GetUsername().equals(username)) {
-                return new UserInfo(currentUser.GetUsername(), currentUser.GetAccountType(), currentUser.GetOrganisationalUnit());
+            if (currentUser.getUsername().equals(username)) {
+                return new UserInfo(currentUser.getUsername(), currentUser.getAccountType(), currentUser.getOrganisationalUnit());
             }
         }
         return null;
@@ -169,7 +169,7 @@ public class MockSocket implements IDataSource {
     public List<UserInfo> GetAllUsers(LoginToken token) {
         List<UserInfo> infoTable = new ArrayList<>();
         for (User user : userTable) {
-            infoTable.add(new UserInfo(user.GetUsername(), user.GetAccountType(), user.GetOrganisationalUnit()));
+            infoTable.add(new UserInfo(user.getUsername(), user.getAccountType(), user.getOrganisationalUnit()));
         }
         return infoTable;
     }
