@@ -65,57 +65,56 @@ public class SQL implements IDataSource{
                     "FOREIGN KEY(SellerOrgName) REFERENCES OrganisationalUnit(OrganisationalUnitName)" +
                     ");";
 
-    // Basic SQL Queries
+    // Basic SQL Queries (Missing Login/Reset Password)
     private static final String INSERT_USER = "INSERT INTO Users VALUES ('User 1', 'Sales', 'User', 'b717415eb5e699e4989ef3e2c4e9cbf7', '12345');";
-
     private static final String INSERT_ASSET = "INSERT INTO Assets VALUES ('?');";
-
     private static final String INSERT_ORGANISATION = "INSERT INTO OrganisationalUnit VALUES ('?', '?');";
-
     private static final String INSERT_ORDER = "INSERT INTO Order1 (OrganisationalUnitName, PlaceDateMilSecs, AssetQuantity, AssetName, OrderType) " +
                                                 "VALUES ('?', '?', '?', '?', '?');";
 
     private static final String GET_SALT = "SELECT Salt FROM Users WHERE UserName=?";
-
     private static final String GET_ORGANISATION = "SELECT * FROM OrganisationUnit WHERE OrganisationalUnitName=?";
-
     private static final String GET_ALL_ORGANISATIONS = "SELECT * FROM OrganisationUnit";
-
     private static final String GET_ORGANISATION_ORDERS = "SELECT * FROM Order WHERE OrganisationalUnitName=?";
-
     private static final String GET_ORDERS = "SELECT * FROM Order1";
-
     private static final String GET_USER = "SELECT * FROM Users WHERE UserName=?";
-
     private static final String GET_ALL_USERS = "SELECT * FROM Users";
-
     private static final String GET_ASSET_TYPES = "SELECT * FROM Assets"; // is this correct?
-
     private static final String GET_TRADE_HISTORY = "SELECT * FROM Trade"; // is this correct?
 
-    private static final String DELETE_ORDERS = "DELETE FROM Order1 WHERE OrderID = ?";
+    private static final String DELETE_ORDER = "DELETE FROM Order1 WHERE OrderID = ?";
 
     private static final String UPDATE_USER_PASSWORD = "UPDATE Users SET HashedPassword = ?, Salt = ? WHERE UserName = ?";
-
     private static final String UPDATE_USER_ACCOUNT_TYPE = "UPDATE Users SET AccountType = ? WHERE UserName = ?";
-
     private static final String UPDATE_USER_ORGANISATION = "UPDATE Users SET OrganisationalUnit = ? WHERE UserName = ?";
-
     private static final String UPDATE_ORGANISATION_ASSET = "UPDATE OrgHasQuantity SET AssetName = ?, AssetQuantity = ? " +
                                                             "WHERE OrganisationalUnitName = ?";
 
-
-
-    //private static final String DELETE_USER = "DELETE FROM Users WHERE name=?";
-
-    //private static final String COUNT_ROWS = "SELECT COUNT(*) FROM Users";
 
     // Connection and Statements
     private Connection connection;
 
     private PreparedStatement AddUser;
+    private PreparedStatement AddAsset;
+    private PreparedStatement AddOrganisation;
+    private PreparedStatement AddOrder;
 
     private PreparedStatement GetUser;
+    private PreparedStatement GetAllUsers;
+    private PreparedStatement GetSalt;
+    private PreparedStatement GetOrganisation;
+    private PreparedStatement GetAllOrganisations;
+    private PreparedStatement GetOrganisationOrders;
+    private PreparedStatement GetOrders;
+    private PreparedStatement GetAssetTypes;
+    private PreparedStatement GetTradeHistory;
+
+    private PreparedStatement DeleteOrder;
+
+    private PreparedStatement UpdateUserPassword;
+    private PreparedStatement UpdateUserAccountType;
+    private PreparedStatement UpdateUserOrganisation;
+    private PreparedStatement UpdateOrganisationAsset;
 
 
     public SQL() {
