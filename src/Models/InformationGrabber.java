@@ -4,10 +4,7 @@ import Controllers.Backend.AccountType;
 import Controllers.Backend.NetworkObjects.*;
 
 import javax.xml.crypto.Data;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 /**
@@ -15,31 +12,77 @@ import java.util.List;
  */
 public class  InformationGrabber {
 
-    //SQL queries for user, login and reset password
-
+    // SQL Queries
     private static final String INSERT_NEW_USER = "INSERT INTO user (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES (?, ?, ?, ?, ?)";
+    private static final String INSERT_ASSET = "INSERT INTO Assets VALUES ('?');";
+    private static final String INSERT_ORGANISATION = "INSERT INTO OrganisationalUnit VALUES ('?', '?');";
+    private static final String INSERT_ORDER = "INSERT INTO Order1 (OrganisationalUnitName, PlaceDateMilSecs, AssetQuantity, AssetName, OrderType) " +
+            "VALUES ('?', '?', '?', '?', '?');";
 
-    private static final String UPDATE_PASSWORD = "UPDATE user SET Password=?, Salt=? WHERE UserName=?";
+    private static final String GET_USER = "SELECT * FROM Users WHERE UserName=?";
+    private static final String GET_USER_PASSWORD = "SELECT HashedPassword FROM User WHERE UserName=?";
+    private static final String GET_ALL_USERS = "SELECT * FROM Users";
+    private static final String GET_SALT = "SELECT Salt FROM Users WHERE UserName=?";
+    private static final String GET_ORGANISATION = "SELECT * FROM OrganisationUnit WHERE OrganisationalUnitName=?";
+    private static final String GET_ALL_ORGANISATIONS = "SELECT * FROM OrganisationUnit";
+    private static final String GET_ORGANISATION_ORDERS = "SELECT * FROM Order WHERE OrganisationalUnitName=?";
+    private static final String GET_ORDERS = "SELECT * FROM Order1";
+    private static final String GET_ASSET_TYPES = "SELECT * FROM Assets"; // is this correct?
+    private static final String GET_TRADE_HISTORY = "SELECT * FROM Trade"; // is this correct?
 
-    private static final String GET_NONCE = "SELECT Salt FROM User WHERE UserName=?";
+    private static final String DELETE_ORDER = "DELETE FROM Order1 WHERE OrderID = ?";
 
-    private static final String GET_PASSWORD = "SELECT HashedPassword FROM User WHERE UserName=?";
-
-    private static final String GET_USER = "SELECT * FROM user WHERE UserName=?";
+    private static final String UPDATE_USER_PASSWORD = "UPDATE Users SET HashedPassword = ?, Salt = ? WHERE UserName = ?";
+    private static final String UPDATE_USER_ACCOUNT_TYPE = "UPDATE Users SET AccountType = ? WHERE UserName = ?";
+    private static final String UPDATE_USER_ORGANISATION = "UPDATE Users SET OrganisationalUnit = ? WHERE UserName = ?";
+    private static final String UPDATE_ORGANISATION_ASSET = "UPDATE OrgHasQuantity SET AssetName = ?, AssetQuantity = ? " +
+            "WHERE OrganisationalUnitName = ?";
 
     private PreparedStatement addUser;
-
-    private PreparedStatement updatePassword;
-
-    private PreparedStatement getNonce;
-
-    private PreparedStatement getPassword;
+    private PreparedStatement addAsset;
+    private PreparedStatement addOrganisation;
+    private PreparedStatement addOrder;
 
     private PreparedStatement getUser;
+    private PreparedStatement getPassword;
+    private PreparedStatement getAllUsers;
+    private PreparedStatement getSalt;
+    private PreparedStatement getOrganisation;
+    private PreparedStatement getAllOrganisations;
+    private PreparedStatement getOrganisationOrders;
+    private PreparedStatement getOrders;
+    private PreparedStatement getAssetTypes;
+    private PreparedStatement getTradeHistory;
+
+    private PreparedStatement deleteOrder;
+
+    private PreparedStatement updateUserPassword;
+    private PreparedStatement updateUserAccountType;
+    private PreparedStatement updateUserOrganisation;
+    private PreparedStatement updateOrganisationAsset;
 
     private Connection connection;
 
+    public InformationGrabber() {
+        connection = DatabaseConnection.getInstance();
+        try {
+            new SQL(connection);
+            constructPreparedStatements();
 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void constructPreparedStatements() throws SQLException {
+        addUser = connection.prepareStatement(INSERT_NEW_USER);
+        getUser = connection.prepareStatement(GET_USER);
+        getAllUsers = connection.prepareStatement(GET_ALL_USERS);
+        getSalt = connection.prepareStatement(GET_SALT);
+        updateUserPassword = connection.prepareStatement(UPDATE_USER_PASSWORD);
+        updateUserAccountType = connection.prepareStatement(UPDATE_USER_ACCOUNT_TYPE);
+        updateUserOrganisation = connection.prepareStatement(UPDATE_USER_ORGANISATION);
+    }
 
     /**
      * Inserts user into the database.
@@ -82,7 +125,7 @@ public class  InformationGrabber {
         try
         {
             connection = DatabaseConnection.getInstance();
-            getPassword = connection.prepareStatement(GET_PASSWORD);
+            getPassword = connection.prepareStatement(GET_USER_PASSWORD);
             getPassword.setString(1, username);
             rs = getPassword.executeQuery();
 
@@ -100,13 +143,13 @@ public class  InformationGrabber {
         try
         {
             connection = DatabaseConnection.getInstance();
-            getNonce = connection.prepareStatement(GET_NONCE);
-            getNonce.setString(1, username);
+            getSalt = connection.prepareStatement(GET_SALT);
+            getSalt.setString(1, username);
 
 
-            if(getNonce != null)
+            if(getSalt != null)
             {
-                ResultSet rs = getNonce.executeQuery();
+                ResultSet rs = getSalt.executeQuery();
             }
 
 
@@ -124,14 +167,14 @@ public class  InformationGrabber {
     public void updatePassword(String username, String password, String salt){
         try
         {
-            updatePassword = connection.prepareStatement(UPDATE_PASSWORD);
-            updatePassword.setString(1, password);
-            updatePassword.setString(2, salt);
-            updatePassword.setString(3, username);
+            updateUserPassword = connection.prepareStatement(UPDATE_USER_PASSWORD);
+            updateUserPassword.setString(1, password);
+            updateUserPassword.setString(2, salt);
+            updateUserPassword.setString(3, username);
 
-            if(updatePassword != null)
+            if(updateUserPassword != null)
             {
-                updatePassword.executeQuery();
+                updateUserPassword.executeQuery();
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -1,5 +1,7 @@
 package Controllers.Socket;
 
+import Models.InformationGrabber;
+
 import java.io.*;
 import java.net.*;
 
@@ -14,6 +16,7 @@ public class Server extends Thread
     private DataInputStream in;
     private DataOutputStream out;
 
+    private InformationGrabber database;//
 
     /**
      * Creates the server
