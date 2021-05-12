@@ -22,6 +22,8 @@ public class MockSocket implements IDataSource {
     private ArrayList<OrganisationalUnit> organisationalUnitTable = new ArrayList<>();
     private HashMap<String, Integer> organisationAssets = new HashMap<>();
     private ArrayList<Order> orderTable = new ArrayList<>();
+    private ArrayList<String> assetTypesTable = new ArrayList<>();
+    private ArrayList<Trade> tradesTable = new ArrayList<>();
 
     /**
      * TODO finish implementing IDataSource
@@ -54,10 +56,15 @@ public class MockSocket implements IDataSource {
         organisationAssets.put("CPU hours", 600);
         organisationAssets.put("Pickles", 50);
         organisationAssets.put("Casino Chips", 50);
+
         organisationalUnitTable.add(new OrganisationalUnit("Sales", 3000.50, organisationAssets));
         organisationalUnitTable.add(new OrganisationalUnit("Finance", 100, organisationAssets));
         organisationalUnitTable.add(new OrganisationalUnit("Research", 90, organisationAssets));
         organisationalUnitTable.add(new OrganisationalUnit("Admin", 0, organisationAssets));
+
+        assetTypesTable.add("Sales");
+        assetTypesTable.add("Finance");
+        assetTypesTable.add("Research");
 
         System.out.println("HELL");
     }
@@ -124,7 +131,7 @@ public class MockSocket implements IDataSource {
 
     @Override
     public List<Order> GetOrganisationOrders(LoginToken token, String orgName) {
-        return null;
+        return orderTable;
     }
 
     @Override
@@ -135,63 +142,67 @@ public class MockSocket implements IDataSource {
 
     @Override
     public String AddOrder(LoginToken token, Order newOrder) {
-        return null;
+        return "Success";
     }
 
     @Override
     public String RemoveOrder(LoginToken token, int OrderID) {
-        return null;
+        return "Success";
     }
 
     @Override
     public List<String> GetAssetTypes(LoginToken token) {
-        return null;
+        return assetTypesTable;
     }
 
     @Override
     public List<Trade> GetTradeHistory(LoginToken token, String AssetType) {
-        return null;
+        return tradesTable;
     }
 
     @Override
     public String AddUser(LoginToken token, User user) {
-        return null;
+        return "Success";
     }
 
     @Override
     public List<UserInfo> GetAllUsers(LoginToken token) {
-        return null;
+        List<UserInfo> infoTable = new ArrayList<>();
+        for (User user : userTable) {
+            infoTable.add(new UserInfo(user.GetUsername(), user.GetAccountType(), user.GetOrganisationalUnit()));
+        }
+        return infoTable;
     }
 
     @Override
     public String UpdateUserPassword(LoginToken token, String username, String hashedPassword, String salt) {
-        return null;
+        return "success";
     }
 
     @Override
     public String UpdateUserAccountType(LoginToken token, String username, AccountType accountType) {
-        return null;
+        return "Success";
     }
 
     @Override
     public String UpdateUserOrganisation(LoginToken token, String username, String organisationName) {
-        return null;
+        return "Success";
     }
 
     @Override
     public String AddAsset(LoginToken token, String assetName) {
-        return null;
+        return "Success";
     }
 
     @Override
     public String AddOrganisation(LoginToken token, OrganisationalUnit organisation) {
-        return null;
+        return "Success";
     }
 
     @Override
     public List<OrganisationalUnit> GetAllOrganisations(LoginToken token) {
 
-        return null;
+        return organisationalUnitTable;
     }
 
     @Override

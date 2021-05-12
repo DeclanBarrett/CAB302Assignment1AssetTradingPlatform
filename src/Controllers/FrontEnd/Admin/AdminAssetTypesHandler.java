@@ -1,5 +1,7 @@
 package Controllers.FrontEnd.Admin;
 
+import Controllers.FrontEnd.LoginController;
+import Controllers.Socket.MockSocket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -27,7 +30,7 @@ public class AdminAssetTypesHandler implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        UpdateAssetTypes();
     }
 
     /**
@@ -35,6 +38,9 @@ public class AdminAssetTypesHandler implements Initializable {
      * @param CreateAsset Asset to be created
      */
     public void CreateAsset(ActionEvent CreateAsset) {
+        MockSocket.getInstance().AddAsset(LoginController.GetToken(), CreateAssetName.getText());
+
+
         System.out.println(CreateAsset.getSource());
     }
 
@@ -42,6 +48,9 @@ public class AdminAssetTypesHandler implements Initializable {
      * Updates asset types
      */
     private void UpdateAssetTypes() {
+        System.out.println("Updating Asset Types");
+        List<String> types = MockSocket.getInstance().GetAssetTypes(LoginController.GetToken());
+        CreateAssetTable.getItems().addAll(types);
 
     }
 }
