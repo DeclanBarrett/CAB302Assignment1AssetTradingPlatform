@@ -1,14 +1,16 @@
 package Controllers.FrontEnd.Admin;
 
+import Controllers.Backend.NetworkObjects.OrganisationalUnit;
+import Controllers.FrontEnd.LoginController;
+import Controllers.Socket.MockSocket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -27,10 +29,17 @@ public class AdminCreateOrganisationHandler implements Initializable {
     @FXML
     TableView CreateOrgTable;
 
+    @FXML
+    TableColumn<OrganisationalUnit, String> CreateOrgNameColumn;
+    @FXML
+    TableColumn<OrganisationalUnit, String> CreateOrgCreditColumn;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        CreateOrgNameColumn.setCellValueFactory(new PropertyValueFactory<>("unitName"));
+        CreateOrgCreditColumn.setCellValueFactory(new PropertyValueFactory<>("credits"));
+        UpdateOrganisationTable();
     }
 
     /**
@@ -42,7 +51,8 @@ public class AdminCreateOrganisationHandler implements Initializable {
     }
 
     private void UpdateOrganisationTable() {
-
+        List<OrganisationalUnit> orgs = MockSocket.getInstance().GetAllOrganisations(LoginController.GetToken());
+        CreateOrgTable.getItems().addAll(orgs);
     }
 
 }

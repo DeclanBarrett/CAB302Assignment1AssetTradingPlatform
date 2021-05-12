@@ -35,7 +35,7 @@ public class Order implements Comparable<Order>, Serializable  {
         this.assetType = assetType;
         this.assetQuantity = assetQuantity;
         this.requestPrice = requestPrice;
-        this.organisationalUnitName = organisationalUnit.GetUnitName();
+        this.organisationalUnitName = organisationalUnit.getUnitName();
         this.date = date;
     }
 

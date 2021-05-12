@@ -25,13 +25,13 @@ public class TestOrganisationalUnit {
 
     @Test
     public void TestGetUnitName() {
-        String name = organisationalUnit.GetUnitName();
+        String name = organisationalUnit.getUnitName();
         assertEquals("Sales", name);
     }
 
     @Test
     public void TestGetCredits() {
-        double credits = organisationalUnit.GetCredits();
+        double credits = organisationalUnit.getCredits();
         assertEquals(3000.5, credits);
     }
 
@@ -48,7 +48,7 @@ public class TestOrganisationalUnit {
 
     @Test
     public void TestGetQuantity() {
-        int quantity = organisationalUnit.GetQuantity("Casino Chips");
+        int quantity = organisationalUnit.getQuantity("Casino Chips");
         assertEquals(50, quantity);
     }
 }

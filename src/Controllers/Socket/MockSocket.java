@@ -122,7 +122,7 @@ public class MockSocket implements IDataSource {
     @Override
     public OrganisationalUnit GetOrganisation(LoginToken token, String orgName) {
         for (OrganisationalUnit organisationalUnit: organisationalUnitTable) {
-            if (organisationalUnit.GetUnitName().equals(orgName)) {
+            if (organisationalUnit.getUnitName().equals(orgName)) {
                 return organisationalUnit;
             }
         }
@@ -191,6 +191,7 @@ public class MockSocket implements IDataSource {
 
     @Override
     public String AddAsset(LoginToken token, String assetName) {
+        assetTypesTable.add(assetName);
         return "Success";
     }
 

@@ -8,7 +8,7 @@ import java.util.HashMap;
  */
 public class OrganisationalUnit implements Comparable<OrganisationalUnit>, Serializable {
 
-    String name;
+    String unitName;
     double credits;
     HashMap<String, Integer> organisationAssets;
 
@@ -19,7 +19,7 @@ public class OrganisationalUnit implements Comparable<OrganisationalUnit>, Seria
      * @param organisationAssets Asset type and Asset quantity hashmap pair.
      */
     public OrganisationalUnit(String name, double credits, HashMap<String, Integer> organisationAssets) {
-        this.name = name;
+        this.unitName = name;
         this.credits = credits;
         this.organisationAssets = organisationAssets;
     }
@@ -28,15 +28,15 @@ public class OrganisationalUnit implements Comparable<OrganisationalUnit>, Seria
      *
      * @return the name of the unit.
      */
-    public String GetUnitName() {
-        return name;
+    public String getUnitName() {
+        return unitName;
     }
 
     /**
      *
      * @return Amount of credits owned by the unit.
      */
-    public double GetCredits() {
+    public double getCredits() {
         return credits;
     }
 
@@ -45,7 +45,7 @@ public class OrganisationalUnit implements Comparable<OrganisationalUnit>, Seria
      * @param assetName requests quantity based on parameter value.
      * @return quantity of asset requested.
      */
-    public int GetQuantity(String assetName) {
+    public int getQuantity(String assetName) {
         return organisationAssets.get(assetName);
     }
 
@@ -59,7 +59,7 @@ public class OrganisationalUnit implements Comparable<OrganisationalUnit>, Seria
 
     @Override
     public int compareTo(OrganisationalUnit o) {
-        return this.name.compareTo(o.name);
+        return this.unitName.compareTo(o.unitName);
     }
 
     @Override
@@ -79,6 +79,6 @@ public class OrganisationalUnit implements Comparable<OrganisationalUnit>, Seria
         OrganisationalUnit u = (OrganisationalUnit) o;
 
         // Compare the data members and return accordingly
-        return (this.GetUnitName()).equals(u.GetUnitName());
+        return (this.getUnitName()).equals(u.getUnitName());
     }
 }
