@@ -8,12 +8,12 @@ public class Trade implements Serializable, Comparable<Trade> {
     Integer TradeID;
     String AssetName;
     Integer AssetQuantity;
-    Float AssetPrice;
+    Double AssetPrice;
     String BuyerOrgName;
     String SellerOrgName;
     Date TradeDateMilSecs;
 
-    public Trade(Integer tradeID, String assetName, Integer assetQuantity, Float assetPrice, String buyerOrgName, String sellerOrgName, Date tradeDateMilSecs) {
+    public Trade(Integer tradeID, String assetName, Integer assetQuantity, Double assetPrice, String buyerOrgName, String sellerOrgName, Date tradeDateMilSecs) {
         TradeID = tradeID;
         AssetName = assetName;
         AssetQuantity = assetQuantity;
@@ -41,7 +41,7 @@ public class Trade implements Serializable, Comparable<Trade> {
         return AssetQuantity;
     }
 
-    public Float getAssetPrice() {
+    public Double getAssetPrice() {
         return AssetPrice;
     }
 

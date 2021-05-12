@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="UserRemoveAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.User.UserRemoveHandler">
    <children>
       <Label fx:id="RemoveOrganisationName" alignment="CENTER" layoutX="159.0" layoutY="50.0" prefHeight="48.0" prefWidth="553.0" stylesheets="@../StyleSheets/Root.css" text="Organisation Name" textAlignment="CENTER">
@@ -16,11 +15,11 @@
       </Label>
       <TableView fx:id="RemoveTable" layoutX="22.0" layoutY="112.0" prefHeight="530.0" prefWidth="828.0">
          <columns>
-            <TableColumn prefWidth="313.0" text="Asset Type" />
-            <TableColumn prefWidth="74.0" text="Quantity" />
-            <TableColumn prefWidth="112.0" text="Price" />
-            <TableColumn prefWidth="132.0" text="Date" />
-            <TableColumn prefWidth="196.0" text="Remove" />
+            <TableColumn fx:id="RemoveAssetTypeColumn" prefWidth="313.0" text="Asset Type" />
+            <TableColumn fx:id="RemoveQuantityColumn" prefWidth="74.0" text="Quantity" />
+            <TableColumn fx:id="RemovePriceColumn" prefWidth="112.0" text="Price" />
+            <TableColumn fx:id="RemoveDateColumn" prefWidth="132.0" text="Date" />
+            <TableColumn fx:id="RemoveButtonColumn" prefWidth="196.0" text="Remove" />
          </columns>
       </TableView>
    </children>

@@ -68,11 +68,27 @@ public interface IDataSource {
      * @param token - token to be used for authentication
      * @return List of all orders
      */
-    List<Order> GetOrganisationBuyOrders(LoginToken token, String organisationName);
+    List<Order> GetBuyOrders(LoginToken token);
 
     /**
      * Get sell orders from the server
      * @param token - token to be used for authentication
+     * @return List of all orders
+     */
+    List<Order> GetSellOrders(LoginToken token);
+
+    /**
+     * Get buy orders from the server for an organisation
+     * @param token - token to be used for authentication
+     * @param organisationName - organisation to get buy orders
+     * @return List of all orders
+     */
+    List<Order> GetOrganisationBuyOrders(LoginToken token, String organisationName);
+
+    /**
+     * Get sell orders from the server for an organisation
+     * @param token - token to be used for authentication
+     * @param organisationName - organisation to get buy orders
      * @return List of all orders
      */
     List<Order> GetOrganisationSellOrders(LoginToken token, String organisationName);

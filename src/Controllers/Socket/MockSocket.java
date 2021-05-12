@@ -68,9 +68,19 @@ public class MockSocket implements IDataSource {
         assetTypesTable.add("Casino Chips");
 
         orderTable.add(new Order(123456, OrderType.BUY, "Paper", 3, 3, "Research", new Date()));
-        orderTable.add(new Order(123456, OrderType.SELL, "CPU hours", 3, 3000, "Research", new Date()));
-        orderTable.add(new Order(123456, OrderType.BUY, "Pickles", 3, 3000, "Sales", new Date()));
-        orderTable.add(new Order(123456, OrderType.SELL, "Casino Chips", 3, 3, "Sales", new Date()));
+        orderTable.add(new Order(123457, OrderType.SELL, "CPU hours", 3, 3000, "Research", new Date()));
+        orderTable.add(new Order(123458, OrderType.BUY, "Pickles", 3, 3000, "Sales", new Date()));
+        orderTable.add(new Order(123459, OrderType.SELL, "Casino Chips", 3, 3, "Sales", new Date()));
+
+        Date date = new Date();
+
+        tradesTable.add(new Trade(123456, "Paper", 5, 3.0, "Research", "Sales", new Date(date.getTime() + 1)));
+        tradesTable.add(new Trade(123457, "Paper", 4, 3.2, "Research", "Sales", new Date(date.getTime() + 2)));
+        tradesTable.add(new Trade(123458, "Paper", 6, 4.3, "Research", "Sales", new Date(date.getTime() + 3)));
+        tradesTable.add(new Trade(123459, "Paper", 2, 4.5, "Research", "Sales", new Date(date.getTime() + 4)));
+        tradesTable.add(new Trade(123410, "Paper", 4, 3.1, "Research", "Sales", new Date(date.getTime() + 5)));
+        tradesTable.add(new Trade(123412, "Paper", 5, 5.0, "Research", "Sales", new Date(date.getTime() + 6)));
+        tradesTable.add(new Trade(123413, "Paper", 1, 1.0, "Research", "Sales", new Date(date.getTime() + 7)));
 
         System.out.println("HELL");
     }
@@ -137,13 +147,40 @@ public class MockSocket implements IDataSource {
 
     @Override
     public List<Order> GetOrganisationOrders(LoginToken token, String orgName) {
-        return orderTable;
+        ArrayList<Order> orders = new ArrayList<>();
+        for (Order order: orderTable) {
+            if (order.getOrganisationalUnit().equals(orgName))
+                orders.add(order);
+        }
+        return orders;
     }
 
     @Override
     public List<Order> GetAllOrders(LoginToken token) {
         ArrayList<Order> orders = orderTable;
         return orders;
+    }
+
+    @Override
+    public List<Order> GetBuyOrders(LoginToken token) {
+        ArrayList<Order> buyOrders = new ArrayList<>();
+        for (Order order: orderTable) {
+            if (order.getOrderType().equals(OrderType.BUY)) {
+                buyOrders.add(order);
+            }
+        }
+        return buyOrders;
+    }
+
+    @Override
+    public List<Order> GetSellOrders(LoginToken token) {
+        ArrayList<Order> sellOrders = new ArrayList<>();
+        for (Order order: orderTable) {
+            if (order.getOrderType().equals(OrderType.BUY)) {
+                sellOrders.add(order);
+            }
+        }
+        return sellOrders;
     }
 
     @Override
@@ -188,6 +225,7 @@ public class MockSocket implements IDataSource {
 
     @Override
     public String RemoveOrder(LoginToken token, int OrderID) {
+        orderTable.removeIf(order -> order.getOrderID() == OrderID);
         return "Success";
     }
 
@@ -198,7 +236,15 @@ public class MockSocket implements IDataSource {
 
     @Override
     public List<Trade> GetTradeHistory(LoginToken token, String AssetType) {
-        return tradesTable;
+        List<Trade> trades = new ArrayList<>();
+
+        for (Trade trade: tradesTable) {
+            if (trade.getAssetName().equals(AssetType)) {
+                trades.add(trade);
+            }
+        }
+
+        return trades;
     }
 
     @Override

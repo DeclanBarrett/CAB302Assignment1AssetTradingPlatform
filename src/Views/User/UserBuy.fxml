@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
@@ -48,21 +47,21 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label alignment="CENTER" layoutX="161.0" layoutY="292.0" prefHeight="25.0" prefWidth="109.0" text="Current Orders" textAlignment="CENTER">
+                  <Label alignment="CENTER" layoutX="138.0" layoutY="295.0" prefHeight="25.0" prefWidth="161.0" text="Current Sell Orders" textAlignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
                   <TableView fx:id="BuyOrdersTable" layoutX="14.0" layoutY="320.0" prefHeight="305.0" prefWidth="409.0">
                      <columns>
-                        <TableColumn prefWidth="230.0" text="Asset Name" />
-                        <TableColumn prefWidth="93.0" text="Quantity" />
-                        <TableColumn prefWidth="85.0" text="Price" />
+                        <TableColumn fx:id="BuyHandlerOrderAssetTypeColumn" prefWidth="230.0" text="Asset Name" />
+                        <TableColumn fx:id="BuyHandlerOrderQuantityColumn" prefWidth="93.0" text="Quantity" />
+                        <TableColumn fx:id="BuyHandlerOrderPriceColumn" prefWidth="85.0" text="Price" />
                      </columns>
                   </TableView>
                   <LineChart fx:id="BuyPriceHistoryGraph" layoutX="18.0" layoutY="41.0" prefHeight="239.0" prefWidth="397.0">
                      <xAxis>
-                        <CategoryAxis side="BOTTOM" />
+                        <NumberAxis forceZeroInRange="false" side="BOTTOM" />
                      </xAxis>
                      <yAxis>
                         <NumberAxis side="LEFT" />

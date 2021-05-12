@@ -14,7 +14,7 @@ public class TestTrade {
 
     @BeforeEach
     public void ConstructTrade(){
-        trade = new Trade(11111111, "Paper", 500, 9.00f, "Sales", "Finance", new Date());
+        trade = new Trade(11111111, "Paper", 500, 9.00, "Sales", "Finance", new Date());
     }
 
     @Test

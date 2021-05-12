@@ -1,13 +1,22 @@
 package Controllers.FrontEnd.User;
 
+import Controllers.Backend.NetworkObjects.Order;
+import Controllers.Backend.NetworkObjects.Trade;
+import Controllers.FrontEnd.LoginController;
+import Controllers.Socket.MockSocket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -18,19 +27,28 @@ public class UserBuyHandler implements Initializable {
     @FXML
     private TextField BuyAssetQuantity;
     @FXML
-    private TextField BuyPriceCredits;
+    TextField BuyPriceCredits;
     @FXML
-    private Label BuyAssetTypeText;
+    Label BuyAssetTypeText;
     @FXML
-    private Button BuyButton;
+    Button BuyButton;
     @FXML
-    private ComboBox BuyAssetType;
+    ComboBox<String> BuyAssetType;
     @FXML
-    private Label BuyErrorText;
+    Label BuyErrorText;
     @FXML
-    private LineChart BuyPriceHistoryGraph;
+    LineChart BuyPriceHistoryGraph;
+
     @FXML
-    private TableView BuyOrdersTable;
+    TableView BuyOrdersTable;
+    @FXML
+    TableColumn<Order, String> BuyHandlerOrderAssetTypeColumn;
+    @FXML
+    TableColumn<Order, String> BuyHandlerOrderQuantityColumn;
+    @FXML
+    TableColumn<Order, String> BuyHandlerOrderPriceColumn;
+
+
 
     /**
      * Initializes User buy handler
@@ -39,7 +57,17 @@ public class UserBuyHandler implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+         BuyHandlerOrderAssetTypeColumn.setCellValueFactory(new PropertyValueFactory<>("assetType"));
+         BuyHandlerOrderQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("assetQuantity"));
+         BuyHandlerOrderPriceColumn.setCellValueFactory(new PropertyValueFactory<>("requestPrice"));
 
+        NumberAxis xAxis = new NumberAxis();
+        NumberAxis yAxis = new NumberAxis();
+        xAxis.setLabel("Time");
+        yAxis.setLabel("Price");
+
+        UpdateAssetTypeText();
+        UpdateBuyInformation();
     }
 
     /**
@@ -56,20 +84,35 @@ public class UserBuyHandler implements Initializable {
      * @param AssetTypeChanged
      */
     public void AssetTypeChanged(ActionEvent AssetTypeChanged) {
-
+        UpdateBuyInformation();
     }
 
     /**
      * Updates asset type textbox
      */
     private void UpdateAssetTypeText() {
-
+        BuyAssetType.getItems().setAll(MockSocket.getInstance().GetAssetTypes(LoginController.GetToken()));
     }
 
     /**
      * Updates buy information
      */
     private void UpdateBuyInformation() {
+        Date currentDate = new Date();
+
+        List<Order> sellOrders = MockSocket.getInstance().GetSellOrders(LoginController.GetToken());
+        BuyOrdersTable.getItems().setAll(sellOrders);
+
+        List<Trade> trades = MockSocket.getInstance().GetTradeHistory(LoginController.GetToken(), BuyAssetType.getValue());
+        XYChart.Series tradeData = new XYChart.Series();
+
+        tradeData.setName("Price of " + BuyAssetType.getValue());
+
+        for (Trade trade: trades) {
+            tradeData.getData().add(new XYChart.Data(trade.getTradeDateMilSecs().getTime(), trade.getAssetPrice()));
+        }
+
+        BuyPriceHistoryGraph.getData().setAll(tradeData);
 
     }
 }
