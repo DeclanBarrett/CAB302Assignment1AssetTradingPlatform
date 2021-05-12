@@ -72,13 +72,13 @@ public class SQL implements IDataSource{
     private static final String INSERT_ORDER = "INSERT INTO Order1 (OrganisationalUnitName, PlaceDateMilSecs, AssetQuantity, AssetName, OrderType) " +
                                                 "VALUES ('?', '?', '?', '?', '?');";
 
+    private static final String GET_USER = "SELECT * FROM Users WHERE UserName=?";
+    private static final String GET_ALL_USERS = "SELECT * FROM Users";
     private static final String GET_SALT = "SELECT Salt FROM Users WHERE UserName=?";
     private static final String GET_ORGANISATION = "SELECT * FROM OrganisationUnit WHERE OrganisationalUnitName=?";
     private static final String GET_ALL_ORGANISATIONS = "SELECT * FROM OrganisationUnit";
     private static final String GET_ORGANISATION_ORDERS = "SELECT * FROM Order WHERE OrganisationalUnitName=?";
     private static final String GET_ORDERS = "SELECT * FROM Order1";
-    private static final String GET_USER = "SELECT * FROM Users WHERE UserName=?";
-    private static final String GET_ALL_USERS = "SELECT * FROM Users";
     private static final String GET_ASSET_TYPES = "SELECT * FROM Assets"; // is this correct?
     private static final String GET_TRADE_HISTORY = "SELECT * FROM Trade"; // is this correct?
 
@@ -116,7 +116,7 @@ public class SQL implements IDataSource{
     private PreparedStatement UpdateUserOrganisation;
     private PreparedStatement UpdateOrganisationAsset;
 
-
+    // This function currently 'works' for the users tables
     public SQL() {
         connection = DatabaseConnection.getInstance();
         try {
@@ -124,6 +124,11 @@ public class SQL implements IDataSource{
             st.execute(CREATE_TABLE_Users);
             AddUser = connection.prepareStatement(INSERT_USER);
             GetUser = connection.prepareStatement(GET_USER);
+            GetAllUsers = connection.prepareStatement(GET_ALL_USERS);
+            GetSalt = connection.prepareStatement(GET_SALT);
+            UpdateUserPassword = connection.prepareStatement(UPDATE_USER_PASSWORD);
+            UpdateUserAccountType = connection.prepareStatement(UPDATE_USER_ACCOUNT_TYPE);
+            UpdateUserOrganisation = connection.prepareStatement(UPDATE_USER_ORGANISATION);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
