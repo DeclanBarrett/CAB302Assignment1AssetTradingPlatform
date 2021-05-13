@@ -1,16 +1,9 @@
 package Models;
 
-import Controllers.Backend.AccountType;
-import Controllers.Backend.NetworkObjects.*;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class SQL {
     // Table and Database Creation
@@ -65,196 +58,109 @@ public class SQL {
                     "FOREIGN KEY(SellerOrgName) REFERENCES OrganisationalUnit(OrganisationalUnitName)" +
                     ");";
 
-    // SQL Queries
-    private static final String INSERT_NEW_USER = "INSERT INTO user (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES (?, ?, ?, ?, ?)";
-    private static final String INSERT_ASSET = "INSERT INTO Assets VALUES ('?');";
-    private static final String INSERT_ORGANISATION = "INSERT INTO OrganisationalUnit VALUES ('?', '?');";
-    private static final String INSERT_ORDER = "INSERT INTO Order1 (OrganisationalUnitName, PlaceDateMilSecs, AssetQuantity, AssetName, OrderType) " +
-                                                "VALUES ('?', '?', '?', '?', '?');";
+    // Population SQL Queries (based off Mock Socket data)
+    private static final String INSERT_NEW_USER1 = "INSERT INTO Users VALUES ('User 1', 'Sales', 'User', 'b717415eb5e699e4989ef3e2c4e9cbf7', '12345')";
+    private static final String INSERT_NEW_USER2 = "INSERT INTO Users VALUES ('User 2', 'Sales', 'User', 'b717415eb5e699e4989ef3e2c4e9cbf7', '12345')";
+    private static final String INSERT_NEW_USER3 = "INSERT INTO Users VALUES ('User 3', 'Finance', 'User', '8d421e892a47dff539f46142eb09e56b', '123456')";
+    private static final String INSERT_NEW_USER4 = "INSERT INTO Users VALUES ('User 4', 'Finance', 'User', 'b26b843656e6834822b83179b4297620', '123457')";
+    private static final String INSERT_NEW_USER5 = "INSERT INTO Users VALUES ('User 5', 'Finance', 'User', 'c3a4b61825259a74c26d49daa3e89312', '123458')";
+    private static final String INSERT_NEW_USER6 = "INSERT INTO Users VALUES ('User 6', 'Research', 'User', '2ec7484fa99bbaa7bdebe544f1f52f61', '123459')";
+    private static final String INSERT_NEW_USER7 = "INSERT INTO Users VALUES ('User 7', 'Research', 'User', 'ccab59bc481b2105a4dbdf3d30a66248', '123450')";
+    private static final String INSERT_NEW_USER8 = "INSERT INTO Users VALUES ('User 8', 'Research', 'User', 'aa3cae505478da19d13efa65bc8c71b3', '123451')";
+    private static final String INSERT_NEW_USER9 = "INSERT INTO Users VALUES ('User 9', 'Research', 'User', '43bf88d863f230f328c15ccf61d9d89d', '123452')";
 
-    private static final String GET_USER = "SELECT * FROM Users WHERE UserName=?";
-    private static final String GET_ALL_USERS = "SELECT * FROM Users";
-    private static final String GET_SALT = "SELECT Salt FROM Users WHERE UserName=?";
-    private static final String GET_ORGANISATION = "SELECT * FROM OrganisationUnit WHERE OrganisationalUnitName=?";
-    private static final String GET_ALL_ORGANISATIONS = "SELECT * FROM OrganisationUnit";
-    private static final String GET_ORGANISATION_ORDERS = "SELECT * FROM Order WHERE OrganisationalUnitName=?";
-    private static final String GET_ORDERS = "SELECT * FROM Order1";
-    private static final String GET_ASSET_TYPES = "SELECT * FROM Assets"; // is this correct?
-    private static final String GET_TRADE_HISTORY = "SELECT * FROM Trade"; // is this correct?
+    private static final String INSERT_NEW_USER_DECLAN = "INSERT INTO Users VALUES ('Declan Testing', 'Admin', 'SystemAdmin', '802b492fc1d1fe592090399c1ca3b56a', '12346')";
+    private static final String INSERT_NEW_USER_AIDEN = "INSERT INTO Users VALUES ('Aiden Testing', 'Admin', 'SystemAdmin', '086e1b7e1c12ba37cd473670b3a15214', '123456')";
+    private static final String INSERT_NEW_USER_BRAD = "INSERT INTO Users VALUES ('Brad Testing', 'Admin', 'SystemAdmin', '086e1b7e1c12ba37cd473670b3a15214', '123456')";
+    private static final String INSERT_NEW_USER_ETHAN = "INSERT INTO Users VALUES ('Ethan Testing', 'Admin', 'SystemAdmin', '086e1b7e1c12ba37cd473670b3a15214', '123456')";
 
-    private static final String DELETE_ORDER = "DELETE FROM Order1 WHERE OrderID = ?";
+    private static final String INSERT_NEW_USER10 = "INSERT INTO Users VALUES ('User 10', 'Sales', 'UnitLeader', '579d9ec9d0c3d687aaa91289ac2854e4', '123452')";
+    private static final String INSERT_NEW_USER11 = "INSERT INTO Users VALUES ('User 11', 'Finance', 'UnitLeader', '086e1b7e1c12ba37cd473670b3a15214', '123452')";
+    private static final String INSERT_NEW_USER12 = "INSERT INTO Users VALUES ('User 12', 'Research', 'UnitLeader', '086e1b7e1c12ba37cd473670b3a15214', '123452')";
+    private static final String INSERT_NEW_USER13 = "INSERT INTO Users VALUES ('User 13', 'Research', 'UnitLeader', '086e1b7e1c12ba37cd473670b3a15214', '123452')";
 
-    private static final String UPDATE_USER_PASSWORD = "UPDATE Users SET HashedPassword = ?, Salt = ? WHERE UserName = ?";
-    private static final String UPDATE_USER_ACCOUNT_TYPE = "UPDATE Users SET AccountType = ? WHERE UserName = ?";
-    private static final String UPDATE_USER_ORGANISATION = "UPDATE Users SET OrganisationalUnit = ? WHERE UserName = ?";
-    private static final String UPDATE_ORGANISATION_ASSET = "UPDATE OrgHasQuantity SET AssetName = ?, AssetQuantity = ? " +
-                                                            "WHERE OrganisationalUnitName = ?";
+    private static final String INSERT_NEW_ORGANISATIONAL_UNIT_SALES = "INSERT INTO OrganisationalUnit VALUES ('Sales', 3000.50)";
+    private static final String INSERT_NEW_ORGANISATIONAL_UNIT_FINANCE = "INSERT INTO OrganisationalUnit VALUES ('Finance', 100)";
+    private static final String INSERT_NEW_ORGANISATIONAL_UNIT_RESEARCH = "INSERT INTO OrganisationalUnit VALUES ('Research', 90)";
+    private static final String INSERT_NEW_ORGANISATIONAL_UNIT_ADMIN = "INSERT INTO OrganisationalUnit VALUES ('Admin', 0)";
 
 
-    // Connection and Statements
+    // Connection and Statements (Create and Populate)
     private Connection connection;
 
     private PreparedStatement AddUser;
-    private PreparedStatement AddAsset;
-    private PreparedStatement AddOrganisation;
-    private PreparedStatement AddOrder;
+    private PreparedStatement addOrganisationalUnit;
 
-    private PreparedStatement GetUser;
-    private PreparedStatement GetAllUsers;
-    private PreparedStatement GetSalt;
-    private PreparedStatement GetOrganisation;
-    private PreparedStatement GetAllOrganisations;
-    private PreparedStatement GetOrganisationOrders;
-    private PreparedStatement GetOrders;
-    private PreparedStatement GetAssetTypes;
-    private PreparedStatement GetTradeHistory;
 
-    private PreparedStatement DeleteOrder;
-
-    private PreparedStatement UpdateUserPassword;
-    private PreparedStatement UpdateUserAccountType;
-    private PreparedStatement UpdateUserOrganisation;
-    private PreparedStatement UpdateOrganisationAsset;
-
-    // This function currently 'works' for the users tables
+    // Create and Populate prepare statements in here
     public SQL() {
         connection = DatabaseConnection.getInstance();
         try {
             Statement st = connection.createStatement();
+            st.execute(CREATE_DATABASE);
+
             st.execute(CREATE_TABLE_Users);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER);
-            GetUser = connection.prepareStatement(GET_USER);
-            GetAllUsers = connection.prepareStatement(GET_ALL_USERS);
-            GetSalt = connection.prepareStatement(GET_SALT);
-            UpdateUserPassword = connection.prepareStatement(UPDATE_USER_PASSWORD);
-            UpdateUserAccountType = connection.prepareStatement(UPDATE_USER_ACCOUNT_TYPE);
-            UpdateUserOrganisation = connection.prepareStatement(UPDATE_USER_ORGANISATION);
+            st.execute(CREATE_TABLE_OrgHasQuantity);
+            st.execute(CREATE_TABLE_Order1);
+            st.execute(CREATE_TABLE_OrganisationalUnit);
+            st.execute(CREATE_TABLE_Assets);
+            st.execute(CREATE_TABLE_Trade);
+
+            AddUser = connection.prepareStatement(INSERT_NEW_USER1);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER2);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER3);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER4);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER5);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER6);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER7);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER8);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER9);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER10);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER11);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER12);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER13);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER_DECLAN);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER_AIDEN);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER_BRAD);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER_ETHAN);
+            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_SALES);
+            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_FINANCE);
+            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_RESEARCH);
+            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_ADMIN);
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
-    public void AddUser(String username, String orgUnit, String accType, String hashedPW, String salt)
-    {
-        try
-        {
-            connection = DatabaseConnection.getInstance();
-            AddUser = connection.prepareStatement(INSERT_NEW_USER);
+    // Populate functions (Currently adding user and organisational unit)
+    public void AddUser(String username, String orgUnit, String accType, String hashedPW, String salt) {
+        try {
             AddUser.setString(1, username);
             AddUser.setString(2, orgUnit);
             AddUser.setString(3, accType);
-            AddUser.setString(4,hashedPW);
+            AddUser.setString(4, hashedPW);
             AddUser.setString(5, salt);
 
-            if(AddUser != null)
-            {
+            if (AddUser != null) {
                 AddUser.executeQuery();
             }
-
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
-
-    public UserInfo GetUser(LoginToken token, String username) {
-        UserInfo u = new UserInfo();
-        ResultSet rs = null;
+    public void AddOrganisationalUnit(String orgUnitName, Integer amountCredits) {
         try {
-            GetUser.setString(1, username);
-            rs = GetUser.executeQuery();
-            rs.next();
-            u.setUserName(rs.getString("username"));
-            u.setOrganisationalUnit(rs.getString("organisationalunit"));
-            u.setAccountType(rs.getString("accounttype"));
-            u.setHashedPassword(rs.getString("hashedpassword"));
-            u.setSalt(rs.getString("salt"));
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            addOrganisationalUnit.setString(1, orgUnitName);
+            addOrganisationalUnit.setInt(2, amountCredits);
+
+            if (addOrganisationalUnit != null) {
+                addOrganisationalUnit.executeQuery();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        return u;
-    }
-
-
-// Methods to be created
-    public String GetSalt(String username) {
-        return null;
-    }
-
-    public LoginToken AttemptLogin(String username, String password) {
-        return null;
-    }
-
-    public String AttemptResetPassword(String oldPassword, String newPassword) {
-        return null;
-    }
-
-    public OrganisationalUnit GetOrganisation(LoginToken token, String orgName) {
-        return null;
-    }
-
-    public List<Order> GetOrganisationOrders(LoginToken token, String orgName) {
-        return null;
-    }
-
-
-    public List<Order> GetAllOrders(LoginToken token) {
-        return null;
-    }
-
-
-    public String AddOrder(LoginToken token, Order newOrder) {
-        return null;
-    }
-
-
-    public String RemoveOrder(LoginToken token, int orderID) {
-        return null;
-    }
-
-
-    public List<String> GetAssetTypes(LoginToken token) {
-        return null;
-    }
-
-
-    public List<Trade> GetTradeHistory(LoginToken token, String AssetType) {
-        return null;
-    }
-
-
-    public List<UserInfo> GetAllUsers(LoginToken token) {
-        return null;
-    }
-
-    public String UpdateUserPassword(LoginToken token, String username, String hashedPassword, String salt) {
-        return null;
-    }
-
-
-    public String UpdateUserAccountType(LoginToken token, String username, AccountType accountType) {
-        return null;
-    }
-
-
-    public String UpdateUserOrganisation(LoginToken token, String username, String organisationName) {
-        return null;
-    }
-
-
-    public String AddAsset(LoginToken token, String assetName) {
-        return null;
-    }
-
-
-    public String AddOrganisation(LoginToken token, OrganisationalUnit organisation) {
-        return null;
-    }
-
-    public List<OrganisationalUnit> GetAllOrganisations(LoginToken token) {
-        return null;
-    }
-
-    public String UpdateOrganisationAsset(LoginToken token, String organisationName, String AssetType, int AssetQuantity) {
-        return null;
     }
 }
+
+
+

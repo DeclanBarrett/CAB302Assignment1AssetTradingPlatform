@@ -15,27 +15,66 @@ import java.util.List;
  */
 public class  InformationGrabber {
 
-    //SQL queries for user, login and reset password
+    //SQL queries
 
-    private static final String INSERT_NEW_USER = "INSERT INTO user (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES (?, ?, ?, ?, ?)";
+    private static final String INSERT_NEW_USER = "INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES (?, ?, ?, ?, ?)";
+    private static final String INSERT_ASSET = "INSERT INTO Assets VALUES ('?');";
+    private static final String INSERT_ORGANISATION = "INSERT INTO OrganisationalUnit VALUES ('?', '?');";
+    private static final String INSERT_ORDER = "INSERT INTO Order1 (OrganisationalUnitName, PlaceDateMilSecs, AssetQuantity, AssetName, OrderType) " +
+                                               "VALUES ('?', '?', '?', '?', '?');";
+    private static final String INSERT_TRADE = "INSERT INTO Trades (BuyerOrgName, SellerOrgName, TradeDateMilSecs, AssetQuantity, AssetName) " +
+                                               "VALUES ('?', '?', '?', '?', '?');";
 
-    private static final String UPDATE_PASSWORD = "UPDATE user SET Password=?, Salt=? WHERE UserName=?";
+
+    private static final String UPDATE_PASSWORD = "UPDATE Users SET HashedPassword=?, Salt=? WHERE UserName=?";
+    private static final String UPDATE_USER_ACCOUNT_TYPE = "UPDATE Users SET AccountType = ? WHERE UserName = ?";
+    private static final String UPDATE_USER_ORGANISATION = "UPDATE Users SET OrganisationalUnit = ? WHERE UserName = ?";
+    private static final String UPDATE_ORGANISATION_ASSET = "UPDATE OrgHasQuantity SET AssetName = ?, AssetQuantity = ? " +
+            "WHERE OrganisationalUnitName = ?";
 
     private static final String GET_NONCE = "SELECT Salt FROM User WHERE UserName=?";
+    private static final String GET_PASSWORD = "SELECT HashedPassword FROM Users WHERE UserName=?";
+    private static final String GET_USER = "SELECT * FROM Users WHERE UserName=?";
+    private static final String GET_USER_INFO = "SELECT * FROM Users WHERE UserName=?"; //Fix to be diff from prev
 
-    private static final String GET_PASSWORD = "SELECT HashedPassword FROM User WHERE UserName=?";
+    private static final String GET_ALL_USERS = "SELECT * FROM Users";
+    private static final String GET_SALT = "SELECT Salt FROM Users WHERE UserName=?";
+    private static final String GET_ORGANISATION = "SELECT * FROM OrganisationUnit WHERE OrganisationalUnitName=?";
+    private static final String GET_ALL_ORGANISATIONS = "SELECT * FROM OrganisationUnit";
+    private static final String GET_ORGANISATION_ORDERS = "SELECT * FROM Order WHERE OrganisationalUnitName=?";
+    private static final String GET_BUY_ORDERS = "SELECT * FROM Order1 WHERE OrderType = BUY";
+    private static final String GET_SELL_ORDERS = "SELECT * FROM Order1 WHERE OrderType = SELL";
+    private static final String GET_ORDERS = "SELECT * FROM Order1";
+    private static final String GET_ASSET_TYPES = "SELECT * FROM Assets"; // is this correct?
+    private static final String GET_TRADE_HISTORY = "SELECT * FROM Trade"; // is this correct? what is assettype?
 
-    private static final String GET_USER = "SELECT * FROM user WHERE UserName=?";
+    private static final String DELETE_ORDER = "DELETE FROM Order1 WHERE OrderID = ?";
 
+    // Prepared statements for all previous queries + Connection
     private PreparedStatement addUser;
+    private PreparedStatement addAsset;
+    private PreparedStatement addOrganisation;
+    private PreparedStatement addOrder;
+    private PreparedStatement addTrade;
 
     private PreparedStatement updatePassword;
+    private PreparedStatement updateUserAccountType;
+    private PreparedStatement updateUserOrganisation;
+    private PreparedStatement updateOrganisationAsset;
 
     private PreparedStatement getNonce;
-
     private PreparedStatement getPassword;
-
     private PreparedStatement getUser;
+    private PreparedStatement getAllUsers;
+    private PreparedStatement getSalt;
+    private PreparedStatement getOrganisation;
+    private PreparedStatement getAllOrganisations;
+    private PreparedStatement getOrganisationOrders;
+    private PreparedStatement getOrders;
+    private PreparedStatement getAssetTypes;
+    private PreparedStatement getTradeHistory;
+
+    private PreparedStatement deleteOrder;
 
     private Connection connection;
 
