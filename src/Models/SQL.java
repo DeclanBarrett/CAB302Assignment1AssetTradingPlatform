@@ -15,9 +15,9 @@ import java.util.TreeSet;
 public class SQL {
     // Table and Database Creation
     public static final String CREATE_DATABASE =
-            "CREATE DATABASE trading_platform;";
+            "CREATE DATABASE IF NOT EXISTS trading_platform;";
     public static final String CREATE_TABLE_OrgHasQuantity =
-            "CREATE TABLE OrgHasQuantity (" +
+            "CREATE TABLE IF NOT EXISTS OrgHasQuantity (" +
                     "OrganisationalUnitName VARCHAR(60) NOT NULL PRIMARY KEY," +
                     "AssetName VARCHAR(60) NOT NULL," +
                     "AssetQuantity INT NOT NULL," +
@@ -25,12 +25,12 @@ public class SQL {
                     "FOREIGN KEY(AssetName) REFERENCES Assets(AssetName)" +
                     ");";
     public static final String CREATE_TABLE_OrganisationalUnit =
-            "CREATE TABLE OrganisationalUnit(" +
+            "CREATE TABLE IF NOT EXISTS OrganisationalUnit(" +
                     "OrganisationalUnitName VARCHAR(60) NOT NULL PRIMARY KEY," +
                     "AmountCredits INT NOT NULL" +
                     ");";
     public static final String CREATE_TABLE_Users =
-            "CREATE TABLE Users(" +
+            "CREATE TABLE IF NOT EXISTS Users(" +
                     "UserName VARCHAR(60) NOT NULL PRIMARY KEY," +
                     "OrganisationalUnit VARCHAR(60) NOT NULL," +
                     "AccountType ENUM('User', 'UnitLeader', 'SystemAdmin') NOT NULL," +
@@ -38,8 +38,8 @@ public class SQL {
                     "Salt VARCHAR(60) NOT NULL," +
                     "FOREIGN KEY(OrganisationalUnit) REFERENCES OrganisationalUnit(OrganisationalUnitName)" +
                     ");";
-    public static final String CREATE_TABLE_Order1 =
-            "CREATE TABLE Order1(" +
+    public static final String CREATE_TABLE_Orders =
+            "CREATE TABLE IF NOT EXISTS Order(" +
                     "OrderID INT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
                     "OrganisationalUnitName VARCHAR(60) NOT NULL," +
                     "PlaceDateMilSecs INT NOT NULL," +
@@ -50,11 +50,11 @@ public class SQL {
                     "FOREIGN KEY(AssetName) REFERENCES Assets(AssetName)" +
                     ");";
     public static final String CREATE_TABLE_Assets =
-            "CREATE TABLE Assets(" +
+            "CREATE TABLE IF NOT EXISTS Assets(" +
                     "AssetName VARCHAR(60) NOT NULL PRIMARY KEY" +
                     ");";
     public static final String CREATE_TABLE_Trade =
-            "CREATE TABLE Trade(" +
+            "CREATE TABLE IF NOT EXISTS Trade(" +
                     "TradeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
                     "BuyerOrgName VARCHAR(60) NOT NULL," +
                     "SellerOrgName VARCHAR(60) NOT NULL," +
@@ -94,7 +94,8 @@ public class SQL {
 
     // Connection and Statements
     private Connection connection;
-
+    private PreparedStatement AddUser;
+    private PreparedStatement addOrganisationalUnit;
 
     // This function currently 'works' for the users tables
     public SQL(Connection connection) {
@@ -102,9 +103,8 @@ public class SQL {
         CreateTables();
     }
 
-    private void CreateTables() {
-    private PreparedStatement AddUser;
-    private PreparedStatement addOrganisationalUnit;
+    private void CreateTables() {}
+
 
 
     // Create and Populate prepare statements in here
@@ -130,7 +130,7 @@ public class SQL {
 
             st.execute(CREATE_TABLE_Users);
             st.execute(CREATE_TABLE_OrgHasQuantity);
-            st.execute(CREATE_TABLE_Order1);
+            st.execute(CREATE_TABLE_Orders);
             st.execute(CREATE_TABLE_OrganisationalUnit);
             st.execute(CREATE_TABLE_Assets);
             st.execute(CREATE_TABLE_Trade);
@@ -189,9 +189,4 @@ public class SQL {
             throwables.printStackTrace();
         }
     }
-}
-
-
-
-
 }
