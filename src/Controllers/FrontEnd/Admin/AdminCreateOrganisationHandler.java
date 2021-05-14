@@ -52,7 +52,7 @@ public class AdminCreateOrganisationHandler implements Initializable {
 
     private void UpdateOrganisationTable() {
         List<OrganisationalUnit> orgs = MockSocket.getInstance().GetAllOrganisations(LoginController.GetToken());
-        CreateOrgTable.getItems().addAll(orgs);
+        CreateOrgTable.getItems().setAll(orgs);
     }
 
 }
