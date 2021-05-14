@@ -113,7 +113,8 @@ public class  InformationGrabber {
 
     /**
      * Retrieves password from database
-     * @param username
+     * @param username username to retrieve password for
+     * @return the hashed password
      */
     public String getPassword(String username)
     {
