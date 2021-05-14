@@ -2,7 +2,7 @@ package Controllers.FrontEnd.Admin;
 
 import Controllers.Backend.NetworkObjects.OrganisationalUnit;
 import Controllers.FrontEnd.LoginController;
-import Controllers.Socket.MockSocket;
+import Controllers.Backend.Socket.MockSocket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

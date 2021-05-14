@@ -1,4 +1,4 @@
-package Controllers.Socket;
+package Controllers.Backend.Socket;
 
 import Controllers.Backend.*;
 import Controllers.Backend.NetworkObjects.*;

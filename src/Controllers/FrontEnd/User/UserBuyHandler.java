@@ -3,7 +3,7 @@ package Controllers.FrontEnd.User;
 import Controllers.Backend.NetworkObjects.Order;
 import Controllers.Backend.NetworkObjects.Trade;
 import Controllers.FrontEnd.LoginController;
-import Controllers.Socket.MockSocket;
+import Controllers.Backend.Socket.MockSocket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

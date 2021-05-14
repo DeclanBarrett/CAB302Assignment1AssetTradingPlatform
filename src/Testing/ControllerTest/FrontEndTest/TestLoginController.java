@@ -5,7 +5,7 @@ import Controllers.Backend.NetworkObjects.LoginToken;
 import Controllers.Backend.NetworkObjects.UserInfo;
 import Controllers.FrontEnd.LoginController;
 import Controllers.FrontEnd.LoginException;
-import Controllers.Socket.MockSocket;
+import Controllers.Backend.Socket.MockSocket;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
