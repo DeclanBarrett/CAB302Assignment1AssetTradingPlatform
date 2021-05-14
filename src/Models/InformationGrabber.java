@@ -115,7 +115,7 @@ public class  InformationGrabber {
      * Retrieves password from database
      * @param username
      */
-    public void getPassword(String username)
+    public String getPassword(String username)
     {
         ResultSet rs = null;
         try
@@ -128,13 +128,14 @@ public class  InformationGrabber {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return "";
     }
 
     /**
      * Retrieve salt from database
      * @param username salt attached to this users password
      */
-    public void getSalt(String username)
+    public String getSalt(String username)
     {
         try
         {
@@ -152,6 +153,7 @@ public class  InformationGrabber {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return "";
     }
 
     /**
