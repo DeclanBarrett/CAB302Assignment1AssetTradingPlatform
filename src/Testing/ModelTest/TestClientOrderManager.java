@@ -4,12 +4,10 @@ import Controllers.Backend.AccountType;
 import Controllers.Backend.NetworkObjects.Order;
 import Controllers.Backend.NetworkObjects.OrganisationalUnit;
 import Controllers.Backend.NetworkObjects.UserInfo;
-import Controllers.Backend.OrderType;
-import Controllers.FrontEnd.OrderManager;
+import Controllers.Backend.Processing.OrderManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,6 +1,7 @@
-package Controllers.FrontEnd;
+package Controllers.FrontEnd.Login;
 
 import Controllers.Backend.AccountType;
+import Controllers.Exceptions.LoginException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -26,11 +26,10 @@ public interface IDataSource {
 
     /**
      * Attempts to reset the password of the user on the server
-     * @param oldPassword - the old password of the user
      * @param newPassword - the new password of the user which is to replace the old password
      * @return a success message, or failure message
      */
-    String AttemptResetPassword(String oldPassword, String newPassword);
+    String AttemptResetPassword(LoginToken token, String username, String newPassword);
 
     /**
      * Gets the user information (without login details) from the server

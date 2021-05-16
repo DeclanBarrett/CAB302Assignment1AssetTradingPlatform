@@ -1,4 +1,4 @@
-package Controllers.FrontEnd;
+package Controllers.Backend.Processing;
 
 import Controllers.Backend.NetworkObjects.Order;
 import Controllers.Backend.NetworkObjects.OrganisationalUnit;
@@ -49,7 +49,7 @@ public class OrderManager {
     }
 
     /**
-     * Set organisaitonal unit as 'owner' of the Organisational Unit
+     * Set organisational unit as 'owner' of the Organisational Unit
      *
      * @param unit Organisational unit attached to the order.
      */

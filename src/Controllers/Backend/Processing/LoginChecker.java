@@ -1,6 +1,6 @@
-package Controllers.Backend;
+package Controllers.Backend.Processing;
 
-import Controllers.FrontEnd.LoginException;
+import Controllers.Exceptions.LoginException;
 import Models.InformationGrabber;
 
 public class LoginChecker {

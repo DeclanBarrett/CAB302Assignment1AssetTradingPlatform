@@ -1,4 +1,4 @@
-package Controllers.FrontEnd;
+package Controllers.Exceptions;
 
 /**
  * Thrown when login fails, displays error text

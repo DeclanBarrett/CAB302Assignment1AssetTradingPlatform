@@ -2,7 +2,9 @@ package Controllers.Backend.Socket;
 
 import Controllers.Backend.*;
 import Controllers.Backend.NetworkObjects.*;
+import Controllers.FrontEnd.Login.LoginController;
 import Models.IDataSource;
+import com.mysql.cj.log.Log;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -121,7 +123,7 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public String AttemptResetPassword(String oldPassword, String newPassword) {
+    public String AttemptResetPassword(LoginToken token, String username, String newPassword) {
         return null;
     }
 

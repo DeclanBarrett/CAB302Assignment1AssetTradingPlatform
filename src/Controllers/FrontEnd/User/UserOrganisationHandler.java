@@ -2,7 +2,7 @@ package Controllers.FrontEnd.User;
 
 import Controllers.Backend.NetworkObjects.Order;
 import Controllers.Backend.NetworkObjects.OrganisationalUnit;
-import Controllers.FrontEnd.LoginController;
+import Controllers.FrontEnd.Login.LoginController;
 import Controllers.Backend.Socket.MockSocket;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

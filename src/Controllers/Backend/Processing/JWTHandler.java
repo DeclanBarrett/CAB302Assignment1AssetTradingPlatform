@@ -1,6 +1,6 @@
-package Controllers.Backend;
+package Controllers.Backend.Processing;
 
-import Controllers.FrontEnd.LoginException;
+import Controllers.Exceptions.LoginException;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;

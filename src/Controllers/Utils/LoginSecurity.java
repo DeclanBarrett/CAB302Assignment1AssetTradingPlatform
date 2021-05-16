@@ -1,5 +1,6 @@
-package Controllers.FrontEnd;
-import java.nio.charset.StandardCharsets;
+package Controllers.Utils;
+import Controllers.Exceptions.LoginException;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -7,9 +8,14 @@ import java.security.SecureRandom;
 /**
  * Large class for potential password storage,
  */
-public class ClientSecurity {
+public class LoginSecurity {
 
-    public ClientSecurity() {
+    public static final String MD_5 = "MD5";
+
+    /**
+     * Creates login security
+     */
+    public LoginSecurity() {
     }
 
     /**
@@ -42,7 +48,7 @@ public class ClientSecurity {
         StringBuilder hexaDFormat = new StringBuilder();
 
         try {
-            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            MessageDigest md5 = MessageDigest.getInstance(MD_5);
 
             md5.update(salt.getBytes());
             byte[] getHashBytes = md5.digest(userInputPassword.getBytes());

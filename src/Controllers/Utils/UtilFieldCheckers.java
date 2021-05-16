@@ -16,8 +16,8 @@ public class UtilFieldCheckers {
      * @param fieldType
      * @return - true if strings match and false if strings do not match.
      */
-    public boolean CheckTwoStrings(TextField field1, TextField field2, Label errorText, String fieldType) {
-        if (!field1.getText().equals(field2.getText())) {
+    public boolean CheckTwoStrings(String field1, String field2, Label errorText, String fieldType) {
+        if (!field1.equals(field2)) {
             errorText.setText(fieldType + " DO NOT MATCH");
             return false;
 

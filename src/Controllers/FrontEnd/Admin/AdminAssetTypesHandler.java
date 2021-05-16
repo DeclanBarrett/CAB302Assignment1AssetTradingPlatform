@@ -1,6 +1,6 @@
 package Controllers.FrontEnd.Admin;
 
-import Controllers.FrontEnd.LoginController;
+import Controllers.FrontEnd.Login.LoginController;
 import Controllers.Backend.Socket.MockSocket;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
