@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * Creates and initialises SQL database. Features all table creation String statements
+ */
 public class SQL {
     // Table and Database Creation
     public static final String CREATE_DATABASE =

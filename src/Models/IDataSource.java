@@ -5,6 +5,9 @@ import Controllers.Backend.NetworkObjects.*;
 
 import java.util.List;
 
+/**
+ * Interface for data source.
+ */
 public interface IDataSource {
 
     /**

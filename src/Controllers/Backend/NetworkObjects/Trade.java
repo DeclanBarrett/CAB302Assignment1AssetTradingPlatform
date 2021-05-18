@@ -3,6 +3,9 @@ package Controllers.Backend.NetworkObjects;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Serializable trade objects.
+ */
 public class Trade implements Serializable, Comparable<Trade> {
 
     Integer TradeID;

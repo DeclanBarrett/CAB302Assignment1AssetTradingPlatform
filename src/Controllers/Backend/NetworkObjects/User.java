@@ -4,6 +4,9 @@ import Controllers.Backend.AccountType;
 
 import java.io.Serializable;
 
+/**
+ * Serializable user objects constructor
+ */
 public class User implements Comparable<User>, Serializable {
 
     private String username;

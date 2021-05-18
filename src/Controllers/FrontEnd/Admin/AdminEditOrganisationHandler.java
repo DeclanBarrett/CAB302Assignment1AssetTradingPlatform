@@ -83,6 +83,9 @@ public class AdminEditOrganisationHandler implements Initializable {
         EditOrgAssetsTable.getItems().setAll(tableOrgs);
     }
 
+    /**
+     * Object constructor for Organisation Table Objects.
+     */
     public class OrganisationTableObject {
         String unitName;
         double credits;

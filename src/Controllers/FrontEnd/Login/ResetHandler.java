@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Handles events on the reset password page
+ * Handles events on the reset password page.
  */
 public class ResetHandler implements Initializable {
 

@@ -14,6 +14,9 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 
+/**
+ * Controller for password resets
+ */
 public class ResetController {
 
     public static final String ERROR_TEXT_RESET_PASSWORD = "USERNAME OR PASSWORD INCORRECT";

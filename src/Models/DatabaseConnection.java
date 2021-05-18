@@ -8,6 +8,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Database connection, allows creation and grants global access to the singleton instance
+ * of url set.
+ */
 public class DatabaseConnection {
     private static Connection instance = null;
 

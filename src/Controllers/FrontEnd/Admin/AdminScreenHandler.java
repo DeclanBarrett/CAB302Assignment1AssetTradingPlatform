@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- *
+ * Admin screen handler initialisation
  */
 public class AdminScreenHandler implements Initializable {
     @Override
