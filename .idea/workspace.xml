@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Added User Controller. Fixed LoginController.java">
-      <change afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/AdminController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Models/Assets.java" afterDir="false" />
+    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Merged Development -&gt; Brads">
+      <change afterPath="$PROJECT_DIR$/src/App_Start/ServerStart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App_Start/ClientStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Start/ClientStart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/FakeDatabase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/IDatabase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/InformationGrabber.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/OrderExecutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/BradsPacket.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +29,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="Development" />
   </component>
   <component name="Git.Settings">
     <option name="PUSH_TAGS">
@@ -56,9 +56,6 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/Controllers/FrontEnd/LoginController.java" root0="FORCE_HIGHLIGHTING" />
-  </component>
   <component name="ProjectId" id="1qoyBDtoSUT10ozznKhI69mkQcv" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -72,7 +69,7 @@
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="true" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -84,7 +81,7 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="project.structure.side.proportion" value="0.38557693" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -110,92 +107,18 @@
       <command value="ClientStart" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.Assets">
-    <configuration name="Assets" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Models.Assets" />
-      <module name="CAB302Assignment1AssetTradingPlatform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Models.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ClientStart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="App_Start.ClientStart" />
-      <module name="CAB302Assignment1AssetTradingPlatform" />
-      <option name="VM_PARAMETERS" value="--module-path C:\Tools\JavaFX\lib --add-modules javafx.controls,javafx.fxml --add-exports javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="App_Start.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Controllers.Backend.Server" />
-      <module name="CAB302Assignment1AssetTradingPlatform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Controllers.Backend.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ServerStart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="App_Start.ServerStart" />
-      <module name="CAB302Assignment1AssetTradingPlatform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="App_Start.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ModelTest.testReq" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CAB302Assignment1AssetTradingPlatform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test.model" />
-      <option name="MAIN_CLASS_NAME" value="test.model.ModelTest" />
-      <option name="METHOD_NAME" value="testReq" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.ServerStart" />
-      <item itemvalue="Application.ClientStart" />
-      <item itemvalue="Application.Server" />
-      <item itemvalue="Application.Assets" />
-      <item itemvalue="JUnit.ModelTest.testReq" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Assets" />
-        <item itemvalue="Application.ClientStart" />
-        <item itemvalue="Application.Server" />
-        <item itemvalue="Application.ServerStart" />
-        <item itemvalue="JUnit.ModelTest.testReq" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -465,7 +388,8 @@
     <MESSAGE value="Added Threading for Server to handle multiple clients." />
     <MESSAGE value="Fixed issues with GUI not loading, fixed pathing as well." />
     <MESSAGE value="Added User Controller. Fixed LoginController.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added User Controller. Fixed LoginController.java" />
+    <MESSAGE value="Merged Development -&gt; Brads" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merged Development -&gt; Brads" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -2,9 +2,6 @@ package App_Start;
 
 import Controllers.Utils.UtilSceneChanger;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -14,16 +11,19 @@ public class ClientStart extends Application
 {
     private static Stage primaryStage;
 
-    public static Stage getStage() {
+    public static Stage getStage()
+    {
         return primaryStage;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch(args);
     }
 
     /**
      * Initialise GUI screen, make visible
+     *
      * @param primaryStage Handles creation of main GUI screen
      * @throws Exception To stop GUI breaking
      */
