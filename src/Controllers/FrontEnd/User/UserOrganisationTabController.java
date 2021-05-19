@@ -4,6 +4,8 @@ import Controllers.Backend.NetworkObjects.Order;
 import Controllers.Backend.NetworkObjects.OrganisationalUnit;
 import Controllers.FrontEnd.Login.LoginController;
 import Controllers.Backend.Socket.MockSocket;
+import Controllers.FrontEnd.Observer;
+import Controllers.FrontEnd.Subject;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -26,7 +28,7 @@ import java.util.*;
 /**
  * Handles user's organisation tab
  */
-public class UserOrganisationHandler implements Initializable {
+public class UserOrganisationTabController implements Initializable, Observer {
 
     @FXML
     Label OrgName;
@@ -129,5 +131,10 @@ public class UserOrganisationHandler implements Initializable {
         );
         timeline.setCycleCount( Animation.INDEFINITE );
         timeline.play();
+    }
+
+    @Override
+    public void update(Subject s) {
+
     }
 }

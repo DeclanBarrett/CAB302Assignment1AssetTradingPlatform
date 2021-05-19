@@ -1,6 +1,10 @@
 package Controllers.FrontEnd.User;
 
+import Controllers.Backend.NetworkObjects.User;
+import Controllers.Backend.NetworkObjects.UserInfo;
 import Controllers.FrontEnd.Login.LoginController;
+import Controllers.FrontEnd.Observer;
+import Controllers.FrontEnd.Subject;
 import Controllers.Utils.UtilLoginSecurity;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,12 +14,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 
 import java.net.URL;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 /**
  * Handles User tab
  */
-public class UserUserHandler implements Initializable {
+public class UserUserTabController implements Initializable, Observer {
 
     @FXML
     Label UserName;
@@ -60,9 +65,18 @@ public class UserUserHandler implements Initializable {
     }
 
     private void UpdateUserInformation() {
-        UserName.setText(LoginController.GetUser().getUsername());
-        UserType.setText(LoginController.GetUser().getAccountType().toString());
+        UserInfo user = LoginController.GetUser();
+
+        try {
+            UserName.setText(user.getUsername());
+            UserType.setText(user.getAccountType().toString());
+        } catch (Exception e) {
+            UserName.setText("NOT LOGGED IN");
+        }
     }
 
-
+    @Override
+    public void update(Subject s) {
+        //UpdateUserInformation();
+    }
 }

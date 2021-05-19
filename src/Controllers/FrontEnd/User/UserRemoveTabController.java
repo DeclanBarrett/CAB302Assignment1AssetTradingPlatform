@@ -3,6 +3,8 @@ package Controllers.FrontEnd.User;
 import Controllers.Backend.NetworkObjects.Order;
 import Controllers.FrontEnd.Login.LoginController;
 import Controllers.Backend.Socket.MockSocket;
+import Controllers.FrontEnd.Observer;
+import Controllers.FrontEnd.Subject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,12 +14,13 @@ import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 /**
  * Handles User remove tab
  */
-public class UserRemoveHandler implements Initializable {
+public class UserRemoveTabController implements Initializable, Observer {
 
     @FXML
     Label RemoveOrganisationName;
@@ -112,5 +115,10 @@ public class UserRemoveHandler implements Initializable {
         };
 
         RemoveButtonColumn.setCellFactory(cellFactory);
+    }
+
+    @Override
+    public void update(Subject s) {
+
     }
 }

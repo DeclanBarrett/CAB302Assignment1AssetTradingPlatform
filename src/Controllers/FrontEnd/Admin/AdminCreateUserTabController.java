@@ -3,6 +3,8 @@ package Controllers.FrontEnd.Admin;
 import Controllers.Backend.AccountType;
 import Controllers.Backend.NetworkObjects.User;
 import Controllers.Backend.NetworkObjects.UserInfo;
+import Controllers.FrontEnd.Observer;
+import Controllers.FrontEnd.Subject;
 import Controllers.Utils.UtilLoginSecurity;
 import Controllers.FrontEnd.Login.LoginController;
 import Controllers.Backend.Socket.MockSocket;
@@ -19,7 +21,7 @@ import java.util.ResourceBundle;
 /**
  * Handles events in admin Create User tab.
  */
-public class AdminCreateUserHandler implements Initializable {
+public class AdminCreateUserTabController implements Initializable, Observer {
 
     @FXML
     TextField CreateUserUsername;
@@ -54,6 +56,7 @@ public class AdminCreateUserHandler implements Initializable {
         CreateUserAccountTypeColumn.setCellValueFactory(new PropertyValueFactory<>("accountType"));
         CreateUserOrgUnitColumn.setCellValueFactory(new PropertyValueFactory<>("organisationalUnit"));
         UpdateUserInfoTable();
+        CreateUserErrorText.setText("");
     }
 
     /**
@@ -65,9 +68,31 @@ public class AdminCreateUserHandler implements Initializable {
         try {
             UtilLoginSecurity utilLoginSecurity = new UtilLoginSecurity();
             String salt = utilLoginSecurity.generateSalt();
-            User newUser = new User(CreateUserUsername.getText(), utilLoginSecurity.hashPassword(CreateUserPassword.getText(),
-                    salt), AccountType.valueOf(CreateUserAccountType.getText()), CreateUserOrgUnit.getText(), salt);
-            MockSocket.getInstance().AddUser(LoginController.GetToken(), newUser);
+
+            AccountType type = null;
+
+            try {
+                type = AccountType.valueOf(CreateUserAccountType.getText());
+            } catch (IllegalArgumentException e) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("ACCOUNT TYPES ARE:");
+                AccountType accountTypes[] = AccountType.values();
+                for (AccountType accountType: accountTypes) {
+                    sb.append(" " + accountType.toString());
+                }
+                CreateUserErrorText.setText(sb.toString());
+                return;
+            }
+
+            //Create a new user with a new password with the salt passed through it as well
+            User newUser = new User(CreateUserUsername.getText(),
+                    utilLoginSecurity.hashPassword(CreateUserPassword.getText(), salt),
+                    type,
+                    CreateUserOrgUnit.getText(),
+                    salt);
+
+            String success = MockSocket.getInstance().AddUser(LoginController.GetToken(), newUser);
+            CreateUserErrorText.setText(success);
             UpdateUserInfoTable();
         } catch (Exception e) {
             CreateUserErrorText.setText(e.getMessage());
@@ -81,5 +106,10 @@ public class AdminCreateUserHandler implements Initializable {
     private void UpdateUserInfoTable() {
         List<UserInfo> users = MockSocket.getInstance().GetAllUsers(LoginController.GetToken());
         CreateUserTable.getItems().setAll(users);
+    }
+
+    @Override
+    public void update(Subject s) {
+        UpdateUserInfoTable();
     }
 }

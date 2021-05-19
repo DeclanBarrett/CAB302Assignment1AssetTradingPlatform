@@ -2,6 +2,8 @@ package Controllers.FrontEnd.Admin;
 
 import Controllers.FrontEnd.Login.LoginController;
 import Controllers.Backend.Socket.MockSocket;
+import Controllers.FrontEnd.Observer;
+import Controllers.FrontEnd.Subject;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +17,7 @@ import java.util.ResourceBundle;
 /**
  * Handles events in admin asset types tab.
  */
-public class AdminAssetTypesHandler implements Initializable {
+public class AdminAssetTypesTabController implements Initializable, Observer {
 
     @FXML
     TextField CreateAssetName;
@@ -61,9 +63,9 @@ public class AdminAssetTypesHandler implements Initializable {
      * @param CreateAsset Asset to be created
      */
     public void CreateAsset(ActionEvent CreateAsset) {
-        MockSocket.getInstance().AddAsset(LoginController.GetToken(), CreateAssetName.getText());
+        String success = MockSocket.getInstance().AddAsset(LoginController.GetToken(), CreateAssetName.getText());
 
-
+        CreateAssetErrorText.setText(success);
         System.out.println(CreateAsset.getSource());
         UpdateAssetTypes();
     }
@@ -89,5 +91,10 @@ public class AdminAssetTypesHandler implements Initializable {
 
 
 
+    }
+
+    @Override
+    public void update(Subject s) {
+        UpdateAssetTypes();
     }
 }

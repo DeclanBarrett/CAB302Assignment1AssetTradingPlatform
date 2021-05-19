@@ -67,7 +67,7 @@ public class UtilSceneChanger {
             ClientStart.getStage().setScene(new Scene(root));
             ClientStart.getStage().show();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 

@@ -277,17 +277,41 @@ public class MockSocket implements IDataSource {
 
     @Override
     public String UpdateUserPassword(LoginToken token, String username, String hashedPassword, String salt) {
-        return "success";
+        for (User currentUser: userTable) {
+            if (currentUser.getUsername().equals(username)) {
+                User updatedUser = new User(currentUser.getUsername(), hashedPassword, currentUser.getAccountType(), currentUser.getOrganisationalUnit(), salt);
+                userTable.remove(currentUser);
+                userTable.add(updatedUser);
+                return "Success";
+            }
+        }
+        return "mp";
     }
 
     @Override
     public String UpdateUserAccountType(LoginToken token, String username, AccountType accountType) {
-        return "Success";
+        for (User currentUser: userTable) {
+            if (currentUser.getUsername().equals(username)) {
+                User updatedUser = new User(currentUser.getUsername(), currentUser.getPassword(), accountType, currentUser.getOrganisationalUnit(), currentUser.getSalt());
+                userTable.remove(currentUser);
+                userTable.add(updatedUser);
+                return "Success";
+            }
+        }
+        return "BAD";//throw new LoginException("USERNAME OR PASSWORD IS INCORRECT");
     }
 
     @Override
     public String UpdateUserOrganisation(LoginToken token, String username, String organisationName) {
-        return "Success";
+        for (User currentUser: userTable) {
+            if (currentUser.getUsername().equals(username)) {
+                User updatedUser = new User(currentUser.getUsername(), currentUser.getPassword(), currentUser.getAccountType(), organisationName, currentUser.getSalt());
+                userTable.remove(currentUser);
+                userTable.add(updatedUser);
+                return "Success";
+            }
+        }
+        return "BAD";//throw new LoginException("USERNAME OR PASSWORD IS INCORRECT");
     }
 
     @Override
@@ -309,11 +333,38 @@ public class MockSocket implements IDataSource {
 
     @Override
     public String UpdateOrganisationAsset(LoginToken token, String organisationName, String AssetType, int AssetQuantity) {
-        return null;
+        for (OrganisationalUnit organisationalUnit: organisationalUnitTable) {
+            if (organisationalUnit.getUnitName().equals(organisationName)) {
+
+                HashMap<String, Integer> assets = organisationalUnit.GetAllAssets();
+
+                if (assetTypesTable.contains(AssetType)) {
+                    assets.put(AssetType, AssetQuantity);
+                } else {
+                    return "BAD";
+                }
+
+                OrganisationalUnit updatedOrg = new OrganisationalUnit(organisationalUnit.getUnitName(), organisationalUnit.getCredits(), assets);
+                organisationalUnitTable.remove(organisationalUnit);
+                organisationalUnitTable.add(updatedOrg);
+                return "Success";
+            }
+        }
+        return "BAD";//throw new LoginException("USERNAME OR PASSWORD IS INCORRECT");
     }
 
-
-
+    @Override
+    public String UpdateOrganisationCredit(LoginToken token, String organisationName, int creditAmount) {
+        for (OrganisationalUnit organisationalUnit: organisationalUnitTable) {
+            if (organisationalUnit.getUnitName().equals(organisationName)) {
+                OrganisationalUnit updatedOrg = new OrganisationalUnit(organisationalUnit.getUnitName(), creditAmount, organisationalUnit.GetAllAssets());
+                organisationalUnitTable.remove(organisationalUnit);
+                organisationalUnitTable.add(updatedOrg);
+                return "Success";
+            }
+        }
+        return "BAD";//throw new LoginException("USERNAME OR PASSWORD IS INCORRECT");
+    }
 
 
 }
