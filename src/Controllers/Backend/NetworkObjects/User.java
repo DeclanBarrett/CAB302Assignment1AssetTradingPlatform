@@ -2,13 +2,11 @@ package Controllers.Backend.NetworkObjects;
 
 import Controllers.Backend.AccountType;
 
-import java.io.Serializable;
-
 /**
  * Serializable user objects constructor
  */
-public class User implements Comparable<User>, Serializable {
-
+public class User implements Comparable<User>
+{
     private String username;
     private String password;
     private AccountType accountType;
@@ -21,7 +19,8 @@ public class User implements Comparable<User>, Serializable {
      * @param accountType        Account type of the use
      * @param organisationalUnit Organisational Unit that the user belongs to
      */
-    public User(String username, String password, AccountType accountType, String organisationalUnit, String salt) {
+    public User(String username, String password, AccountType accountType, String organisationalUnit, String salt)
+    {
         this.username = username;
         this.password = password;
         this.accountType = accountType;
@@ -32,32 +31,37 @@ public class User implements Comparable<User>, Serializable {
     /**
      * @return username of the User
      */
-    public String getUsername() {
+    public String getUsername()
+    {
         return username;
     }
 
     /**
      * @return password of the User
      */
-    public String getPassword() {
+    public String getPassword()
+    {
         return password;
     }
 
     /**
      * @return account type of the User
      */
-    public AccountType getAccountType() {
+    public AccountType getAccountType()
+    {
         return accountType;
     }
 
     /**
      * @return organisational unit of the User
      */
-    public String getOrganisationalUnit() {
+    public String getOrganisationalUnit()
+    {
         return organisationalType;
     }
 
-    public String getSalt() {
+    public String getSalt()
+    {
         return salt;
     }
 
@@ -74,7 +78,8 @@ public class User implements Comparable<User>, Serializable {
      *                            being compared to this object.
      */
     @Override
-    public int compareTo(User other) {
+    public int compareTo(User other)
+    {
         return this.username.compareTo(other.username);
     }
 
@@ -85,7 +90,8 @@ public class User implements Comparable<User>, Serializable {
      * @return
      */
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         // If the object is compared with itself then return true
         if (o == this) {
             return true;
