@@ -2,6 +2,7 @@ package Controllers.FrontEnd.User;
 
 import Controllers.Backend.NetworkObjects.Order;
 import Controllers.Backend.NetworkObjects.Trade;
+import Controllers.Backend.OrderType;
 import Controllers.FrontEnd.Login.LoginController;
 import Controllers.Backend.Socket.MockSocket;
 import javafx.event.ActionEvent;
@@ -15,7 +16,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -24,8 +24,9 @@ import java.util.ResourceBundle;
  */
 public class UserBuyHandler implements Initializable {
 
+    private static final String ERROR_WRONG_INPUT_TYPE = "PLEASE INSERT NUMBERS";
     @FXML
-    private TextField BuyAssetQuantity;
+    TextField BuyAssetQuantity;
     @FXML
     TextField BuyPriceCredits;
     @FXML
@@ -75,8 +76,31 @@ public class UserBuyHandler implements Initializable {
      * @param BuyAsset
      * @throws IOException - thrown if in/out exception occurs
      */
-    public void BuyAsset(ActionEvent BuyAsset) throws IOException {
-        System.out.println(BuyAsset.getSource());
+    public void BuyAsset(ActionEvent BuyAsset) {
+        if (BuyAssetType.getValue() == null) {
+            BuyErrorText.setText("NO ASSET TYPE SELECTED");
+            return;
+        }
+        try {
+            Integer quantity = 0;
+            Float price = 0.0f;
+            try {
+                quantity = Integer.parseInt(BuyAssetQuantity.getText());
+                price = Float.parseFloat(BuyPriceCredits.getText());
+            } catch (NumberFormatException formatException) {
+                BuyErrorText.setText(ERROR_WRONG_INPUT_TYPE);
+                return;
+            }
+
+            MockSocket.getInstance().AddOrder(LoginController.GetToken(),
+                    new Order(-1, OrderType.BUY, BuyAssetType.getValue(), quantity, price, LoginController.GetUser().getOrganisationalUnit(), null));
+            BuyErrorText.setText("ORDER WAS SUCCESSFULLY PLACED");
+        } catch (Exception e) {
+            BuyErrorText.setText("ERROR");
+        }
+        UpdateBuyInformation();
+
+
     }
 
     /**
@@ -98,8 +122,6 @@ public class UserBuyHandler implements Initializable {
      * Updates buy information
      */
     private void UpdateBuyInformation() {
-        Date currentDate = new Date();
-
         List<Order> sellOrders = MockSocket.getInstance().GetSellOrders(LoginController.GetToken());
         BuyOrdersTable.getItems().setAll(sellOrders);
 

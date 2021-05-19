@@ -2,15 +2,10 @@ package Controllers.Backend.Socket;
 
 import Controllers.Backend.*;
 import Controllers.Backend.NetworkObjects.*;
-import Controllers.FrontEnd.Login.LoginController;
-import Models.IDataSource;
-import com.mysql.cj.log.Log;
+import Controllers.Exceptions.LoginException;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Mock database for testing.
@@ -108,6 +103,7 @@ public class MockSocket implements IDataSource {
 
     @Override
     public LoginToken AttemptLogin(String username, String password) {
+
         for (User currentUser: userTable) {
             if (currentUser.getUsername().equals(username) && currentUser.getPassword().equals(password)) {
                 Date actualDate = new Date();
@@ -123,8 +119,16 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public String AttemptResetPassword(LoginToken token, String username, String newPassword) {
-        return null;
+    public String AttemptResetPassword(LoginToken token, String username, String newPassword) throws LoginException {
+        for (User currentUser: userTable) {
+            if (currentUser.getUsername().equals(username)) {
+                User updatedUser = new User(currentUser.getUsername(), newPassword, currentUser.getAccountType(), currentUser.getOrganisationalUnit(), currentUser.getSalt());
+                userTable.remove(currentUser);
+                userTable.add(updatedUser);
+                return "Success";
+            }
+        }
+        throw new LoginException("USERNAME OR PASSWORD IS INCORRECT");
     }
 
     @Override
@@ -178,7 +182,7 @@ public class MockSocket implements IDataSource {
     public List<Order> GetSellOrders(LoginToken token) {
         ArrayList<Order> sellOrders = new ArrayList<>();
         for (Order order: orderTable) {
-            if (order.getOrderType().equals(OrderType.BUY)) {
+            if (order.getOrderType().equals(OrderType.SELL)) {
                 sellOrders.add(order);
             }
         }
@@ -222,6 +226,14 @@ public class MockSocket implements IDataSource {
 
     @Override
     public String AddOrder(LoginToken token, Order newOrder) {
+        Random rand = new Random();
+        orderTable.add(new Order(rand.nextInt(),
+                newOrder.getOrderType(),
+                newOrder.getAssetType(),
+                newOrder.getAssetQuantity(),
+                newOrder.getRequestPrice(),
+                newOrder.getOrganisationalUnit(),
+                new Date()));
         return "Success";
     }
 
