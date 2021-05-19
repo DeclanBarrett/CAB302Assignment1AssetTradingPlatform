@@ -68,7 +68,7 @@ public class SQL {
                     "FOREIGN KEY(SellerOrgName) REFERENCES OrganisationalUnit(OrganisationalUnitName)" +
                     ");";
 
-    // Population SQL Queries (based off Mock Socket data)
+    // Population of database via SQL Queries (based off Mock Socket data)
     private static final String INSERT_NEW_USER1 = "INSERT INTO Users VALUES ('User 1', 'Sales', 'User', 'b717415eb5e699e4989ef3e2c4e9cbf7', '12345')";
     private static final String INSERT_NEW_USER2 = "INSERT INTO Users VALUES ('User 2', 'Sales', 'User', 'b717415eb5e699e4989ef3e2c4e9cbf7', '12345')";
     private static final String INSERT_NEW_USER3 = "INSERT INTO Users VALUES ('User 3', 'Finance', 'User', '8d421e892a47dff539f46142eb09e56b', '123456')";
