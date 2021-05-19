@@ -1,15 +1,12 @@
 package Controllers.FrontEnd;
 
-import Controllers.BradsPacket;
+import Controllers.Backend.NetworkObjects.BradsPacket;
 
 import java.net.*;
 import java.io.*;
 
 /**
- * @author Brad Kent
- * @author n10632999@qut.edu.au
- * @version 1.1
- * @since 0.5
+ * Client Socket intiialisation.
  */
 public class ClientSocket
 {

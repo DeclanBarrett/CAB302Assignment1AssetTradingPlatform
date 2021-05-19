@@ -1,0 +1,512 @@
+Index: .idea/libraries/lib.xml
+===================================================================
+diff --git a/.idea/libraries/lib.xml b/.idea/libraries/lib.xml
+deleted file mode 100644
+--- a/.idea/libraries/lib.xml	(revision 9841925e2f3e3fd256ae366cc03cbbb004bc8cb6)
++++ /dev/null	(revision 9841925e2f3e3fd256ae366cc03cbbb004bc8cb6)
+@@ -1,13 +0,0 @@
+-<component name="libraryTable">
+-  <library name="lib">
+-    <CLASSES>
+-      <root url="file://$PROJECT_DIR$/../../Tools/javafx-sdk-11.0.2/lib" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES>
+-      <root url="file://$PROJECT_DIR$/../../Tools/javafx-sdk-11.0.2/lib" />
+-    </SOURCES>
+-    <jarDirectory url="file://$PROJECT_DIR$/../../Tools/javafx-sdk-11.0.2/lib" recursive="false" />
+-    <jarDirectory url="file://$PROJECT_DIR$/../../Tools/javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
+-  </library>
+-</component>
+\ No newline at end of file
+Index: src/Models/IDataSource.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Models;\r\n\r\nimport Controllers.Backend.AccountType;\r\nimport Controllers.Backend.NetworkObjects.*;\r\n\r\nimport java.util.List;\r\n\r\npublic interface IDataSource {\r\n\r\n    /**\r\n     * Gets the salt for a user from the server\r\n     * @param username - username for the user that's to be retrieved\r\n     * @return a string that is the salt\r\n     */\r\n    String GetSalt(String username);\r\n\r\n    /**\r\n     * Attempt to login to the server so that the user can be authenticated\r\n     * and the user can then have a token to prove authentication\r\n     * @param username - username of user to login\r\n     * @param password - the client side hashed password\r\n     * @return a login token that can be stored client side and given to the server\r\n     * whenever the client wants to communicate while logged in\r\n     */\r\n    LoginToken AttemptLogin(String username, String password);\r\n\r\n    /**\r\n     * Attempts to reset the password of the user on the server\r\n     * @param oldPassword - the old password of the user\r\n     * @param newPassword - the new password of the user which is to replace the old password\r\n     * @return a success message, or failure message\r\n     */\r\n    String AttemptResetPassword(String oldPassword, String newPassword);\r\n\r\n    /**\r\n     * Gets the user information (without login details) from the server\r\n     * @param token - token to be used for authentication\r\n     * @param username - the user to gather the information on\r\n     * @return a user info object with the users information in it\r\n     */\r\n    UserInfo GetUser(LoginToken token, String username);\r\n\r\n    /**\r\n     * Gets an organisation from the server\r\n     * @param token - token to be used for authentication\r\n     * @param orgName - organisation name for the organisation to gather\r\n     * @return an organisation unit object with organisation information within it\r\n     */\r\n    OrganisationalUnit GetOrganisation(LoginToken token, String orgName);\r\n\r\n    /**\r\n     * Gets all orders for an organisation from the server\r\n     * @param token - token to be used for authentication\r\n     * @param orgName - organisation which orders will be gathered\r\n     * @return a list of orders that have been placed by an organisation\r\n     */\r\n    List<Order> GetOrganisationOrders(LoginToken token, String orgName);\r\n\r\n    /**\r\n     * Get all orders from the server\r\n     * @param token - token to be used for authentication\r\n     * @return List of all orders\r\n     */\r\n    List<Order> GetAllOrders(LoginToken token);\r\n\r\n    /**\r\n     * Get buy orders from the server\r\n     * @param token - token to be used for authentication\r\n     * @return List of all orders\r\n     */\r\n    List<Order> GetBuyOrders(LoginToken token);\r\n\r\n    /**\r\n     * Get sell orders from the server\r\n     * @param token - token to be used for authentication\r\n     * @return List of all orders\r\n     */\r\n    List<Order> GetSellOrders(LoginToken token);\r\n\r\n    /**\r\n     * Get buy orders from the server for an organisation\r\n     * @param token - token to be used for authentication\r\n     * @param organisationName - organisation to get buy orders\r\n     * @return List of all orders\r\n     */\r\n    List<Order> GetOrganisationBuyOrders(LoginToken token, String organisationName);\r\n\r\n    /**\r\n     * Get sell orders from the server for an organisation\r\n     * @param token - token to be used for authentication\r\n     * @param organisationName - organisation to get buy orders\r\n     * @return List of all orders\r\n     */\r\n    List<Order> GetOrganisationSellOrders(LoginToken token, String organisationName);\r\n\r\n    /**\r\n     * Attempts to add an order to the server, with it either being executed,\r\n     * stored for later execution or rejected since it would put the organisation\r\n     * at risk of going into negative credits\r\n     * @param token - token to be used for authentication\r\n     * @param newOrder - order to attempt to be added and executed\r\n     * @return a success or failure message\r\n     */\r\n    String AddOrder(LoginToken token, Order newOrder);\r\n\r\n    /**\r\n     * Attempts to remove an order from the server\r\n     * @param token - token to be used for authentication\r\n     * @param orderID - orderID of the order to be removed\r\n     * @return a success or failure message\r\n     */\r\n    String RemoveOrder(LoginToken token, int orderID);\r\n\r\n    /**\r\n     * Gets the asset types which are currently allowed from the server\r\n     * @param token - token to be used for authentication\r\n     * @return a list of asset types\r\n     */\r\n    List<String> GetAssetTypes(LoginToken token);\r\n\r\n    /**\r\n     * Gets the history of all trades that have occurred for a type of asset\r\n     * from the server\r\n     * @param token - token to be used for authentication\r\n     * @param AssetType - the type of asset that the history is retrieved for\r\n     * @return a list of trades for a type of asset\r\n     */\r\n    List<Trade> GetTradeHistory(LoginToken token, String AssetType);\r\n\r\n    /**\r\n     * Attempts to add a new user to the server\r\n     * @param token - token to be used for authentication\r\n     * @param user - user object with all information to be added to the database\r\n     * @return a success or failure message\r\n     */\r\n    String AddUser(LoginToken token, User user);\r\n\r\n    /**\r\n     * Gets all the user info from the server\r\n     * @param token - token to be used for authentication\r\n     * @return a list of user information in user info objects\r\n     */\r\n    List<UserInfo> GetAllUsers(LoginToken token);\r\n\r\n    /**\r\n     * Change a users password on the server\r\n     * @param token - token to be used for authentication\r\n     * @param username - username for user to have their password changed\r\n     * @param hashedPassword - password to change to\r\n     * @param salt - client side salt to store with it\r\n     * @return a success or failure message\r\n     */\r\n    String UpdateUserPassword(LoginToken token, String username, String hashedPassword, String salt);\r\n\r\n    /**\r\n     * Change a users account type on the server\r\n     * @param token - token to be used for authentication\r\n     * @param username - username for user to have their account type changed\r\n     * @param accountType - account type to change to\r\n     * @return a success or failure message\r\n     */\r\n    String UpdateUserAccountType(LoginToken token, String username, AccountType accountType);\r\n\r\n    /**\r\n     * Change a users organisation they are part of on the server\r\n     * @param token - token to be used for authentication\r\n     * @param username - username for user to have their organisation changed\r\n     * @param organisationName - organisation to change to\r\n     * @return a success or failure message\r\n     */\r\n    String UpdateUserOrganisation(LoginToken token, String username, String organisationName);\r\n\r\n    /**\r\n     * Attempt to add an asset that is allowed to the server which\r\n     * doesn't actually add any instances it just allows for the asset type\r\n     * to be used\r\n     * @param token - token to be used for authentication\r\n     * @param assetName - asset to be added\r\n     * @return a success or failure message\r\n     */\r\n    String AddAsset(LoginToken token, String assetName);\r\n\r\n    /**\r\n     * Attempt to add a new organisation to the server\r\n     * @param token - token to be used for authentication\r\n     * @param organisation - organisation object with all information regarding organisation\r\n     * @return a success or failure message\r\n     */\r\n    String AddOrganisation(LoginToken token, OrganisationalUnit organisation);\r\n\r\n    /**\r\n     * Gets all organisations with information from the server\r\n     * @param token - token to be used for authentication\r\n     * @return a list of all organisations with internal information from the server\r\n     */\r\n    List<OrganisationalUnit> GetAllOrganisations(LoginToken token);\r\n\r\n    /**\r\n     * Change an organisations asset and quantity on the server\r\n     * @param token - token to be used for authentication\r\n     * @param organisationName - organisation to have their assets edited\r\n     * @param AssetType - asset to add or edit\r\n     * @param AssetQuantity - quantity to set the asset to\r\n     * @return a success or failure message\r\n     */\r\n    String UpdateOrganisationAsset(LoginToken token, String organisationName, String AssetType, int AssetQuantity);\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Models/IDataSource.java b/src/Models/IDataSource.java
+--- a/src/Models/IDataSource.java	(revision 9841925e2f3e3fd256ae366cc03cbbb004bc8cb6)
++++ b/src/Models/IDataSource.java	(date 1620951531764)
+@@ -135,6 +135,8 @@
+      */
+     String AddUser(LoginToken token, User user);
+ 
++    String AddUser(LoginToken token, Controllers.Backend.NetworkObjects.User user);
++
+     /**
+      * Gets all the user info from the server
+      * @param token - token to be used for authentication
+Index: .idea/libraries/lib1.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/lib1.xml b/.idea/libraries/lib1.xml
+new file mode 100644
+--- /dev/null	(date 1620950985675)
++++ b/.idea/libraries/lib1.xml	(date 1620950985675)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="lib1">
++    <CLASSES>
++      <root url="file://$PROJECT_DIR$/../../../../Tools/JavaFX/lib" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="file://$PROJECT_DIR$/../../../../Tools/JavaFX/lib" />
++    </SOURCES>
++    <jarDirectory url="file://$PROJECT_DIR$/../../../../Tools/JavaFX/lib" recursive="false" />
++    <jarDirectory url="file://$PROJECT_DIR$/../../../../Tools/JavaFX/lib" recursive="false" type="SOURCES" />
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/org_mariadb_jdbc_mariadb_java_client_2_7_2.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/org_mariadb_jdbc_mariadb_java_client_2_7_2.xml b/.idea/libraries/org_mariadb_jdbc_mariadb_java_client_2_7_2.xml
+new file mode 100644
+--- /dev/null	(date 1620950687917)
++++ b/.idea/libraries/org_mariadb_jdbc_mariadb_java_client_2_7_2.xml	(date 1620950687917)
+@@ -0,0 +1,10 @@
++<component name="libraryTable">
++  <library name="org.mariadb.jdbc:mariadb-java-client:2.7.2" type="repository">
++    <properties maven-id="org.mariadb.jdbc:mariadb-java-client:2.7.2" />
++    <CLASSES>
++      <root url="jar://$PROJECT_DIR$/lib/mariadb-java-client-2.7.2.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: src/Models/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Models/User.java b/src/Models/User.java
+new file mode 100644
+--- /dev/null	(date 1620951432386)
++++ b/src/Models/User.java	(date 1620951432386)
+@@ -0,0 +1,320 @@
++package Models;
++
++import Controllers.Backend.AccountType;
++import Controllers.Backend.NetworkObjects.Order;
++import Controllers.Backend.NetworkObjects.OrganisationalUnit;
++import Controllers.Backend.NetworkObjects.Trade;
++import Controllers.Backend.NetworkObjects.UserInfo;
++
++import javax.xml.crypto.Data;
++import java.sql.Connection;
++import java.sql.PreparedStatement;
++import java.sql.ResultSet;
++import java.sql.SQLException;
++import java.util.List;
++
++/**
++ * Finds information from the backend
++ */
++public class  User {
++
++    //SQL queries for user, login and reset password
++
++    private static final String INSERT_NEW_USER = "INSERT INTO user (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES (?, ?, ?, ?, ?)";
++
++    private static final String UPDATE_PASSWORD = "UPDATE user SET Password=?, Salt=? WHERE UserName=?";
++
++    private static final String GET_NONCE = "SELECT Salt FROM User WHERE UserName=?";
++
++    private static final String GET_PASSWORD = "SELECT HashedPassword FROM User WHERE UserName=?";
++
++    private static final String GET_USER = "SELECT * FROM user WHERE UserName=?";
++
++    private PreparedStatement addUser;
++
++    private PreparedStatement updatePassword;
++
++    private PreparedStatement getNonce;
++
++    private PreparedStatement getPassword;
++
++    private PreparedStatement getUser;
++
++    private Connection connection;
++
++
++
++    /**
++     * Inserts user into the database.
++     * @param username - users username
++     * @param orgUnit - organisational unit user belongs too
++     * @param accType - Account type user has
++     * @param hashedPW - hashed password attached to the user
++     * @param salt - salt attached to users password
++     */
++    public void insertUser(String username, String orgUnit, String accType, String hashedPW, String salt)
++    {
++        try
++        {
++            connection = DatabaseConnection.getInstance();
++            addUser = connection.prepareStatement(INSERT_NEW_USER);
++            addUser.setString(1, username);
++            addUser.setString(2, orgUnit);
++            addUser.setString(3, accType);
++            addUser.setString(4,hashedPW);
++            addUser.setString(5, salt);
++
++            if(addUser != null)
++            {
++                addUser.executeQuery();
++            }
++
++
++        } catch (SQLException throwables) {
++            throwables.printStackTrace();
++        }
++    }
++
++    /**
++     * Retrieves password from database
++     * @param username
++     */
++    public void getPassword(String username)
++    {
++        ResultSet rs = null;
++        try
++        {
++            connection = DatabaseConnection.getInstance();
++            getPassword = connection.prepareStatement(GET_PASSWORD);
++            getPassword.setString(1, username);
++            rs = getPassword.executeQuery();
++
++        } catch (SQLException throwables) {
++            throwables.printStackTrace();
++        }
++    }
++
++    /**
++     * Retrieve salt from database
++     * @param username salt attached to this users password
++     */
++    public void getSalt(String username)
++    {
++        try
++        {
++            connection = DatabaseConnection.getInstance();
++            getNonce = connection.prepareStatement(GET_NONCE);
++            getNonce.setString(1, username);
++
++
++            if(getNonce != null)
++            {
++                ResultSet rs = getNonce.executeQuery();
++            }
++
++
++        } catch (SQLException throwables) {
++            throwables.printStackTrace();
++        }
++    }
++
++    /**
++     * Update users password
++     * @param username - users username
++     * @param password - users password
++     * @param salt - salt attached to users password
++     */
++    public void updatePassword(String username, String password, String salt){
++        try
++        {
++            updatePassword = connection.prepareStatement(UPDATE_PASSWORD);
++            updatePassword.setString(1, password);
++            updatePassword.setString(2, salt);
++            updatePassword.setString(3, username);
++
++            if(updatePassword != null)
++            {
++                updatePassword.executeQuery();
++            }
++        } catch (SQLException throwables) {
++            throwables.printStackTrace();
++        }
++    }
++
++    /**
++     * Gets user from the database
++     * @param username - username of requested user.
++     * @return the User with login info included
++     */
++    public User getUser(String username)
++    {
++        try
++        {
++            getUser = connection.prepareStatement(GET_USER);
++            getUser.setString(1,username);
++
++            if(getUser != null)
++            {
++                getUser.executeQuery();
++            }
++
++        } catch (SQLException throwables) {
++            throwables.printStackTrace();
++        }
++
++        return null;
++    }
++    /**
++     * Get the list of Orders
++     * @return the list of orders
++     */
++    public List<Order> GetOrderList() {
++        return null;
++    }
++
++    /**
++     * Gets user info from the database
++     * @param username - username of requested user.
++     * @return the User with no login info included
++     */
++    public UserInfo getUserInfo(String username) {return null;}
++
++    /**
++     * Gets list of user info for all users from the database
++     * @return the list of user information
++     */
++    public List<UserInfo> getAllUserInfo() {return null;}
++
++    /**
++     * Gets list of users for all users from the database
++     * @return the list of users with login info
++     */
++    public List<User> getAllUsers() {return null;}
++
++    /**
++     * Inserts a new user into the database
++     * (Warning - Users cannot be removed from the database)
++     * (BUT they can have their Account Type be changed to inactive)
++     * @param user - the user to be inserted (with login info)
++     * @return a success message
++     */
++    public String insertUser(User user) {return null;}
++
++    /**
++     * Updates the account type of the user in the database
++     * @param username - username of updated user.
++     * @param accountType - account type to change the users account type to
++     * @return a success message
++     */
++    public String updateUserAccountType(String username, AccountType accountType) {return null;}
++
++    /**
++     * Updates the organisation of the user in the database
++     * @param username - username of the updated user.
++     * @param organisationName - organisation to change the users organisation to
++     * @return a success message
++     */
++    public String updateUserOrganisation(String username, String organisationName) {return null;}
++
++    /**
++     * Gets the organisational unit object in the database
++     * @param orgName - organisation name of the organisation
++     * @return the organisation unit object with all included information
++     */
++    public OrganisationalUnit getOrganisation(String orgName) {return null;}
++
++    /**
++     * Gets a list of all organisational units with info in the database
++     * @return a list of organisationa unit objects
++     */
++    public List<OrganisationalUnit> getAllOrganisations() {return null;}
++
++    /**
++     * Insert a new organisation into the database
++     * (Warning - Organisations cannot be removed from the database)
++     * (Warning - All asset types must be valid asset types)
++     * @param organisation - organisation with all information to be inserted
++     * @return a success message
++     */
++    public String insertOrganisation(OrganisationalUnit organisation) {return null;}
++
++    /**
++     * Update the quantity of an asset in an organisation, either by inserting a new
++     * asset or updating an existing asset in the database
++     * @param organisationName - organisation to have its asset changed
++     * @param assetType - the asset type to be added or updated
++     * @param assetQuantity - quantity to set the asset to
++     * @return a success message
++     */
++    public String updateOrganisationAsset(String organisationName, String assetType, int assetQuantity) {return null;}
++
++    /**
++     * Gets a list of all orders that an organisation currently has active in the database
++     * @param orgName - the organisation to retrieve orders for
++     * @return a list of orders both buy and sell
++     */
++    public List<Order> getOrganisationOrders(String orgName) {return null;}
++
++    /**
++     * Gets all buy orders that are currently active in the database
++     * @return a list of all orders with the orderType BUY
++     */
++    public List<Order> getBuyOrders() {return null;}
++
++    /**
++     * Gets all sell orders that are currently active in the database
++     * @return a list of all orders with the orderType SELL
++     */
++    public List<Order> getSellOrders() {return null;}
++
++    /**
++     * Gets all orders that are currently active in the database
++     * @return a list of all orders, regardless of type
++     */
++    public List<Order> getAllOrders() {return null;}
++
++    /**
++     * Inserts a new order into the database
++     * @param newOrder - the order with all information to be inserted
++     * @return a success message
++     */
++    public String insertOrder(Order newOrder) {return null;}
++
++    /**
++     * Deletes an order in the database
++     * @param OrderID - the orderID of the order to be deleted
++     * @return a success message
++     */
++    public String deleteOrder(int OrderID) {return null;}
++
++    /**
++     * Gets a list of all the asset types that are in the database
++     * @return a list of asset types
++     */
++    public List<String> getAssetTypes() {return null;}
++
++    /**
++     * Inserts a new asset type into the database, so that orders etc
++     * cannot be placed with an invalid asset type
++     * (Warning - asset types cannot be removed from the database)
++     * @param assetName - asset to be added
++     * @return a success message
++     */
++    public String insertAsset(String assetName) {return null;}
++
++    /**
++     * Inserts a new trade into the database
++     * (Warning - a trade is a measure of history thus they cannot
++     * be removed from the database)
++     * @param trade - trade to be added
++     * @return a success message
++     */
++    public String insertTrade(Trade trade) {return null;}
++
++    /**
++     * Gets a list of all previous trades that occurred for an asset type
++     * @param AssetType - asset type of the trades
++     * @return a list of trades
++     */
++    public List<Trade> getTradeHistory(String AssetType) {return null;}
++}
+\ No newline at end of file
+Index: src/Controllers/Socket/MockSocket.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Controllers.Socket;\r\n\r\nimport Controllers.Backend.*;\r\nimport Controllers.Backend.NetworkObjects.*;\r\nimport Models.IDataSource;\r\n\r\nimport java.time.Duration;\r\nimport java.util.ArrayList;\r\nimport java.util.Date;\r\nimport java.util.HashMap;\r\nimport java.util.List;\r\n\r\n/**\r\n * Mock database for testing.\r\n */\r\npublic class MockSocket implements IDataSource {\r\n\r\n\r\n    private boolean databaseConnected;\r\n\r\n    private ArrayList<User> userTable = new ArrayList<>();\r\n    private ArrayList<OrganisationalUnit> organisationalUnitTable = new ArrayList<>();\r\n    private HashMap<String, Integer> organisationAssets = new HashMap<>();\r\n    private ArrayList<Order> orderTable = new ArrayList<>();\r\n    private ArrayList<String> assetTypesTable = new ArrayList<>();\r\n    private ArrayList<Trade> tradesTable = new ArrayList<>();\r\n\r\n    /**\r\n     * TODO finish implementing IDataSource\r\n     * Populating the mock database with values\r\n     */\r\n    protected MockSocket() {\r\n        databaseConnected = false;\r\n\r\n        userTable.add(new User(\"User 1\", \"b717415eb5e699e4989ef3e2c4e9cbf7\", AccountType.User, \"Sales\", \"12345\")); //qwerty\r\n        userTable.add(new User(\"User 2\", \"b717415eb5e699e4989ef3e2c4e9cbf7\", AccountType.User, \"Sales\", \"12345\"));\r\n        userTable.add(new User(\"User 3\", \"8d421e892a47dff539f46142eb09e56b\", AccountType.User, \"Finance\", \"123456\")); //1234\r\n        userTable.add(new User(\"User 4\", \"b26b843656e6834822b83179b4297620\", AccountType.User, \"Finance\", \"123457\"));\r\n        userTable.add(new User(\"User 5\", \"c3a4b61825259a74c26d49daa3e89312\", AccountType.User, \"Finance\", \"123458\")); //password\r\n        userTable.add(new User(\"User 6\", \"2ec7484fa99bbaa7bdebe544f1f52f61\", AccountType.User, \"Research\", \"123459\"));\r\n        userTable.add(new User(\"User 7\", \"ccab59bc481b2105a4dbdf3d30a66248\", AccountType.User, \"Research\", \"123450\"));\r\n        userTable.add(new User(\"User 8\", \"aa3cae505478da19d13efa65bc8c71b3\", AccountType.User, \"Research\", \"123451\"));\r\n        userTable.add(new User(\"User 9\", \"43bf88d863f230f328c15ccf61d9d89d\", AccountType.User, \"Research\", \"123452\"));\r\n\r\n        userTable.add(new User(\"Declan Testing\", \"802b492fc1d1fe592090399c1ca3b56a\", AccountType.SystemAdmin, \"Admin\", \"12346\")); //qwerty\r\n        userTable.add(new User(\"Aiden Testing\", \"086e1b7e1c12ba37cd473670b3a15214\", AccountType.SystemAdmin, \"Admin\", \"123456\"));\r\n        userTable.add(new User(\"Brad Testing\", \"086e1b7e1c12ba37cd473670b3a15214\", AccountType.SystemAdmin, \"Admin\", \"123456\"));\r\n        userTable.add(new User(\"Ethan Testing\", \"086e1b7e1c12ba37cd473670b3a15214\", AccountType.SystemAdmin, \"Admin\", \"123456\"));\r\n\r\n        userTable.add(new User(\"User 10\", \"579d9ec9d0c3d687aaa91289ac2854e4\", AccountType.UnitLeader, \"Sales\", \"123456\")); //123\r\n        userTable.add(new User(\"User 11\", \"086e1b7e1c12ba37cd473670b3a15214\", AccountType.UnitLeader, \"Finance\", \"123456\")); //qwerty\r\n        userTable.add(new User(\"User 12\", \"086e1b7e1c12ba37cd473670b3a15214\", AccountType.UnitLeader, \"Research\", \"123456\"));\r\n        userTable.add(new User(\"User 13\", \"086e1b7e1c12ba37cd473670b3a15214\", AccountType.UnitLeader, \"Research\", \"123456\"));\r\n\r\n        organisationAssets.put(\"Paper\", 50);\r\n        organisationAssets.put(\"CPU hours\", 600);\r\n        organisationAssets.put(\"Pickles\", 50);\r\n        organisationAssets.put(\"Casino Chips\", 50);\r\n\r\n        organisationalUnitTable.add(new OrganisationalUnit(\"Sales\", 3000.50, organisationAssets));\r\n        organisationalUnitTable.add(new OrganisationalUnit(\"Finance\", 100, organisationAssets));\r\n        organisationalUnitTable.add(new OrganisationalUnit(\"Research\", 90, organisationAssets));\r\n        organisationalUnitTable.add(new OrganisationalUnit(\"Admin\", 0, organisationAssets));\r\n\r\n        assetTypesTable.add(\"Paper\");\r\n        assetTypesTable.add(\"CPU hours\");\r\n        assetTypesTable.add(\"Pickles\");\r\n        assetTypesTable.add(\"Casino Chips\");\r\n\r\n        orderTable.add(new Order(123456, OrderType.BUY, \"Paper\", 3, 3, \"Research\", new Date()));\r\n        orderTable.add(new Order(123457, OrderType.SELL, \"CPU hours\", 3, 3000, \"Research\", new Date()));\r\n        orderTable.add(new Order(123458, OrderType.BUY, \"Pickles\", 3, 3000, \"Sales\", new Date()));\r\n        orderTable.add(new Order(123459, OrderType.SELL, \"Casino Chips\", 3, 3, \"Sales\", new Date()));\r\n\r\n        Date date = new Date();\r\n\r\n        tradesTable.add(new Trade(123456, \"Paper\", 5, 3.0, \"Research\", \"Sales\", new Date(date.getTime() + 1)));\r\n        tradesTable.add(new Trade(123457, \"Paper\", 4, 3.2, \"Research\", \"Sales\", new Date(date.getTime() + 2)));\r\n        tradesTable.add(new Trade(123458, \"Paper\", 6, 4.3, \"Research\", \"Sales\", new Date(date.getTime() + 3)));\r\n        tradesTable.add(new Trade(123459, \"Paper\", 2, 4.5, \"Research\", \"Sales\", new Date(date.getTime() + 4)));\r\n        tradesTable.add(new Trade(123410, \"Paper\", 4, 3.1, \"Research\", \"Sales\", new Date(date.getTime() + 5)));\r\n        tradesTable.add(new Trade(123412, \"Paper\", 5, 5.0, \"Research\", \"Sales\", new Date(date.getTime() + 6)));\r\n        tradesTable.add(new Trade(123413, \"Paper\", 1, 1.0, \"Research\", \"Sales\", new Date(date.getTime() + 7)));\r\n\r\n        System.out.println(\"HELL\");\r\n    }\r\n\r\n    private static class MockSocketHolder {\r\n        private final static MockSocket INSTANCE = new MockSocket();\r\n    }\r\n\r\n    public static MockSocket getInstance() {\r\n        return MockSocketHolder.INSTANCE;\r\n    }\r\n\r\n    @Override\r\n    public String GetSalt(String username) {\r\n        for (User currentUser: userTable) {\r\n            if (currentUser.getUsername().equals(username)) {\r\n                return currentUser.getSalt();\r\n            }\r\n        }\r\n\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public LoginToken AttemptLogin(String username, String password) {\r\n        for (User currentUser: userTable) {\r\n            if (currentUser.getUsername().equals(username) && currentUser.getPassword().equals(password)) {\r\n                Date actualDate = new Date();\r\n\r\n                actualDate.toInstant().plus(Duration.ofHours(2));\r\n\r\n                LoginToken login = new LoginToken(currentUser.getUsername(), new Date());\r\n\r\n                return login;\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public String AttemptResetPassword(String oldPassword, String newPassword) {\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public UserInfo GetUser(LoginToken token, String username) {\r\n        for (User currentUser: userTable) {\r\n            if (currentUser.getUsername().equals(username)) {\r\n                return new UserInfo(currentUser.getUsername(), currentUser.getAccountType(), currentUser.getOrganisationalUnit());\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public OrganisationalUnit GetOrganisation(LoginToken token, String orgName) {\r\n        for (OrganisationalUnit organisationalUnit: organisationalUnitTable) {\r\n            if (organisationalUnit.getUnitName().equals(orgName)) {\r\n                return organisationalUnit;\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public List<Order> GetOrganisationOrders(LoginToken token, String orgName) {\r\n        ArrayList<Order> orders = new ArrayList<>();\r\n        for (Order order: orderTable) {\r\n            if (order.getOrganisationalUnit().equals(orgName))\r\n                orders.add(order);\r\n        }\r\n        return orders;\r\n    }\r\n\r\n    @Override\r\n    public List<Order> GetAllOrders(LoginToken token) {\r\n        ArrayList<Order> orders = orderTable;\r\n        return orders;\r\n    }\r\n\r\n    @Override\r\n    public List<Order> GetBuyOrders(LoginToken token) {\r\n        ArrayList<Order> buyOrders = new ArrayList<>();\r\n        for (Order order: orderTable) {\r\n            if (order.getOrderType().equals(OrderType.BUY)) {\r\n                buyOrders.add(order);\r\n            }\r\n        }\r\n        return buyOrders;\r\n    }\r\n\r\n    @Override\r\n    public List<Order> GetSellOrders(LoginToken token) {\r\n        ArrayList<Order> sellOrders = new ArrayList<>();\r\n        for (Order order: orderTable) {\r\n            if (order.getOrderType().equals(OrderType.BUY)) {\r\n                sellOrders.add(order);\r\n            }\r\n        }\r\n        return sellOrders;\r\n    }\r\n\r\n    @Override\r\n    public List<Order> GetOrganisationBuyOrders(LoginToken token, String organisationName) {\r\n        ArrayList<Order> orders = new ArrayList<>();\r\n        for (Order order: orderTable) {\r\n            if (order.getOrganisationalUnit().equals(organisationName))\r\n                orders.add(order);\r\n        }\r\n\r\n        ArrayList<Order> buyOrders = new ArrayList<>();\r\n        for (Order order: orders) {\r\n            if (order.getOrderType().equals(OrderType.BUY)) {\r\n                buyOrders.add(order);\r\n            }\r\n        }\r\n        return buyOrders;\r\n    }\r\n\r\n    @Override\r\n    public List<Order> GetOrganisationSellOrders(LoginToken token, String organisationName) {\r\n\r\n        ArrayList<Order> orders = new ArrayList<>();\r\n        for (Order order: orderTable) {\r\n            if (order.getOrganisationalUnit().equals(organisationName))\r\n            orders.add(order);\r\n        }\r\n\r\n        ArrayList<Order> sellOrders = new ArrayList<>();\r\n        for (Order order: orders) {\r\n            if (order.getOrderType().equals(OrderType.SELL)) {\r\n                sellOrders.add(order);\r\n            }\r\n        }\r\n        return sellOrders;\r\n    }\r\n\r\n    @Override\r\n    public String AddOrder(LoginToken token, Order newOrder) {\r\n        return \"Success\";\r\n    }\r\n\r\n    @Override\r\n    public String RemoveOrder(LoginToken token, int OrderID) {\r\n        orderTable.removeIf(order -> order.getOrderID() == OrderID);\r\n        return \"Success\";\r\n    }\r\n\r\n    @Override\r\n    public List<String> GetAssetTypes(LoginToken token) {\r\n        return assetTypesTable;\r\n    }\r\n\r\n    @Override\r\n    public List<Trade> GetTradeHistory(LoginToken token, String AssetType) {\r\n        List<Trade> trades = new ArrayList<>();\r\n\r\n        for (Trade trade: tradesTable) {\r\n            if (trade.getAssetName().equals(AssetType)) {\r\n                trades.add(trade);\r\n            }\r\n        }\r\n\r\n        return trades;\r\n    }\r\n\r\n    @Override\r\n    public String AddUser(LoginToken token, User user) {\r\n        return \"Success\";\r\n    }\r\n\r\n    @Override\r\n    public List<UserInfo> GetAllUsers(LoginToken token) {\r\n        List<UserInfo> infoTable = new ArrayList<>();\r\n        for (User user : userTable) {\r\n            infoTable.add(new UserInfo(user.getUsername(), user.getAccountType(), user.getOrganisationalUnit()));\r\n        }\r\n        return infoTable;\r\n    }\r\n\r\n    @Override\r\n    public String UpdateUserPassword(LoginToken token, String username, String hashedPassword, String salt) {\r\n        return \"success\";\r\n    }\r\n\r\n    @Override\r\n    public String UpdateUserAccountType(LoginToken token, String username, AccountType accountType) {\r\n        return \"Success\";\r\n    }\r\n\r\n    @Override\r\n    public String UpdateUserOrganisation(LoginToken token, String username, String organisationName) {\r\n        return \"Success\";\r\n    }\r\n\r\n    @Override\r\n    public String AddAsset(LoginToken token, String assetName) {\r\n        assetTypesTable.add(assetName);\r\n        return \"Success\";\r\n    }\r\n\r\n    @Override\r\n    public String AddOrganisation(LoginToken token, OrganisationalUnit organisation) {\r\n        return \"Success\";\r\n    }\r\n\r\n    @Override\r\n    public List<OrganisationalUnit> GetAllOrganisations(LoginToken token) {\r\n\r\n        return organisationalUnitTable;\r\n    }\r\n\r\n    @Override\r\n    public String UpdateOrganisationAsset(LoginToken token, String organisationName, String AssetType, int AssetQuantity) {\r\n        return null;\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Controllers/Socket/MockSocket.java b/src/Controllers/Socket/MockSocket.java
+--- a/src/Controllers/Socket/MockSocket.java	(revision 9841925e2f3e3fd256ae366cc03cbbb004bc8cb6)
++++ b/src/Controllers/Socket/MockSocket.java	(date 1620951504627)
+@@ -247,6 +247,12 @@
+         return trades;
+     }
+ 
++    @Override
++    public String AddUser(LoginToken token, Models.User user)
++    {
++        return null;
++    }
++
+     @Override
+     public String AddUser(LoginToken token, User user) {
+         return "Success";
+Index: .idea/libraries/com_auth0_java_jwt_3_9_0.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><component name=\"libraryTable\">\r\n  <library name=\"com.auth0:java-jwt:3.9.0\" type=\"repository\">\r\n    <properties maven-id=\"com.auth0:java-jwt:3.9.0\" />\r\n    <CLASSES>\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/com/auth0/java-jwt/3.9.0/java-jwt-3.9.0.jar!/\" />\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.10.0.pr3/jackson-databind-2.10.0.pr3.jar!/\" />\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.10.0.pr3/jackson-annotations-2.10.0.pr3.jar!/\" />\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.10.0.pr3/jackson-core-2.10.0.pr3.jar!/\" />\r\n      <root url=\"jar://$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.12/commons-codec-1.12.jar!/\" />\r\n    </CLASSES>\r\n    <JAVADOC />\r\n    <SOURCES />\r\n  </library>\r\n</component>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/com_auth0_java_jwt_3_9_0.xml b/.idea/libraries/com_auth0_java_jwt_3_9_0.xml
+--- a/.idea/libraries/com_auth0_java_jwt_3_9_0.xml	(revision 9841925e2f3e3fd256ae366cc03cbbb004bc8cb6)
++++ b/.idea/libraries/com_auth0_java_jwt_3_9_0.xml	(date 1620951333192)
+@@ -1,6 +1,9 @@
+ <component name="libraryTable">
+   <library name="com.auth0:java-jwt:3.9.0" type="repository">
+     <properties maven-id="com.auth0:java-jwt:3.9.0" />
++    <ANNOTATIONS>
++      <root url="file://$MAVEN_REPOSITORY$/com/auth0/java-jwt/3.9.0" />
++    </ANNOTATIONS>
+     <CLASSES>
+       <root url="jar://$MAVEN_REPOSITORY$/com/auth0/java-jwt/3.9.0/java-jwt-3.9.0.jar!/" />
+       <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.10.0.pr3/jackson-databind-2.10.0.pr3.jar!/" />
+Index: CAB302Assignment1AssetTradingPlatform.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"JAVA_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" />\r\n    </content>\r\n    <orderEntry type=\"inheritedJdk\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n    <orderEntry type=\"module-library\">\r\n      <library name=\"JUnit5.7.0\">\r\n        <CLASSES>\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.7.0/junit-jupiter-5.7.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.7.0/junit-jupiter-api-5.7.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.7.0/junit-platform-commons-1.7.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.7.0/junit-jupiter-params-5.7.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.7.0/junit-jupiter-engine-5.7.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.7.0/junit-platform-engine-1.7.0.jar!/\" />\r\n        </CLASSES>\r\n        <JAVADOC />\r\n        <SOURCES />\r\n      </library>\r\n    </orderEntry>\r\n    <orderEntry type=\"library\" name=\"mysql:mysql-connector-java:8.0.24\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"org.mariadb.jdbc:mariadb-java-client:2.7.21\" level=\"project\" />\r\n    <orderEntry type=\"module-library\">\r\n      <library name=\"JUnit5.4\">\r\n        <CLASSES>\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.4.2/junit-jupiter-5.4.2.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.4.2/junit-jupiter-api-5.4.2.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.4.2/junit-platform-commons-1.4.2.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.4.2/junit-jupiter-params-5.4.2.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.4.2/junit-jupiter-engine-5.4.2.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.4.2/junit-platform-engine-1.4.2.jar!/\" />\r\n        </CLASSES>\r\n        <JAVADOC />\r\n        <SOURCES />\r\n      </library>\r\n    </orderEntry>\r\n    <orderEntry type=\"library\" name=\"com.auth0:java-jwt:3.9.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"lib\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"com.auth0:java-jwt:3.9.0\" level=\"project\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CAB302Assignment1AssetTradingPlatform.iml b/CAB302Assignment1AssetTradingPlatform.iml
+--- a/CAB302Assignment1AssetTradingPlatform.iml	(revision 9841925e2f3e3fd256ae366cc03cbbb004bc8cb6)
++++ b/CAB302Assignment1AssetTradingPlatform.iml	(date 1620951366355)
+@@ -4,28 +4,11 @@
+     <exclude-output />
+     <content url="file://$MODULE_DIR$">
+       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
++      <excludeFolder url="file://$MODULE_DIR$/src/test" />
+     </content>
+-    <orderEntry type="inheritedJdk" />
++    <orderEntry type="jdk" jdkName="15" jdkType="JavaSDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+-    <orderEntry type="module-library">
+-      <library name="JUnit5.7.0">
+-        <CLASSES>
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.7.0/junit-jupiter-5.7.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.7.0/junit-jupiter-api-5.7.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.7.0/junit-platform-commons-1.7.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.7.0/junit-jupiter-params-5.7.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.7.0/junit-jupiter-engine-5.7.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.7.0/junit-platform-engine-1.7.0.jar!/" />
+-        </CLASSES>
+-        <JAVADOC />
+-        <SOURCES />
+-      </library>
+-    </orderEntry>
+-    <orderEntry type="library" name="mysql:mysql-connector-java:8.0.24" level="project" />
+-    <orderEntry type="library" name="org.mariadb.jdbc:mariadb-java-client:2.7.21" level="project" />
+-    <orderEntry type="module-library">
++    <orderEntry type="module-library" exported="">
+       <library name="JUnit5.4">
+         <CLASSES>
+           <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.4.2/junit-jupiter-5.4.2.jar!/" />
+@@ -41,8 +24,7 @@
+         <SOURCES />
+       </library>
+     </orderEntry>
+-    <orderEntry type="library" name="com.auth0:java-jwt:3.9.0" level="project" />
+-    <orderEntry type="library" name="lib" level="project" />
++    <orderEntry type="library" name="lib1" level="project" />
+     <orderEntry type="library" name="com.auth0:java-jwt:3.9.0" level="project" />
+   </component>
+ </module>
+\ No newline at end of file

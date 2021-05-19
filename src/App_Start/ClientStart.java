@@ -1,38 +1,38 @@
 package App_Start;
 
-
+import Controllers.Utils.UtilSceneChanger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Creates st age for the UI, contains basic stage information
+ */
 public class ClientStart extends Application
 {
-    public static void main(String[] args)
-    {
-//        ClientSocket clientSocket = new ClientSocket();
-//        clientSocket.startClient();
+    private static Stage primaryStage;
 
+    public static Stage getStage() {
+        return primaryStage;
+    }
+
+    public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * Initialise GUI screen, make visible
+     * @param primaryStage Handles creation of main GUI screen
+     * @throws Exception To stop GUI breaking
+     */
     @Override
-    public void start(Stage stage) throws Exception
+    public void start(Stage primaryStage) throws Exception
     {
-        stage.setTitle("Unnamed Client Organisation Trading System");
+        this.primaryStage = primaryStage;
+        UtilSceneChanger.getInstance().ChangeToScene(UtilSceneChanger.SceneType.ADMIN);
+        this.primaryStage.setTitle("Unnamed Client Organisation Trading System");
 
-        Parent root;
-
-        // Admin
-        root = FXMLLoader.load(getClass().getResource("/Views/Admin/Admin.fxml"));
-        // User
-        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/User/UserScreen.fxml"));
-        // Login
-        //root = FXMLLoader.load(getClass().getResource("/Views/Login/Login.fxml"));
-        // Reset
-        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/PasswordReset.fxml"));
-
-        stage.setScene(new Scene(root));
-        stage.show();
-    } }
+    }
+}
