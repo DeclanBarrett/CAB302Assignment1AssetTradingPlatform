@@ -2,6 +2,7 @@ package Controllers.FrontEnd.User;
 
 import Controllers.Backend.NetworkObjects.Order;
 import Controllers.Backend.NetworkObjects.Trade;
+import Controllers.Backend.OrderType;
 import Controllers.FrontEnd.Login.LoginController;
 import Controllers.Backend.Socket.MockSocket;
 import javafx.event.ActionEvent;
@@ -23,6 +24,7 @@ import java.util.ResourceBundle;
  */
 public class UserSellHandler implements Initializable {
 
+    private static final String ERROR_WRONG_INPUT_TYPE = "PLEASE INSERT NUMBERS";
     @FXML
     private TextField SellAssetQuantity;
     @FXML
@@ -74,6 +76,29 @@ public class UserSellHandler implements Initializable {
      * @param SellAsset
      */
     public void SellAsset(ActionEvent SellAsset) {
+        if (SellAssetType.getValue() == null) {
+            SellErrorText.setText("NO ASSET TYPE SELECTED");
+            return;
+        }
+        try {
+            Integer quantity = 0;
+            Float price = 0.0f;
+            try {
+                quantity = Integer.parseInt(SellAssetQuantity.getText());
+                price = Float.parseFloat(SellPriceCredits.getText());
+            } catch (NumberFormatException formatException) {
+                SellErrorText.setText(ERROR_WRONG_INPUT_TYPE);
+                return;
+            }
+
+            MockSocket.getInstance().AddOrder(LoginController.GetToken(),
+                    new Order(-1, OrderType.SELL, SellAssetType.getValue(), quantity, price, LoginController.GetUser().getOrganisationalUnit(), null));
+
+            SellErrorText.setText("ORDER WAS SUCCESSFULLY PLACED");
+        } catch (Exception e) {
+            SellErrorText.setText("ERROR");
+        }
+        UpdateSellInformation();
         System.out.println(SellAsset.getSource());
     }
 
@@ -89,7 +114,12 @@ public class UserSellHandler implements Initializable {
      * Updates asset type text box.
      */
     private void UpdateAssetTypeText() {
-        SellAssetType.getItems().setAll(MockSocket.getInstance().GetAssetTypes(LoginController.GetToken()));
+        try {
+            SellAssetType.getItems().setAll(MockSocket.getInstance().GetAssetTypes(LoginController.GetToken()));
+        } catch (Exception e) {
+
+        }
+
     }
 
     /**

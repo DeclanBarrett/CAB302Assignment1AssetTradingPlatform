@@ -25,7 +25,7 @@ public class TestLoginController {
     }
 
     @BeforeEach
-    public void ConstructSecurity(){
+    public void ConstructController(){
         loginController = new LoginController();
     }
 

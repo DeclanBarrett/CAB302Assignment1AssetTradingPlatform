@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 public class UtilSceneChanger {
 
     public static final String LOGIN_FXML_FILE_PATH = "/Views/Login/Login.fxml";
-    public static final String RESET_FXML_FILE_PATH = "/Views/FXMLPages/PasswordReset.fxml";
+    public static final String RESET_FXML_FILE_PATH = "/Views/Login/Reset.fxml";
     public static final String ADMIN_FXML_FILE_PATH = "/Views/Admin/AdminScreen.fxml";
     public static final String USER_FXML_FILE_PATH = "/Views/User/UserScreen.fxml";
 
@@ -67,7 +67,7 @@ public class UtilSceneChanger {
             ClientStart.getStage().setScene(new Scene(root));
             ClientStart.getStage().show();
         } catch (Exception e) {
-            System.out.println("Failed to load FXML");
+            System.out.println(e.getMessage());
         }
     }
 

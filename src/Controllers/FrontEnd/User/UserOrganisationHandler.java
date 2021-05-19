@@ -4,6 +4,9 @@ import Controllers.Backend.NetworkObjects.Order;
 import Controllers.Backend.NetworkObjects.OrganisationalUnit;
 import Controllers.FrontEnd.Login.LoginController;
 import Controllers.Backend.Socket.MockSocket;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,8 +16,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -70,6 +76,8 @@ public class UserOrganisationHandler implements Initializable {
         OrgOrderSellPriceColumn.setCellValueFactory(new PropertyValueFactory<>("requestPrice"));
 
         UpdateOrganisationInformation();
+
+        updatePage();
     }
 
     /**
@@ -101,9 +109,25 @@ public class UserOrganisationHandler implements Initializable {
         OrgAssetQuantityTable.getItems().setAll(items);
 
         List<Order> buyOrders = MockSocket.getInstance().GetOrganisationBuyOrders(LoginController.GetToken(), "Sales");
-        OrgBuyOrdersTable.getItems().addAll(buyOrders);
+        OrgBuyOrdersTable.getItems().setAll(buyOrders);
 
         List<Order> sellOrders = MockSocket.getInstance().GetOrganisationSellOrders(LoginController.GetToken(), "Sales");
-        OrgSellOrdersTable.getItems().addAll(sellOrders);
+        OrgSellOrdersTable.getItems().setAll(sellOrders);
+    }
+
+    private void updatePage() {
+        long endTime = 2000;
+        DateFormat timeFormat = new SimpleDateFormat( "HH:mm:ss" );
+        final Timeline timeline = new Timeline(
+                new KeyFrame(
+                        Duration.seconds(1),
+                        event -> {
+                            UpdateOrganisationInformation();
+                            System.out.println("Updating");
+                        }
+                )
+        );
+        timeline.setCycleCount( Animation.INDEFINITE );
+        timeline.play();
     }
 }

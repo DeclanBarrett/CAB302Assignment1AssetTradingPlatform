@@ -1,7 +1,8 @@
-package Models;
+package Controllers.Backend.Socket;
 
 import Controllers.Backend.AccountType;
 import Controllers.Backend.NetworkObjects.*;
+import Controllers.Exceptions.LoginException;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public interface IDataSource {
      * @param newPassword - the new password of the user which is to replace the old password
      * @return a success message, or failure message
      */
-    String AttemptResetPassword(LoginToken token, String username, String newPassword);
+    String AttemptResetPassword(LoginToken token, String username, String newPassword) throws LoginException;
 
     /**
      * Gets the user information (without login details) from the server

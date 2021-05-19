@@ -1,5 +1,7 @@
 package Controllers.FrontEnd.User;
 
+import Controllers.FrontEnd.Login.LoginController;
+import Controllers.Utils.UtilLoginSecurity;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,7 +39,7 @@ public class UserUserHandler implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        UpdateUserInformation();
     }
 
     /**
@@ -45,7 +47,8 @@ public class UserUserHandler implements Initializable {
      * @param LogOutUser
      */
     public void LogOutUser(ActionEvent LogOutUser) {
-        System.out.println(LogOutUser.getSource());
+
+        LoginController.Logout();
     }
 
     /**
@@ -55,4 +58,11 @@ public class UserUserHandler implements Initializable {
     public void ResetPassword (ActionEvent ResetPassword) {
         System.out.println(ResetPassword.getSource());
     }
+
+    private void UpdateUserInformation() {
+        UserName.setText(LoginController.GetUser().getUsername());
+        UserType.setText(LoginController.GetUser().getAccountType().toString());
+    }
+
+
 }

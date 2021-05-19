@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,12 +46,14 @@ public class LoginHandler implements Initializable {
                     LoginController.GetUser().getAccountType() == AccountType.UnitLeader) {
                 UtilSceneChanger.getInstance().ChangeToScene(UtilSceneChanger.SceneType.USER);
             } else {
-                throw new LoginException("Unexpected Error");
+                throw new LoginException("UNEXPECTED ERROR");
             }
 
         } catch(LoginException e) {
+            LoginErrorText.setTextFill(Color.RED);
             LoginErrorText.setText(e.getMessage());
         } catch (Exception e) {
+            LoginErrorText.setTextFill(Color.ORANGE);
             LoginErrorText.setText(e.getMessage());
         }
 
