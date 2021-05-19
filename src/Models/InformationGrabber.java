@@ -104,8 +104,6 @@ public class  InformationGrabber {
             {
                 addUser.executeQuery();
             }
-
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -138,23 +136,23 @@ public class  InformationGrabber {
      */
     public String getSalt(String username)
     {
+        String result = null;
         try
         {
             connection = DatabaseConnection.getInstance();
             getNonce = connection.prepareStatement(GET_NONCE);
             getNonce.setString(1, username);
 
-
             if(getNonce != null)
             {
                 ResultSet rs = getNonce.executeQuery();
+                rs.next();
+                result = rs.getString(1);
             }
-
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return "";
+        return result;
     }
 
     /**
@@ -187,6 +185,9 @@ public class  InformationGrabber {
      */
     public User getUser(String username)
     {
+        ResultSet rs = null;
+        User user = new User();
+
         try
         {
             getUser = connection.prepareStatement(GET_USER);
@@ -194,14 +195,20 @@ public class  InformationGrabber {
 
             if(getUser != null)
             {
-                getUser.executeQuery();
+                rs = getUser.executeQuery();
+                user.setUsername(rs.getString("UserName"));
+                user.setPassword(rs.getString("HashedPassword"));
+                //Unsure about getting the account Type, will ask soon
+                // user.setAccountType(rs.getEn("AccountType"));
+                user.setOrganisationalType(rs.getString("OrganisationalUnit"));
+                user.setSalt(rs.getString("Salt"));
             }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return null;
+        return user;
     }
     /**
      * Get the list of Orders

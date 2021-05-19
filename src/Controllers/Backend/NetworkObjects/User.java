@@ -2,25 +2,34 @@ package Controllers.Backend.NetworkObjects;
 
 import Controllers.Backend.AccountType;
 
+import java.io.Serializable;
+
 /**
  * Serializable user objects constructor
  */
-public class User implements Comparable<User>
-{
+public class User implements Comparable<User>, Serializable {
+
     private String username;
     private String password;
     private AccountType accountType;
     private String organisationalType;
     private String salt;
 
+
+    /**
+     * No args constructor
+     */
+    public User()
+    {
+
+    }
     /**
      * @param username           Username of the user
      * @param password           Password of the user
      * @param accountType        Account type of the use
      * @param organisationalUnit Organisational Unit that the user belongs to
      */
-    public User(String username, String password, AccountType accountType, String organisationalUnit, String salt)
-    {
+    public User(String username, String password, AccountType accountType, String organisationalUnit, String salt) {
         this.username = username;
         this.password = password;
         this.accountType = accountType;
@@ -31,39 +40,68 @@ public class User implements Comparable<User>
     /**
      * @return username of the User
      */
-    public String getUsername()
-    {
+    public String getUsername() {
         return username;
     }
 
     /**
+     * Sets username of user.
+     */
+    public void setUsername(String username) { this.username = username; }
+
+    /**
      * @return password of the User
      */
-    public String getPassword()
-    {
+    public String getPassword() {
         return password;
     }
 
     /**
+     * sets user password
+     * @param password
+     */
+    public void setPassword(String password) { this.password = password; }
+
+    /**
      * @return account type of the User
      */
-    public AccountType getAccountType()
-    {
+    public AccountType getAccountType() {
         return accountType;
     }
 
     /**
+     * Sets user account type
+     * @param accountType
+     */
+    public void setAccountType(AccountType accountType) { this.accountType = accountType; }
+
+    /**
      * @return organisational unit of the User
      */
-    public String getOrganisationalUnit()
-    {
+    public String getOrganisationalUnit() {
         return organisationalType;
     }
 
-    public String getSalt()
-    {
+    /**
+     * Sets users organisational Unit
+     * @return
+     */
+    public void setOrganisationalType(String organisationalType) { this.organisationalType = organisationalType; }
+
+
+    /**
+     * gets users salt.
+     * @return
+     */
+    public String getSalt() {
         return salt;
     }
+
+    /**
+     * Sets user salt.
+     * @param salt
+     */
+    public void setSalt(String salt) { this.salt = salt; }
 
 
     /**
@@ -78,8 +116,7 @@ public class User implements Comparable<User>
      *                            being compared to this object.
      */
     @Override
-    public int compareTo(User other)
-    {
+    public int compareTo(User other) {
         return this.username.compareTo(other.username);
     }
 
@@ -90,8 +127,7 @@ public class User implements Comparable<User>
      * @return
      */
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         // If the object is compared with itself then return true
         if (o == this) {
             return true;
