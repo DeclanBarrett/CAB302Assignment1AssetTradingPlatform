@@ -1,38 +1,22 @@
 package App_Start;
 
-import Controllers.Utils.UtilSceneChanger;
-import javafx.application.Application;
-import javafx.stage.Stage;
+import Controllers.FrontEnd.ClientSocket;
 
-/**
- * Creates st age for the UI, contains basic stage information
- */
-public class ClientStart extends Application
+public class ClientStart
 {
-    private static Stage primaryStage;
-
-    public static Stage getStage()
-    {
-        return primaryStage;
-    }
-
     public static void main(String[] args)
     {
-        launch(args);
-    }
 
-    /**
-     * Initialise GUI screen, make visible
-     *
-     * @param primaryStage Handles creation of main GUI screen
-     * @throws Exception To stop GUI breaking
-     */
-    @Override
-    public void start(Stage primaryStage) throws Exception
-    {
-        this.primaryStage = primaryStage;
-        UtilSceneChanger.getInstance().ChangeToScene(UtilSceneChanger.SceneType.ADMIN);
-        this.primaryStage.setTitle("Unnamed Client Organisation Trading System");
 
+        for(int i = 0; i < 1; i++){
+            new Thread(
+                new Runnable(){
+                    @Override
+                    public void run()
+                     {
+                         new ClientSocket().startClient();
+                     }
+            }).start();
+        }
     }
 }

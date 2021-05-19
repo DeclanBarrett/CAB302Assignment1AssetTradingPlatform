@@ -2,8 +2,10 @@ package Controllers.FrontEnd;
 
 import Controllers.Backend.NetworkObjects.BradsPacket;
 
-import java.net.*;
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 
 /**
  * @author Brad Kent
@@ -22,22 +24,21 @@ public class ClientSocket
             // Connect to Server
             Socket client = new Socket(serverName, port);
             System.out.println("Client Connected: " + client.getRemoteSocketAddress());
-
+            System.out.println("Streams");
             // Communication with server
             ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
             ObjectInputStream in  = new ObjectInputStream(client.getInputStream());
+            System.out.println("Looping");
 
-            for (int i = 0; i < 10; i++) {
-                if (in.available() > 0) {
-                    System.out.println(in.readObject());
-                }
-                out.writeObject(new BradsPacket());
-            }
+            out.writeObject(new BradsPacket());
+            System.out.println(in.readObject());
+
+
             Thread.sleep(500);
             // Close Connections
             out.close();
             client.close();
-        } catch (IOException | ClassNotFoundException | InterruptedException i){
+        } catch (IOException | InterruptedException | ClassNotFoundException i){
             i.printStackTrace();
         }
 

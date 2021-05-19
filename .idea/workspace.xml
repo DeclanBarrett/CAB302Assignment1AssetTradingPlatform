@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Issues with Creating SQL Tables.&#10;&#10;SolN: &#10;- Create the tables in SQL order, i.e. tables need to be present in DB before creating Foreign keys. &#10;- Need to Fix SQL syntax, giving exceptions based on bad syntax of SQL statements.&#10;Notes:&#10;Had to create DB Manually">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_json_json_20210307.xml" afterDir="false" />
+    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Added JSON Objects, Java 15 does not include oracles JOSN objects (Depreciated).&#10;&#10;Found Suitable replacement on github, resolved via maven.&#10;&#10;JSON as network medium are far superior than Serial .class files.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App_Start/ClientStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Start/ClientStart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App_Start/ServerStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Start/ServerStart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/NetworkObjects/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/NetworkObjects/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/ClientHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/ClientHandle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/ClientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/ClientSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/Login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/Login/LoginController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +108,20 @@
       <command value="ClientStart" />
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.ClientStart">
+    <configuration name="ClientStart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="App_Start.ClientStart" />
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="App_Start.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ServerStart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="App_Start.ServerStart" />
       <module name="CAB302Assignment1AssetTradingPlatform" />
@@ -134,6 +150,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ClientStart" />
         <item itemvalue="Application.ServerStart" />
       </list>
     </recent_temporary>
@@ -196,7 +213,7 @@
       <workItem from="1620607941513" duration="8154000" />
       <workItem from="1620623791548" duration="624000" />
       <workItem from="1620624432090" duration="81000" />
-      <workItem from="1621403761490" duration="3762000" />
+      <workItem from="1621403761490" duration="6207000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit (Brad Barebones)">
       <created>1617760354635</created>
@@ -387,7 +404,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621405504213</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Added JSON Objects, Java 15 does not include oracles JOSN objects (Depreciated).&#10;&#10;Found Suitable replacement on github, resolved via maven.&#10;&#10;JSON as network medium are far superior than Serial .class files.">
+      <created>1621407886148</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1621407886148</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -440,7 +464,8 @@
     <MESSAGE value="Finally Got the database hooked up!!! &#10;&#10;- Team had bad dependencies and imported 4 wrong maven modules. &#10;- Cleaned up unused imports (Could not compile after removing bad maven imports)&#10;&#10;Note -&gt; Need to create the Database on local system and use the correct jdbc driver. team had mySQL driver instead of Mariadb." />
     <MESSAGE value="Issues with Creating SQL Tables.&#10;&#10;SolN: Create the tables in SQL order, i.e. tables need to be present in DB before creating Foreign keys. &#10;&#10;Notes:&#10;Had to create DB Manually" />
     <MESSAGE value="Issues with Creating SQL Tables.&#10;&#10;SolN: &#10;- Create the tables in SQL order, i.e. tables need to be present in DB before creating Foreign keys. &#10;- Need to Fix SQL syntax, giving exceptions based on bad syntax of SQL statements.&#10;Notes:&#10;Had to create DB Manually" />
-    <option name="LAST_COMMIT_MESSAGE" value="Issues with Creating SQL Tables.&#10;&#10;SolN: &#10;- Create the tables in SQL order, i.e. tables need to be present in DB before creating Foreign keys. &#10;- Need to Fix SQL syntax, giving exceptions based on bad syntax of SQL statements.&#10;Notes:&#10;Had to create DB Manually" />
+    <MESSAGE value="Added JSON Objects, Java 15 does not include oracles JOSN objects (Depreciated).&#10;&#10;Found Suitable replacement on github, resolved via maven.&#10;&#10;JSON as network medium are far superior than Serial .class files." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added JSON Objects, Java 15 does not include oracles JOSN objects (Depreciated).&#10;&#10;Found Suitable replacement on github, resolved via maven.&#10;&#10;JSON as network medium are far superior than Serial .class files." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

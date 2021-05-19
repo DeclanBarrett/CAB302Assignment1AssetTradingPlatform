@@ -2,6 +2,7 @@ package Controllers.Backend;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 
@@ -36,13 +37,16 @@ public class ClientHandle implements Runnable
 
         try {
             ObjectInputStream in = new ObjectInputStream(connection.getInputStream());
+            ObjectOutputStream out = new ObjectOutputStream(connection.getOutputStream());
             while(!connection.isClosed()) {
             //while(in.read() != -1) {
                 if (connection.getInputStream().available() > 0) {
                     System.out.println("Received: " + in.readObject() + " : " + i++);
+                    out.writeObject("from Server");
                 } else{
                     System.out.println("Just Waiting for: " + thisId + "...");
-                    Thread.sleep(500);
+                    Thread.sleep(1000);
+                    System.out.println("Awake");
                 }
             }
             System.out.println("Loop-----");
