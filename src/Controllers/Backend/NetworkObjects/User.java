@@ -15,6 +15,14 @@ public class User implements Comparable<User>, Serializable {
     private String organisationalType;
     private String salt;
 
+
+    /**
+     * No args constructor
+     */
+    public User()
+    {
+
+    }
     /**
      * @param username           Username of the user
      * @param password           Password of the user
@@ -37,11 +45,22 @@ public class User implements Comparable<User>, Serializable {
     }
 
     /**
+     * Sets username of user.
+     */
+    public void setUsername(String username) { this.username = username; }
+
+    /**
      * @return password of the User
      */
     public String getPassword() {
         return password;
     }
+
+    /**
+     * sets user password
+     * @param password
+     */
+    public void setPassword(String password) { this.password = password; }
 
     /**
      * @return account type of the User
@@ -51,15 +70,38 @@ public class User implements Comparable<User>, Serializable {
     }
 
     /**
+     * Sets user account type
+     * @param accountType
+     */
+    public void setAccountType(AccountType accountType) { this.accountType = accountType; }
+
+    /**
      * @return organisational unit of the User
      */
     public String getOrganisationalUnit() {
         return organisationalType;
     }
 
+    /**
+     * Sets users organisational Unit
+     * @return
+     */
+    public void setOrganisationalType(String organisationalType) { this.organisationalType = organisationalType; }
+
+
+    /**
+     * gets users salt.
+     * @return
+     */
     public String getSalt() {
         return salt;
     }
+
+    /**
+     * Sets user salt.
+     * @param salt
+     */
+    public void setSalt(String salt) { this.salt = salt; }
 
 
     /**
