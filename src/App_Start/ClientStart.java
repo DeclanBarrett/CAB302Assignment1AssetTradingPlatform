@@ -31,7 +31,7 @@ public class ClientStart extends Application
     public void start(Stage primaryStage) throws Exception
     {
         this.primaryStage = primaryStage;
-        UtilSceneChanger.getInstance().ChangeToScene(UtilSceneChanger.SceneType.LOGIN);
+        UtilSceneChanger.getInstance().ChangeToScene(UtilSceneChanger.SceneType.ADMIN);
         this.primaryStage.setTitle("Unnamed Client Organisation Trading System");
 
     }

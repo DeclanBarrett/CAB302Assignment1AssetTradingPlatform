@@ -3,27 +3,22 @@ package Controllers.FrontEnd.Admin;
 import Controllers.Backend.NetworkObjects.OrganisationalUnit;
 import Controllers.FrontEnd.Login.LoginController;
 import Controllers.Backend.Socket.MockSocket;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import Controllers.FrontEnd.Observer;
+import Controllers.FrontEnd.Subject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Duration;
 
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
 /**
  * Handles events in admin organisation edit tab.
  */
-public class AdminCreateOrganisationHandler implements Initializable {
+public class AdminCreateOrganisationTabController implements Initializable, Observer {
 
     @FXML
     TextField CreateOrgName;
@@ -46,7 +41,9 @@ public class AdminCreateOrganisationHandler implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         CreateOrgNameColumn.setCellValueFactory(new PropertyValueFactory<>("unitName"));
         CreateOrgCreditColumn.setCellValueFactory(new PropertyValueFactory<>("credits"));
+        CreateOrgErrorText.setText("");
         UpdateOrganisationTable();
+
     }
 
     /**
@@ -55,6 +52,16 @@ public class AdminCreateOrganisationHandler implements Initializable {
      */
     public void CreateOrganisation(ActionEvent CreateOrganisation) {
         System.out.println(CreateOrganisation.getSource());
+
+        Integer credit = 0;
+        try {
+            credit = Integer.parseInt(CreateOrgCredits.getText());
+        } catch (NumberFormatException e) {
+            CreateOrgErrorText.setText("PLEASE ENTER A NUMBER FOR CREDITS");
+        }
+        String success = MockSocket.getInstance().AddOrganisation(LoginController.GetToken(),
+                new OrganisationalUnit(CreateOrgName.getText(), credit, null));
+        CreateOrgErrorText.setText(success);
     }
 
     private void UpdateOrganisationTable() {
@@ -63,5 +70,8 @@ public class AdminCreateOrganisationHandler implements Initializable {
     }
 
 
-
+    @Override
+    public void update(Subject s) {
+        UpdateOrganisationTable();
+    }
 }

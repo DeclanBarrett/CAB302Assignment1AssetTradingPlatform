@@ -208,4 +208,13 @@ public interface IDataSource {
      */
     String UpdateOrganisationAsset(LoginToken token, String organisationName, String AssetType, int AssetQuantity);
 
+    /**
+     * Change an organisations credit
+     * @param token - token to be used for authentication
+     * @param organisationName - organisation to have their credit edited
+     * @param creditAmount - credit amount to change to
+     * @return a success or failure message
+     */
+    String UpdateOrganisationCredit(LoginToken token, String organisationName, int creditAmount);
+
 }

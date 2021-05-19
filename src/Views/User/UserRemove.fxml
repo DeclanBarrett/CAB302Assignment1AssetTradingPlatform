@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="UserRemoveAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.User.UserRemoveHandler">
+<AnchorPane fx:id="userRemoveTab" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.User.UserRemoveTabController">
    <children>
       <Label fx:id="RemoveOrganisationName" alignment="CENTER" layoutX="159.0" layoutY="50.0" prefHeight="48.0" prefWidth="553.0" stylesheets="@../StyleSheets/Root.css" text="Organisation Name" textAlignment="CENTER">
          <font>

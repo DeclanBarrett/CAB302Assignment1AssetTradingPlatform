@@ -3,6 +3,8 @@ package Controllers.FrontEnd.Admin;
 import Controllers.Backend.NetworkObjects.OrganisationalUnit;
 import Controllers.FrontEnd.Login.LoginController;
 import Controllers.Backend.Socket.MockSocket;
+import Controllers.FrontEnd.Observer;
+import Controllers.FrontEnd.Subject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +19,7 @@ import java.util.ResourceBundle;
 /**
  * Handles events in admin edit organisational unit tab.
  */
-public class AdminEditOrganisationHandler implements Initializable {
+public class AdminEditOrganisationTabController implements Initializable, Observer {
 
     @FXML
     TextField EditOrgName;
@@ -60,6 +62,24 @@ public class AdminEditOrganisationHandler implements Initializable {
      */
     public void SetAssetQuantityToOrg(ActionEvent SetAssetQuantityToOrg) {
         System.out.println(SetAssetQuantityToOrg.getSource());
+
+        if (EditOrgName.getText() == null || EditOrgName.getText().equals("")) {
+            EditOrgErrorText.setText("NO ORGANISATION");
+            return;
+        }
+
+
+        Integer assetQuantity = 0;
+        try {
+            assetQuantity = Integer.parseInt(EditOrgSetAssetQuantity.getText());
+
+        } catch (Exception e) {
+            EditOrgErrorText.setText("PLEASE ENTER AN INTEGER FOR QUANTITY");
+        }
+
+        String success = MockSocket.getInstance().UpdateOrganisationAsset(LoginController.GetToken(), EditOrgName.getText(), EditOrgSetAssetName.getText(), assetQuantity);
+        EditOrgErrorText.setText(success);
+
     }
 
     /**
@@ -67,7 +87,22 @@ public class AdminEditOrganisationHandler implements Initializable {
      * @param SetCreditOfOrg Sets new credits value
      */
     public void SetCreditOfOrg(ActionEvent SetCreditOfOrg) {
-        System.out.println(SetCreditOfOrg.getSource());
+
+        if (EditOrgName.getText() == null || EditOrgName.getText().equals("")) {
+            EditOrgErrorText.setText("NO ORGANISATION");
+            return;
+        }
+
+        Integer assetQuantity = 0;
+        try {
+            assetQuantity = Integer.parseInt(EditOrgSetAssetQuantity.getText());
+
+        } catch (Exception e) {
+            EditOrgErrorText.setText("PLEASE ENTER AN INTEGER FOR QUANTITY");
+        }
+
+        String success = MockSocket.getInstance().UpdateOrganisationAsset(LoginController.GetToken(), EditOrgName.getText(), EditOrgSetAssetName.getText(), assetQuantity);
+        EditOrgErrorText.setText(success);
     }
 
     private void UpdateOrganisationTable() {
@@ -81,6 +116,11 @@ public class AdminEditOrganisationHandler implements Initializable {
         }
 
         EditOrgAssetsTable.getItems().setAll(tableOrgs);
+    }
+
+    @Override
+    public void update(Subject s) {
+        UpdateOrganisationTable();
     }
 
     /**

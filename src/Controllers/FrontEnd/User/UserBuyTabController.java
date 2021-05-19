@@ -5,6 +5,8 @@ import Controllers.Backend.NetworkObjects.Trade;
 import Controllers.Backend.OrderType;
 import Controllers.FrontEnd.Login.LoginController;
 import Controllers.Backend.Socket.MockSocket;
+import Controllers.FrontEnd.Observer;
+import Controllers.FrontEnd.Subject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,7 +24,7 @@ import java.util.ResourceBundle;
 /**
  * Handles all user buy orders.
  */
-public class UserBuyHandler implements Initializable {
+public class UserBuyTabController implements Initializable, Observer {
 
     private static final String ERROR_WRONG_INPUT_TYPE = "PLEASE INSERT NUMBERS";
     @FXML
@@ -135,6 +137,11 @@ public class UserBuyHandler implements Initializable {
         }
 
         BuyPriceHistoryGraph.getData().setAll(tradeData);
+
+    }
+
+    @Override
+    public void update(Subject s) {
 
     }
 }
