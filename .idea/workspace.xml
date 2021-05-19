@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Finally Got the database hooked up!!! &#10;&#10;- Team had bad dependencies and imported 4 wrong maven modules. &#10;- Cleaned up unused imports (Could not compile after removing bad maven imports)&#10;&#10;Note -&gt; Need to create the Database on local system and use the correct jdbc driver. team had mySQL driver instead of Mariadb.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App_Start/ServerStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Start/ServerStart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/SQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/SQL.java" afterDir="false" />
-    </list>
+    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Issues with Creating SQL Tables.&#10;&#10;SolN: Create the tables in SQL order, i.e. tables need to be present in DB before creating Foreign keys. &#10;&#10;Notes:&#10;Had to create DB Manually" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -194,7 +190,7 @@
       <workItem from="1620607941513" duration="8154000" />
       <workItem from="1620623791548" duration="624000" />
       <workItem from="1620624432090" duration="81000" />
-      <workItem from="1621403761490" duration="1361000" />
+      <workItem from="1621403761490" duration="1691000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit (Brad Barebones)">
       <created>1617760354635</created>
@@ -371,7 +367,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621404377036</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Issues with Creating SQL Tables.&#10;&#10;SolN: Create the tables in SQL order, i.e. tables need to be present in DB before creating Foreign keys. &#10;&#10;Notes:&#10;Had to create DB Manually">
+      <created>1621405295299</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1621405295299</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -422,7 +425,8 @@
     <MESSAGE value="Merged Development -&gt; Brads" />
     <MESSAGE value="Fixed Merge errors &amp; project base not established." />
     <MESSAGE value="Finally Got the database hooked up!!! &#10;&#10;- Team had bad dependencies and imported 4 wrong maven modules. &#10;- Cleaned up unused imports (Could not compile after removing bad maven imports)&#10;&#10;Note -&gt; Need to create the Database on local system and use the correct jdbc driver. team had mySQL driver instead of Mariadb." />
-    <option name="LAST_COMMIT_MESSAGE" value="Finally Got the database hooked up!!! &#10;&#10;- Team had bad dependencies and imported 4 wrong maven modules. &#10;- Cleaned up unused imports (Could not compile after removing bad maven imports)&#10;&#10;Note -&gt; Need to create the Database on local system and use the correct jdbc driver. team had mySQL driver instead of Mariadb." />
+    <MESSAGE value="Issues with Creating SQL Tables.&#10;&#10;SolN: Create the tables in SQL order, i.e. tables need to be present in DB before creating Foreign keys. &#10;&#10;Notes:&#10;Had to create DB Manually" />
+    <option name="LAST_COMMIT_MESSAGE" value="Issues with Creating SQL Tables.&#10;&#10;SolN: Create the tables in SQL order, i.e. tables need to be present in DB before creating Foreign keys. &#10;&#10;Notes:&#10;Had to create DB Manually" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
