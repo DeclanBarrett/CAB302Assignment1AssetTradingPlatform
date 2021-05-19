@@ -1,11 +1,9 @@
 package Controllers.Backend.Socket;
 
-import Controllers.Backend.*;
+import Controllers.Backend.AccountType;
 import Controllers.Backend.NetworkObjects.*;
-import Controllers.FrontEnd.Login.LoginController;
+import Controllers.Backend.OrderType;
 import Models.IDataSource;
-import com.mysql.cj.log.Log;
-
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,7 +13,8 @@ import java.util.List;
 /**
  * Mock database for testing.
  */
-public class MockSocket implements IDataSource {
+public class MockSocket implements IDataSource
+{
 
 
     private boolean databaseConnected;
@@ -31,7 +30,8 @@ public class MockSocket implements IDataSource {
      * TODO finish implementing IDataSource
      * Populating the mock database with values
      */
-    protected MockSocket() {
+    protected MockSocket()
+    {
         databaseConnected = false;
 
         userTable.add(new User("User 1", "b717415eb5e699e4989ef3e2c4e9cbf7", AccountType.User, "Sales", "12345")); //qwerty
@@ -87,17 +87,15 @@ public class MockSocket implements IDataSource {
         System.out.println("HELL");
     }
 
-    private static class MockSocketHolder {
-        private final static MockSocket INSTANCE = new MockSocket();
-    }
-
-    public static MockSocket getInstance() {
+    public static MockSocket getInstance()
+    {
         return MockSocketHolder.INSTANCE;
     }
 
     @Override
-    public String GetSalt(String username) {
-        for (User currentUser: userTable) {
+    public String GetSalt(String username)
+    {
+        for (User currentUser : userTable) {
             if (currentUser.getUsername().equals(username)) {
                 return currentUser.getSalt();
             }
@@ -107,8 +105,9 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public LoginToken AttemptLogin(String username, String password) {
-        for (User currentUser: userTable) {
+    public LoginToken AttemptLogin(String username, String password)
+    {
+        for (User currentUser : userTable) {
             if (currentUser.getUsername().equals(username) && currentUser.getPassword().equals(password)) {
                 Date actualDate = new Date();
 
@@ -123,13 +122,15 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public String AttemptResetPassword(LoginToken token, String username, String newPassword) {
+    public String AttemptResetPassword(LoginToken token, String username, String newPassword)
+    {
         return null;
     }
 
     @Override
-    public UserInfo GetUser(LoginToken token, String username) {
-        for (User currentUser: userTable) {
+    public UserInfo GetUser(LoginToken token, String username)
+    {
+        for (User currentUser : userTable) {
             if (currentUser.getUsername().equals(username)) {
                 return new UserInfo(currentUser.getUsername(), currentUser.getAccountType(), currentUser.getOrganisationalUnit());
             }
@@ -138,8 +139,9 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public OrganisationalUnit GetOrganisation(LoginToken token, String orgName) {
-        for (OrganisationalUnit organisationalUnit: organisationalUnitTable) {
+    public OrganisationalUnit GetOrganisation(LoginToken token, String orgName)
+    {
+        for (OrganisationalUnit organisationalUnit : organisationalUnitTable) {
             if (organisationalUnit.getUnitName().equals(orgName)) {
                 return organisationalUnit;
             }
@@ -148,25 +150,29 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public List<Order> GetOrganisationOrders(LoginToken token, String orgName) {
+    public List<Order> GetOrganisationOrders(LoginToken token, String orgName)
+    {
         ArrayList<Order> orders = new ArrayList<>();
-        for (Order order: orderTable) {
-            if (order.getOrganisationalUnit().equals(orgName))
+        for (Order order : orderTable) {
+            if (order.getOrganisationalUnit().equals(orgName)) {
                 orders.add(order);
+            }
         }
         return orders;
     }
 
     @Override
-    public List<Order> GetAllOrders(LoginToken token) {
+    public List<Order> GetAllOrders(LoginToken token)
+    {
         ArrayList<Order> orders = orderTable;
         return orders;
     }
 
     @Override
-    public List<Order> GetBuyOrders(LoginToken token) {
+    public List<Order> GetBuyOrders(LoginToken token)
+    {
         ArrayList<Order> buyOrders = new ArrayList<>();
-        for (Order order: orderTable) {
+        for (Order order : orderTable) {
             if (order.getOrderType().equals(OrderType.BUY)) {
                 buyOrders.add(order);
             }
@@ -175,9 +181,10 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public List<Order> GetSellOrders(LoginToken token) {
+    public List<Order> GetSellOrders(LoginToken token)
+    {
         ArrayList<Order> sellOrders = new ArrayList<>();
-        for (Order order: orderTable) {
+        for (Order order : orderTable) {
             if (order.getOrderType().equals(OrderType.BUY)) {
                 sellOrders.add(order);
             }
@@ -186,15 +193,17 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public List<Order> GetOrganisationBuyOrders(LoginToken token, String organisationName) {
+    public List<Order> GetOrganisationBuyOrders(LoginToken token, String organisationName)
+    {
         ArrayList<Order> orders = new ArrayList<>();
-        for (Order order: orderTable) {
-            if (order.getOrganisationalUnit().equals(organisationName))
+        for (Order order : orderTable) {
+            if (order.getOrganisationalUnit().equals(organisationName)) {
                 orders.add(order);
+            }
         }
 
         ArrayList<Order> buyOrders = new ArrayList<>();
-        for (Order order: orders) {
+        for (Order order : orders) {
             if (order.getOrderType().equals(OrderType.BUY)) {
                 buyOrders.add(order);
             }
@@ -203,16 +212,18 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public List<Order> GetOrganisationSellOrders(LoginToken token, String organisationName) {
+    public List<Order> GetOrganisationSellOrders(LoginToken token, String organisationName)
+    {
 
         ArrayList<Order> orders = new ArrayList<>();
-        for (Order order: orderTable) {
-            if (order.getOrganisationalUnit().equals(organisationName))
-            orders.add(order);
+        for (Order order : orderTable) {
+            if (order.getOrganisationalUnit().equals(organisationName)) {
+                orders.add(order);
+            }
         }
 
         ArrayList<Order> sellOrders = new ArrayList<>();
-        for (Order order: orders) {
+        for (Order order : orders) {
             if (order.getOrderType().equals(OrderType.SELL)) {
                 sellOrders.add(order);
             }
@@ -221,26 +232,30 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public String AddOrder(LoginToken token, Order newOrder) {
+    public String AddOrder(LoginToken token, Order newOrder)
+    {
         return "Success";
     }
 
     @Override
-    public String RemoveOrder(LoginToken token, int OrderID) {
+    public String RemoveOrder(LoginToken token, int OrderID)
+    {
         orderTable.removeIf(order -> order.getOrderID() == OrderID);
         return "Success";
     }
 
     @Override
-    public List<String> GetAssetTypes(LoginToken token) {
+    public List<String> GetAssetTypes(LoginToken token)
+    {
         return assetTypesTable;
     }
 
     @Override
-    public List<Trade> GetTradeHistory(LoginToken token, String AssetType) {
+    public List<Trade> GetTradeHistory(LoginToken token, String AssetType)
+    {
         List<Trade> trades = new ArrayList<>();
 
-        for (Trade trade: tradesTable) {
+        for (Trade trade : tradesTable) {
             if (trade.getAssetName().equals(AssetType)) {
                 trades.add(trade);
             }
@@ -250,12 +265,14 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public String AddUser(LoginToken token, User user) {
+    public String AddUser(LoginToken token, User user)
+    {
         return "Success";
     }
 
     @Override
-    public List<UserInfo> GetAllUsers(LoginToken token) {
+    public List<UserInfo> GetAllUsers(LoginToken token)
+    {
         List<UserInfo> infoTable = new ArrayList<>();
         for (User user : userTable) {
             infoTable.add(new UserInfo(user.getUsername(), user.getAccountType(), user.getOrganisationalUnit()));
@@ -264,44 +281,53 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public String UpdateUserPassword(LoginToken token, String username, String hashedPassword, String salt) {
+    public String UpdateUserPassword(LoginToken token, String username, String hashedPassword, String salt)
+    {
         return "success";
     }
 
     @Override
-    public String UpdateUserAccountType(LoginToken token, String username, AccountType accountType) {
+    public String UpdateUserAccountType(LoginToken token, String username, AccountType accountType)
+    {
         return "Success";
     }
 
     @Override
-    public String UpdateUserOrganisation(LoginToken token, String username, String organisationName) {
+    public String UpdateUserOrganisation(LoginToken token, String username, String organisationName)
+    {
         return "Success";
     }
 
     @Override
-    public String AddAsset(LoginToken token, String assetName) {
+    public String AddAsset(LoginToken token, String assetName)
+    {
         assetTypesTable.add(assetName);
         return "Success";
     }
 
     @Override
-    public String AddOrganisation(LoginToken token, OrganisationalUnit organisation) {
+    public String AddOrganisation(LoginToken token, OrganisationalUnit organisation)
+    {
         return "Success";
     }
 
     @Override
-    public List<OrganisationalUnit> GetAllOrganisations(LoginToken token) {
+    public List<OrganisationalUnit> GetAllOrganisations(LoginToken token)
+    {
 
         return organisationalUnitTable;
     }
 
     @Override
-    public String UpdateOrganisationAsset(LoginToken token, String organisationName, String AssetType, int AssetQuantity) {
+    public String UpdateOrganisationAsset(LoginToken token, String organisationName, String AssetType, int AssetQuantity)
+    {
         return null;
     }
 
-
-
+    private static class MockSocketHolder
+    {
+        private final static MockSocket INSTANCE = new MockSocket();
+    }
 
 
 }

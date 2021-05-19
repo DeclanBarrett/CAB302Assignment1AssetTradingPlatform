@@ -6,7 +6,10 @@ import java.net.*;
 import java.io.*;
 
 /**
- * Client Socket intiialisation.
+ * @author Brad Kent
+ * @author n10632999@qut.edu.au
+ * @version 1.0
+ * @since 0.1
  */
 public class ClientSocket
 {
