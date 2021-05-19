@@ -1,4 +1,4 @@
-package Testing.ModelTest;
+package Tests.ModelTest;
 
 import Controllers.Backend.AccountType;
 import Controllers.Backend.NetworkObjects.Order;

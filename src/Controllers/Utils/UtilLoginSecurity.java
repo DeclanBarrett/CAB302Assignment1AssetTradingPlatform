@@ -8,14 +8,14 @@ import java.security.SecureRandom;
 /**
  * Large class for potential password storage,
  */
-public class LoginSecurity {
+public class UtilLoginSecurity {
 
     public static final String MD_5 = "MD5";
 
     /**
      * Creates login security
      */
-    public LoginSecurity() {
+    public UtilLoginSecurity() {
     }
 
     /**
@@ -44,7 +44,6 @@ public class LoginSecurity {
      */
     public String hashPassword(String userInputPassword, String salt) throws LoginException {
 
-        String securePassword = null;
         StringBuilder hexaDFormat = new StringBuilder();
 
         try {
@@ -64,6 +63,6 @@ public class LoginSecurity {
         } catch (Exception e) {
             throw new LoginException("Password Hashing has Failed");
         }
-        return securePassword = hexaDFormat.toString();
+        return hexaDFormat.toString();
     }
 }

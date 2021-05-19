@@ -1,4 +1,4 @@
-package Testing.ControllerTest.FrontEndTest;
+package Tests.Controllers.FrontEnd.Login;
 
 import Controllers.Backend.AccountType;
 import Controllers.Backend.NetworkObjects.LoginToken;

@@ -1,4 +1,4 @@
-package Testing.ControllerTest.NetworkObjects;
+package Tests.Controllers.NetworkObjects;
 
 import Controllers.Backend.NetworkObjects.LoginToken;
 import org.junit.jupiter.api.BeforeEach;

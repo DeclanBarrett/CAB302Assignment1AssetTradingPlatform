@@ -1,4 +1,4 @@
-package Testing.ControllerTest.NetworkObjects;
+package Tests.Controllers.NetworkObjects;
 
 import Controllers.Backend.NetworkObjects.Trade;
 import org.junit.jupiter.api.BeforeEach;

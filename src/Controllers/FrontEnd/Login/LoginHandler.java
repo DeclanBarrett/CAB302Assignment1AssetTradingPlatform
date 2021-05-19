@@ -2,17 +2,13 @@ package Controllers.FrontEnd.Login;
 
 import Controllers.Backend.AccountType;
 import Controllers.Exceptions.LoginException;
+import Controllers.Utils.UtilSceneChanger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,24 +39,15 @@ public class LoginHandler implements Initializable {
             LoginController loginController = new LoginController();
             loginController.AttemptLogin(LoginUsername.getText(), LoginPassword.getText());
 
-            Parent loginView;
-
             if (LoginController.GetUser().getAccountType() == AccountType.SystemAdmin) {
-                loginView = FXMLLoader.load(getClass().getResource("/Views/Admin/AdminScreen.fxml"));
+                UtilSceneChanger.getInstance().ChangeToScene(UtilSceneChanger.SceneType.ADMIN);
             } else if (LoginController.GetUser().getAccountType() == AccountType.User ||
                     LoginController.GetUser().getAccountType() == AccountType.UnitLeader) {
-                loginView = FXMLLoader.load(getClass().getResource("/Views/User/UserScreen.fxml"));
+                UtilSceneChanger.getInstance().ChangeToScene(UtilSceneChanger.SceneType.USER);
             } else {
                 throw new LoginException("Unexpected Error");
             }
 
-
-            Scene loginViewScene = new Scene(loginView);
-
-            Stage window = (Stage)((Node)HandleLoginPress.getSource()).getScene().getWindow();
-
-            window.setScene(loginViewScene);
-            window.show();
         } catch(LoginException e) {
             LoginErrorText.setText(e.getMessage());
         } catch (Exception e) {
@@ -75,16 +62,7 @@ public class LoginHandler implements Initializable {
      * @throws IOException handles error in file entry/output
      */
     public void TriggerResetPassword (ActionEvent TriggerResetPassword) throws IOException {
-
-        Parent passwordReseter;
-        passwordReseter = FXMLLoader.load(getClass().getResource("/Views/Login/Reset.fxml"));
-        Scene passwordReseterScene = new Scene(passwordReseter);
-
-        Stage window = (Stage)((Node)TriggerResetPassword.getSource()).getScene().getWindow();
-
-        window.setScene(passwordReseterScene);
-        window.show();
-
+        UtilSceneChanger.getInstance().ChangeToScene(UtilSceneChanger.SceneType.RESET);
     }
 
 

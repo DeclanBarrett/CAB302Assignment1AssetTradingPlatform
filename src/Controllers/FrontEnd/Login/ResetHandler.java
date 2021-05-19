@@ -38,9 +38,6 @@ public class ResetHandler implements Initializable {
 
     ResetController resetController;
 
-
-
-
     /**
      * Checks that the correct username/password combination is entered into the reset password screen
      * this then returns the user to the login screen after password reset.

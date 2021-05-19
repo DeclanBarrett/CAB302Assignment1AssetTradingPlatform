@@ -3,7 +3,7 @@ package Controllers.FrontEnd.Admin;
 import Controllers.Backend.AccountType;
 import Controllers.Backend.NetworkObjects.User;
 import Controllers.Backend.NetworkObjects.UserInfo;
-import Controllers.Utils.LoginSecurity;
+import Controllers.Utils.UtilLoginSecurity;
 import Controllers.FrontEnd.Login.LoginController;
 import Controllers.Backend.Socket.MockSocket;
 import javafx.event.ActionEvent;
@@ -63,9 +63,9 @@ public class AdminCreateUserHandler implements Initializable {
     public void CreateUser(ActionEvent CreateUser) {
 
         try {
-            LoginSecurity loginSecurity = new LoginSecurity();
-            String salt = loginSecurity.generateSalt();
-            User newUser = new User(CreateUserUsername.getText(), loginSecurity.hashPassword(CreateUserPassword.getText(),
+            UtilLoginSecurity utilLoginSecurity = new UtilLoginSecurity();
+            String salt = utilLoginSecurity.generateSalt();
+            User newUser = new User(CreateUserUsername.getText(), utilLoginSecurity.hashPassword(CreateUserPassword.getText(),
                     salt), AccountType.valueOf(CreateUserAccountType.getText()), CreateUserOrgUnit.getText(), salt);
             MockSocket.getInstance().AddUser(LoginController.GetToken(), newUser);
             UpdateUserInfoTable();

@@ -2,15 +2,10 @@ package Controllers.FrontEnd.Login;
 
 import Controllers.Backend.Socket.MockSocket;
 import Controllers.Exceptions.LoginException;
+import Controllers.Utils.UtilSceneChanger;
 import Controllers.Utils.UtilFieldCheckers;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 
@@ -44,7 +39,7 @@ public class ResetController {
                     MockSocket.getInstance().AttemptResetPassword(LoginController.GetToken(), username, newPassword);
                     loginController.Logout();
 
-                    showLoginPage(window);
+                    UtilSceneChanger.getInstance().ChangeToScene(UtilSceneChanger.SceneType.LOGIN);
                 } else {
                     throw new LoginException(ERROR_TEXT_RESET_PASSWORD);
                 }
@@ -52,20 +47,6 @@ public class ResetController {
                 error.setText(ERROR_TEXT_RESET_PASSWORD);
             }
         }
-    }
-
-    /**
-     * Shows the login page
-     * @param window source to get window of
-     * @throws IOException throws if resource cannot be retrieved
-     */
-    private void showLoginPage(Stage window) throws IOException {
-        Parent loginView;
-        loginView = FXMLLoader.load(getClass().getResource(LOGIN_PAGE_FILE_PATH));
-        Scene loginViewScene = new Scene(loginView);
-
-        window.setScene(loginViewScene);
-        window.show();
     }
 
     /**

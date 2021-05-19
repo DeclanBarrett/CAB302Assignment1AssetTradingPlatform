@@ -5,7 +5,7 @@ import Controllers.Backend.NetworkObjects.LoginToken;
 import Controllers.Backend.NetworkObjects.UserInfo;
 import Controllers.Backend.Socket.MockSocket;
 import Controllers.Exceptions.LoginException;
-import Controllers.Utils.LoginSecurity;
+import Controllers.Utils.UtilLoginSecurity;
 
 /**
  * Used to check for correct login input.
@@ -72,7 +72,7 @@ public class LoginController {
         if (salt == null) {
             throw new LoginException(LOGIN_ERROR_USERNAME_PASSWORD_2);
         }
-        LoginSecurity securityManager = new LoginSecurity();
+        UtilLoginSecurity securityManager = new UtilLoginSecurity();
 
         // Generates salted and hashed password using md5 algorithm.
         //String salt = securityManager.generateSalt();
