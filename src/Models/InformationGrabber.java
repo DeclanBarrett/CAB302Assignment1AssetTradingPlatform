@@ -32,7 +32,7 @@ public class  InformationGrabber {
     private static final String UPDATE_ORGANISATION_ASSET = "UPDATE OrgHasQuantity SET AssetName = ?, AssetQuantity = ? " +
             "WHERE OrganisationalUnitName = ?";
 
-    private static final String GET_NONCE = "SELECT Salt FROM User WHERE UserName=?";
+    private static final String GET_NONCE = "SELECT Salt FROM Users WHERE UserName=?";
     private static final String GET_PASSWORD = "SELECT HashedPassword FROM Users WHERE UserName=?";
     private static final String GET_USER = "SELECT * FROM Users WHERE UserName=?";
     private static final String GET_USER_INFO = "SELECT * FROM Users WHERE UserName=?"; //Fix to be diff from prev
