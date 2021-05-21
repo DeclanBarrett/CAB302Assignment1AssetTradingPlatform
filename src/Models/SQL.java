@@ -64,6 +64,7 @@ public class SQL {
                     "TradeDateMilSecs INT NOT NULL," +
                     "AssetQuantity INT NOT NULL," +
                     "AssetName VARCHAR(60) NOT NULL," +
+                    "AssetPrice FLOAT NOT NULL," +
                     "FOREIGN KEY(BuyerOrgName) REFERENCES OrganisationalUnit(OrganisationalUnitName)," +
                     "FOREIGN KEY(SellerOrgName) REFERENCES OrganisationalUnit(OrganisationalUnitName)" +
                     ");";

@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,7 +47,7 @@ public class  InformationGrabber {
     private static final String GET_SELL_ORDERS = "SELECT * FROM Order1 WHERE OrderType = SELL";
     private static final String GET_ORDERS = "SELECT * FROM Order1";
     private static final String GET_ASSET_TYPES = "SELECT * FROM Assets"; // is this correct?
-    private static final String GET_TRADE_HISTORY = "SELECT * FROM Trade"; // is this correct? what is assettype?
+    private static final String GET_TRADE_HISTORY = "SELECT * FROM Trade WHERE AssetName=?"; // is this correct? what is assettype?
 
     private static final String DELETE_ORDER = "DELETE FROM Order1 WHERE OrderID = ?";
 
@@ -359,8 +360,38 @@ public class  InformationGrabber {
 
     /**
      * Gets a list of all previous trades that occurred for an asset type
-     * @param AssetType - asset type of the trades
+     * @param AssetName - asset that was traded
      * @return a list of trades
      */
-    public List<Trade> getTradeHistory(String AssetType) {return null;}
+    public List<Trade> getTradeHistory(String AssetName) {
+        List<Trade> trades = null;
+        try
+        {
+            connection = DatabaseConnection.getInstance();
+            getTradeHistory = connection.prepareStatement(GET_TRADE_HISTORY);
+            getTradeHistory.setString(1, AssetName);
+
+            if(getTradeHistory != null)
+            {
+                ResultSet rs = getTradeHistory.executeQuery();
+                while (rs.next()) {
+                    Trade trade = new Trade(
+                            rs.getInt("TradeID"),
+                            rs.getString("AssetName"),
+                            rs.getInt("AssetQuantity"),
+                            rs.getDouble("AssetPrice"),
+                            rs.getString("BuyerOrgName"),
+                            rs.getString("SellerOrgName"),
+                            new Date(rs.getInt("TradeDateMilSecs"))
+
+                    );
+
+                    trades.add(trade);
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return trades;
+    }
 }
