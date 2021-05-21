@@ -94,10 +94,14 @@ public class SQL {
     private static final String INSERT_NEW_ORGANISATIONAL_UNIT_RESEARCH = "INSERT INTO OrganisationalUnit VALUES ('Research', 90)";
     private static final String INSERT_NEW_ORGANISATIONAL_UNIT_ADMIN = "INSERT INTO OrganisationalUnit VALUES ('Admin', 0)";
 
+    private static final String INSERT_NEW_TRADE = "INSERT INTO Trade VALUES (1, 'Sales', 'Finance', 1, 10, 'Paper')";
+    private static final String INSERT_NEW_ASSET = "INSERT INTO Assets VALUES ('Paper')";
 
     // Connection and Statements
     private Connection connection;
     private PreparedStatement AddUser;
+    private PreparedStatement AddTrade;
+    private PreparedStatement AddAsset;
     private PreparedStatement addOrganisationalUnit;
 
     // This function currently 'works' for the users tables
@@ -159,7 +163,7 @@ public class SQL {
             AddUser = connection.prepareStatement(INSERT_NEW_USER9);
             AddUser = connection.prepareStatement(INSERT_NEW_USER10);
 
-            AddUser.execute(INSERT_NEW_USER1);
+            /*AddUser.execute(INSERT_NEW_USER1);
             AddUser.execute(INSERT_NEW_USER2);
             AddUser.execute(INSERT_NEW_USER3);
             AddUser.execute(INSERT_NEW_USER4);
@@ -168,7 +172,13 @@ public class SQL {
             AddUser.execute(INSERT_NEW_USER7);
             AddUser.execute(INSERT_NEW_USER8);
             AddUser.execute(INSERT_NEW_USER9);
-            AddUser.execute(INSERT_NEW_USER10);
+            AddUser.execute(INSERT_NEW_USER10);*/
+
+            AddAsset = connection.prepareStatement(INSERT_NEW_ASSET);
+            AddTrade = connection.prepareStatement(INSERT_NEW_TRADE);
+            AddTrade.execute();
+            AddAsset.execute();
+
 
             /*AddUser = connection.prepareStatement(INSERT_NEW_USER1);
             AddUser.execute();*/
@@ -180,7 +190,7 @@ public class SQL {
 
 
 
-*/
+
             /*AddUser = connection.prepareStatement(INSERT_NEW_USER1);
             AddUser = connection.prepareStatement(INSERT_NEW_USER2);
             AddUser = connection.prepareStatement(INSERT_NEW_USER3);
