@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * Creates and initialises SQL database. Features all table creation String statements
+ * Creates and initialises PopulateDatabase database. Features all table creation String statements
  */
 public class SQL {
     // Table and Database Creation
@@ -42,7 +42,7 @@ public class SQL {
                     "FOREIGN KEY(OrganisationalUnit) REFERENCES OrganisationalUnit(OrganisationalUnitName)" +
                     ");";
     public static final String CREATE_TABLE_Orders =
-            "CREATE TABLE IF NOT EXISTS Order(" +
+            "CREATE TABLE IF NOT EXISTS Orders(" +
                     "OrderID INT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
                     "OrganisationalUnitName VARCHAR(60) NOT NULL," +
                     "PlaceDateMilSecs INT NOT NULL," +
@@ -68,7 +68,7 @@ public class SQL {
                     "FOREIGN KEY(SellerOrgName) REFERENCES OrganisationalUnit(OrganisationalUnitName)" +
                     ");";
 
-    // Population of database via SQL Queries (based off Mock Socket data)
+    // Population of database via PopulateDatabase Queries (based off Mock Socket data)
     private static final String INSERT_NEW_USER1 = "INSERT INTO Users VALUES ('User 1', 'Sales', 'User', 'b717415eb5e699e4989ef3e2c4e9cbf7', '12345')";
     private static final String INSERT_NEW_USER2 = "INSERT INTO Users VALUES ('User 2', 'Sales', 'User', 'b717415eb5e699e4989ef3e2c4e9cbf7', '12345')";
     private static final String INSERT_NEW_USER3 = "INSERT INTO Users VALUES ('User 3', 'Finance', 'User', '8d421e892a47dff539f46142eb09e56b', '123456')";
@@ -111,7 +111,7 @@ public class SQL {
 
 
     // Create and Populate prepare statements in here
-    public SQL() {
+    public void populateDatabase() {
         connection = DatabaseConnection.getInstance();
         try {
             Statement createUserTableStatement = connection.createStatement();
@@ -121,24 +121,67 @@ public class SQL {
             Statement createAssetsTableStatement = connection.createStatement();
             Statement createTradeTableStatement = connection.createStatement();
 
-            createUserTableStatement.execute(CREATE_TABLE_Users);
+           /* createUserTableStatement.execute(CREATE_TABLE_Users);
             createOrgHasQuantityTableStatement.execute(CREATE_TABLE_OrgHasQuantity);
             createOrganisationalUnitTableStatement.execute(CREATE_TABLE_OrganisationalUnit);
             createOrdersTableStatement.execute(CREATE_TABLE_Orders);
             createAssetsTableStatement.execute(CREATE_TABLE_Assets);
-            createTradeTableStatement.execute(CREATE_TABLE_Trade);
+            createTradeTableStatement.execute(CREATE_TABLE_Trade);*/
 
             Statement st = connection.createStatement();
-            st.execute(CREATE_DATABASE);
+            //st.execute(CREATE_DATABASE);
 
-            st.execute(CREATE_TABLE_Users);
-            st.execute(CREATE_TABLE_OrgHasQuantity);
-            st.execute(CREATE_TABLE_Orders);
             st.execute(CREATE_TABLE_OrganisationalUnit);
             st.execute(CREATE_TABLE_Assets);
+            st.execute(CREATE_TABLE_Users);
+            st.execute(CREATE_TABLE_OrgHasQuantity);
             st.execute(CREATE_TABLE_Trade);
+            st.execute(CREATE_TABLE_Orders);
+
+
+          /*  addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_SALES);
+            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_FINANCE);
+            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_RESEARCH);
+            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_ADMIN);
+            addOrganisationalUnit.execute(INSERT_NEW_ORGANISATIONAL_UNIT_SALES);
+            addOrganisationalUnit.execute(INSERT_NEW_ORGANISATIONAL_UNIT_FINANCE);
+            addOrganisationalUnit.execute(INSERT_NEW_ORGANISATIONAL_UNIT_RESEARCH);
+            addOrganisationalUnit.execute(INSERT_NEW_ORGANISATIONAL_UNIT_ADMIN);*/
 
             AddUser = connection.prepareStatement(INSERT_NEW_USER1);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER2);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER3);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER4);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER5);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER6);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER7);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER8);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER9);
+            AddUser = connection.prepareStatement(INSERT_NEW_USER10);
+
+            AddUser.execute(INSERT_NEW_USER1);
+            AddUser.execute(INSERT_NEW_USER2);
+            AddUser.execute(INSERT_NEW_USER3);
+            AddUser.execute(INSERT_NEW_USER4);
+            AddUser.execute(INSERT_NEW_USER5);
+            AddUser.execute(INSERT_NEW_USER6);
+            AddUser.execute(INSERT_NEW_USER7);
+            AddUser.execute(INSERT_NEW_USER8);
+            AddUser.execute(INSERT_NEW_USER9);
+            AddUser.execute(INSERT_NEW_USER10);
+
+            /*AddUser = connection.prepareStatement(INSERT_NEW_USER1);
+            AddUser.execute();*/
+            //AddUser = connection.prepareStatement(INSERT_NEW_USER1);
+           //
+        /*
+
+
+
+
+
+*/
+            /*AddUser = connection.prepareStatement(INSERT_NEW_USER1);
             AddUser = connection.prepareStatement(INSERT_NEW_USER2);
             AddUser = connection.prepareStatement(INSERT_NEW_USER3);
             AddUser = connection.prepareStatement(INSERT_NEW_USER4);
@@ -158,7 +201,7 @@ public class SQL {
             addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_SALES);
             addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_FINANCE);
             addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_RESEARCH);
-            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_ADMIN);
+            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_ADMIN);*/
 
         } catch (SQLException ex) {
             ex.printStackTrace();

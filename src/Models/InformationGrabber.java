@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class  InformationGrabber {
 
-    //SQL queries
+    //PopulateDatabase queries
 
     private static final String INSERT_NEW_USER = "INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES (?, ?, ?, ?, ?)";
     private static final String INSERT_ASSET = "INSERT INTO Assets VALUES ('?');";

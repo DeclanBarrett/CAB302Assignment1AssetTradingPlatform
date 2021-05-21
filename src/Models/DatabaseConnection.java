@@ -19,7 +19,7 @@ public class DatabaseConnection {
         Properties props = new Properties();
         FileInputStream in = null;
         try {
-            in = new FileInputStream("./db.props");
+            in = new FileInputStream("src/Models/db.props");
             props.load(in);
             in.close();
 

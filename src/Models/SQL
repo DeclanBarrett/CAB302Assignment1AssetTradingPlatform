@@ -23,7 +23,7 @@ Salt VARCHAR(60) NOT NULL,
 FOREIGN KEY(OrganisationalUnit) REFERENCES OrganisationalUnit(OrganisationalUnitName)
 );
 
-CREATE TABLE Order1(
+CREATE TABLE Order(
 OrderID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 OrganisationalUnitName VARCHAR(60) NOT NULL,
 PlaceDateMilSecs INT NOT NULL,
