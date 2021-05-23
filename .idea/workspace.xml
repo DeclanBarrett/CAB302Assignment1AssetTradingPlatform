@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Added JSON Objects, Java 15 does not include oracles JOSN objects (Depreciated).&#10;&#10;Found Suitable replacement on github, resolved via maven.&#10;&#10;JSON as network medium are far superior than Serial .class files.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App_Start/ClientStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Start/ClientStart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App_Start/ServerStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Start/ServerStart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/ClientHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/ClientHandle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/Backend/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Backend/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/ClientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/ClientSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/Login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/Login/LoginController.java" afterDir="false" />
-    </list>
+    <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Removed Unwanted file" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,6 +47,11 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Models/UserDAO.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Models/SQL.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Models/InformationGrabber.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1qoyBDtoSUT10ozznKhI69mkQcv" />
   <component name="ProjectLevelVcsManager">
@@ -135,19 +131,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <list>
+      <item itemvalue="Application.ServerStart" />
+      <item itemvalue="Application.ClientStart" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.ClientStart" />
