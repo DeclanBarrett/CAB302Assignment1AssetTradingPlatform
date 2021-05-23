@@ -10,27 +10,29 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-public class TestClientOrderManager {
+public class TestClientOrderManager
+{
 
     OrderManager orderManager;
 
     @BeforeEach
-    public void ConstructClientOrderManager(){
+    public void ConstructClientOrderManager()
+    {
 
         orderManager = new OrderManager();
 
     }
 
     @Test
-    public void TestSetUser() {
+    public void TestSetUser()
+    {
         UserInfo userInfo = new UserInfo("Jack", AccountType.User, "Sales");
         orderManager.SetUser(userInfo);
     }
 
     @Test
-    public void TestSetOrgUnit() {
+    public void TestSetOrgUnit()
+    {
         HashMap<String, Integer> organisationAssets = new HashMap<>();
         organisationAssets.put("Paper", 50);
         organisationAssets.put("CPU hours", 600);
@@ -41,7 +43,8 @@ public class TestClientOrderManager {
     }
 
     @Test
-    public void TestCheckOrderNormal() {
+    public void TestCheckOrderNormal()
+    {
         UserInfo userInfo = new UserInfo("Jack", AccountType.User, "Sales");
 
         Order order = null;//new Order(OrderType.BUY, "Paper", 50, 3.5, "Sales", new Date());
