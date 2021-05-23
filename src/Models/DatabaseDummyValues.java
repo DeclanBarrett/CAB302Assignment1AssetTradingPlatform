@@ -36,7 +36,7 @@ public class DatabaseDummyValues extends Database
             "INSERT INTO OrganisationalUnit VALUES ('Finance' , 100)",
             "INSERT INTO OrganisationalUnit VALUES ('Research', 90)",
             "INSERT INTO OrganisationalUnit VALUES ('Admin'   , 0)"
-    }
+    };
 
     //=========== Asset Dummy Data =============//
     private static final String[] assetData = {
@@ -44,7 +44,9 @@ public class DatabaseDummyValues extends Database
     };
 
     //=========== Trade Dummy Data =============//
-    private static final String[] tradeData "INSERT INTO Trade VALUES (1, 'Sales', 'Finance', 1, 10, 'Paper', 200);"; // Fixed, not sure about Data tho?
+    private static final String[] tradeData = {
+            "INSERT INTO Trade VALUES (1, 'Sales', 'Finance', 1, 10, 'Paper', 200);"
+    };
 
 
     public static void insertUsers()
