@@ -30,13 +30,7 @@ public class SQL {
 
 
 
-    private static final String INSERT_NEW_ORGANISATIONAL_UNIT_SALES = "INSERT INTO OrganisationalUnit VALUES ('Sales', 3000.50)";
-    private static final String INSERT_NEW_ORGANISATIONAL_UNIT_FINANCE = "INSERT INTO OrganisationalUnit VALUES ('Finance', 100)";
-    private static final String INSERT_NEW_ORGANISATIONAL_UNIT_RESEARCH = "INSERT INTO OrganisationalUnit VALUES ('Research', 90)";
-    private static final String INSERT_NEW_ORGANISATIONAL_UNIT_ADMIN = "INSERT INTO OrganisationalUnit VALUES ('Admin', 0)";
 
-    private static final String INSERT_NEW_TRADE = "INSERT INTO Trade VALUES (1, 'Sales', 'Finance', 1, 10, 'Paper', 200);"; // Fixed, not sure about Data tho?
-    private static final String INSERT_NEW_ASSET = "INSERT INTO Assets VALUES ('Paper')";
 
     // Connection and Statements
     private Connection connection;
@@ -59,29 +53,7 @@ public class SQL {
     public void populateDatabase() {
        // connection = DatabaseConnection.getInstance();
         try {
-            Statement createUserTableStatement = connection.createStatement();
-            Statement createOrgHasQuantityTableStatement = connection.createStatement();
-            Statement createOrganisationalUnitTableStatement = connection.createStatement();
-            Statement createOrdersTableStatement = connection.createStatement();
-            Statement createAssetsTableStatement = connection.createStatement();
-            Statement createTradeTableStatement = connection.createStatement();
 
-           /* createUserTableStatement.execute(CREATE_TABLE_Users);
-            createOrgHasQuantityTableStatement.execute(CREATE_TABLE_OrgHasQuantity);
-            createOrganisationalUnitTableStatement.execute(CREATE_TABLE_OrganisationalUnit);
-            createOrdersTableStatement.execute(CREATE_TABLE_Orders);
-            createAssetsTableStatement.execute(CREATE_TABLE_Assets);
-            createTradeTableStatement.execute(CREATE_TABLE_Trade);*/
-
-            Statement st = connection.createStatement();
-            //st.execute(CREATE_DATABASE);
-
-            st.execute(CREATE_TABLE_OrganisationalUnit);
-            st.execute(CREATE_TABLE_Assets);
-            st.execute(CREATE_TABLE_Users);
-            st.execute(CREATE_TABLE_OrgHasQuantity);
-            st.execute(CREATE_TABLE_Trade);
-            st.execute(CREATE_TABLE_Orders);
 
 
 //            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_SALES);

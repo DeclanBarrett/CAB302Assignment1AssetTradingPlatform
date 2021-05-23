@@ -1,10 +1,13 @@
 package Models;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DatabaseSchema
 {
     private static Connection db;
+    private static Statement st;
 
     private static final String CREATE_TABLE_OrganisationalUnit =
             "CREATE TABLE IF NOT EXISTS OrganisationalUnit(" +
@@ -62,25 +65,55 @@ public class DatabaseSchema
     public void getDbConnection()
     {
         DatabaseSchema.db = DatabaseConnection.getInstance();
+        if (db != null)
+        {
+            try{
+                st = db.createStatement();
+            } catch (SQLException throwables)
+            {
+                throwables.printStackTrace();
+            }
+        }
     }
 
-    public static void createAssetTable()
+    public static void createAssetTable() throws SQLException
     {
-
+        st.execute(CREATE_TABLE_Assets);
     }
-    public static void createOrgUnitTable() {}
-    public static void createOrgHasTable() {}
-    public static void createUserTable() {}
-    public static void createTradeTable() {}
-    public static void createOrderTable() {}
+    public static void createOrgUnitTable() throws SQLException
+    {
+        st.execute(CREATE_TABLE_OrganisationalUnit)
+    }
+    public static void createOrgHasTable() throws SQLException
+    {
+        st.execute(CREATE_TABLE_OrgHasQuantity);
+    }
+    public static void createUserTable() throws SQLException
+    {
+        st.execute(CREATE_TABLE_Users);
+    }
+    public static void createTradeTable() throws SQLException
+    {
+        st.execute(CREATE_TABLE_Trade);
+    }
+    public static void createOrderTable() throws SQLException
+    {
+        st.execute(CREATE_TABLE_Orders);
+    }
 
     public static void createAllTables()
     {
-        createOrgUnitTable();
-        createAssetTable();
-        createUserTable();
-        createTradeTable();
-        createOrderTable();
-        createOrgHasTable();
+        try
+        {
+            createOrgUnitTable();
+            createAssetTable();
+            createUserTable();
+            createTradeTable();
+            createOrderTable();
+            createOrgHasTable();
+        } catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
     }
 }
