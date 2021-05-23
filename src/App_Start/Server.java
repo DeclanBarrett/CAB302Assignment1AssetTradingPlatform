@@ -1,25 +1,23 @@
 package App_Start;
 
+import Controllers.Backend.AccountType;
+import Controllers.Backend.NetworkObjects.User;
 import Models.DatabaseConnection;
 import Models.InformationGrabber;
 import Models.SQL;
+import Models.UserDAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Server {
     public static void main(String[] args) throws SQLException
     {
-        Connection connection = DatabaseConnection.getInstance();
-        SQL sql = new SQL(connection);
-        sql.populateDatabase();
-
-        InformationGrabber a = new InformationGrabber();
-       // a.getSalt("User 1");
-        System.out.println(a.getSalt("User 1"));
-        connection.close();
-
-
+        UserDAO.updateDbConnection();
+        List<User> a = UserDAO.getAll();
+        a.forEach((n) -> { System.out.println(n);});
+        DatabaseConnection.closeDbConnection();
     }
 }

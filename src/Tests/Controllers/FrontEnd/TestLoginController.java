@@ -1,5 +1,3 @@
-package Tests.Controllers.FrontEnd.Login;
-
 import Controllers.Backend.AccountType;
 import Controllers.Backend.NetworkObjects.LoginToken;
 import Controllers.Backend.NetworkObjects.UserInfo;
