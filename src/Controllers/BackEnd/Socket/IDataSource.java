@@ -2,7 +2,8 @@ package Controllers.BackEnd.Socket;
 
 import Controllers.BackEnd.AccountType;
 import Controllers.BackEnd.NetworkObjects.*;
-import Controllers.Exceptions.LoginException;
+import Controllers.Exceptions.AuthenticationException;
+import Controllers.Exceptions.ServerException;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface IDataSource {
      * @param username - username for the user that's to be retrieved
      * @return a string that is the salt
      */
-    String GetSalt(String username);
+    String GetSalt(String username) throws ServerException;
 
     /**
      * Attempt to login to the server so that the user can be authenticated
@@ -26,14 +27,14 @@ public interface IDataSource {
      * @return a login token that can be stored client side and given to the server
      * whenever the client wants to communicate while logged in
      */
-    LoginToken AttemptLogin(String username, String password);
+    LoginToken AttemptLogin(String username, String password) throws AuthenticationException, ServerException;
 
     /**
      * Attempts to reset the password of the user on the server
      * @param newPassword - the new password of the user which is to replace the old password
      * @return a success message, or failure message
      */
-    String AttemptResetPassword(LoginToken token, String username, String newPassword) throws LoginException;
+    String AttemptResetPassword(LoginToken token, String username, String newPassword) throws AuthenticationException, ServerException;
 
     /**
      * Gets the user information (without login details) from the server
@@ -41,7 +42,7 @@ public interface IDataSource {
      * @param username - the user to gather the information on
      * @return a user info object with the users information in it
      */
-    UserInfo GetUser(LoginToken token, String username);
+    UserInfo GetUser(LoginToken token, String username) throws AuthenticationException, ServerException;
 
     /**
      * Gets an organisation from the server
@@ -49,7 +50,7 @@ public interface IDataSource {
      * @param orgName - organisation name for the organisation to gather
      * @return an organisation unit object with organisation information within it
      */
-    OrganisationalUnit GetOrganisation(LoginToken token, String orgName);
+    OrganisationalUnit GetOrganisation(LoginToken token, String orgName) throws AuthenticationException, ServerException;
 
     /**
      * Gets all orders for an organisation from the server
@@ -57,28 +58,28 @@ public interface IDataSource {
      * @param orgName - organisation which orders will be gathered
      * @return a list of orders that have been placed by an organisation
      */
-    List<Order> GetOrganisationOrders(LoginToken token, String orgName);
+    List<Order> GetOrganisationOrders(LoginToken token, String orgName) throws AuthenticationException, ServerException;
 
     /**
      * Get all orders from the server
      * @param token - token to be used for authentication
      * @return List of all orders
      */
-    List<Order> GetAllOrders(LoginToken token);
+    List<Order> GetAllOrders(LoginToken token) throws AuthenticationException, ServerException;
 
     /**
      * Get buy orders from the server
      * @param token - token to be used for authentication
      * @return List of all orders
      */
-    List<Order> GetBuyOrders(LoginToken token);
+    List<Order> GetBuyOrders(LoginToken token) throws AuthenticationException, ServerException;
 
     /**
      * Get sell orders from the server
      * @param token - token to be used for authentication
      * @return List of all orders
      */
-    List<Order> GetSellOrders(LoginToken token);
+    List<Order> GetSellOrders(LoginToken token) throws AuthenticationException, ServerException;
 
     /**
      * Get buy orders from the server for an organisation
@@ -86,7 +87,7 @@ public interface IDataSource {
      * @param organisationName - organisation to get buy orders
      * @return List of all orders
      */
-    List<Order> GetOrganisationBuyOrders(LoginToken token, String organisationName);
+    List<Order> GetOrganisationBuyOrders(LoginToken token, String organisationName) throws AuthenticationException, ServerException;
 
     /**
      * Get sell orders from the server for an organisation
@@ -94,7 +95,7 @@ public interface IDataSource {
      * @param organisationName - organisation to get buy orders
      * @return List of all orders
      */
-    List<Order> GetOrganisationSellOrders(LoginToken token, String organisationName);
+    List<Order> GetOrganisationSellOrders(LoginToken token, String organisationName) throws AuthenticationException, ServerException;
 
     /**
      * Attempts to add an order to the server, with it either being executed,
@@ -104,7 +105,7 @@ public interface IDataSource {
      * @param newOrder - order to attempt to be added and executed
      * @return a success or failure message
      */
-    String AddOrder(LoginToken token, Order newOrder);
+    String AddOrder(LoginToken token, Order newOrder) throws AuthenticationException, ServerException;
 
     /**
      * Attempts to remove an order from the server
@@ -112,14 +113,14 @@ public interface IDataSource {
      * @param orderID - orderID of the order to be removed
      * @return a success or failure message
      */
-    String RemoveOrder(LoginToken token, int orderID);
+    String RemoveOrder(LoginToken token, int orderID) throws AuthenticationException, ServerException;
 
     /**
      * Gets the asset types which are currently allowed from the server
      * @param token - token to be used for authentication
      * @return a list of asset types
      */
-    List<String> GetAssetTypes(LoginToken token);
+    List<String> GetAssetTypes(LoginToken token) throws AuthenticationException, ServerException;
 
     /**
      * Gets the history of all trades that have occurred for a type of asset
@@ -128,7 +129,7 @@ public interface IDataSource {
      * @param AssetType - the type of asset that the history is retrieved for
      * @return a list of trades for a type of asset
      */
-    List<Trade> GetTradeHistory(LoginToken token, String AssetType);
+    List<Trade> GetTradeHistory(LoginToken token, String AssetType) throws AuthenticationException, ServerException;
 
     /**
      * Attempts to add a new user to the server
@@ -136,14 +137,14 @@ public interface IDataSource {
      * @param user - user object with all information to be added to the database
      * @return a success or failure message
      */
-    String AddUser(LoginToken token, User user);
+    String AddUser(LoginToken token, User user) throws AuthenticationException, ServerException;
 
     /**
      * Gets all the user info from the server
      * @param token - token to be used for authentication
      * @return a list of user information in user info objects
      */
-    List<UserInfo> GetAllUsers(LoginToken token);
+    List<UserInfo> GetAllUsers(LoginToken token) throws AuthenticationException, ServerException;
 
     /**
      * Change a users password on the server
@@ -153,7 +154,7 @@ public interface IDataSource {
      * @param salt - client side salt to store with it
      * @return a success or failure message
      */
-    String UpdateUserPassword(LoginToken token, String username, String hashedPassword, String salt);
+    String UpdateUserPassword(LoginToken token, String username, String hashedPassword, String salt) throws AuthenticationException, ServerException;
 
     /**
      * Change a users account type on the server
@@ -162,7 +163,7 @@ public interface IDataSource {
      * @param accountType - account type to change to
      * @return a success or failure message
      */
-    String UpdateUserAccountType(LoginToken token, String username, AccountType accountType);
+    String UpdateUserAccountType(LoginToken token, String username, AccountType accountType) throws AuthenticationException, ServerException;
 
     /**
      * Change a users organisation they are part of on the server
@@ -171,7 +172,7 @@ public interface IDataSource {
      * @param organisationName - organisation to change to
      * @return a success or failure message
      */
-    String UpdateUserOrganisation(LoginToken token, String username, String organisationName);
+    String UpdateUserOrganisation(LoginToken token, String username, String organisationName) throws AuthenticationException, ServerException;
 
     /**
      * Attempt to add an asset that is allowed to the server which
@@ -181,7 +182,7 @@ public interface IDataSource {
      * @param assetName - asset to be added
      * @return a success or failure message
      */
-    String AddAsset(LoginToken token, String assetName);
+    String AddAsset(LoginToken token, String assetName) throws AuthenticationException, ServerException;
 
     /**
      * Attempt to add a new organisation to the server
@@ -189,14 +190,14 @@ public interface IDataSource {
      * @param organisation - organisation object with all information regarding organisation
      * @return a success or failure message
      */
-    String AddOrganisation(LoginToken token, OrganisationalUnit organisation);
+    String AddOrganisation(LoginToken token, OrganisationalUnit organisation) throws AuthenticationException, ServerException;
 
     /**
      * Gets all organisations with information from the server
      * @param token - token to be used for authentication
      * @return a list of all organisations with internal information from the server
      */
-    List<OrganisationalUnit> GetAllOrganisations(LoginToken token);
+    List<OrganisationalUnit> GetAllOrganisations(LoginToken token) throws AuthenticationException, ServerException;
 
     /**
      * Change an organisations asset and quantity on the server
@@ -206,7 +207,7 @@ public interface IDataSource {
      * @param AssetQuantity - quantity to set the asset to
      * @return a success or failure message
      */
-    String UpdateOrganisationAsset(LoginToken token, String organisationName, String AssetType, int AssetQuantity);
+    String UpdateOrganisationAsset(LoginToken token, String organisationName, String AssetType, int AssetQuantity) throws AuthenticationException, ServerException;
 
     /**
      * Change an organisations credit
@@ -215,6 +216,6 @@ public interface IDataSource {
      * @param creditAmount - credit amount to change to
      * @return a success or failure message
      */
-    String UpdateOrganisationCredit(LoginToken token, String organisationName, int creditAmount);
+    String UpdateOrganisationCredit(LoginToken token, String organisationName, int creditAmount) throws AuthenticationException, ServerException;
 
 }

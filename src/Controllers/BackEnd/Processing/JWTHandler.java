@@ -1,6 +1,6 @@
 package Controllers.BackEnd.Processing;
 
-import Controllers.Exceptions.LoginException;
+import Controllers.Exceptions.AuthenticationException;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -22,9 +22,9 @@ public class JWTHandler {
     /**
      * Creates a new JWT token
      * @param username the username that the JWT belongs to
-     * @throws LoginException throws if a token cannot be constructed
+     * @throws AuthenticationException throws if a token cannot be constructed
      */
-    public String createToken(String username) throws LoginException {
+    public String createToken(String username) throws AuthenticationException {
         String token = null;
         try {
             long nowMillis = System.currentTimeMillis();
@@ -38,7 +38,7 @@ public class JWTHandler {
                     .sign(algorithm);
         } catch (JWTCreationException exception){
             //Invalid Signing configuration / Couldn't convert Claims.
-            throw new LoginException("Cannot Create Token");
+            throw new AuthenticationException("Cannot Create Token");
         }
         return token;
     }
@@ -46,9 +46,9 @@ public class JWTHandler {
     /**
      * Verifies an existing token and errors if its invalid
      * @param token the token to validate
-     * @throws LoginException the exception thrown that states what went wrong validating the token
+     * @throws AuthenticationException the exception thrown that states what went wrong validating the token
      */
-    public void verifyToken(String token) throws LoginException {
+    public void verifyToken(String token) throws AuthenticationException {
         try {
             Algorithm algorithm = Algorithm.HMAC256(SERVER_SECRET);
             JWTVerifier verifier = JWT.require(algorithm)
@@ -57,7 +57,7 @@ public class JWTHandler {
             DecodedJWT jwt = verifier.verify(token);
         } catch (JWTVerificationException exception){
             //Invalid signature/claims
-            throw new LoginException("Invalid Login Token");
+            throw new AuthenticationException("Invalid Login Token");
         }
     }
 }

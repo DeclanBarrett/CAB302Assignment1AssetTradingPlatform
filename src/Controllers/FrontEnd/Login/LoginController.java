@@ -4,7 +4,8 @@ package Controllers.FrontEnd.Login;
 import Controllers.BackEnd.NetworkObjects.LoginToken;
 import Controllers.BackEnd.NetworkObjects.UserInfo;
 import Controllers.BackEnd.Socket.MockSocket;
-import Controllers.Exceptions.LoginException;
+import Controllers.Exceptions.AuthenticationException;
+import Controllers.Exceptions.ServerException;
 import Controllers.Utils.UtilLoginSecurity;
 import Controllers.Utils.UtilSceneChanger;
 
@@ -37,7 +38,7 @@ public class LoginController {
     /**
      * Global Utility for attempting to login to the server
      */
-    public void AttemptLogin(String username, String password) throws LoginException {
+    public void AttemptLogin(String username, String password) throws AuthenticationException, ServerException {
 
         //Get the hashed password
         UtilLoginSecurity loginSecurity = new UtilLoginSecurity();
@@ -50,7 +51,7 @@ public class LoginController {
             return;
         }
 
-        throw new LoginException(LOGIN_ERROR_USERNAME_PASSWORD_1);
+        throw new AuthenticationException(LOGIN_ERROR_USERNAME_PASSWORD_1);
     }
 
     private boolean isCurrentLogin() {

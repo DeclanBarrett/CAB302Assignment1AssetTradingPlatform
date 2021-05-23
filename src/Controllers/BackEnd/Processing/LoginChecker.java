@@ -1,6 +1,6 @@
 package Controllers.BackEnd.Processing;
 
-import Controllers.Exceptions.LoginException;
+import Controllers.Exceptions.AuthenticationException;
 import Models.InformationGrabber;
 
 public class LoginChecker {
@@ -16,15 +16,15 @@ public class LoginChecker {
      * @param hashedPassword password to check the database against
      * @return a JWT token
      */
-    public String compareLogin(String username, String hashedPassword) throws LoginException {
+    public String compareLogin(String username, String hashedPassword) throws AuthenticationException {
 
         String newToken = "";
         try {
             if (hashedPassword.equals(database.getPassword(username)))
             return newToken;
         } catch (Exception e) {
-            throw new LoginException("Incorrect Username of Password");
+            throw new AuthenticationException("Incorrect Username of Password");
         }
-        throw new LoginException("Incorrect Username of Password");
+        throw new AuthenticationException("Incorrect Username of Password");
     }
 }

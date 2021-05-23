@@ -2,7 +2,8 @@ package Controllers.BackEnd.Socket;
 
 import Controllers.BackEnd.*;
 import Controllers.BackEnd.NetworkObjects.*;
-import Controllers.Exceptions.LoginException;
+import Controllers.Exceptions.AuthenticationException;
+import Controllers.Exceptions.ServerException;
 
 import java.time.Duration;
 import java.util.*;
@@ -91,7 +92,7 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public String GetSalt(String username) {
+    public String GetSalt(String username) throws ServerException{
         for (User currentUser: userTable) {
             if (currentUser.getUsername().equals(username)) {
                 return currentUser.getSalt();
@@ -102,7 +103,7 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public LoginToken AttemptLogin(String username, String password) {
+    public LoginToken AttemptLogin(String username, String password) throws AuthenticationException, ServerException {
 
         for (User currentUser: userTable) {
             if (currentUser.getUsername().equals(username) && currentUser.getPassword().equals(password)) {
@@ -119,7 +120,7 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public String AttemptResetPassword(LoginToken token, String username, String newPassword) throws LoginException {
+    public String AttemptResetPassword(LoginToken token, String username, String newPassword) throws AuthenticationException, ServerException {
         for (User currentUser: userTable) {
             if (currentUser.getUsername().equals(username)) {
                 User updatedUser = new User(currentUser.getUsername(), newPassword, currentUser.getAccountType(), currentUser.getOrganisationalUnit(), currentUser.getSalt());
@@ -128,11 +129,11 @@ public class MockSocket implements IDataSource {
                 return "Success";
             }
         }
-        throw new LoginException("USERNAME OR PASSWORD IS INCORRECT");
+        throw new AuthenticationException("USERNAME OR PASSWORD IS INCORRECT");
     }
 
     @Override
-    public UserInfo GetUser(LoginToken token, String username) {
+    public UserInfo GetUser(LoginToken token, String username) throws AuthenticationException, ServerException {
         for (User currentUser: userTable) {
             if (currentUser.getUsername().equals(username)) {
                 System.out.println(currentUser.getOrganisationalUnit());
@@ -143,7 +144,7 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public OrganisationalUnit GetOrganisation(LoginToken token, String orgName) {
+    public OrganisationalUnit GetOrganisation(LoginToken token, String orgName) throws AuthenticationException, ServerException {
         for (OrganisationalUnit organisationalUnit: organisationalUnitTable) {
             if (organisationalUnit.getUnitName().equals(orgName)) {
                 return organisationalUnit;
@@ -153,7 +154,7 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public List<Order> GetOrganisationOrders(LoginToken token, String orgName) {
+    public List<Order> GetOrganisationOrders(LoginToken token, String orgName) throws AuthenticationException, ServerException {
         ArrayList<Order> orders = new ArrayList<>();
         for (Order order: orderTable) {
             if (order.getOrganisationalUnit().equals(orgName))
@@ -163,13 +164,13 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public List<Order> GetAllOrders(LoginToken token) {
+    public List<Order> GetAllOrders(LoginToken token) throws AuthenticationException, ServerException {
         ArrayList<Order> orders = orderTable;
         return orders;
     }
 
     @Override
-    public List<Order> GetBuyOrders(LoginToken token) {
+    public List<Order> GetBuyOrders(LoginToken token) throws AuthenticationException, ServerException {
         ArrayList<Order> buyOrders = new ArrayList<>();
         for (Order order: orderTable) {
             if (order.getOrderType().equals(OrderType.BUY)) {
@@ -180,7 +181,7 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public List<Order> GetSellOrders(LoginToken token) {
+    public List<Order> GetSellOrders(LoginToken token) throws AuthenticationException, ServerException {
         ArrayList<Order> sellOrders = new ArrayList<>();
         for (Order order: orderTable) {
             if (order.getOrderType().equals(OrderType.SELL)) {
@@ -191,7 +192,7 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public List<Order> GetOrganisationBuyOrders(LoginToken token, String organisationName) {
+    public List<Order> GetOrganisationBuyOrders(LoginToken token, String organisationName) throws AuthenticationException, ServerException {
         ArrayList<Order> orders = new ArrayList<>();
         for (Order order: orderTable) {
             if (order.getOrganisationalUnit().equals(organisationName))
@@ -208,7 +209,7 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public List<Order> GetOrganisationSellOrders(LoginToken token, String organisationName) {
+    public List<Order> GetOrganisationSellOrders(LoginToken token, String organisationName) throws AuthenticationException, ServerException {
 
         ArrayList<Order> orders = new ArrayList<>();
         for (Order order: orderTable) {
@@ -226,7 +227,7 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public String AddOrder(LoginToken token, Order newOrder) {
+    public String AddOrder(LoginToken token, Order newOrder) throws AuthenticationException, ServerException {
         Random rand = new Random();
         orderTable.add(new Order(rand.nextInt(),
                 newOrder.getOrderType(),
@@ -239,18 +240,18 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public String RemoveOrder(LoginToken token, int OrderID) {
+    public String RemoveOrder(LoginToken token, int OrderID) throws AuthenticationException, ServerException {
         orderTable.removeIf(order -> order.getOrderID() == OrderID);
         return "Success";
     }
 
     @Override
-    public List<String> GetAssetTypes(LoginToken token) {
+    public List<String> GetAssetTypes(LoginToken token) throws AuthenticationException, ServerException {
         return assetTypesTable;
     }
 
     @Override
-    public List<Trade> GetTradeHistory(LoginToken token, String AssetType) {
+    public List<Trade> GetTradeHistory(LoginToken token, String AssetType) throws AuthenticationException, ServerException {
         List<Trade> trades = new ArrayList<>();
 
         for (Trade trade: tradesTable) {
@@ -263,13 +264,13 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public String AddUser(LoginToken token, User user) {
+    public String AddUser(LoginToken token, User user) throws AuthenticationException, ServerException {
         userTable.add(user);
         return "Success";
     }
 
     @Override
-    public List<UserInfo> GetAllUsers(LoginToken token) {
+    public List<UserInfo> GetAllUsers(LoginToken token) throws AuthenticationException, ServerException {
         List<UserInfo> infoTable = new ArrayList<>();
         for (User user : userTable) {
             infoTable.add(new UserInfo(user.getUsername(), user.getAccountType(), user.getOrganisationalUnit()));
@@ -278,7 +279,7 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public String UpdateUserPassword(LoginToken token, String username, String hashedPassword, String salt) {
+    public String UpdateUserPassword(LoginToken token, String username, String hashedPassword, String salt) throws AuthenticationException, ServerException {
         for (User currentUser: userTable) {
             if (currentUser.getUsername().equals(username)) {
                 User updatedUser = new User(currentUser.getUsername(), hashedPassword, currentUser.getAccountType(), currentUser.getOrganisationalUnit(), salt);
@@ -291,7 +292,7 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public String UpdateUserAccountType(LoginToken token, String username, AccountType accountType) {
+    public String UpdateUserAccountType(LoginToken token, String username, AccountType accountType) throws AuthenticationException, ServerException {
         for (User currentUser: userTable) {
             if (currentUser.getUsername().equals(username)) {
                 User updatedUser = new User(currentUser.getUsername(), currentUser.getPassword(), accountType, currentUser.getOrganisationalUnit(), currentUser.getSalt());
@@ -300,11 +301,11 @@ public class MockSocket implements IDataSource {
                 return "Success";
             }
         }
-        return "BAD";//throw new LoginException("USERNAME OR PASSWORD IS INCORRECT");
+        return "BAD";//throw new AuthenticationException("USERNAME OR PASSWORD IS INCORRECT");
     }
 
     @Override
-    public String UpdateUserOrganisation(LoginToken token, String username, String organisationName) {
+    public String UpdateUserOrganisation(LoginToken token, String username, String organisationName) throws AuthenticationException, ServerException {
         for (User currentUser: userTable) {
             if (currentUser.getUsername().equals(username)) {
                 User updatedUser = new User(currentUser.getUsername(), currentUser.getPassword(), currentUser.getAccountType(), organisationName, currentUser.getSalt());
@@ -313,30 +314,30 @@ public class MockSocket implements IDataSource {
                 return "Success";
             }
         }
-        return "BAD";//throw new LoginException("USERNAME OR PASSWORD IS INCORRECT");
+        return "BAD";//throw new AuthenticationException("USERNAME OR PASSWORD IS INCORRECT");
     }
 
     @Override
-    public String AddAsset(LoginToken token, String assetName) {
+    public String AddAsset(LoginToken token, String assetName) throws AuthenticationException, ServerException {
         assetTypesTable.add(assetName);
         return "Success";
     }
 
     @Override
-    public String AddOrganisation(LoginToken token, OrganisationalUnit organisation) {
+    public String AddOrganisation(LoginToken token, OrganisationalUnit organisation) throws AuthenticationException, ServerException {
 
         organisationalUnitTable.add(organisation);
         return "Success";
     }
 
     @Override
-    public List<OrganisationalUnit> GetAllOrganisations(LoginToken token) {
+    public List<OrganisationalUnit> GetAllOrganisations(LoginToken token) throws AuthenticationException, ServerException {
 
         return organisationalUnitTable;
     }
 
     @Override
-    public String UpdateOrganisationAsset(LoginToken token, String organisationName, String AssetType, int AssetQuantity) {
+    public String UpdateOrganisationAsset(LoginToken token, String organisationName, String AssetType, int AssetQuantity) throws AuthenticationException, ServerException {
         for (OrganisationalUnit organisationalUnit: organisationalUnitTable) {
             if (organisationalUnit.getUnitName().equals(organisationName)) {
 
@@ -354,11 +355,11 @@ public class MockSocket implements IDataSource {
                 return "Success";
             }
         }
-        return "BAD";//throw new LoginException("USERNAME OR PASSWORD IS INCORRECT");
+        return "BAD";//throw new AuthenticationException("USERNAME OR PASSWORD IS INCORRECT");
     }
 
     @Override
-    public String UpdateOrganisationCredit(LoginToken token, String organisationName, int creditAmount) {
+    public String UpdateOrganisationCredit(LoginToken token, String organisationName, int creditAmount) throws AuthenticationException, ServerException {
         for (OrganisationalUnit organisationalUnit: organisationalUnitTable) {
             if (organisationalUnit.getUnitName().equals(organisationName)) {
                 OrganisationalUnit updatedOrg = new OrganisationalUnit(organisationalUnit.getUnitName(), creditAmount, organisationalUnit.GetAllAssets());
@@ -367,7 +368,7 @@ public class MockSocket implements IDataSource {
                 return "Success";
             }
         }
-        return "BAD";//throw new LoginException("USERNAME OR PASSWORD IS INCORRECT");
+        return "BAD";//throw new AuthenticationException("USERNAME OR PASSWORD IS INCORRECT");
     }
 
 

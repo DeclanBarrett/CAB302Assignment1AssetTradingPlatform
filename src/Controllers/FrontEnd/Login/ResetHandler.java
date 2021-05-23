@@ -1,7 +1,7 @@
 package Controllers.FrontEnd.Login;
 
 import Controllers.BackEnd.Socket.MockSocket;
-import Controllers.Exceptions.LoginException;
+import Controllers.Exceptions.AuthenticationException;
 import Controllers.Utils.UtilFieldCheckers;
 import Controllers.Utils.UtilLoginSecurity;
 import javafx.event.ActionEvent;
@@ -57,7 +57,7 @@ public class ResetHandler implements Initializable {
                     ErrorText.setText(MockSocket.getInstance().AttemptResetPassword(LoginController.GetToken(), UsernameTextArea.getText(), hashPassword));
                     loginController.Logout();
                 } else {
-                    throw new LoginException(ERROR_TEXT_RESET_PASSWORD);
+                    throw new AuthenticationException(ERROR_TEXT_RESET_PASSWORD);
                 }
             } catch (Exception e) {
                 ErrorText.setTextFill(Color.RED);
