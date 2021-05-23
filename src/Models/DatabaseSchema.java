@@ -1,14 +1,9 @@
 package Models;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class DatabaseSchema
+public class DatabaseSchema extends Database
 {
-    private static Connection db;
-    private static Statement st;
-
     private static final String CREATE_TABLE_OrganisationalUnit =
             "CREATE TABLE IF NOT EXISTS OrganisationalUnit(" +
                     "OrganisationalUnitName VARCHAR(60) NOT NULL PRIMARY KEY," +
@@ -62,27 +57,13 @@ public class DatabaseSchema
 
     private DatabaseSchema() {}
 
-    public void getDbConnection()
-    {
-        DatabaseSchema.db = DatabaseConnection.getInstance();
-        if (db != null)
-        {
-            try{
-                st = db.createStatement();
-            } catch (SQLException throwables)
-            {
-                throwables.printStackTrace();
-            }
-        }
-    }
-
     public static void createAssetTable() throws SQLException
     {
         st.execute(CREATE_TABLE_Assets);
     }
     public static void createOrgUnitTable() throws SQLException
     {
-        st.execute(CREATE_TABLE_OrganisationalUnit)
+        st.execute(CREATE_TABLE_OrganisationalUnit);
     }
     public static void createOrgHasTable() throws SQLException
     {
