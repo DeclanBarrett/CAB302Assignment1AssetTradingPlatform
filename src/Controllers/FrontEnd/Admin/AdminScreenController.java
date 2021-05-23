@@ -44,7 +44,7 @@ public class AdminScreenController extends Subject implements Initializable {
                 new KeyFrame(
                         Duration.seconds(5),
                         event -> {
-                            System.out.println("Updating");
+                            System.out.println("Updating Admin");
                             notifyObservers();
                         }
                 )

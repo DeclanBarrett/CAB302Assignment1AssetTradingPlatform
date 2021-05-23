@@ -1,17 +1,22 @@
 package Controllers.FrontEnd.Admin;
 
-import Controllers.Backend.NetworkObjects.UserInfo;
+import Controllers.BackEnd.AccountType;
+import Controllers.BackEnd.NetworkObjects.UserInfo;
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.Backend.Socket.MockSocket;
+import Controllers.BackEnd.Socket.MockSocket;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
+import Controllers.Utils.UtilFieldCheckers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -64,7 +69,21 @@ public class AdminEditUserTabController implements Initializable, Observer {
     public void EditUserPassword(ActionEvent EditUserPassword) {
 
         System.out.println(EditUserPassword.getSource());
-        //MockSocket.getInstance().UpdateUserPassword();
+        String clientResponse = "";
+
+        try {
+            clientResponse = UtilFieldCheckers.checkTwoStrings(EditUserPassword.toString(), EditUserPassword2.toString(), "PASSWORDS");
+            AdminProcessing processing = new AdminProcessing();
+            clientResponse = processing.editUserPassword(EditUserUsername.getText(), EditUserPassword.toString());
+            EditUserErrorText.setTextFill(Color.GREEN);
+        } catch (Exception e) {
+            clientResponse = e.getMessage();
+            EditUserErrorText.setTextFill(Color.RED);
+        }
+
+        EditUserErrorText.setText(clientResponse);
+
+
     }
 
     /**
@@ -72,8 +91,25 @@ public class AdminEditUserTabController implements Initializable, Observer {
      * @param EditAccountType
      */
     public void EditAccountType(ActionEvent EditAccountType) {
-        System.out.println(EditAccountType.getSource());
-        //MockSocket.getInstance().UpdateUserAccountType();
+
+        String clientResponse = "";
+
+        try {
+            UtilFieldCheckers.checkMissingValues(new ArrayList<>(Arrays.asList(EditUserAccountType.getText(), EditUserUsername.getText())));
+
+            AccountType accountType = UtilFieldCheckers.checkAccountType(EditUserAccountType.getText());
+
+            clientResponse = MockSocket.getInstance().UpdateUserAccountType(LoginController.GetToken(),
+                    EditUserUsername.getText(),
+                    accountType);
+            EditUserErrorText.setTextFill(Color.GREEN);
+        } catch (Exception e) {
+            EditUserErrorText.setTextFill(Color.RED);
+            clientResponse = e.getMessage();
+        }
+
+        EditUserErrorText.setText(clientResponse);
+
     }
 
     /**
@@ -81,12 +117,37 @@ public class AdminEditUserTabController implements Initializable, Observer {
      * @param EditUserOrg
      */
     public void EditUserOrg(ActionEvent EditUserOrg) {
-        System.out.println(EditUserOrg.getSource());
-        //MockSocket.getInstance().UpdateUserOrganisation();
+
+        String clientResponse = "";
+
+        try {
+            UtilFieldCheckers.checkMissingValues(new ArrayList<>(Arrays.asList(EditUserOrgUnit.getText(), EditUserUsername.getText())));
+
+            clientResponse = MockSocket.getInstance().UpdateUserOrganisation(LoginController.GetToken(),
+                    EditUserUsername.getText(),
+                    EditUserOrgUnit.getText());
+            EditUserErrorText.setTextFill(Color.GREEN);
+        } catch (Exception e) {
+            EditUserErrorText.setTextFill(Color.RED);
+            clientResponse = e.getMessage();
+        }
+
+        EditUserErrorText.setText(clientResponse);
     }
 
+    /**
+     * Sets all the user information in the tables
+     */
     private void UpdateUserInfoTable() {
-        List<UserInfo> users = MockSocket.getInstance().GetAllUsers(LoginController.GetToken());
+        List<UserInfo> users = new ArrayList<>();
+
+        try {
+            users = MockSocket.getInstance().GetAllUsers(LoginController.GetToken());
+        } catch (Exception e) {
+            EditUserErrorText.setTextFill(Color.RED);
+            EditUserErrorText.setText(e.getMessage());
+        }
+
         EditUserTable.getItems().setAll(users);
     }
 

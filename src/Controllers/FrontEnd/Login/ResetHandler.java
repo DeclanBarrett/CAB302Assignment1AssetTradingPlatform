@@ -1,24 +1,17 @@
 package Controllers.FrontEnd.Login;
 
-import Controllers.Backend.Socket.MockSocket;
+import Controllers.BackEnd.Socket.MockSocket;
 import Controllers.Exceptions.LoginException;
 import Controllers.Utils.UtilFieldCheckers;
 import Controllers.Utils.UtilLoginSecurity;
-import Controllers.Utils.UtilSceneChanger;
-import com.mysql.cj.x.protobuf.MysqlxSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -62,7 +55,6 @@ public class ResetHandler implements Initializable {
                     String hashPassword = loginSecurity.generateHashedPassword(UsernameTextArea.getText(), NewPasswordText.getText());
                     //Attempts the password reset
                     ErrorText.setText(MockSocket.getInstance().AttemptResetPassword(LoginController.GetToken(), UsernameTextArea.getText(), hashPassword));
-                    //
                     loginController.Logout();
                 } else {
                     throw new LoginException(ERROR_TEXT_RESET_PASSWORD);
@@ -82,8 +74,19 @@ public class ResetHandler implements Initializable {
      */
     public void CheckPasswordDifference (KeyEvent CheckPasswordDifference) {
 
-        UtilFieldCheckers checker = new UtilFieldCheckers();
-        isPasswordMatching = checker.CheckTwoStrings(NewPasswordText.getText(), NewPassword2Text.getText(), ErrorText, "PASSWORDS");
+        String clientResponse = "";
+        try {
+            clientResponse = UtilFieldCheckers.checkTwoStrings(NewPasswordText.getText(), NewPassword2Text.getText(), "PASSWORDS");
+            isPasswordMatching = true;
+            ErrorText.setTextFill(Color.GREEN);
+        } catch (IllegalArgumentException e) {
+            isPasswordMatching = false;
+            clientResponse = e.getMessage();
+            ErrorText.setTextFill(Color.RED);
+        }
+
+        ErrorText.setText(clientResponse);
+
     }
 
     /**

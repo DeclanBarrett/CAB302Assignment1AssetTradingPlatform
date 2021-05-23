@@ -1,12 +1,13 @@
 package Controllers.FrontEnd.User;
 
-import Controllers.Backend.NetworkObjects.Order;
-import Controllers.Backend.NetworkObjects.Trade;
-import Controllers.Backend.OrderType;
+import Controllers.BackEnd.NetworkObjects.Order;
+import Controllers.BackEnd.NetworkObjects.Trade;
+import Controllers.BackEnd.OrderType;
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.Backend.Socket.MockSocket;
+import Controllers.BackEnd.Socket.MockSocket;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
+import Controllers.Utils.UtilFieldCheckers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,9 +16,12 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -69,6 +73,7 @@ public class UserBuyTabController implements Initializable, Observer {
         xAxis.setLabel("Time");
         yAxis.setLabel("Price");
 
+        BuyErrorText.setText("");
         UpdateAssetTypeText();
         UpdateBuyInformation();
     }
@@ -79,30 +84,34 @@ public class UserBuyTabController implements Initializable, Observer {
      * @throws IOException - thrown if in/out exception occurs
      */
     public void BuyAsset(ActionEvent BuyAsset) {
-        if (BuyAssetType.getValue() == null) {
-            BuyErrorText.setText("NO ASSET TYPE SELECTED");
-            return;
-        }
+
+        String clientResponse = "";
+
         try {
-            Integer quantity = 0;
-            Float price = 0.0f;
-            try {
-                quantity = Integer.parseInt(BuyAssetQuantity.getText());
-                price = Float.parseFloat(BuyPriceCredits.getText());
-            } catch (NumberFormatException formatException) {
-                BuyErrorText.setText(ERROR_WRONG_INPUT_TYPE);
-                return;
-            }
+            //Send an order to the database
+            UtilFieldCheckers.checkMissingValues(new ArrayList<>(Arrays.asList(BuyAssetType.getValue())));
+
+            Integer quantity = Integer.parseInt(BuyAssetQuantity.getText());
+            Float price = Float.parseFloat(BuyPriceCredits.getText());
 
             MockSocket.getInstance().AddOrder(LoginController.GetToken(),
                     new Order(-1, OrderType.BUY, BuyAssetType.getValue(), quantity, price, LoginController.GetUser().getOrganisationalUnit(), null));
-            BuyErrorText.setText("ORDER WAS SUCCESSFULLY PLACED");
+            clientResponse = "ORDER WAS SUCCESSFULLY PLACED";
+            System.out.println("IN: " +  clientResponse);
+            BuyErrorText.setTextFill(Color.GREEN);
+        } catch (NumberFormatException formatException) {
+            clientResponse = ERROR_WRONG_INPUT_TYPE;
+            BuyErrorText.setTextFill(Color.RED);
+            System.out.println("FORMAT: " +  clientResponse);
         } catch (Exception e) {
-            BuyErrorText.setText("ERROR");
+            clientResponse = e.getMessage();
+            BuyErrorText.setTextFill(Color.RED);
+            System.out.println("EXCE: " +  clientResponse);
         }
+
+        System.out.println("IS THIS TRIGGERING: " + clientResponse);
+        BuyErrorText.setText(clientResponse);
         UpdateBuyInformation();
-
-
     }
 
     /**
@@ -117,31 +126,52 @@ public class UserBuyTabController implements Initializable, Observer {
      * Updates asset type textbox
      */
     private void UpdateAssetTypeText() {
-        BuyAssetType.getItems().setAll(MockSocket.getInstance().GetAssetTypes(LoginController.GetToken()));
+        try {
+            BuyAssetType.getItems().setAll(MockSocket.getInstance().GetAssetTypes(LoginController.GetToken()));
+        } catch (Exception e) {
+            BuyErrorText.setText(e.getMessage());
+            BuyErrorText.setTextFill(Color.RED);
+        }
     }
 
     /**
      * Updates buy information
      */
     private void UpdateBuyInformation() {
-        List<Order> sellOrders = MockSocket.getInstance().GetSellOrders(LoginController.GetToken());
-        BuyOrdersTable.getItems().setAll(sellOrders);
 
-        List<Trade> trades = MockSocket.getInstance().GetTradeHistory(LoginController.GetToken(), BuyAssetType.getValue());
+        List<Order> sellOrders = new ArrayList<>();
         XYChart.Series tradeData = new XYChart.Series();
 
-        tradeData.setName("Price of " + BuyAssetType.getValue());
+        String clientResponse = BuyErrorText.getText();
 
-        for (Trade trade: trades) {
-            tradeData.getData().add(new XYChart.Data(trade.getTradeDateMilSecs().getTime(), trade.getAssetPrice()));
+        try {
+            //Update the buy orders table
+            sellOrders = MockSocket.getInstance().GetSellOrders(LoginController.GetToken());
+
+
+            //Update the graph
+            List<Trade> trades = MockSocket.getInstance().GetTradeHistory(LoginController.GetToken(), BuyAssetType.getValue());
+
+            tradeData.setName("Price of " + BuyAssetType.getValue());
+
+            for (Trade trade: trades) {
+                tradeData.getData().add(new XYChart.Data(trade.getTradeDateMilSecs().getTime(), trade.getAssetPrice()));
+            }
+
+            //BuyErrorText.setTextFill(Color.GREEN);
+        } catch (Exception e) {
+            clientResponse = e.getMessage();
+            BuyErrorText.setTextFill(Color.RED);
         }
 
         BuyPriceHistoryGraph.getData().setAll(tradeData);
+        BuyOrdersTable.getItems().setAll(sellOrders);
+        BuyErrorText.setText(clientResponse);
 
     }
 
     @Override
     public void update(Subject s) {
-
+        UpdateBuyInformation();
     }
 }

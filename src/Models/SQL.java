@@ -1,16 +1,9 @@
 package Models;
 
-import Controllers.Backend.AccountType;
-import Controllers.Backend.NetworkObjects.*;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Creates and initialises PopulateDatabase database. Features all table creation String statements
@@ -95,7 +88,14 @@ public class SQL {
     private static final String INSERT_NEW_ORGANISATIONAL_UNIT_RESEARCH = "INSERT INTO OrganisationalUnit VALUES ('Research', 90)";
     private static final String INSERT_NEW_ORGANISATIONAL_UNIT_ADMIN = "INSERT INTO OrganisationalUnit VALUES ('Admin', 0)";
 
-    private static final String INSERT_NEW_TRADE = "INSERT INTO Trade VALUES (1, 'Sales', 'Finance', 1, 10, 'Paper')";
+    private static final String INSERT_NEW_TRADE_1 = "INSERT INTO Trade VALUES (1, 'Sales', 'Finance', 1, 10, 'Paper', 6.00)";
+    private static final String INSERT_NEW_TRADE_2 = "INSERT INTO Trade VALUES (2, 'Sales', 'Finance', 2, 10, 'Paper', 7.00)";
+    private static final String INSERT_NEW_TRADE_3 = "INSERT INTO Trade VALUES (3, 'Sales', 'Finance', 3, 10, 'Paper', 9.00)";
+    private static final String INSERT_NEW_TRADE_4 = "INSERT INTO Trade VALUES (4, 'Sales', 'Finance', 4, 10, 'Paper', 10.00)";
+    private static final String INSERT_NEW_TRADE_5 = "INSERT INTO Trade VALUES (5, 'Sales', 'Finance', 5, 10, 'Paper', 11.00)";
+    private static final String INSERT_NEW_TRADE_6 = "INSERT INTO Trade VALUES (6, 'Sales', 'Finance', 6, 10, 'Paper', 12.00)";
+    private static final String INSERT_NEW_TRADE_7 = "INSERT INTO Trade VALUES (7, 'Sales', 'Finance', 7, 10, 'Paper', 13.00)";
+
     private static final String INSERT_NEW_ASSET = "INSERT INTO Assets VALUES ('Paper')";
 
     // Connection and Statements
@@ -111,13 +111,7 @@ public class SQL {
         CreateTables();
     }
 
-    private void CreateTables() {}
-
-
-
-    // Create and Populate prepare statements in here
-    public void populateDatabase() {
-        connection = DatabaseConnection.getInstance();
+    private void CreateTables() {
         try {
             Statement createUserTableStatement = connection.createStatement();
             Statement createOrgHasQuantityTableStatement = connection.createStatement();
@@ -126,98 +120,66 @@ public class SQL {
             Statement createAssetsTableStatement = connection.createStatement();
             Statement createTradeTableStatement = connection.createStatement();
 
-           /* createUserTableStatement.execute(CREATE_TABLE_Users);
+            createUserTableStatement.execute(CREATE_TABLE_Users);
             createOrgHasQuantityTableStatement.execute(CREATE_TABLE_OrgHasQuantity);
             createOrganisationalUnitTableStatement.execute(CREATE_TABLE_OrganisationalUnit);
             createOrdersTableStatement.execute(CREATE_TABLE_Orders);
             createAssetsTableStatement.execute(CREATE_TABLE_Assets);
-            createTradeTableStatement.execute(CREATE_TABLE_Trade);*/
+            createTradeTableStatement.execute(CREATE_TABLE_Trade);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+    }
+
+
+
+    // Create and Populate prepare statements in here
+    public void populateDatabase() {
+        connection = DatabaseConnection.getInstance();
+        try {
             Statement st = connection.createStatement();
-            //st.execute(CREATE_DATABASE);
 
-            st.execute(CREATE_TABLE_OrganisationalUnit);
-            st.execute(CREATE_TABLE_Assets);
-            st.execute(CREATE_TABLE_Users);
-            st.execute(CREATE_TABLE_OrgHasQuantity);
-            st.execute(CREATE_TABLE_Trade);
-            st.execute(CREATE_TABLE_Orders);
+            /*
+            st.execute(INSERT_NEW_ORGANISATIONAL_UNIT_SALES);
+            st.execute(INSERT_NEW_ORGANISATIONAL_UNIT_FINANCE);
+            st.execute(INSERT_NEW_ORGANISATIONAL_UNIT_RESEARCH);
+            st.execute(INSERT_NEW_ORGANISATIONAL_UNIT_ADMIN);
 
+            st.execute(INSERT_NEW_USER1);
+            st.execute(INSERT_NEW_USER2);
+            st.execute(INSERT_NEW_USER3);
+            st.execute(INSERT_NEW_USER4);
+            st.execute(INSERT_NEW_USER5);
+            st.execute(INSERT_NEW_USER6);
+            st.execute(INSERT_NEW_USER7);
+            st.execute(INSERT_NEW_USER8);
+            st.execute(INSERT_NEW_USER9);
+            st.execute(INSERT_NEW_USER10);
+            st.execute(INSERT_NEW_USER11);
+            st.execute(INSERT_NEW_USER12);
+            st.execute(INSERT_NEW_USER13);
 
-          /*  addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_SALES);
-            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_FINANCE);
-            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_RESEARCH);
-            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_ADMIN);
-            addOrganisationalUnit.execute(INSERT_NEW_ORGANISATIONAL_UNIT_SALES);
-            addOrganisationalUnit.execute(INSERT_NEW_ORGANISATIONAL_UNIT_FINANCE);
-            addOrganisationalUnit.execute(INSERT_NEW_ORGANISATIONAL_UNIT_RESEARCH);
-            addOrganisationalUnit.execute(INSERT_NEW_ORGANISATIONAL_UNIT_ADMIN);*/
+            st.execute(INSERT_NEW_USER_DECLAN);
+            st.execute(INSERT_NEW_USER_AIDEN);
+            st.execute(INSERT_NEW_USER_BRAD);
+            st.execute(INSERT_NEW_USER_ETHAN);
+            */
+            Statement addAsset = connection.createStatement();
+            Statement addTrade = connection.createStatement();
+            addAsset.execute(INSERT_NEW_ASSET);
+            addTrade.execute(INSERT_NEW_TRADE_1);
+            addTrade.execute(INSERT_NEW_TRADE_2);
+            addTrade.execute(INSERT_NEW_TRADE_3);
+            addTrade.execute(INSERT_NEW_TRADE_4);
+            addTrade.execute(INSERT_NEW_TRADE_6);
 
-            AddUser = connection.prepareStatement(INSERT_NEW_USER1);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER2);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER3);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER4);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER5);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER6);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER7);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER8);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER9);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER10);
-
-            /*AddUser.execute(INSERT_NEW_USER1);
-            AddUser.execute(INSERT_NEW_USER2);
-            AddUser.execute(INSERT_NEW_USER3);
-            AddUser.execute(INSERT_NEW_USER4);
-            AddUser.execute(INSERT_NEW_USER5);
-            AddUser.execute(INSERT_NEW_USER6);
-            AddUser.execute(INSERT_NEW_USER7);
-            AddUser.execute(INSERT_NEW_USER8);
-            AddUser.execute(INSERT_NEW_USER9);
-            AddUser.execute(INSERT_NEW_USER10);*/
-
-            AddAsset = connection.prepareStatement(INSERT_NEW_ASSET);
-            AddTrade = connection.prepareStatement(INSERT_NEW_TRADE);
-            AddTrade.execute();
-            AddAsset.execute();
-
-
-            /*AddUser = connection.prepareStatement(INSERT_NEW_USER1);
-            AddUser.execute();*/
-            //AddUser = connection.prepareStatement(INSERT_NEW_USER1);
-           //
-        /*
-
-
-
-
-
-
-            /*AddUser = connection.prepareStatement(INSERT_NEW_USER1);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER2);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER3);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER4);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER5);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER6);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER7);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER8);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER9);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER10);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER11);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER12);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER13);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER_DECLAN);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER_AIDEN);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER_BRAD);
-            AddUser = connection.prepareStatement(INSERT_NEW_USER_ETHAN);
-            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_SALES);
-            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_FINANCE);
-            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_RESEARCH);
-            addOrganisationalUnit = connection.prepareStatement(INSERT_NEW_ORGANISATIONAL_UNIT_ADMIN);*/
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
+
     // Populate functions (Currently adding user and organisational unit)
     public void AddUser(String username, String orgUnit, String accType, String hashedPW, String salt) {
         try {

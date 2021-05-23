@@ -1,9 +1,9 @@
 package Controllers.FrontEnd.Login;
 
 
-import Controllers.Backend.NetworkObjects.LoginToken;
-import Controllers.Backend.NetworkObjects.UserInfo;
-import Controllers.Backend.Socket.MockSocket;
+import Controllers.BackEnd.NetworkObjects.LoginToken;
+import Controllers.BackEnd.NetworkObjects.UserInfo;
+import Controllers.BackEnd.Socket.MockSocket;
 import Controllers.Exceptions.LoginException;
 import Controllers.Utils.UtilLoginSecurity;
 import Controllers.Utils.UtilSceneChanger;

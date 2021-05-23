@@ -13,7 +13,7 @@
             <Font name="Bodoni MT" size="34.0" />
          </font>
       </Label>
-      <TableView fx:id="RemoveTable" layoutX="22.0" layoutY="112.0" prefHeight="530.0" prefWidth="828.0">
+      <TableView fx:id="RemoveTable" layoutX="22.0" layoutY="112.0" prefHeight="488.0" prefWidth="828.0">
          <columns>
             <TableColumn fx:id="RemoveAssetTypeColumn" prefWidth="313.0" text="Asset Type" />
             <TableColumn fx:id="RemoveQuantityColumn" prefWidth="74.0" text="Quantity" />
@@ -22,5 +22,6 @@
             <TableColumn fx:id="RemoveButtonColumn" prefWidth="196.0" text="Remove" />
          </columns>
       </TableView>
+      <Label fx:id="userRemoveErrorText" alignment="CENTER" layoutX="224.0" layoutY="614.0" prefHeight="32.0" prefWidth="425.0" />
    </children>
 </AnchorPane>

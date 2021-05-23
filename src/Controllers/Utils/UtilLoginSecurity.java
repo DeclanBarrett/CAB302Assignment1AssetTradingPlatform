@@ -1,5 +1,5 @@
 package Controllers.Utils;
-import Controllers.Backend.Socket.MockSocket;
+import Controllers.BackEnd.Socket.MockSocket;
 import Controllers.Exceptions.LoginException;
 
 import java.security.MessageDigest;

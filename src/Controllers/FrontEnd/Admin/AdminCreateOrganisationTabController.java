@@ -1,17 +1,21 @@
 package Controllers.FrontEnd.Admin;
 
-import Controllers.Backend.NetworkObjects.OrganisationalUnit;
+import Controllers.BackEnd.NetworkObjects.OrganisationalUnit;
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.Backend.Socket.MockSocket;
+import Controllers.BackEnd.Socket.MockSocket;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
+import Controllers.Utils.UtilFieldCheckers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -20,6 +24,7 @@ import java.util.ResourceBundle;
  */
 public class AdminCreateOrganisationTabController implements Initializable, Observer {
 
+    public static final String ERROR_TEXT_NOT_NUMBER = "PLEASE ENTER A NUMBER FOR CREDITS";
     @FXML
     TextField CreateOrgName;
     @FXML
@@ -51,21 +56,55 @@ public class AdminCreateOrganisationTabController implements Initializable, Obse
      * @param CreateOrganisation Orgnisational unit to be created
      */
     public void CreateOrganisation(ActionEvent CreateOrganisation) {
-        System.out.println(CreateOrganisation.getSource());
 
-        Integer credit = 0;
+        String clientResponse = "";
+
+        //Attempt to parse the credit amount
         try {
-            credit = Integer.parseInt(CreateOrgCredits.getText());
+            Integer credit = Integer.parseInt(CreateOrgCredits.getText());
+
+            UtilFieldCheckers.checkMissingValues(new ArrayList<String>(Arrays.asList(CreateOrgName.getText())));
+
+            //Attempt to add the organisation - it sends an organisation without any assets
+            try {
+                clientResponse = MockSocket.getInstance().AddOrganisation(LoginController.GetToken(),
+                        new OrganisationalUnit(CreateOrgName.getText(), credit, null));
+                CreateOrgErrorText.setTextFill(Color.GREEN);
+            } catch (Exception e) {
+                CreateOrgErrorText.setTextFill(Color.RED);
+            }
+
         } catch (NumberFormatException e) {
-            CreateOrgErrorText.setText("PLEASE ENTER A NUMBER FOR CREDITS");
+            CreateOrgErrorText.setTextFill(Color.RED);
+            clientResponse = ERROR_TEXT_NOT_NUMBER;
+
+        } catch (NullPointerException e) {
+            CreateOrgErrorText.setTextFill(Color.RED);
+            clientResponse = e.getMessage();
         }
-        String success = MockSocket.getInstance().AddOrganisation(LoginController.GetToken(),
-                new OrganisationalUnit(CreateOrgName.getText(), credit, null));
-        CreateOrgErrorText.setText(success);
+
+        CreateOrgErrorText.setText(clientResponse);
+
     }
 
+    /**
+     * Updates the organisation table with all the organisations on the server
+     */
     private void UpdateOrganisationTable() {
-        List<OrganisationalUnit> orgs = MockSocket.getInstance().GetAllOrganisations(LoginController.GetToken());
+
+        List<OrganisationalUnit> orgs = new ArrayList<>();
+
+        String clientResponse = CreateOrgErrorText.getText();
+
+        try {
+            orgs = MockSocket.getInstance().GetAllOrganisations(LoginController.GetToken());
+
+        } catch (Exception e) {
+            clientResponse = e.getMessage();
+            CreateOrgErrorText.setTextFill(Color.RED);
+        }
+
+        CreateOrgErrorText.setText(clientResponse);
         CreateOrgTable.getItems().setAll(orgs);
     }
 

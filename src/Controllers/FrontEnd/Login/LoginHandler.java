@@ -1,6 +1,6 @@
 package Controllers.FrontEnd.Login;
 
-import Controllers.Backend.AccountType;
+import Controllers.BackEnd.AccountType;
 import Controllers.Exceptions.LoginException;
 import Controllers.Utils.UtilSceneChanger;
 import javafx.event.ActionEvent;

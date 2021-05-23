@@ -1,11 +1,11 @@
 package Tests.Controllers.FrontEnd.Login;
 
-import Controllers.Backend.AccountType;
-import Controllers.Backend.NetworkObjects.LoginToken;
-import Controllers.Backend.NetworkObjects.UserInfo;
+import Controllers.BackEnd.AccountType;
+import Controllers.BackEnd.NetworkObjects.LoginToken;
+import Controllers.BackEnd.NetworkObjects.UserInfo;
 import Controllers.FrontEnd.Login.LoginController;
 import Controllers.Exceptions.LoginException;
-import Controllers.Backend.Socket.MockSocket;
+import Controllers.BackEnd.Socket.MockSocket;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

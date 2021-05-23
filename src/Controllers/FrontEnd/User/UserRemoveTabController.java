@@ -1,20 +1,23 @@
 package Controllers.FrontEnd.User;
 
-import Controllers.Backend.NetworkObjects.Order;
+import Controllers.BackEnd.NetworkObjects.Order;
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.Backend.Socket.MockSocket;
+import Controllers.BackEnd.Socket.MockSocket;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.ResourceBundle;
 
 /**
@@ -27,6 +30,8 @@ public class UserRemoveTabController implements Initializable, Observer {
 
     @FXML
     TableView RemoveTable;
+    @FXML
+    Label userRemoveErrorText;
 
     @FXML
     TableColumn<Order, String> RemoveAssetTypeColumn;
@@ -39,9 +44,6 @@ public class UserRemoveTabController implements Initializable, Observer {
     @FXML
     TableColumn<Order, Void> RemoveButtonColumn;
 
-
-    Button[] RemoveButtons;
-
     /**
      * Initialise User Remove Handler
      * @param url
@@ -49,7 +51,7 @@ public class UserRemoveTabController implements Initializable, Observer {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        RemoveOrganisationName.setText("Sales" + " Orders ");
+        updateOrganisationText();
         RemoveAssetTypeColumn.setCellValueFactory(new PropertyValueFactory<>("assetType"));
         RemoveQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("assetQuantity"));
         RemovePriceColumn.setCellValueFactory(new PropertyValueFactory<>("requestPrice"));
@@ -60,28 +62,59 @@ public class UserRemoveTabController implements Initializable, Observer {
 
     /**
      * Remove order from system
-     * @param RemoveOrder - order to remove
      */
-    public void RemoveOrder(ActionEvent RemoveOrder) {
-        System.out.println(RemoveOrder.getSource());
+    public void RemoveOrder(Order order) {
+
+        String clientResponse = "";
+
+        try {
+            clientResponse = MockSocket.getInstance().RemoveOrder(LoginController.GetToken(), order.getOrderID());
+            UpdateRemoveTable();
+        } catch (Exception e) {
+            clientResponse = e.getMessage();
+            userRemoveErrorText.setTextFill(Color.RED);
+        }
+
+        userRemoveErrorText.setText(clientResponse);
     }
 
     /**
      * Update remove table
      */
     private void UpdateRemoveTable() {
-        List<Order> buyOrders = MockSocket.getInstance().GetOrganisationOrders(LoginController.GetToken(), "Sales");
+
+        List<Order> buyOrders = new ArrayList<>();
+
+        String clientResponse = userRemoveErrorText.getText();;
+
+        try {
+            buyOrders = MockSocket.getInstance().GetOrganisationOrders(LoginController.GetToken(), LoginController.GetUser().getOrganisationalUnit());
+            userRemoveErrorText.setTextFill(Color.GREEN);
+        } catch (Exception e) {
+            userRemoveErrorText.setTextFill(Color.RED);
+            clientResponse = e.getMessage();
+        }
+
+        userRemoveErrorText.setText(clientResponse);
         RemoveTable.getItems().setAll(buyOrders);
     }
 
     /**
      * Update organisational unit text field.
      */
-    private void UpdateOrganisationText() {
-
+    private void updateOrganisationText() {
+        try {
+            RemoveOrganisationName.setText(LoginController.GetUser().getOrganisationalUnit() + " Orders ");
+        } catch (Exception e) {
+            RemoveOrganisationName.setText("NOT LOGGED IN");
+        }
     }
 
     //https://riptutorial.com/javafx/example/27946/add-button-to-tableview
+
+    /**
+     * Adds a remove button to the table in the row
+     */
     private void addButtonToTable() {
 
         Callback<TableColumn<Order, Void>, TableCell<Order, Void>> cellFactory = new Callback<>() {
@@ -93,10 +126,7 @@ public class UserRemoveTabController implements Initializable, Observer {
 
                     {
                         btn.setOnAction((ActionEvent event) -> {
-                            Order order = getTableView().getItems().get(getIndex());
-                            System.out.println("Remove: " + order);
-                            MockSocket.getInstance().RemoveOrder(LoginController.GetToken(), order.getOrderID());
-                            UpdateRemoveTable();
+                            RemoveOrder(getTableView().getItems().get(getIndex()));
                         });
                     }
 
@@ -119,6 +149,6 @@ public class UserRemoveTabController implements Initializable, Observer {
 
     @Override
     public void update(Subject s) {
-
+        UpdateRemoveTable();
     }
 }

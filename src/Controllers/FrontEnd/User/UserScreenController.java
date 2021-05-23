@@ -29,11 +29,11 @@ public class UserScreenController extends Subject implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //attachObserver(userBuyTabController);
-       // attachObserver(userOrganisationTabController);
-        //attachObserver(userRemoveTabController);
-       // attachObserver(userSellTabController);
-        //attachObserver(userUserTabController);
+        attachObserver(userBuyTabController);
+        attachObserver(userOrganisationTabController);
+        attachObserver(userRemoveTabController);
+        attachObserver(userSellTabController);
+        attachObserver(userUserTabController);
         updatePage();
     }
 
@@ -43,10 +43,9 @@ public class UserScreenController extends Subject implements Initializable {
     private void updatePage() {
         final Timeline timeline = new Timeline(
                 new KeyFrame(
-                        Duration.seconds(5),
+                        Duration.seconds(10),
                         event -> {
-                            System.out.println("Updating");
-                            //notifyObservers();
+                            notifyObservers();
                         }
                 )
         );

@@ -1,12 +1,13 @@
 package Controllers.FrontEnd.User;
 
-import Controllers.Backend.NetworkObjects.Order;
-import Controllers.Backend.NetworkObjects.Trade;
-import Controllers.Backend.OrderType;
+import Controllers.BackEnd.NetworkObjects.Order;
+import Controllers.BackEnd.NetworkObjects.Trade;
+import Controllers.BackEnd.OrderType;
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.Backend.Socket.MockSocket;
+import Controllers.BackEnd.Socket.MockSocket;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
+import Controllers.Utils.UtilFieldCheckers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.*;
@@ -25,20 +27,13 @@ import java.util.*;
 public class UserSellTabController implements Initializable, Observer {
 
     private static final String ERROR_WRONG_INPUT_TYPE = "PLEASE INSERT NUMBERS";
-    @FXML
-    private TextField SellAssetQuantity;
-    @FXML
-    private TextField SellPriceCredits;
-    @FXML
-    private Label SellAssetTypeText;
-    @FXML
-    private Button SellButton;
-    @FXML
-    private ComboBox<String> SellAssetType;
-    @FXML
-    private Label SellErrorText;
-    @FXML
-    private LineChart SellPriceHistoryGraph;
+    @FXML TextField SellAssetQuantity;
+    @FXML TextField SellPriceCredits;
+    @FXML Label SellAssetTypeText;
+    @FXML Button SellButton;
+    @FXML ComboBox<String> SellAssetType;
+    @FXML Label SellErrorText;
+    @FXML LineChart SellPriceHistoryGraph;
 
 
     @FXML
@@ -67,6 +62,7 @@ public class UserSellTabController implements Initializable, Observer {
         xAxis.setLabel("Time");
         yAxis.setLabel("Price");
 
+        SellErrorText.setText("");
         UpdateAssetTypeText();
         UpdateSellInformation();
     }
@@ -76,30 +72,28 @@ public class UserSellTabController implements Initializable, Observer {
      * @param SellAsset
      */
     public void SellAsset(ActionEvent SellAsset) {
-        if (SellAssetType.getValue() == null) {
-            SellErrorText.setText("NO ASSET TYPE SELECTED");
-            return;
-        }
+
+        String clientResponse = "";
+
         try {
-            Integer quantity = 0;
-            Float price = 0.0f;
-            try {
-                quantity = Integer.parseInt(SellAssetQuantity.getText());
-                price = Float.parseFloat(SellPriceCredits.getText());
-            } catch (NumberFormatException formatException) {
-                SellErrorText.setText(ERROR_WRONG_INPUT_TYPE);
-                return;
-            }
+            //Send an order to the database
+            UtilFieldCheckers.checkMissingValues(new ArrayList<>(Arrays.asList(SellAssetType.getValue())));
+            Integer quantity = Integer.parseInt(SellAssetQuantity.getText());
+            Float price = Float.parseFloat(SellPriceCredits.getText());
 
-            MockSocket.getInstance().AddOrder(LoginController.GetToken(),
+            clientResponse = MockSocket.getInstance().AddOrder(LoginController.GetToken(),
                     new Order(-1, OrderType.SELL, SellAssetType.getValue(), quantity, price, LoginController.GetUser().getOrganisationalUnit(), null));
-
-            SellErrorText.setText("ORDER WAS SUCCESSFULLY PLACED");
+            SellErrorText.setTextFill(Color.GREEN);
+        } catch (NumberFormatException formatException) {
+            SellErrorText.setTextFill(Color.RED);
+            clientResponse = ERROR_WRONG_INPUT_TYPE;
         } catch (Exception e) {
-            SellErrorText.setText("ERROR");
+            SellErrorText.setTextFill(Color.RED);
+            clientResponse = e.getMessage();
         }
+
         UpdateSellInformation();
-        System.out.println(SellAsset.getSource());
+        SellErrorText.setText(clientResponse);
     }
 
     /**
@@ -117,7 +111,8 @@ public class UserSellTabController implements Initializable, Observer {
         try {
             SellAssetType.getItems().setAll(MockSocket.getInstance().GetAssetTypes(LoginController.GetToken()));
         } catch (Exception e) {
-
+            SellErrorText.setText(e.getMessage());
+            SellErrorText.setTextFill(Color.RED);
         }
 
     }
@@ -126,25 +121,33 @@ public class UserSellTabController implements Initializable, Observer {
      * Updates sell order information
      */
     private void UpdateSellInformation() {
-        Date currentDate = new Date();
 
-        List<Order> sellOrders = MockSocket.getInstance().GetBuyOrders(LoginController.GetToken());
-        SellOrdersTable.getItems().setAll(sellOrders);
-
-        List<Trade> trades = MockSocket.getInstance().GetTradeHistory(LoginController.GetToken(), SellAssetType.getValue());
+        List<Order> sellOrders = new ArrayList<>();
         XYChart.Series tradeData = new XYChart.Series();
 
-        tradeData.setName("Price of " + SellAssetType.getValue());
+        String clientResponse = SellErrorText.getText();
+        try {
+            sellOrders = MockSocket.getInstance().GetBuyOrders(LoginController.GetToken());
 
-        for (Trade trade: trades) {
-            tradeData.getData().add(new XYChart.Data(trade.getTradeDateMilSecs().getTime(), trade.getAssetPrice()));
+            List<Trade> trades = MockSocket.getInstance().GetTradeHistory(LoginController.GetToken(), SellAssetType.getValue());
+
+            tradeData.setName("Price of " + SellAssetType.getValue());
+
+            for (Trade trade: trades) {
+                tradeData.getData().add(new XYChart.Data(trade.getTradeDateMilSecs().getTime(), trade.getAssetPrice()));
+            }
+        } catch (Exception e) {
+            SellErrorText.setTextFill(Color.RED);
+            clientResponse = e.getMessage();
         }
 
+        SellErrorText.setText(clientResponse);
+        SellOrdersTable.getItems().setAll(sellOrders);
         SellPriceHistoryGraph.getData().setAll(tradeData);
     }
 
     @Override
     public void update(Subject s) {
-
+        UpdateSellInformation();
     }
 }

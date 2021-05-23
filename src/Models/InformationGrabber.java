@@ -1,13 +1,13 @@
 package Models;
 
-import Controllers.Backend.AccountType;
-import Controllers.Backend.NetworkObjects.*;
+import Controllers.BackEnd.AccountType;
+import Controllers.BackEnd.NetworkObjects.*;
 
-import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -364,7 +364,7 @@ public class  InformationGrabber {
      * @return a list of trades
      */
     public List<Trade> getTradeHistory(String AssetName) {
-        List<Trade> trades = null;
+        List<Trade> trades = new ArrayList<>();
         try
         {
             connection = DatabaseConnection.getInstance();
