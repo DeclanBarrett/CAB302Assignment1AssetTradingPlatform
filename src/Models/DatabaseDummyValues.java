@@ -4,7 +4,7 @@ public class DatabaseDummyValues
 {
     private DatabaseDummyValues() {}
 
-    //=========== User Dummy Data ==============//
+    //=========== User Dummy Data =============//
     private static final String INSERT_NEW_USER1 = "INSERT INTO Users VALUES ('User 1', 'Sales', 'User', 'b717415eb5e699e4989ef3e2c4e9cbf7', '12345')";
     private static final String INSERT_NEW_USER2 = "INSERT INTO Users VALUES ('User 2', 'Sales', 'User', 'b717415eb5e699e4989ef3e2c4e9cbf7', '12345')";
     private static final String INSERT_NEW_USER3 = "INSERT INTO Users VALUES ('User 3', 'Finance', 'User', '8d421e892a47dff539f46142eb09e56b', '123456')";
@@ -23,5 +23,18 @@ public class DatabaseDummyValues
     private static final String INSERT_NEW_USER_AIDEN = "INSERT INTO Users VALUES ('Aiden Testing', 'Admin', 'SystemAdmin', '086e1b7e1c12ba37cd473670b3a15214', '123456')";
     private static final String INSERT_NEW_USER_BRAD = "INSERT INTO Users VALUES ('Brad Testing', 'Admin', 'SystemAdmin', '086e1b7e1c12ba37cd473670b3a15214', '123456')";
     private static final String INSERT_NEW_USER_ETHAN = "INSERT INTO Users VALUES ('Ethan Testing', 'Admin', 'SystemAdmin', '086e1b7e1c12ba37cd473670b3a15214', '123456')";
+
+    //=========== Organisational Unit Dummy Data =============//
+    private static final String INSERT_NEW_ORGANISATIONAL_UNIT_SALES = "INSERT INTO OrganisationalUnit VALUES ('Sales', 3000.50)";
+    private static final String INSERT_NEW_ORGANISATIONAL_UNIT_FINANCE = "INSERT INTO OrganisationalUnit VALUES ('Finance', 100)";
+    private static final String INSERT_NEW_ORGANISATIONAL_UNIT_RESEARCH = "INSERT INTO OrganisationalUnit VALUES ('Research', 90)";
+    private static final String INSERT_NEW_ORGANISATIONAL_UNIT_ADMIN = "INSERT INTO OrganisationalUnit VALUES ('Admin', 0)";
+
+    //=========== Asset Dummy Data =============//
+    private static final String INSERT_NEW_ASSET = "INSERT INTO Assets VALUES ('Paper')";
+
+    //=========== Trade Dummy Data =============//
+    private static final String INSERT_NEW_TRADE = "INSERT INTO Trade VALUES (1, 'Sales', 'Finance', 1, 10, 'Paper', 200);"; // Fixed, not sure about Data tho?
+
 
 }
