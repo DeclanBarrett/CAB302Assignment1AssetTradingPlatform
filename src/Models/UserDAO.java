@@ -2,7 +2,6 @@ package Models;
 
 import Controllers.Backend.AccountType;
 import Controllers.Backend.NetworkObjects.User;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +9,12 @@ import java.util.List;
 /**
  * Pure Static singleton that interacts with the database
  */
-public class UserDAO
+public class UserDAO extends Database
 {
     private UserDAO() {}
     private static String[] columnNames = {"UserName", "OrganisationalUnit", "AccountType", "HashedPassword", "Salt"};
     private static final String getAll = "Select * from Users";
-    private static Connection db;
 
-   public static void updateDbConnection()
-   {
-       UserDAO.db = DatabaseConnection.getInstance();
-   }
     public static void printAll()
     {
         try {
@@ -35,7 +29,6 @@ public class UserDAO
         }
     }
 
-   // public static <T> List<T> getAll()
     public static List<User> getAll()
     {
         List<User> users = new ArrayList<>();
@@ -58,4 +51,21 @@ public class UserDAO
         }
         return users;
     }
+
+//    // Populate functions (Currently adding user and organisational unit)
+//    public static void AddUser(User user) {
+//        try {
+//            db.prepareStatement()setString(1, user.getUsername());
+//            AddUser.setString(2, user.getOrganisationalUnit());
+//            AddUser.setString(3, user.getAccountType());
+//            AddUser.setString(4, user.getPassword());
+//            AddUser.setString(5, user.getSalt());
+//
+//            if (AddUser != null) {
+//                AddUser.executeQuery();
+//            }
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//    }
 }
