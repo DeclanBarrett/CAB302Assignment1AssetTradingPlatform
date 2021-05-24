@@ -22,14 +22,6 @@ public class TestUserInfo {
         assertEquals("Jack", username);
     }
 
-    /*
-    @Test
-    public void TestGetPassword() {
-        String password = user.GetPassword();
-        assertEquals("qwerty", password);
-    }
-    */
-
     @Test
     public void TestGetAccountType() {
         AccountType type = userInfo.getAccountType();

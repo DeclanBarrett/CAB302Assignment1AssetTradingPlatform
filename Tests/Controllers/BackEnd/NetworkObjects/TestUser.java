@@ -4,52 +4,44 @@ import Controllers.BackEnd.AccountType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TestUser {
+public class TestUser {
+
     User user;
 
     @BeforeEach
-    public void ConstructUser() { user = new User("TestUser", "qwerty", AccountType.User, "Finance", "12345678"); }
-
-    @Test
-    void getUsername() { assertEquals("TestUser", user.getUsername());
-    }
-
-    // Dont think we need to test setters as Declan mentioned setters arent necessary, Will ask again about this today
-    @Test
-    void setUsername() {
+    public void ConstructUser(){
+        user = new User("Jack",  "b717415eb5e699e4989ef3e2c4e9cbf7", AccountType.User, "Sales", "12345");
     }
 
     @Test
-    void getPassword() { assertEquals("qwerty", user.getPassword());
+    public void TestGetUsername() {
+        String username = user.getUsername();
+        assertEquals("Jack", username);
     }
 
     @Test
-    void setPassword() {
+    public void TestGetAccountType() {
+        AccountType type = user.getAccountType();
+        assertEquals(AccountType.User, type);
     }
 
     @Test
-    void getAccountType() { assertEquals(AccountType.User, user.getAccountType());
+    public void TestGetOrganisationalUnit() {
+        String unit = user.getOrganisationalUnit();
+        assertEquals("Sales", unit);
     }
 
     @Test
-    void setAccountType() {
+    public void TestPassword() {
+        String password = user.getPassword();
+        assertEquals("b717415eb5e699e4989ef3e2c4e9cbf7", password);
     }
 
     @Test
-    void getOrganisationalUnit() { assertEquals("Finance", user.getOrganisationalUnit());
-    }
-
-    @Test
-    void setOrganisationalType() {
-    }
-
-    @Test
-    void getSalt() { assertEquals("12345678", user.getSalt());
-    }
-
-    @Test
-    void setSalt() {
+    public void TestSalt() {
+        String salt = user.getSalt();
+        assertEquals("12345", salt);
     }
 }

@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class TestOrganisationalUnit {
 
@@ -50,5 +52,25 @@ public class TestOrganisationalUnit {
     public void TestGetQuantity() {
         int quantity = organisationalUnit.getQuantity("Casino Chips");
         assertEquals(50, quantity);
+    }
+
+    @Test
+    public void TestOrgEquals() {
+        assertTrue(organisationalUnit.equals(organisationalUnit));
+    }
+
+    @Test
+    public void TestOrgDoesntEquals() {
+        assertFalse(organisationalUnit.equals(new OrganisationalUnit("Jumble", 3000, null)));
+    }
+
+    @Test
+    public void TestOrgClassDoesntEquals() {
+        assertFalse(organisationalUnit.equals(new Object()));
+    }
+
+    @Test
+    public void TestCompareOrg() {
+        assertTrue(0 == organisationalUnit.compareTo(organisationalUnit));
     }
 }

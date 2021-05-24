@@ -91,9 +91,6 @@ public class UtilLoginSecurity {
         //String salt = securityManager.generateSalt();
         String hashedPassword = hashPassword(password, salt);
 
-        System.out.println("Password: " + password + ", Salt: " + salt);
-        System.out.println("Hashed Password: " + hashedPassword);
-
         return hashedPassword;
     }
 

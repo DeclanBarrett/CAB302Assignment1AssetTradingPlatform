@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -43,6 +44,7 @@ public class  InformationGrabber {
     private static final String GET_SALT = "SELECT Salt FROM Users WHERE UserName=?";
     private static final String GET_ORGANISATION = "SELECT * FROM OrganisationUnit WHERE OrganisationalUnitName=?";
     private static final String GET_ALL_ORGANISATIONS = "SELECT * FROM OrganisationUnit";
+    private static final String GET_ORGANISATION_ASSETS = "SELECT * FROM OrgHasQuantity WHERE OrganisationalUnitName=?";
     private static final String GET_ORGANISATION_ORDERS = "SELECT * FROM Order WHERE OrganisationalUnitName=?";
     private static final String GET_BUY_ORDERS = "SELECT * FROM Order1 WHERE OrderType = BUY";
     private static final String GET_SELL_ORDERS = "SELECT * FROM Order1 WHERE OrderType = SELL";
@@ -73,6 +75,7 @@ public class  InformationGrabber {
     private PreparedStatement getAllUsers;
     private PreparedStatement getSalt;
     private PreparedStatement getOrganisation;
+    private PreparedStatement getOrganisationAssets;
     private PreparedStatement getAllOrganisations;
     private PreparedStatement getOrganisationOrders;
     private PreparedStatement getBuyOrders;
@@ -459,24 +462,43 @@ public class  InformationGrabber {
         try
         {
             connection = DatabaseConnection.getInstance();
+
+            getOrganisationAssets = connection.prepareStatement(GET_ORGANISATION_ASSETS);
+            getOrganisationAssets.setString(1, orgName);
+
+            HashMap<String, Integer> orgAssets = new HashMap<>();
+
+            if(getOrganisationAssets != null)
+            {
+                ResultSet rs = getOrganisationAssets.executeQuery();
+                while (rs.next()) {
+                    // Order is different from Database Order
+                    orgAssets.put(rs.getString("AssetName"), rs.getInt("AssetQuantity"));
+                }
+            }
+
+
             getOrganisation = connection.prepareStatement(GET_ORGANISATION);
             getOrganisation.setString(1, orgName);
+
+
 
             if(getOrganisation != null)
             {
                 ResultSet rs = getOrganisation.executeQuery();
-                while (rs.next()) {
-                    // Order is different from Database Order
-                    organisationalunit = new OrganisationalUnit(
-                            rs.getString(1),
-                            rs.getInt(2)
-                    );
-                }
+                rs.next();
+                // Order is different from Database Order
+                organisationalunit = new OrganisationalUnit(
+                        orgName,
+                        rs.getInt(""),
+                        orgAssets
+                );
+                return organisationalunit;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return organisationalunit;
+        return null;
     }
 
     /**
@@ -503,12 +525,13 @@ public class  InformationGrabber {
                 while (rs.next()) {
                     // Order is different from Database Order
                     Order order = new Order(
-                            rs.getInt(1),
-                            new OrderType(rs.getString(6)),
-                            rs.getString(3),
-                            rs.getInt(4),
-                            rs.getDouble(5),
-                            rs.getString(6)
+                            rs.getInt("OrderID"),
+                            OrderType.valueOf(rs.getString("OrderType")),
+                            rs.getString("AssetName"),
+                            rs.getInt("AssetQuantity"),
+                            rs.getDouble("AssetPrice"),
+                            rs.getString("OrganisationalUnitName"),
+                            new Date(rs.getInt("PlaceDateMilSecs"))
                     );
 
                     orgOrders.add(order);
@@ -537,12 +560,13 @@ public class  InformationGrabber {
                 while (rs.next()) {
                     // Order is different from Database Order
                     Order order = new Order(
-                            rs.getInt(1),
-                            new OrderType(rs.getString(6)),
-                            rs.getString(3),
-                            rs.getInt(4),
-                            rs.getDouble(5),
-                            rs.getString(6)
+                            rs.getInt("OrderID"),
+                            OrderType.valueOf(rs.getString("OrderType")),
+                            rs.getString("AssetName"),
+                            rs.getInt("AssetQuantity"),
+                            rs.getDouble("AssetPrice"),
+                            rs.getString("OrganisationalUnitName"),
+                            new Date(rs.getInt("PlaceDateMilSecs"))
                     );
 
                     buyOrders.add(order);
@@ -571,12 +595,13 @@ public class  InformationGrabber {
                 while (rs.next()) {
                     // Order is different from Database Order
                     Order order = new Order(
-                            rs.getInt(1),
-                            new OrderType(rs.getString(6)),
-                            rs.getString(3),
-                            rs.getInt(4),
-                            rs.getDouble(5),
-                            rs.getString(6)
+                            rs.getInt("OrderID"),
+                            OrderType.valueOf(rs.getString("OrderType")),
+                            rs.getString("AssetName"),
+                            rs.getInt("AssetQuantity"),
+                            rs.getDouble("AssetPrice"),
+                            rs.getString("OrganisationalUnitName"),
+                            new Date(rs.getInt("PlaceDateMilSecs"))
                     );
 
                     sellOrders.add(order);
@@ -604,12 +629,13 @@ public class  InformationGrabber {
                 while (rs.next()) {
                     // Order is different from Database Order
                     Order order = new Order(
-                            rs.getInt(1),
-                            new OrderType(rs.getString(6)),
-                            rs.getString(3),
-                            rs.getInt(4),
-                            rs.getDouble(5),
-                            rs.getString(6)
+                            rs.getInt("OrderID"),
+                            OrderType.valueOf(rs.getString("OrderType")),
+                            rs.getString("AssetName"),
+                            rs.getInt("AssetQuantity"),
+                            rs.getDouble("AssetPrice"),
+                            rs.getString("OrganisationalUnitName"),
+                            new Date(rs.getInt("PlaceDateMilSecs"))
                     );
 
                     orders.add(order);
@@ -638,12 +664,13 @@ public class  InformationGrabber {
                 while (rs.next()) {
                     // Order is different from Database Order
                     Order order = new Order(
-                            rs.getInt(1),
-                            new OrderType(rs.getString(6)),
-                            rs.getString(3),
-                            rs.getInt(4),
-                            rs.getDouble(5),
-                            rs.getString(6)
+                            rs.getInt("OrderID"),
+                            OrderType.valueOf(rs.getString("OrderType")),
+                            rs.getString("AssetName"),
+                            rs.getInt("AssetQuantity"),
+                            rs.getDouble("AssetPrice"),
+                            rs.getString("OrganisationalUnitName"),
+                            new Date(rs.getInt("PlaceDateMilSecs"))
                     );
 
                     orders.add(order);

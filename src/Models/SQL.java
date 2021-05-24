@@ -41,6 +41,7 @@ public class SQL {
                     "PlaceDateMilSecs INT NOT NULL," +
                     "AssetQuantity INT NOT NULL," +
                     "AssetName VARCHAR(60) NOT NULL," +
+                    "AssetPrice FLOAT NOT NULL," +
                     "OrderType ENUM('BUY', 'SELL') NOT NULL," +
                     "FOREIGN KEY(OrganisationalUnitName) REFERENCES OrganisationalUnit(OrganisationalUnitName)," +
                     "FOREIGN KEY(AssetName) REFERENCES Assets(AssetName)" +
