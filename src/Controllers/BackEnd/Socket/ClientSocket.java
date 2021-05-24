@@ -1,54 +1,853 @@
 package Controllers.BackEnd.Socket;
 
-import Controllers.BackEnd.NetworkObjects.BradsPacket;
+import Controllers.BackEnd.AccountType;
+import Controllers.BackEnd.NetworkObjects.*;
+import Controllers.BackEnd.OrderType;
+import Controllers.BackEnd.RequestType;
+import Controllers.Exceptions.AuthenticationException;
+import Controllers.Exceptions.ServerException;
 
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Client Socket intiialisation.
  */
-public class ClientSocket
+public class ClientSocket implements IDataSource
 {
 
     private static final String HOSTNAME = "127.0.0.1";
-    private static final int PORT = 10000;
+    private static final int PORT = 6066;
+    public static final String NETWORK_ERROR_MESSAGE = "Networking Error";
 
-    private Socket socket;
+    private Socket clientSocket;
     private ObjectOutputStream outputStream;
     private ObjectInputStream inputStream;
 
     private static class ClientSocketHolder {
         private final static ClientSocket INSTANCE = new ClientSocket();
     }
+
     public void ClientSocket()
     {
-        String serverName = "127.0.0.1";
-        int port = 6066;
-
         try {
             // Connect to Server
-            Socket client = new Socket(serverName, port);
-            System.out.println("Client Connected: " + client.getRemoteSocketAddress());
+            clientSocket = new Socket(HOSTNAME, PORT);
+            System.out.println("Client Connected: " + clientSocket.getRemoteSocketAddress());
 
             // Communication with server
-            ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
-            ObjectInputStream in  = new ObjectInputStream(client.getInputStream());
+            outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+            inputStream  = new ObjectInputStream(clientSocket.getInputStream());
 
-            for (int i = 0; i < 10; i++) {
-                if (in.available() > 0) {
-                    System.out.println(in.readObject());
-                }
-                out.writeObject(new BradsPacket());
-            }
-            Thread.sleep(500);
-            // Close Connections
-            out.close();
-            client.close();
-        } catch (IOException | ClassNotFoundException | InterruptedException i){
-            i.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
         }
 
         System.out.println("Client End...");
     }
-} // End of Class
+
+    @Override
+    public String GetSalt(String username) throws ServerException {
+        try {
+            //Tell the server we need it to pass the salt
+            outputStream.writeObject(RequestType.RequestSalt);
+
+            //Tell the server the username
+            outputStream.writeObject(username);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get a salt or send the error code
+            if (response == RequestType.SendSalt ) {
+                return (String) inputStream.readObject();
+            } else if (response == RequestType.SendErrorCode) {
+                throw new ServerException((String) inputStream.readObject());
+            }
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public LoginToken AttemptLogin(String username, String password) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to handle login
+            outputStream.writeObject(RequestType.RequestLogin);
+
+            //Tell the server the username and hashed password
+            outputStream.writeObject(username);
+            outputStream.writeObject(password);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get a token or send the error code
+            if (response == RequestType.SendLoginToken) {
+                return (LoginToken) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public String AttemptResetPassword(LoginToken token, String username, String newPassword) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestResetPassword);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.writeObject(username);
+            outputStream.writeObject(newPassword);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendSuccessMessage) {
+                return (String) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public UserInfo GetUser(LoginToken token, String username) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestUserInfo);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.writeObject(username);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendUserInfo) {
+                return (UserInfo) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public OrganisationalUnit GetOrganisation(LoginToken token, String orgName) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestOrganisation);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.writeObject(orgName);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendOrganisation) {
+                return (OrganisationalUnit) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Order> GetOrganisationOrders(LoginToken token, String orgName) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestOrganisationOrders);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.writeObject(orgName);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendOrders) {
+                return (List<Order>) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Order> GetAllOrders(LoginToken token) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestAllOrders);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendOrders) {
+                return (List<Order>) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Order> GetBuyOrders(LoginToken token) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestBuyOrders);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendOrders) {
+                return (List<Order>) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Order> GetSellOrders(LoginToken token) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestSellOrders);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendOrders) {
+                return (List<Order>) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Order> GetOrganisationBuyOrders(LoginToken token, String organisationName) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestOrganisationOrders);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendOrders) {
+                List<Order> orders = (List<Order>) inputStream.readObject();
+                List<Order> buyOrders = new ArrayList<>();
+                for (Order order: orders) {
+                    if (order.getOrderType().equals(OrderType.BUY)) {
+                        buyOrders.add(order);
+                    }
+                }
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Order> GetOrganisationSellOrders(LoginToken token, String organisationName) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestOrganisationOrders);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendOrders) {
+                List<Order> orders = (List<Order>) inputStream.readObject();
+                List<Order> sellOrders = new ArrayList<>();
+                for (Order order: orders) {
+                    if (order.getOrderType().equals(OrderType.SELL)) {
+                        sellOrders.add(order);
+                    }
+                }
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public String AddOrder(LoginToken token, Order newOrder) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestAddOrder);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.writeObject(newOrder);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendSuccessMessage) {
+                return (String) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public String RemoveOrder(LoginToken token, int orderID) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestRemoveOrder);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.writeObject(orderID);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendSuccessMessage) {
+                return (String) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public List<String> GetAssetTypes(LoginToken token) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestAssetTypes);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendAssetTypes) {
+                return (List<String>) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Trade> GetTradeHistory(LoginToken token, String AssetType) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestTradeHistory);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.writeObject(AssetType);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendTradeHistory) {
+                return (List<Trade>) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public String AddUser(LoginToken token, User user) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestAddUser);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.writeObject(user);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendSuccessMessage) {
+                return (String) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public List<UserInfo> GetAllUsers(LoginToken token) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestAllUsers);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendAllUsers) {
+                return (List<UserInfo>) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public String UpdateUserPassword(LoginToken token, String username, String hashedPassword, String salt) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestUpdateUserPassword);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.writeObject(username);
+            outputStream.writeObject(hashedPassword);
+            outputStream.writeObject(salt);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendSuccessMessage) {
+                return (String) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public String UpdateUserAccountType(LoginToken token, String username, AccountType accountType) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestUpdateUserAccountType);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.writeObject(username);
+            outputStream.writeObject(accountType);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendSuccessMessage) {
+                return (String) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public String UpdateUserOrganisation(LoginToken token, String username, String organisationName) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestUpdateUserOrganisation);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.writeObject(username);
+            outputStream.writeObject(organisationName);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendSuccessMessage) {
+                return (String) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public String AddAsset(LoginToken token, String assetName) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestAddAsset);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.writeObject(assetName);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendSuccessMessage) {
+                return (String) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public String AddOrganisation(LoginToken token, OrganisationalUnit organisation) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestAddOrganisation);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.writeObject(organisation);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendSuccessMessage) {
+                return (String) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public List<OrganisationalUnit> GetAllOrganisations(LoginToken token) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestAllOrganisations);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendAllOrganisations) {
+                return (List<OrganisationalUnit>) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public String UpdateOrganisationAsset(LoginToken token, String organisationName, String AssetType, int AssetQuantity) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestUpdateOrganisationAsset);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.writeObject(organisationName);
+            outputStream.writeObject(AssetType);
+            outputStream.writeObject(AssetQuantity);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendSuccessMessage) {
+                return (String) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
+    public String UpdateOrganisationCredit(LoginToken token, String organisationName, int creditAmount) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestUpdateOrganisationCredit);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.writeObject(organisationName);
+            outputStream.writeObject(creditAmount);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendSuccessMessage) {
+                return (String) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    /**
+     * Handles the generic errors that can be expected from the server
+     * @param response - the response from the server
+     * @throws ServerException - if something goes wrong on the server for processing
+     * @throws AuthenticationException - if something goes wrong with authenticating the user
+     * @throws Exception - if something else goes wrong, like an IO issue
+     */
+    private void errorHandling(RequestType response) throws ServerException, AuthenticationException, Exception {
+        if (response == RequestType.SendErrorCode) {
+            throw new ServerException((String) inputStream.readObject());
+        } else if (response == RequestType.SendAuthenticationError) {
+            throw new AuthenticationException((String) inputStream.readObject());
+        } else {
+            throw new Exception();
+        }
+    }
+
+
+}

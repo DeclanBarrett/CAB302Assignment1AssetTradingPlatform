@@ -1,5 +1,6 @@
 package Controllers.Utils;
 
+import Controllers.Exceptions.ServerException;
 import Controllers.Utils.UtilLoginSecurity;
 import Controllers.Exceptions.AuthenticationException;
 import org.junit.jupiter.api.BeforeEach;
@@ -67,5 +68,21 @@ public class TestUtilLoginSecurity {
         assertDoesNotThrow(() -> {
             utilLoginSecurity.hashPassword("lsflsdfhksdhfksdhksahdfkjhsdfkjhsadkfhskdhfksdhfkshdfkjhsdkfhsakdfhkjsdahfkjsahdfkjhsadkfhksadfhkjasdhfkjsahdfkjhk", "kjasdhfkjsahdfkjhk");
         });
+    }
+
+    @Test
+    public void TestGenerateHashPasswords() throws AuthenticationException, ServerException {
+        assertEquals("b717415eb5e699e4989ef3e2c4e9cbf7", utilLoginSecurity.generateHashedPassword("User 1", "qwerty"));
+    }
+
+    @Test
+    public void TestGenerateBadUsername() {
+        AuthenticationException exception = assertThrows(AuthenticationException.class, () -> {
+            utilLoginSecurity.generateHashedPassword("Bad User", "qwerty");
+        });
+
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains("USERNAME OR PASSWORD INCORRECT"));
     }
 }
