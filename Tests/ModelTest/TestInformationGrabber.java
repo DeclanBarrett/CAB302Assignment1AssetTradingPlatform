@@ -4,10 +4,12 @@ import Models.DatabaseConnection;
 import Models.InformationGrabber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions.*;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.util.Date;
+import java.time.Duration;
+import java.util.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestInformationGrabber
 {
@@ -19,169 +21,121 @@ public class TestInformationGrabber
     }
 
     @Test
-    void TestInsertOrganisation() throws SQLException {
-        a.insertOrganisation("");
-
-    }
-    @Test
     void TestInsertUser(){
-        a.insertUser("Ethan", "Admin", "SystemAdmin", "xx", "12345");
-
-        // Will return an error if it doesnt work, so if no error -> pass
+        a.insertUser("Declan", "Admin", "SystemAdmin", "xx", "12345");
+        // Will return an error if it doesnt work, so if no error = pass
     }
+
     @Test
     void TestInsertAsset(){
         a.insertAsset("Paper");
+    }
+
+    @Test
+    void TestInsertOrganisation() {
+        //a.insertOrganisation("Sales", 3000.50);
+    }
+
+    @Test
+    void TestInsertOrder() {
+        //a.insertOrder(123456, "BUY", "Paper", 3, 3, "Research");
+    }
+    @Test
+    void TestInsertTrade(){
+        //a.insertTrade(12345, "Paper", 5, 3.0, "Research", "Sales", new Date());
+    }
+    @Test
+    void TestUpdatePassword() {
+        a.updatePassword("Ethan", "xx", "123456");
+    }
+    @Test
+    void TestUpdateUserAccountType() {
+        //a.updateUserAccountType("Ethan", "User");
+    }
+    @Test
+    void TestUpdateUserOrganisation() {
+        //a.updateUserAccountType("Ethan", "User");
+    }
+    @Test
+    void TestUpdateOrganisationAsset() {
+        //a.updateUserAccountType("Ethan", "User");
+    }
+    @Test
+    void TestGetNonce() { // what is thiiiiiis
+        String nonce = a.getSalt("Ethan");
+        assertEquals(nonce, "xx");
+    }
+    @Test
+    void TestGetPassword() {
+        String password = a.getPassword("Ethan");
+        assertEquals(password, "xx");
+    }
+    @Test
+    void TestGetUser() {
+        a.getUser("Ethan");
 
     }
 
     @Test
-    void TestInsertOrder() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
-    }
-    @Test
-    void TestInsertTrade() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
-    }
-    @Test
-    void TestUpdatePassword() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
-    }
-    @Test
-    void TestUpdateUserAccountType() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
-    }
-    @Test
-    void TestUpdateUserOrganisation() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
-    }
-    @Test
-    void TestUpdateOrganisationAsset() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
-    }
-    @Test
-    void TestGetNonce() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
-        // Assert Equals
-    }
-    @Test
-    void TestGetPassword() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
-    }
-    @Test
-    void TestGetUser() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
-    }
-    @Test
-    void TestGetUserInfo() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
-    }
-    @Test
-    void TestGetAllUsers() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
+    void TestGetAllUsers() {
         // test first/last in list
     }
+
     @Test
-    void TestGetSalt() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
+    void TestGetUserInfo() {
+
+    }
+
+    @Test
+    void TestGetAllUserInfo() {
+        // test first/last in list
+    }
+
+    @Test
+    void TestGetSalt() {
+
+    }
+
+    @Test
+    void TestGetOrganisation() {
+
     }
     @Test
-    void TestGetOrganisation() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
+    void TestGetAllOrganisations() {
+// test first/last in list
     }
     @Test
-    void TestGetAllOrganisations() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
+    void TestGetOrganisationOrders() {
+
     }
     @Test
-    void TestGetOrganisationOrders() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
+    void TestGetBuyOrder() {
+
     }
     @Test
-    void TestGetBuyOrder() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
+    void TestGetSellOrders() {
+
     }
     @Test
-    void TestGetSellOrders() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
+    void TestGetOrderList() {
+
+    }
+
+    @Test
+    void TestGetAllOrders() {
+        // test first/last in list
+    }
+
+    @Test
+    void TestGetAssetTypes() {
+
     }
     @Test
-    void TestGetOrders() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
+    void TestGetTradeHistory() {
+
     }
     @Test
-    void TestGetAssetTypes() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
-    }
-    @Test
-    void TestGetTradeHistory() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
-    }
-    @Test
-    void TestDeletePassword() throws SQLException {
-        Connection connection = DatabaseConnection.getInstance();
-        Statement st = connection.createStatement();
-        st.execute("INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES ('Ethan', '', ?, ?, ?);");
-        connection.close();
+    void TestDeletePassword() {
+
     }
 }
