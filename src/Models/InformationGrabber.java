@@ -98,7 +98,7 @@ public class  InformationGrabber {
             addUser.setString(1, username);
             addUser.setString(2, orgUnit);
             addUser.setString(3, accType);
-            addUser.setString(4,hashedPW);
+            addUser.setString(4, hashedPW);
             addUser.setString(5, salt);
 
             if(addUser != null)
