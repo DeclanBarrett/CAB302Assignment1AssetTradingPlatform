@@ -13,7 +13,7 @@ class TestUser {
     public void ConstructUser() { user = new User("TestUser", "qwerty", AccountType.User, "Finance", "12345678"); }
 
     @Test
-    void getUsername() { assertEquals("TestUser", user.getPassword());
+    void getUsername() { assertEquals("TestUser", user.getUsername());
     }
 
     // Dont think we need to test setters as Declan mentioned setters arent necessary, Will ask again about this today
@@ -38,7 +38,7 @@ class TestUser {
     }
 
     @Test
-    void getOrganisationalUnit() { assertEquals("Finance", user.getAccountType());
+    void getOrganisationalUnit() { assertEquals("Finance", user.getOrganisationalUnit());
     }
 
     @Test
@@ -46,7 +46,7 @@ class TestUser {
     }
 
     @Test
-    void getSalt() { assertEquals("12335678", user.getSalt());
+    void getSalt() { assertEquals("12345678", user.getSalt());
     }
 
     @Test
