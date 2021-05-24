@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Client Socket intiialisation.
+ * Client Socket initialisation.
  */
 public class ClientSocket implements IDataSource
 {
@@ -28,6 +28,10 @@ public class ClientSocket implements IDataSource
 
     private static class ClientSocketHolder {
         private final static ClientSocket INSTANCE = new ClientSocket();
+    }
+
+    public static ClientSocket getInstance() {
+        return ClientSocket.ClientSocketHolder.INSTANCE;
     }
 
     public void ClientSocket()

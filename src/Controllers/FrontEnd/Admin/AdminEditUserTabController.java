@@ -3,7 +3,7 @@ package Controllers.FrontEnd.Admin;
 import Controllers.BackEnd.AccountType;
 import Controllers.BackEnd.NetworkObjects.UserInfo;
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.BackEnd.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
 import Controllers.Utils.UtilFieldCheckers;
@@ -99,7 +99,7 @@ public class AdminEditUserTabController implements Initializable, Observer {
 
             AccountType accountType = UtilFieldCheckers.checkAccountType(EditUserAccountType.getText());
 
-            clientResponse = MockSocket.getInstance().UpdateUserAccountType(LoginController.GetToken(),
+            clientResponse = ClientSocket.getInstance().UpdateUserAccountType(LoginController.GetToken(),
                     EditUserUsername.getText(),
                     accountType);
             EditUserErrorText.setTextFill(Color.GREEN);
@@ -123,7 +123,7 @@ public class AdminEditUserTabController implements Initializable, Observer {
         try {
             UtilFieldCheckers.checkMissingValues(new ArrayList<>(Arrays.asList(EditUserOrgUnit.getText(), EditUserUsername.getText())));
 
-            clientResponse = MockSocket.getInstance().UpdateUserOrganisation(LoginController.GetToken(),
+            clientResponse = ClientSocket.getInstance().UpdateUserOrganisation(LoginController.GetToken(),
                     EditUserUsername.getText(),
                     EditUserOrgUnit.getText());
             EditUserErrorText.setTextFill(Color.GREEN);
@@ -142,7 +142,7 @@ public class AdminEditUserTabController implements Initializable, Observer {
         List<UserInfo> users = new ArrayList<>();
 
         try {
-            users = MockSocket.getInstance().GetAllUsers(LoginController.GetToken());
+            users = ClientSocket.getInstance().GetAllUsers(LoginController.GetToken());
         } catch (Exception e) {
             EditUserErrorText.setTextFill(Color.RED);
             EditUserErrorText.setText(e.getMessage());

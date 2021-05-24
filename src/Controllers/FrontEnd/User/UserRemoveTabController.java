@@ -2,7 +2,7 @@ package Controllers.FrontEnd.User;
 
 import Controllers.BackEnd.NetworkObjects.Order;
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.BackEnd.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
 import javafx.event.ActionEvent;
@@ -68,7 +68,7 @@ public class UserRemoveTabController implements Initializable, Observer {
         String clientResponse = "";
 
         try {
-            clientResponse = MockSocket.getInstance().RemoveOrder(LoginController.GetToken(), order.getOrderID());
+            clientResponse = ClientSocket.getInstance().RemoveOrder(LoginController.GetToken(), order.getOrderID());
             UpdateRemoveTable();
         } catch (Exception e) {
             clientResponse = e.getMessage();
@@ -88,7 +88,7 @@ public class UserRemoveTabController implements Initializable, Observer {
         String clientResponse = userRemoveErrorText.getText();;
 
         try {
-            buyOrders = MockSocket.getInstance().GetOrganisationOrders(LoginController.GetToken(), LoginController.GetUser().getOrganisationalUnit());
+            buyOrders = ClientSocket.getInstance().GetOrganisationOrders(LoginController.GetToken(), LoginController.GetUser().getOrganisationalUnit());
             userRemoveErrorText.setTextFill(Color.GREEN);
         } catch (Exception e) {
             userRemoveErrorText.setTextFill(Color.RED);

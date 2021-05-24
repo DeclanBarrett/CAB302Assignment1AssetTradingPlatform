@@ -3,7 +3,7 @@ package Controllers.FrontEnd.Login;
 
 import Controllers.BackEnd.NetworkObjects.LoginToken;
 import Controllers.BackEnd.NetworkObjects.UserInfo;
-import Controllers.BackEnd.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.Exceptions.AuthenticationException;
 import Controllers.Exceptions.ServerException;
 import Controllers.Utils.UtilLoginSecurity;
@@ -44,10 +44,10 @@ public class LoginController {
         UtilLoginSecurity loginSecurity = new UtilLoginSecurity();
         String hashPassword = loginSecurity.generateHashedPassword(username, password);
 
-        currentLogin = MockSocket.getInstance().AttemptLogin(username, hashPassword);
+        currentLogin = ClientSocket.getInstance().AttemptLogin(username, hashPassword);
 
         if (isCurrentLogin()) {
-            currentUser = MockSocket.getInstance().GetUser(GetToken(), username);
+            currentUser = ClientSocket.getInstance().GetUser(GetToken(), username);
             return;
         }
 

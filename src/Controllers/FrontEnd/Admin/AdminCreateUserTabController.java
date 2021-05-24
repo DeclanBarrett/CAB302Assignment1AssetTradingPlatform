@@ -4,7 +4,7 @@ import Controllers.BackEnd.NetworkObjects.UserInfo;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.BackEnd.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -91,7 +91,7 @@ public class AdminCreateUserTabController implements Initializable, Observer {
         List<UserInfo> users = new ArrayList<>();
 
         try {
-            users = MockSocket.getInstance().GetAllUsers(LoginController.GetToken());
+            users = ClientSocket.getInstance().GetAllUsers(LoginController.GetToken());
         } catch (Exception e) {
             CreateUserErrorText.setTextFill(Color.RED);
             clientResponse = e.getMessage();

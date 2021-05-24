@@ -214,7 +214,7 @@ public class MockSocket implements IDataSource {
         ArrayList<Order> orders = new ArrayList<>();
         for (Order order: orderTable) {
             if (order.getOrganisationalUnit().equals(organisationName))
-            orders.add(order);
+                orders.add(order);
         }
 
         ArrayList<Order> sellOrders = new ArrayList<>();

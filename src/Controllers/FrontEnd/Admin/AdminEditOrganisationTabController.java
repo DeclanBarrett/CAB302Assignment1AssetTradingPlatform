@@ -2,7 +2,7 @@ package Controllers.FrontEnd.Admin;
 
 import Controllers.BackEnd.NetworkObjects.OrganisationalUnit;
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.BackEnd.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
 import Controllers.Utils.UtilFieldCheckers;
@@ -74,7 +74,7 @@ public class AdminEditOrganisationTabController implements Initializable, Observ
             //Attempt to parse and then update the organisation values
             assetQuantity = Integer.parseInt(EditOrgSetAssetQuantity.getText());
 
-            clientResponse = MockSocket.getInstance().UpdateOrganisationAsset(LoginController.GetToken(),
+            clientResponse = ClientSocket.getInstance().UpdateOrganisationAsset(LoginController.GetToken(),
                     EditOrgName.getText(),
                     EditOrgSetAssetName.getText(),
                     assetQuantity);
@@ -105,7 +105,7 @@ public class AdminEditOrganisationTabController implements Initializable, Observ
             //Attempt to parse and then update the organisation values
             assetQuantity = Integer.parseInt(EditOrgSetAssetQuantity.getText());
 
-            clientResponse = MockSocket.getInstance().UpdateOrganisationCredit(LoginController.GetToken(),
+            clientResponse = ClientSocket.getInstance().UpdateOrganisationCredit(LoginController.GetToken(),
                     EditOrgName.getText(),
                     assetQuantity);
 
@@ -130,7 +130,7 @@ public class AdminEditOrganisationTabController implements Initializable, Observ
         List<OrganisationTableObject> tableOrgs = new ArrayList<>();
 
         try {
-            orgs = MockSocket.getInstance().GetAllOrganisations(LoginController.GetToken());
+            orgs = ClientSocket.getInstance().GetAllOrganisations(LoginController.GetToken());
 
             //Convert to organisation table object
             for (OrganisationalUnit org: orgs) {

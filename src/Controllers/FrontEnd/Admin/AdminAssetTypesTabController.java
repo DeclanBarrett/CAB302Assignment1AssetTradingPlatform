@@ -1,7 +1,7 @@
 package Controllers.FrontEnd.Admin;
 
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.BackEnd.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
 import javafx.event.ActionEvent;
@@ -49,7 +49,7 @@ public class AdminAssetTypesTabController implements Initializable, Observer {
                 throw new NullPointerException("INFORMATION MISSING");
             }
 
-            clientResponse = MockSocket.getInstance().AddAsset(LoginController.GetToken(), CreateAssetName.getText());
+            clientResponse = ClientSocket.getInstance().AddAsset(LoginController.GetToken(), CreateAssetName.getText());
             CreateAssetErrorText.setTextFill(Color.GREEN);
         } catch (Exception e) {
             CreateAssetErrorText.setTextFill(Color.RED);
@@ -72,7 +72,7 @@ public class AdminAssetTypesTabController implements Initializable, Observer {
 
         //Attempt to contact the server to retrieve all the assets
         try {
-            types = MockSocket.getInstance().GetAssetTypes(LoginController.GetToken());
+            types = ClientSocket.getInstance().GetAssetTypes(LoginController.GetToken());
             CreateAssetErrorText.setTextFill(Color.GREEN);
         } catch (Exception e) {
             CreateAssetErrorText.setTextFill(Color.RED);

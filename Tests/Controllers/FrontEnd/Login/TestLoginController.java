@@ -5,8 +5,7 @@ import Controllers.BackEnd.NetworkObjects.LoginToken;
 import Controllers.BackEnd.NetworkObjects.UserInfo;
 import Controllers.Exceptions.AuthenticationException;
 import Controllers.Exceptions.ServerException;
-import Controllers.FrontEnd.Login.LoginController;
-import Controllers.BackEnd.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,7 @@ public class TestLoginController {
     @BeforeAll
     public static void ConstructMock() {
         //Create socket information
-        MockSocket mockSocket = MockSocket.getInstance();
+        ClientSocket clientSocket = ClientSocket.getInstance();
     }
 
     @BeforeEach

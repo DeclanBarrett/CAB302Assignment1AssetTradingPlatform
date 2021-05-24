@@ -2,7 +2,7 @@ package Controllers.FrontEnd.Admin;
 
 import Controllers.BackEnd.NetworkObjects.OrganisationalUnit;
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.BackEnd.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
 import Controllers.Utils.UtilFieldCheckers;
@@ -67,7 +67,7 @@ public class AdminCreateOrganisationTabController implements Initializable, Obse
 
             //Attempt to add the organisation - it sends an organisation without any assets
             try {
-                clientResponse = MockSocket.getInstance().AddOrganisation(LoginController.GetToken(),
+                clientResponse = ClientSocket.getInstance().AddOrganisation(LoginController.GetToken(),
                         new OrganisationalUnit(CreateOrgName.getText(), credit, null));
                 CreateOrgErrorText.setTextFill(Color.GREEN);
             } catch (Exception e) {
@@ -97,7 +97,7 @@ public class AdminCreateOrganisationTabController implements Initializable, Obse
         String clientResponse = CreateOrgErrorText.getText();
 
         try {
-            orgs = MockSocket.getInstance().GetAllOrganisations(LoginController.GetToken());
+            orgs = ClientSocket.getInstance().GetAllOrganisations(LoginController.GetToken());
 
         } catch (Exception e) {
             clientResponse = e.getMessage();
