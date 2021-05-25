@@ -1,7 +1,6 @@
 package Controllers.FrontEnd.Login;
 
 
-import Controllers.BackEnd.NetworkObjects.LoginToken;
 import Controllers.BackEnd.NetworkObjects.UserInfo;
 import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.Exceptions.AuthenticationException;
@@ -14,15 +13,15 @@ import Controllers.Utils.UtilSceneChanger;
  */
 public class LoginController {
 
-    public static final String LOGIN_ERROR_USERNAME_PASSWORD_1 = "USERNAME OR PASSWORD INCORRECT";
-    private static LoginToken currentLogin;
+    public static final java.lang.String LOGIN_ERROR_USERNAME_PASSWORD_1 = "USERNAME OR PASSWORD INCORRECT";
+    private static String currentLogin;
     private static UserInfo currentUser;
 
     public static UserInfo GetUser() {
         return currentUser;
     }
 
-    public static LoginToken GetToken() {
+    public static String GetToken() {
         return currentLogin;
     }
 
@@ -57,8 +56,4 @@ public class LoginController {
     private boolean isCurrentLogin() {
         return currentLogin != null;
     }
-
-
-
-
 }

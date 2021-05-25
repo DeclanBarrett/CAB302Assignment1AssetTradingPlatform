@@ -1,8 +1,8 @@
 package Controllers.FrontEnd.Login;
 
 import Controllers.BackEnd.AccountType;
-import Controllers.BackEnd.NetworkObjects.LoginToken;
 import Controllers.BackEnd.NetworkObjects.UserInfo;
+import Controllers.BackEnd.Processing.JWTHandler;
 import Controllers.Exceptions.AuthenticationException;
 import Controllers.Exceptions.ServerException;
 import Controllers.BackEnd.Socket.ClientSocket;
@@ -34,9 +34,12 @@ public class TestLoginController {
 
         loginController.AttemptLogin("User 1", "qwerty");
 
-        LoginToken loginToken = new LoginToken("User 1", new Date());
 
-        assertEquals(loginToken.getUsername(), LoginController.GetToken().getUsername());
+        JWTHandler jwtHandler = new JWTHandler();
+
+        String string = jwtHandler.createToken("User 1");
+
+        assertEquals(jwtHandler.getUser(string), jwtHandler.getUser(LoginController.GetToken()));
     }
 
     @Test

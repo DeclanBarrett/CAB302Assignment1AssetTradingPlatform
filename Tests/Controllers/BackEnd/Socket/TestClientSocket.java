@@ -5,15 +5,12 @@ import Controllers.BackEnd.NetworkObjects.*;
 import Controllers.BackEnd.OrderType;
 import Controllers.Exceptions.AuthenticationException;
 import Controllers.Exceptions.ServerException;
-import com.mysql.cj.log.Log;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 public class TestClientSocket{
 
-    LoginToken token;
+    String token;
 
     //TODO: NEED TO ADD A BEFORE ALL WITH A SERVER INSTANCE
 

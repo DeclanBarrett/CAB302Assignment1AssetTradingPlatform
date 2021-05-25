@@ -81,7 +81,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public LoginToken AttemptLogin(String username, String password) throws AuthenticationException, ServerException {
+    public String AttemptLogin(String username, String password) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to handle login
             outputStream.writeObject(RequestType.RequestLogin);
@@ -96,7 +96,7 @@ public class ClientSocket implements IDataSource
 
             //Either get a token or send the error code
             if (response == RequestType.SendLoginToken) {
-                return (LoginToken) inputStream.readObject();
+                return (String) inputStream.readObject();
             }
 
             errorHandling(response);
@@ -112,7 +112,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public String AttemptResetPassword(LoginToken token, String username, String newPassword) throws AuthenticationException, ServerException {
+    public String AttemptResetPassword(String token, String username, String newPassword) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestResetPassword);
@@ -144,7 +144,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public UserInfo GetUser(LoginToken token, String username) throws AuthenticationException, ServerException {
+    public UserInfo GetUser(String token, String username) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestUserInfo);
@@ -175,7 +175,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public OrganisationalUnit GetOrganisation(LoginToken token, String orgName) throws AuthenticationException, ServerException {
+    public OrganisationalUnit GetOrganisation(String token, String orgName) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestOrganisation);
@@ -206,7 +206,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public List<Order> GetOrganisationOrders(LoginToken token, String orgName) throws AuthenticationException, ServerException {
+    public List<Order> GetOrganisationOrders(String token, String orgName) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestOrganisationOrders);
@@ -237,7 +237,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public List<Order> GetAllOrders(LoginToken token) throws AuthenticationException, ServerException {
+    public List<Order> GetAllOrders(String token) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestAllOrders);
@@ -267,7 +267,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public List<Order> GetBuyOrders(LoginToken token) throws AuthenticationException, ServerException {
+    public List<Order> GetBuyOrders(String token) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestBuyOrders);
@@ -297,7 +297,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public List<Order> GetSellOrders(LoginToken token) throws AuthenticationException, ServerException {
+    public List<Order> GetSellOrders(String token) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestSellOrders);
@@ -327,7 +327,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public List<Order> GetOrganisationBuyOrders(LoginToken token, String organisationName) throws AuthenticationException, ServerException {
+    public List<Order> GetOrganisationBuyOrders(String token, String organisationName) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestOrganisationOrders);
@@ -363,7 +363,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public List<Order> GetOrganisationSellOrders(LoginToken token, String organisationName) throws AuthenticationException, ServerException {
+    public List<Order> GetOrganisationSellOrders(String token, String organisationName) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestOrganisationOrders);
@@ -399,7 +399,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public String AddOrder(LoginToken token, Order newOrder) throws AuthenticationException, ServerException {
+    public String AddOrder(String token, Order newOrder) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestAddOrder);
@@ -430,7 +430,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public String RemoveOrder(LoginToken token, int orderID) throws AuthenticationException, ServerException {
+    public String RemoveOrder(String token, int orderID) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestRemoveOrder);
@@ -461,7 +461,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public List<String> GetAssetTypes(LoginToken token) throws AuthenticationException, ServerException {
+    public List<String> GetAssetTypes(String token) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestAssetTypes);
@@ -491,7 +491,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public List<Trade> GetTradeHistory(LoginToken token, String AssetType) throws AuthenticationException, ServerException {
+    public List<Trade> GetTradeHistory(String token, String AssetType) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestTradeHistory);
@@ -522,7 +522,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public String AddUser(LoginToken token, User user) throws AuthenticationException, ServerException {
+    public String AddUser(String token, User user) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestAddUser);
@@ -553,7 +553,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public List<UserInfo> GetAllUsers(LoginToken token) throws AuthenticationException, ServerException {
+    public List<UserInfo> GetAllUsers(String token) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestAllUsers);
@@ -583,7 +583,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public String UpdateUserPassword(LoginToken token, String username, String hashedPassword, String salt) throws AuthenticationException, ServerException {
+    public String UpdateUserPassword(String token, String username, String hashedPassword, String salt) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestUpdateUserPassword);
@@ -616,7 +616,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public String UpdateUserAccountType(LoginToken token, String username, AccountType accountType) throws AuthenticationException, ServerException {
+    public String UpdateUserAccountType(String token, String username, AccountType accountType) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestUpdateUserAccountType);
@@ -648,7 +648,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public String UpdateUserOrganisation(LoginToken token, String username, String organisationName) throws AuthenticationException, ServerException {
+    public String UpdateUserOrganisation(String token, String username, String organisationName) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestUpdateUserOrganisation);
@@ -680,7 +680,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public String AddAsset(LoginToken token, String assetName) throws AuthenticationException, ServerException {
+    public String AddAsset(String token, String assetName) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestAddAsset);
@@ -711,7 +711,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public String AddOrganisation(LoginToken token, OrganisationalUnit organisation) throws AuthenticationException, ServerException {
+    public String AddOrganisation(String token, OrganisationalUnit organisation) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestAddOrganisation);
@@ -742,7 +742,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public List<OrganisationalUnit> GetAllOrganisations(LoginToken token) throws AuthenticationException, ServerException {
+    public List<OrganisationalUnit> GetAllOrganisations(String token) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestAllOrganisations);
@@ -772,7 +772,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public String UpdateOrganisationAsset(LoginToken token, String organisationName, String AssetType, int AssetQuantity) throws AuthenticationException, ServerException {
+    public String UpdateOrganisationAsset(String token, String organisationName, String AssetType, int AssetQuantity) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestUpdateOrganisationAsset);
@@ -805,7 +805,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public String UpdateOrganisationCredit(LoginToken token, String organisationName, int creditAmount) throws AuthenticationException, ServerException {
+    public String UpdateOrganisationCredit(String token, String organisationName, int creditAmount) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestUpdateOrganisationCredit);
