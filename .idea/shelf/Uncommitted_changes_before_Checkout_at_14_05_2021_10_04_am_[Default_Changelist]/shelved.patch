@@ -1,0 +1,589 @@
+Index: .idea/dataSources.xml
+===================================================================
+diff --git a/.idea/dataSources.xml b/.idea/dataSources.xml
+deleted file mode 100644
+--- a/.idea/dataSources.xml	(revision bfe717bc935c0cff869e605ec8fde42a1ce77f85)
++++ /dev/null	(revision bfe717bc935c0cff869e605ec8fde42a1ce77f85)
+@@ -1,12 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+-    <data-source source="LOCAL" name="@localhost" uuid="bb6b2040-466c-4e7a-a62a-0c9cbf7e7c92">
+-      <driver-ref>mariadb</driver-ref>
+-      <synchronize>true</synchronize>
+-      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+-      <jdbc-url>jdbc:mariadb://localhost:3306</jdbc-url>
+-      <working-dir>$ProjectFileDir$</working-dir>
+-    </data-source>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_5_05_2021_10_25_am_[Default_Changelist]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_5_05_2021_10_25_am_[Default_Changelist]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_5_05_2021_10_25_am_[Default_Changelist]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_5_05_2021_10_25_am_[Default_Changelist]/shelved.patch	(revision bfe717bc935c0cff869e605ec8fde42a1ce77f85)
++++ /dev/null	(revision bfe717bc935c0cff869e605ec8fde42a1ce77f85)
+@@ -1,69 +0,0 @@
+-Index: .idea/libraries/lib.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><component name=\"libraryTable\">\r\n  <library name=\"lib\">\r\n    <CLASSES>\r\n      <root url=\"file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib\" />\r\n    </CLASSES>\r\n    <JAVADOC />\r\n    <SOURCES>\r\n      <root url=\"file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib\" />\r\n    </SOURCES>\r\n    <jarDirectory url=\"file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib\" recursive=\"false\" />\r\n    <jarDirectory url=\"file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib\" recursive=\"false\" type=\"SOURCES\" />\r\n  </library>\r\n</component>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/libraries/lib.xml b/.idea/libraries/lib.xml
+---- a/.idea/libraries/lib.xml	(revision 95d00dc2944cac04d5f580b7b54d6c6eaa2b523d)
+-+++ b/.idea/libraries/lib.xml	(date 1619744584904)
+-@@ -1,13 +1,13 @@
+- <component name="libraryTable">
+-   <library name="lib">
+-     <CLASSES>
+--      <root url="file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib" />
+-+      <root url="file://$PROJECT_DIR$/../../../../Tools/JavaFX/lib" />
+-     </CLASSES>
+-     <JAVADOC />
+-     <SOURCES>
+--      <root url="file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib" />
+-+      <root url="file://$PROJECT_DIR$/../../../../Tools/JavaFX/lib" />
+-     </SOURCES>
+--    <jarDirectory url="file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib" recursive="false" />
+--    <jarDirectory url="file://$PROJECT_DIR$/../JAVAFX/javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
+-+    <jarDirectory url="file://$PROJECT_DIR$/../../../../Tools/JavaFX/lib" recursive="false" />
+-+    <jarDirectory url="file://$PROJECT_DIR$/../../../../Tools/JavaFX/lib" recursive="false" type="SOURCES" />
+-   </library>
+- </component>
+-\ No newline at end of file
+-Index: src/App_Start/ClientStart.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package App_Start;\r\n\r\nimport Models.MockSocket;\r\nimport javafx.application.Application;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.stage.Stage;\r\n\r\n/**\r\n * Creates stage for the UI, contains basic stage information\r\n */\r\npublic class ClientStart extends Application\r\n{\r\n    public static void main(String[] args) {\r\n        launch(args);\r\n    }\r\n\r\n    /**\r\n     * Initialise GUI screen, make visible\r\n     * @param primaryStage Handles creation of main GUI screen\r\n     * @throws Exception To stop GUI breaking\r\n     */\r\n    @Override\r\n    public void start(Stage primaryStage) throws Exception\r\n    {\r\n        new MockSocket();\r\n\r\n\r\n        primaryStage.setTitle(\"Unnamed Client Organisation Trading System\");\r\n\r\n        Parent root;\r\n\r\n        // Admin\r\n        //root = FXMLLoader.load(getClass().getResource(\"/Client/FXMLPages/Admin/AdminScreen.fxml\"));\r\n        // User\r\n        //root = FXMLLoader.load(getClass().getResource(\"/Client/FXMLPages/User/UserScreen.fxml\"));\r\n        // Login\r\n        root = FXMLLoader.load(getClass().getResource(\"/Views/Login/Login.fxml\"));\r\n        // Reset\r\n        //root = FXMLLoader.load(getClass().getResource(\"/Client/FXMLPages/PasswordReset.fxml\"));\r\n\r\n\r\n        primaryStage.setScene(new Scene(root));\r\n        primaryStage.show();\r\n    }\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/src/App_Start/ClientStart.java b/src/App_Start/ClientStart.java
+---- a/src/App_Start/ClientStart.java	(revision 95d00dc2944cac04d5f580b7b54d6c6eaa2b523d)
+-+++ b/src/App_Start/ClientStart.java	(date 1620173777454)
+-@@ -1,6 +1,5 @@
+- package App_Start;
+- 
+--import Models.MockSocket;
+- import javafx.application.Application;
+- import javafx.fxml.FXMLLoader;
+- import javafx.scene.Parent;
+-@@ -24,7 +23,7 @@
+-     @Override
+-     public void start(Stage primaryStage) throws Exception
+-     {
+--        new MockSocket();
+-+      //  new MockSocket();
+- 
+- 
+-         primaryStage.setTitle("Unnamed Client Organisation Trading System");
+-@@ -32,11 +31,11 @@
+-         Parent root;
+- 
+-         // Admin
+--        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/Admin/AdminScreen.fxml"));
+-+        root = FXMLLoader.load(getClass().getResource("/Views/Admin/AdminScreen.fxml"));
+-         // User
+-         //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/User/UserScreen.fxml"));
+-         // Login
+--        root = FXMLLoader.load(getClass().getResource("/Views/Login/Login.fxml"));
+-+       // root = FXMLLoader.load(getClass().getResource("/Views/Login/Login.fxml"));
+-         // Reset
+-         //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/PasswordReset.fxml"));
+- 
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_5_05_2021_10_25_am__Default_Changelist_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_5_05_2021_10_25_am__Default_Changelist_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_5_05_2021_10_25_am__Default_Changelist_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_5_05_2021_10_25_am__Default_Changelist_.xml	(revision bfe717bc935c0cff869e605ec8fde42a1ce77f85)
++++ /dev/null	(revision bfe717bc935c0cff869e605ec8fde42a1ce77f85)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_5_05_2021_10_25_am_[Default_Changelist]" date="1620174342963" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_05_2021_10_25_am_[Default_Changelist]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 5/05/2021 10:25 am [Default Changelist]" />
+-</changelist>
+\ No newline at end of file
+Index: src/Models/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Models/User.java b/src/Models/User.java
+new file mode 100644
+--- /dev/null	(date 1620777504637)
++++ b/src/Models/User.java	(date 1620777504637)
+@@ -0,0 +1,314 @@
++package Models;
++
++import javax.xml.crypto.Data;
++import java.sql.Connection;
++import java.sql.PreparedStatement;
++import java.sql.ResultSet;
++import java.sql.SQLException;
++import java.util.List;
++
++/**
++ * Finds information from the backend
++ */
++public class  User {
++
++    //SQL queries for user, login and reset password
++
++    private static final String INSERT_NEW_USER = "INSERT INTO user (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES (?, ?, ?, ?, ?)";
++
++    private static final String UPDATE_PASSWORD = "UPDATE user SET Password=?, Salt=? WHERE UserName=?";
++
++    private static final String GET_NONCE = "SELECT Salt FROM User WHERE UserName=?";
++
++    private static final String GET_PASSWORD = "SELECT HashedPassword FROM User WHERE UserName=?";
++
++    private static final String GET_USER = "SELECT * FROM user WHERE UserName=?";
++
++    private PreparedStatement addUser;
++
++    private PreparedStatement updatePassword;
++
++    private PreparedStatement getNonce;
++
++    private PreparedStatement getPassword;
++
++    private PreparedStatement getUser;
++
++    private Connection connection;
++
++
++
++    /**
++     * Inserts user into the database.
++     * @param username - users username
++     * @param orgUnit - organisational unit user belongs too
++     * @param accType - Account type user has
++     * @param hashedPW - hashed password attached to the user
++     * @param salt - salt attached to users password
++     */
++    public void insertUser(String username, String orgUnit, String accType, String hashedPW, String salt)
++    {
++        try
++        {
++            connection = DatabaseConnection.getInstance();
++            addUser = connection.prepareStatement(INSERT_NEW_USER);
++            addUser.setString(1, username);
++            addUser.setString(2, orgUnit);
++            addUser.setString(3, accType);
++            addUser.setString(4,hashedPW);
++            addUser.setString(5, salt);
++
++            if(addUser != null)
++            {
++                addUser.executeQuery();
++            }
++
++
++        } catch (SQLException throwables) {
++            throwables.printStackTrace();
++        }
++    }
++
++    /**
++     * Retrieves password from database
++     * @param username
++     */
++    public void getPassword(String username)
++    {
++        ResultSet rs = null;
++        try
++        {
++            connection = DatabaseConnection.getInstance();
++            getPassword = connection.prepareStatement(GET_PASSWORD);
++            getPassword.setString(1, username);
++            rs = getPassword.executeQuery();
++
++        } catch (SQLException throwables) {
++            throwables.printStackTrace();
++        }
++    }
++
++    /**
++     * Retrieve salt from database
++     * @param username salt attached to this users password
++     */
++    public void getSalt(String username)
++    {
++        try
++        {
++            connection = DatabaseConnection.getInstance();
++            getNonce = connection.prepareStatement(GET_NONCE);
++            getNonce.setString(1, username);
++
++
++            if(getNonce != null)
++            {
++                ResultSet rs = getNonce.executeQuery();
++            }
++
++
++        } catch (SQLException throwables) {
++            throwables.printStackTrace();
++        }
++    }
++
++    /**
++     * Update users password
++     * @param username - users username
++     * @param password - users password
++     * @param salt - salt attached to users password
++     */
++    public void updatePassword(String username, String password, String salt){
++        try
++        {
++            updatePassword = connection.prepareStatement(UPDATE_PASSWORD);
++            updatePassword.setString(1, password);
++            updatePassword.setString(2, salt);
++            updatePassword.setString(3, username);
++
++            if(updatePassword != null)
++            {
++                updatePassword.executeQuery();
++            }
++        } catch (SQLException throwables) {
++            throwables.printStackTrace();
++        }
++    }
++
++    /**
++     * Gets user from the database
++     * @param username - username of requested user.
++     * @return the User with login info included
++     */
++    public User getUser(String username)
++    {
++        try
++        {
++            getUser = connection.prepareStatement(GET_USER);
++            getUser.setString(1,username);
++
++            if(getUser != null)
++            {
++                getUser.executeQuery();
++            }
++
++        } catch (SQLException throwables) {
++            throwables.printStackTrace();
++        }
++
++        return null;
++    }
++    /**
++     * Get the list of Orders
++     * @return the list of orders
++     */
++    public List<Order> GetOrderList() {
++        return null;
++    }
++
++    /**
++     * Gets user info from the database
++     * @param username - username of requested user.
++     * @return the User with no login info included
++     */
++    public UserInfo getUserInfo(String username) {return null;}
++
++    /**
++     * Gets list of user info for all users from the database
++     * @return the list of user information
++     */
++    public List<UserInfo> getAllUserInfo() {return null;}
++
++    /**
++     * Gets list of users for all users from the database
++     * @return the list of users with login info
++     */
++    public List<User> getAllUsers() {return null;}
++
++    /**
++     * Inserts a new user into the database
++     * (Warning - Users cannot be removed from the database)
++     * (BUT they can have their Account Type be changed to inactive)
++     * @param user - the user to be inserted (with login info)
++     * @return a success message
++     */
++    public String insertUser(User user) {return null;}
++
++    /**
++     * Updates the account type of the user in the database
++     * @param username - username of updated user.
++     * @param accountType - account type to change the users account type to
++     * @return a success message
++     */
++    public String updateUserAccountType(String username, AccountType accountType) {return null;}
++
++    /**
++     * Updates the organisation of the user in the database
++     * @param username - username of the updated user.
++     * @param organisationName - organisation to change the users organisation to
++     * @return a success message
++     */
++    public String updateUserOrganisation(String username, String organisationName) {return null;}
++
++    /**
++     * Gets the organisational unit object in the database
++     * @param orgName - organisation name of the organisation
++     * @return the organisation unit object with all included information
++     */
++    public OrganisationalUnit getOrganisation(String orgName) {return null;}
++
++    /**
++     * Gets a list of all organisational units with info in the database
++     * @return a list of organisationa unit objects
++     */
++    public List<OrganisationalUnit> getAllOrganisations() {return null;}
++
++    /**
++     * Insert a new organisation into the database
++     * (Warning - Organisations cannot be removed from the database)
++     * (Warning - All asset types must be valid asset types)
++     * @param organisation - organisation with all information to be inserted
++     * @return a success message
++     */
++    public String insertOrganisation(OrganisationalUnit organisation) {return null;}
++
++    /**
++     * Update the quantity of an asset in an organisation, either by inserting a new
++     * asset or updating an existing asset in the database
++     * @param organisationName - organisation to have its asset changed
++     * @param assetType - the asset type to be added or updated
++     * @param assetQuantity - quantity to set the asset to
++     * @return a success message
++     */
++    public String updateOrganisationAsset(String organisationName, String assetType, int assetQuantity) {return null;}
++
++    /**
++     * Gets a list of all orders that an organisation currently has active in the database
++     * @param orgName - the organisation to retrieve orders for
++     * @return a list of orders both buy and sell
++     */
++    public List<Order> getOrganisationOrders(String orgName) {return null;}
++
++    /**
++     * Gets all buy orders that are currently active in the database
++     * @return a list of all orders with the orderType BUY
++     */
++    public List<Order> getBuyOrders() {return null;}
++
++    /**
++     * Gets all sell orders that are currently active in the database
++     * @return a list of all orders with the orderType SELL
++     */
++    public List<Order> getSellOrders() {return null;}
++
++    /**
++     * Gets all orders that are currently active in the database
++     * @return a list of all orders, regardless of type
++     */
++    public List<Order> getAllOrders() {return null;}
++
++    /**
++     * Inserts a new order into the database
++     * @param newOrder - the order with all information to be inserted
++     * @return a success message
++     */
++    public String insertOrder(Order newOrder) {return null;}
++
++    /**
++     * Deletes an order in the database
++     * @param OrderID - the orderID of the order to be deleted
++     * @return a success message
++     */
++    public String deleteOrder(int OrderID) {return null;}
++
++    /**
++     * Gets a list of all the asset types that are in the database
++     * @return a list of asset types
++     */
++    public List<String> getAssetTypes() {return null;}
++
++    /**
++     * Inserts a new asset type into the database, so that orders etc
++     * cannot be placed with an invalid asset type
++     * (Warning - asset types cannot be removed from the database)
++     * @param assetName - asset to be added
++     * @return a success message
++     */
++    public String insertAsset(String assetName) {return null;}
++
++    /**
++     * Inserts a new trade into the database
++     * (Warning - a trade is a measure of history thus they cannot
++     * be removed from the database)
++     * @param trade - trade to be added
++     * @return a success message
++     */
++    public String insertTrade(Trade trade) {return null;}
++
++    /**
++     * Gets a list of all previous trades that occurred for an asset type
++     * @param AssetType - asset type of the trades
++     * @return a list of trades
++     */
++    public List<Trade> getTradeHistory(String AssetType) {return null;}
++}
+\ No newline at end of file
+Index: .idea/libraries/org_mariadb_jdbc_mariadb_java_client_2_7_2.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/org_mariadb_jdbc_mariadb_java_client_2_7_2.xml b/.idea/libraries/org_mariadb_jdbc_mariadb_java_client_2_7_2.xml
+new file mode 100644
+--- /dev/null	(date 1620624667315)
++++ b/.idea/libraries/org_mariadb_jdbc_mariadb_java_client_2_7_2.xml	(date 1620624667315)
+@@ -0,0 +1,10 @@
++<component name="libraryTable">
++  <library name="org.mariadb.jdbc:mariadb-java-client:2.7.2" type="repository">
++    <properties maven-id="org.mariadb.jdbc:mariadb-java-client:2.7.2" />
++    <CLASSES>
++      <root url="jar://$PROJECT_DIR$/lib/mariadb-java-client-2.7.2.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c\" name=\"Default Changelist\" comment=\"Added User Controller. Fixed LoginController.java\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/Controllers/FrontEnd/AdminController.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/Models/Assets.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/App_Start/ClientStart.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/App_Start/ClientStart.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Controllers/FrontEnd/UserController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Controllers/FrontEnd/UserController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Models/FakeDatabase.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Models/IDatabase.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Models/InformationGrabber.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Models/OrderExecutor.java\" beforeDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"CodeInsightWorkspaceSettings\">\r\n    <option name=\"optimizeImportsOnTheFly\" value=\"true\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"CSS File\" />\r\n        <option value=\"FxmlFile\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"PUSH_TAGS\">\r\n      <GitPushTagMode>\r\n        <option name=\"argument\" value=\"--tags\" />\r\n        <option name=\"title\" value=\"All\" />\r\n      </GitPushTagMode>\r\n    </option>\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"Aidan-Branch\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"UPDATE_TYPE\" value=\"REBASE\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"HighlightingSettingsPerFile\">\r\n    <setting file=\"file://$PROJECT_DIR$/src/Controllers/FrontEnd/LoginController.java\" root0=\"FORCE_HIGHLIGHTING\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1qoyBDtoSUT10ozznKhI69mkQcv\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"ASKED_ADD_EXTERNAL_FILES\" value=\"true\" />\r\n    <property name=\"DatabaseDriversLRU\" value=\"mariadb\" />\r\n    <property name=\"Downloaded.Files.Path.Enabled\" value=\"false\" />\r\n    <property name=\"Repository.Attach.Annotations\" value=\"false\" />\r\n    <property name=\"Repository.Attach.JavaDocs\" value=\"false\" />\r\n    <property name=\"Repository.Attach.Sources\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"add_unversioned_files\" value=\"$PROJECT_DIR$/.gitignore\" />\r\n    <property name=\"aspect.path.notification.shown\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/../../../../Tools/JavaFX/lib\" />\r\n    <property name=\"list.type.of.created.stylesheet\" value=\"CSS\" />\r\n    <property name=\"nodejs_package_manager_path\" value=\"npm\" />\r\n    <property name=\"project.structure.last.edited\" value=\"Libraries\" />\r\n    <property name=\"project.structure.proportion\" value=\"0.15\" />\r\n    <property name=\"project.structure.side.proportion\" value=\"0.2\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"preferences.pluginManager\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\Battl\\IdeaProjects\\CAB302Assignment1AssetTradingPlatform\\src\\main\\Controller\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\Battl\\IdeaProjects\\CAB302Assignment1AssetTradingPlatform\\src\\Testing\\BlackBox\\Model\" />\r\n      <recent name=\"C:\\Users\\Battl\\IdeaProjects\\CAB302Assignment1AssetTradingPlatform\\src\\Testing\\BlackBox\\Controller\" />\r\n      <recent name=\"C:\\Users\\Battl\\IdeaProjects\\CAB302Assignment1AssetTradingPlatform\\src\\Testing\\ControllerTest\" />\r\n      <recent name=\"C:\\Users\\Battl\\IdeaProjects\\CAB302Assignment1AssetTradingPlatform\\src\\Testing\\ModelTest\" />\r\n      <recent name=\"C:\\Users\\Battl\\IdeaProjects\\CAB302Assignment1AssetTradingPlatform\\src\\Testing\" />\r\n    </key>\r\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\r\n      <recent name=\"\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunAnythingCache\">\r\n    <option name=\"myCommands\">\r\n      <command value=\"ServerStart\" />\r\n      <command value=\"Server\" />\r\n      <command value=\"client\" />\r\n      <command value=\"ClientStart\" />\r\n    </option>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Application.Assets\">\r\n    <configuration name=\"Assets\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Models.Assets\" />\r\n      <module name=\"CAB302Assignment1AssetTradingPlatform\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"Models.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"ClientStart\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"App_Start.ClientStart\" />\r\n      <module name=\"CAB302Assignment1AssetTradingPlatform\" />\r\n      <option name=\"VM_PARAMETERS\" value=\"--module-path C:\\Tools\\JavaFX\\lib --add-modules javafx.controls,javafx.fxml --add-exports javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"App_Start.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Server\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Controllers.Backend.Server\" />\r\n      <module name=\"CAB302Assignment1AssetTradingPlatform\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"Controllers.Backend.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"ServerStart\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"App_Start.ServerStart\" />\r\n      <module name=\"CAB302Assignment1AssetTradingPlatform\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"App_Start.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"ModelTest.testReq\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"CAB302Assignment1AssetTradingPlatform\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"test.model.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"test.model\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"test.model.ModelTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"testReq\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Application.ServerStart\" />\r\n      <item itemvalue=\"Application.ClientStart\" />\r\n      <item itemvalue=\"Application.Server\" />\r\n      <item itemvalue=\"Application.Assets\" />\r\n      <item itemvalue=\"JUnit.ModelTest.testReq\" />\r\n    </list>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Assets\" />\r\n        <item itemvalue=\"Application.ClientStart\" />\r\n        <item itemvalue=\"Application.Server\" />\r\n        <item itemvalue=\"Application.ServerStart\" />\r\n        <item itemvalue=\"JUnit.ModelTest.testReq\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1617760099571</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1617760099571</updated>\r\n      <workItem from=\"1617760100725\" duration=\"286000\" />\r\n      <workItem from=\"1618358517512\" duration=\"1563000\" />\r\n      <workItem from=\"1618531459240\" duration=\"1813000\" />\r\n      <workItem from=\"1618534605228\" duration=\"1119000\" />\r\n      <workItem from=\"1618535852187\" duration=\"359000\" />\r\n      <workItem from=\"1618536229242\" duration=\"233000\" />\r\n      <workItem from=\"1618536481339\" duration=\"3222000\" />\r\n      <workItem from=\"1618622721412\" duration=\"1311000\" />\r\n      <workItem from=\"1618634362390\" duration=\"3213000\" />\r\n      <workItem from=\"1618890159330\" duration=\"833000\" />\r\n      <workItem from=\"1618891796505\" duration=\"152000\" />\r\n      <workItem from=\"1618891968722\" duration=\"160000\" />\r\n      <workItem from=\"1618892152152\" duration=\"291000\" />\r\n      <workItem from=\"1618964068260\" duration=\"584000\" />\r\n      <workItem from=\"1618964699912\" duration=\"1426000\" />\r\n      <workItem from=\"1618966269280\" duration=\"1064000\" />\r\n      <workItem from=\"1619231766816\" duration=\"1586000\" />\r\n      <workItem from=\"1619233396871\" duration=\"1904000\" />\r\n      <workItem from=\"1619235364978\" duration=\"863000\" />\r\n      <workItem from=\"1619236516030\" duration=\"218000\" />\r\n      <workItem from=\"1619236750209\" duration=\"101000\" />\r\n      <workItem from=\"1619236867576\" duration=\"3179000\" />\r\n      <workItem from=\"1619346588405\" duration=\"517000\" />\r\n      <workItem from=\"1619347125300\" duration=\"116000\" />\r\n      <workItem from=\"1619347253230\" duration=\"4408000\" />\r\n      <workItem from=\"1619353060325\" duration=\"2912000\" />\r\n      <workItem from=\"1619356714352\" duration=\"51000\" />\r\n      <workItem from=\"1619356779679\" duration=\"594000\" />\r\n      <workItem from=\"1619400378435\" duration=\"2309000\" />\r\n      <workItem from=\"1619402738784\" duration=\"1379000\" />\r\n      <workItem from=\"1619414126336\" duration=\"1000\" />\r\n      <workItem from=\"1619741203841\" duration=\"444000\" />\r\n      <workItem from=\"1619741716100\" duration=\"1146000\" />\r\n      <workItem from=\"1619743512348\" duration=\"1004000\" />\r\n      <workItem from=\"1619744549223\" duration=\"70000\" />\r\n      <workItem from=\"1620173194188\" duration=\"762000\" />\r\n      <workItem from=\"1620174060356\" duration=\"2235000\" />\r\n      <workItem from=\"1620177056140\" duration=\"601000\" />\r\n      <workItem from=\"1620346122909\" duration=\"1032000\" />\r\n      <workItem from=\"1620347174441\" duration=\"1696000\" />\r\n      <workItem from=\"1620366595148\" duration=\"595000\" />\r\n      <workItem from=\"1620430594175\" duration=\"158000\" />\r\n      <workItem from=\"1620430907587\" duration=\"156000\" />\r\n      <workItem from=\"1620444955429\" duration=\"4400000\" />\r\n      <workItem from=\"1620520182340\" duration=\"10549000\" />\r\n      <workItem from=\"1620547155796\" duration=\"670000\" />\r\n      <workItem from=\"1620605750889\" duration=\"2145000\" />\r\n      <workItem from=\"1620607941513\" duration=\"8154000\" />\r\n      <workItem from=\"1620623791548\" duration=\"624000\" />\r\n      <workItem from=\"1620624432090\" duration=\"81000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Initial Commit (Brad Barebones)\">\r\n      <created>1617760354635</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1617760354635</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Project Setup w/ Test Folder\">\r\n      <created>1618359924035</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1618359924035</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Project Setup w/ MVC &amp; Test Folder\">\r\n      <created>1618531659163</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1618531659163</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Project Setup w/ MVC &amp; Test Folder\">\r\n      <created>1618531677739</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1618531677739</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Project Setup w/ MVC &amp; Test Folder\">\r\n      <created>1618532162644</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1618532162644</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Entire GUI Built, Just needs events to be added &amp; backend\">\r\n      <created>1618640229227</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1618640229227</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"Entire Project Refactored back to MVC, App_Start &amp; Testing; Architecture. &#10;&#10;&#10;I reverted the entire project to conform to MVC design pattern. This will allow for Team Development, Scalable code and logical organisation. &#10;&#10;Please use the testing folder for all tests and testing, i have linked it with a ID within IntelliJ so it knows all unit test are in this folder.&#10;&#10;Thanks,&#10;Brad.\">\r\n      <created>1619351894023</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619351894023</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"Entire Project Refactored back to MVC, App_Start &amp; Testing; Architecture. &#10;&#10;&#10;I reverted the entire project to conform to MVC design pattern. This will allow for Team Development, Scalable code and logical organisation. &#10;&#10;Please use the testing folder for all tests and testing, i have linked it with a ID within IntelliJ so it knows all unit test are in this folder.&#10;&#10;Thanks,&#10;Brad.\">\r\n      <created>1619352581055</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619352581055</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"Basic Networking is now Live with Sockets. I will just expand from the current code once we get Backend and Frontend Pathing organised.\">\r\n      <created>1619355855110</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619355855110</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"Updated Testing Directory Structure to Organise into BlackBox &amp; ClearBox.&#10;&#10;Notes:&#10; - Deleted Un-Used Test Classes with no Tests &#10; - No Clearbox tests yet :(\">\r\n      <created>1620445300421</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620445300421</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"H\">\r\n      <created>1620446704165</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620446704165</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :).\">\r\n      <created>1620447292878</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620447292878</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :).\">\r\n      <created>1620447493972</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620447493972</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :).\">\r\n      <created>1620447553226</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620447553226</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"Refactored Server Code to backed end controller\">\r\n      <created>1620447940931</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620447940931</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"Added Networking structure and intermediate socket program( client &amp; server\">\r\n      <created>1620538905715</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620538905715</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00017\" summary=\"New Sub-Branch. Added BradsPacket.java to experiment with using a class as a packet for seamless transition :)\">\r\n      <created>1620538973860</created>\r\n      <option name=\"number\" value=\"00017\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620538973860</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00018\" summary=\"Sever And Client Sockets Established\">\r\n      <created>1620611087735</created>\r\n      <option name=\"number\" value=\"00018\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620611087735</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00019\" summary=\"Added Threading for Server to handle multiple clients.\">\r\n      <created>1620611118163</created>\r\n      <option name=\"number\" value=\"00019\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620611118163</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00020\" summary=\"Added Threading for Server to handle multiple clients.\">\r\n      <created>1620611233305</created>\r\n      <option name=\"number\" value=\"00020\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620611233305</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00021\" summary=\"Added Threading for Server to handle multiple clients.\">\r\n      <created>1620611275414</created>\r\n      <option name=\"number\" value=\"00021\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00021\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620611275414</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00022\" summary=\"Fixed issues with GUI not loading, fixed pathing as well.\">\r\n      <created>1620615567929</created>\r\n      <option name=\"number\" value=\"00022\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00022\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620615567929</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00023\" summary=\"Added User Controller. Fixed LoginController.java\">\r\n      <created>1620616485003</created>\r\n      <option name=\"number\" value=\"00023\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00023\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1620616485003</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"24\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"Brads-Branch\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"Initial Commit (Brad Barebones)\" />\r\n    <MESSAGE value=\"Project Setup w/ Test Folder\" />\r\n    <MESSAGE value=\"Project Setup w/ MVC &amp; Test Folder\" />\r\n    <MESSAGE value=\"Entire GUI Built, Just needs events to be added &amp; backend\" />\r\n    <MESSAGE value=\"Entire Project Refactored back to MVC, App_Start &amp; Testing; Architecture. &#10;&#10;&#10;I reverted the entire project to conform to MVC design pattern. This will allow for Team Development, Scalable code and logical organisation. &#10;&#10;Please use the testing folder for all tests and testing, i have linked it with a ID within IntelliJ so it knows all unit test are in this folder.&#10;&#10;Thanks,&#10;Brad.\" />\r\n    <MESSAGE value=\"Basic Networking is now Live with Sockets. I will just expand from the current code once we get Backend and Frontend Pathing organised.\" />\r\n    <MESSAGE value=\"Updated Testing Directory Structure to Organise into BlackBox &amp; ClearBox.&#10;&#10;Notes:&#10; - Deleted Un-Used Test Classes with no Tests &#10; - No Clearbox tests yet :(\" />\r\n    <MESSAGE value=\"H\" />\r\n    <MESSAGE value=\"Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :).\" />\r\n    <MESSAGE value=\"Refactored Server Code to backed end controller\" />\r\n    <MESSAGE value=\"Added Networking structure and intermediate socket program( client &amp; server\" />\r\n    <MESSAGE value=\"New Sub-Branch. Added BradsPacket.java to experiment with using a class as a packet for seamless transition :)\" />\r\n    <MESSAGE value=\"Sever And Client Sockets Established\" />\r\n    <MESSAGE value=\"Added Threading for Server to handle multiple clients.\" />\r\n    <MESSAGE value=\"Fixed issues with GUI not loading, fixed pathing as well.\" />\r\n    <MESSAGE value=\"Added User Controller. Fixed LoginController.java\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Added User Controller. Fixed LoginController.java\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/CAB302Assignment1AssetTradingPlatform$ClientStart.ic\" NAME=\"ClientStart Coverage Results\" MODIFIED=\"1619236936087\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\">\r\n      <FILTER>Client.*</FILTER>\r\n    </SUITE>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision bfe717bc935c0cff869e605ec8fde42a1ce77f85)
++++ b/.idea/workspace.xml	(date 1620781464820)
+@@ -5,16 +5,14 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="82b9c439-9f6a-4c83-abd2-dd0bb16e5e8c" name="Default Changelist" comment="Added User Controller. Fixed LoginController.java">
+-      <change afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/AdminController.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/Models/Assets.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_mariadb_jdbc_mariadb_java_client_2_7_2.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/q" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/Models/User.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_05_2021_10_25_am_[Default_Changelist]/shelved.patch" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/App_Start/ClientStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Start/ClientStart.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/UserController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Models/FakeDatabase.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Models/IDatabase.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Models/InformationGrabber.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Models/OrderExecutor.java" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -69,10 +67,10 @@
+   <component name="PropertiesComponent">
+     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+     <property name="DatabaseDriversLRU" value="mariadb" />
+-    <property name="Downloaded.Files.Path.Enabled" value="false" />
++    <property name="Downloaded.Files.Path.Enabled" value="true" />
+     <property name="Repository.Attach.Annotations" value="false" />
+     <property name="Repository.Attach.JavaDocs" value="false" />
+-    <property name="Repository.Attach.Sources" value="true" />
++    <property name="Repository.Attach.Sources" value="false" />
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+@@ -82,7 +80,7 @@
+     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Tools/JavaFX/lib" />
+     <property name="list.type.of.created.stylesheet" value="CSS" />
+     <property name="nodejs_package_manager_path" value="npm" />
+-    <property name="project.structure.last.edited" value="Libraries" />
++    <property name="project.structure.last.edited" value="Modules" />
+     <property name="project.structure.proportion" value="0.15" />
+     <property name="project.structure.side.proportion" value="0.2" />
+     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+@@ -255,6 +253,13 @@
+       <workItem from="1620607941513" duration="8154000" />
+       <workItem from="1620623791548" duration="624000" />
+       <workItem from="1620624432090" duration="81000" />
++      <workItem from="1620624525645" duration="562000" />
++      <workItem from="1620625269053" duration="675000" />
++      <workItem from="1620703701585" duration="2000" />
++      <workItem from="1620776454690" duration="22000" />
++      <workItem from="1620777326451" duration="6000" />
++      <workItem from="1620777410885" duration="420000" />
++      <workItem from="1620781456026" duration="9000" />
+     </task>
+     <task id="LOCAL-00001" summary="Initial Commit (Brad Barebones)">
+       <created>1617760354635</created>
+@@ -417,7 +422,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1620616485003</updated>
+     </task>
+-    <option name="localTasksCounter" value="24" />
++    <task id="LOCAL-00024" summary="Added User Controller. Fixed LoginController.java">
++      <created>1620624549134</created>
++      <option name="number" value="00024" />
++      <option name="presentableId" value="LOCAL-00024" />
++      <option name="project" value="LOCAL" />
++      <updated>1620624549134</updated>
++    </task>
++    <option name="localTasksCounter" value="25" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+Index: .idea/dataSources.local.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"dataSourceStorageLocal\" created-in=\"IU-211.7142.45\">\r\n    <data-source name=\"@localhost\" uuid=\"bb6b2040-466c-4e7a-a62a-0c9cbf7e7c92\">\r\n      <database-info product=\"MariaDB\" version=\"10.5.9-MariaDB\" jdbc-version=\"4.2\" driver-name=\"MariaDB Connector/J\" driver-version=\"2.6.0\" dbms=\"MARIADB\" exact-version=\"10.5.9\" exact-driver-version=\"2.6\">\r\n        <extra-name-characters>#@</extra-name-characters>\r\n        <identifier-quote-string>`</identifier-quote-string>\r\n      </database-info>\r\n      <case-sensitivity plain-identifiers=\"lower\" quoted-identifiers=\"lower\" />\r\n      <secret-storage>master_key</secret-storage>\r\n      <user-name>root</user-name>\r\n      <schema-mapping>\r\n        <introspection-scope>\r\n          <node kind=\"schema\" negative=\"1\" />\r\n        </introspection-scope>\r\n      </schema-mapping>\r\n    </data-source>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources.local.xml b/.idea/dataSources.local.xml
+--- a/.idea/dataSources.local.xml	(revision bfe717bc935c0cff869e605ec8fde42a1ce77f85)
++++ b/.idea/dataSources.local.xml	(date 1620624667344)
+@@ -1,19 +1,4 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="dataSourceStorageLocal" created-in="IU-211.7142.45">
+-    <data-source name="@localhost" uuid="bb6b2040-466c-4e7a-a62a-0c9cbf7e7c92">
+-      <database-info product="MariaDB" version="10.5.9-MariaDB" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="2.6.0" dbms="MARIADB" exact-version="10.5.9" exact-driver-version="2.6">
+-        <extra-name-characters>#@</extra-name-characters>
+-        <identifier-quote-string>`</identifier-quote-string>
+-      </database-info>
+-      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+-      <secret-storage>master_key</secret-storage>
+-      <user-name>root</user-name>
+-      <schema-mapping>
+-        <introspection-scope>
+-          <node kind="schema" negative="1" />
+-        </introspection-scope>
+-      </schema-mapping>
+-    </data-source>
+-  </component>
++  <component name="dataSourceStorageLocal" created-in="IU-211.7142.45" />
+ </project>
+\ No newline at end of file
+Index: CAB302Assignment1AssetTradingPlatform.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"JAVA_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/src/Testing\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/.idea/dataSources\" />\r\n    </content>\r\n    <orderEntry type=\"jdk\" jdkName=\"15\" jdkType=\"JavaSDK\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n    <orderEntry type=\"module-library\">\r\n      <library name=\"JUnit5.4\">\r\n        <CLASSES>\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.4.2/junit-jupiter-5.4.2.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.4.2/junit-jupiter-api-5.4.2.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.4.2/junit-platform-commons-1.4.2.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.4.2/junit-jupiter-params-5.4.2.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.4.2/junit-jupiter-engine-5.4.2.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.4.2/junit-platform-engine-1.4.2.jar!/\" />\r\n        </CLASSES>\r\n        <JAVADOC />\r\n        <SOURCES />\r\n      </library>\r\n    </orderEntry>\r\n    <orderEntry type=\"library\" name=\"lib\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"org.mariadb.jdbc:mariadb-java-client:2.7.2\" level=\"project\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CAB302Assignment1AssetTradingPlatform.iml b/CAB302Assignment1AssetTradingPlatform.iml
+--- a/CAB302Assignment1AssetTradingPlatform.iml	(revision bfe717bc935c0cff869e605ec8fde42a1ce77f85)
++++ b/CAB302Assignment1AssetTradingPlatform.iml	(date 1620777531801)
+@@ -6,6 +6,7 @@
+       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+       <excludeFolder url="file://$MODULE_DIR$/src/Testing" />
+       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
++      <excludeFolder url="file://$MODULE_DIR$/src/Models" />
+     </content>
+     <orderEntry type="jdk" jdkName="15" jdkType="JavaSDK" />
+     <orderEntry type="sourceFolder" forTests="false" />

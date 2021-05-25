@@ -1,12 +1,9 @@
-package Controllers.FrontEnd.Login;
-
-import Controllers.BackEnd.AccountType;
-import Controllers.BackEnd.NetworkObjects.LoginToken;
-import Controllers.BackEnd.NetworkObjects.UserInfo;
-import Controllers.Exceptions.AuthenticationException;
-import Controllers.Exceptions.ServerException;
+import Controllers.Backend.AccountType;
+import Controllers.Backend.NetworkObjects.LoginToken;
+import Controllers.Backend.NetworkObjects.UserInfo;
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.BackEnd.Socket.MockSocket;
+import Controllers.Exceptions.LoginException;
+import Controllers.Backend.Socket.MockSocket;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +28,7 @@ public class TestLoginController {
     }
 
     @Test
-    public void TestStandardLoginToken() throws AuthenticationException, ServerException {
+    public void TestStandardLoginToken() throws LoginException {
 
         loginController.AttemptLogin("User 1", "qwerty");
 
@@ -41,7 +38,7 @@ public class TestLoginController {
     }
 
     @Test
-    public void TestStandardLoginUser() throws AuthenticationException, ServerException {
+    public void TestStandardLoginUser() throws LoginException {
 
         loginController.AttemptLogin("User 1", "qwerty");
 
@@ -53,7 +50,7 @@ public class TestLoginController {
     @Test
     public void TestBadLoginException() {
 
-        assertThrows(AuthenticationException.class, () -> {
+        assertThrows(LoginException.class, () -> {
             loginController.AttemptLogin("User 1", "q");
         });
     }
@@ -61,7 +58,7 @@ public class TestLoginController {
     @Test
     public void TestBadLoginUser(){
 
-        assertThrows(AuthenticationException.class, () -> {
+        assertThrows(LoginException.class, () -> {
             loginController.AttemptLogin("User 1", "q");
         });
 
@@ -71,7 +68,7 @@ public class TestLoginController {
     @Test
     public void TestBadLoginToken(){
 
-        assertThrows(AuthenticationException.class, () -> {
+        assertThrows(LoginException.class, () -> {
             loginController.AttemptLogin("User 1", "q");
         });
 
@@ -81,7 +78,7 @@ public class TestLoginController {
     @Test
     public void TestIncorrectPassword(){
 
-        assertThrows(AuthenticationException.class, () -> {
+        assertThrows(LoginException.class, () -> {
             loginController.AttemptLogin("User 1", "sandwhich");
         });
 
@@ -89,7 +86,7 @@ public class TestLoginController {
     }
 
     @Test
-    public void TestLogoutUser() throws AuthenticationException, ServerException {
+    public void TestLogoutUser() throws LoginException{
 
         loginController.AttemptLogin("User 1", "qwerty");
 
@@ -99,7 +96,7 @@ public class TestLoginController {
     }
 
     @Test
-    public void TestLogoutToken() throws AuthenticationException, ServerException {
+    public void TestLogoutToken() throws LoginException {
 
         loginController.AttemptLogin("User 1", "qwerty");
 
@@ -109,7 +106,7 @@ public class TestLoginController {
     }
 
     @Test
-    public void TestTwoLogins() throws AuthenticationException, ServerException {
+    public void TestTwoLogins() throws LoginException {
 
         loginController.AttemptLogin("User 1", "qwerty");
         loginController.AttemptLogin("User 4", "1234");
@@ -120,7 +117,7 @@ public class TestLoginController {
     }
 
     @Test
-    public void TestAllLogins() throws AuthenticationException, ServerException {
+    public void TestAllLogins() throws LoginException {
         loginController.AttemptLogin("User 1","qwerty");
         loginController.AttemptLogin("User 2","qwerty");
         loginController.AttemptLogin("User 3","1234");
