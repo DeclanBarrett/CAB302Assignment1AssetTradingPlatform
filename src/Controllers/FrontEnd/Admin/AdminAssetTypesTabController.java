@@ -1,16 +1,17 @@
 package Controllers.FrontEnd.Admin;
 
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.Backend.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -27,34 +28,9 @@ public class AdminAssetTypesTabController implements Initializable, Observer {
     Button CreateAssetSubmit;
     @FXML
     ListView<String> CreateAssetTable;
-    //@FXML
-    //TableColumn<String, String> AssetTypeColumn;
-
-
-    private ObservableList<String> data;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        //AssetTypeColumn.setCellValueFactory(new PropertyValueFactory<>("assetType"));
-        //CreateAssetTable.getColumns().add(AssetTypeColumn);
-
-        //data = FXCollections.observableArrayList();
-
-        //TableColumn<Person, String> column1 = new TableColumn<>("First Name");
-        //column1.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-//
-//
-        //TableColumn<Person, String> column2 = new TableColumn<>("Last Name");
-        //column2.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-//
-//
-        //tableView.getColumns().add(column1);
-        //tableView.getColumns().add(column2);
-
-
-
-
         UpdateAssetTypes();
     }
 
@@ -63,10 +39,25 @@ public class AdminAssetTypesTabController implements Initializable, Observer {
      * @param CreateAsset Asset to be created
      */
     public void CreateAsset(ActionEvent CreateAsset) {
-        String success = MockSocket.getInstance().AddAsset(LoginController.GetToken(), CreateAssetName.getText());
 
-        CreateAssetErrorText.setText(success);
-        System.out.println(CreateAsset.getSource());
+        String clientResponse = "";
+
+        //Attempt to contact the server with a new asset to be created
+        try {
+
+            if (CreateAssetName.getText().equals(null) || CreateAssetName.getText().equals("")) {
+                throw new NullPointerException("INFORMATION MISSING");
+            }
+
+            clientResponse = ClientSocket.getInstance().AddAsset(LoginController.GetToken(), CreateAssetName.getText());
+            CreateAssetErrorText.setTextFill(Color.GREEN);
+        } catch (Exception e) {
+            CreateAssetErrorText.setTextFill(Color.RED);
+            clientResponse = e.getMessage();
+        }
+
+        CreateAssetErrorText.setText(clientResponse);
+
         UpdateAssetTypes();
     }
 
@@ -75,23 +66,24 @@ public class AdminAssetTypesTabController implements Initializable, Observer {
      */
     private void UpdateAssetTypes() {
 
-        System.out.println("Updating Asset Types");
+        List<String> types = new ArrayList<>();
 
-        List<String> types = MockSocket.getInstance().GetAssetTypes(LoginController.GetToken());
+        String clientResponse = CreateAssetErrorText.getText();
+
+        //Attempt to contact the server to retrieve all the assets
+        try {
+            types = ClientSocket.getInstance().GetAssetTypes(LoginController.GetToken());
+            CreateAssetErrorText.setTextFill(Color.GREEN);
+        } catch (Exception e) {
+            CreateAssetErrorText.setTextFill(Color.RED);
+            clientResponse = e.getMessage();
+        }
 
         CreateAssetTable.getItems().setAll(types);
-        //Fill the list view with the retrieved types
-        /*
-        for (String type : types) {
-            CreateAssetTable.getItems().add(type);
-            //data.add(type);
-            System.out.println(type);
-        }
-        */
 
-
-
+        CreateAssetErrorText.setText(clientResponse);
     }
+
 
     @Override
     public void update(Subject s) {

@@ -1,18 +1,21 @@
 package Controllers.FrontEnd.Admin;
 
-import Controllers.Backend.NetworkObjects.OrganisationalUnit;
+import Controllers.BackEnd.NetworkObjects.OrganisationalUnit;
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.Backend.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
+import Controllers.Utils.UtilFieldCheckers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -61,24 +64,29 @@ public class AdminEditOrganisationTabController implements Initializable, Observ
      * @param SetAssetQuantityToOrg Asset Quantity set
      */
     public void SetAssetQuantityToOrg(ActionEvent SetAssetQuantityToOrg) {
-        System.out.println(SetAssetQuantityToOrg.getSource());
 
-        if (EditOrgName.getText() == null || EditOrgName.getText().equals("")) {
-            EditOrgErrorText.setText("NO ORGANISATION");
-            return;
-        }
-
+        String clientResponse = "";
 
         Integer assetQuantity = 0;
         try {
+            UtilFieldCheckers.checkMissingValues(new ArrayList<>(Arrays.asList(EditOrgName.getText(), EditOrgSetAssetName.getText())));
+
+            //Attempt to parse and then update the organisation values
             assetQuantity = Integer.parseInt(EditOrgSetAssetQuantity.getText());
 
+            clientResponse = ClientSocket.getInstance().UpdateOrganisationAsset(LoginController.GetToken(),
+                    EditOrgName.getText(),
+                    EditOrgSetAssetName.getText(),
+                    assetQuantity);
+
+            EditOrgErrorText.setTextFill(Color.GREEN);
+
         } catch (Exception e) {
-            EditOrgErrorText.setText("PLEASE ENTER AN INTEGER FOR QUANTITY");
+            EditOrgErrorText.setTextFill(Color.RED);
+            clientResponse = e.getMessage();
         }
 
-        String success = MockSocket.getInstance().UpdateOrganisationAsset(LoginController.GetToken(), EditOrgName.getText(), EditOrgSetAssetName.getText(), assetQuantity);
-        EditOrgErrorText.setText(success);
+        EditOrgErrorText.setText(clientResponse);
 
     }
 
@@ -88,31 +96,49 @@ public class AdminEditOrganisationTabController implements Initializable, Observ
      */
     public void SetCreditOfOrg(ActionEvent SetCreditOfOrg) {
 
-        if (EditOrgName.getText() == null || EditOrgName.getText().equals("")) {
-            EditOrgErrorText.setText("NO ORGANISATION");
-            return;
-        }
+        String clientResponse = "";
 
         Integer assetQuantity = 0;
         try {
+            UtilFieldCheckers.checkMissingValues(new ArrayList<>(Arrays.asList(EditOrgName.getText())));
+
+            //Attempt to parse and then update the organisation values
             assetQuantity = Integer.parseInt(EditOrgSetAssetQuantity.getText());
 
+            clientResponse = ClientSocket.getInstance().UpdateOrganisationCredit(LoginController.GetToken(),
+                    EditOrgName.getText(),
+                    assetQuantity);
+
+            EditOrgErrorText.setTextFill(Color.GREEN);
+
         } catch (Exception e) {
-            EditOrgErrorText.setText("PLEASE ENTER AN INTEGER FOR QUANTITY");
+            EditOrgErrorText.setTextFill(Color.RED);
+            clientResponse = e.getMessage();
         }
 
-        String success = MockSocket.getInstance().UpdateOrganisationAsset(LoginController.GetToken(), EditOrgName.getText(), EditOrgSetAssetName.getText(), assetQuantity);
-        EditOrgErrorText.setText(success);
+        EditOrgErrorText.setText(clientResponse);
+
     }
 
+    /**
+     * Updates the organisation table
+     */
     private void UpdateOrganisationTable() {
-        List<OrganisationalUnit> orgs = MockSocket.getInstance().GetAllOrganisations(LoginController.GetToken());
+
+        List<OrganisationalUnit> orgs = new ArrayList<>();
 
         List<OrganisationTableObject> tableOrgs = new ArrayList<>();
 
-        //Convert to organisation table object
-        for (OrganisationalUnit org: orgs) {
-            org.GetAllAssets().forEach((k, v) ->  tableOrgs.add(new OrganisationTableObject(org.getUnitName(), org.getCredits(), k, v)));
+        try {
+            orgs = ClientSocket.getInstance().GetAllOrganisations(LoginController.GetToken());
+
+            //Convert to organisation table object
+            for (OrganisationalUnit org: orgs) {
+                org.GetAllAssets().forEach((k, v) ->  tableOrgs.add(new OrganisationTableObject(org.getUnitName(), org.getCredits(), k, v)));
+            }
+
+        } catch (Exception e) {
+            EditOrgErrorText.setText(e.getMessage());
         }
 
         EditOrgAssetsTable.getItems().setAll(tableOrgs);

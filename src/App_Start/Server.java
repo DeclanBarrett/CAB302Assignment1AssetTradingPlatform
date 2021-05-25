@@ -13,11 +13,12 @@ public class Server {
     {
         Connection connection = DatabaseConnection.getInstance();
         SQL sql = new SQL(connection);
-        sql.populateDatabase();
+        //sql.populateDatabase();
 
         InformationGrabber a = new InformationGrabber();
        // a.getSalt("User 1");
-        System.out.println(a.getSalt("User 1"));
+        System.out.println(a.getTradeHistory("Paper").get(0).getAssetPrice());
+
         connection.close();
 
 

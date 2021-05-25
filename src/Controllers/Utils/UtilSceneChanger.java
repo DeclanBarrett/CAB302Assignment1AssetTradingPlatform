@@ -71,4 +71,8 @@ public class UtilSceneChanger {
         }
     }
 
+    public void CloseApplication() {
+        ClientStart.getStage().close();
+    }
+
 }

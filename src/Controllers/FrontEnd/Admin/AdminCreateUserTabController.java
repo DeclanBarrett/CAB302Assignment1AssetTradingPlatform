@@ -1,20 +1,19 @@
 package Controllers.FrontEnd.Admin;
 
-import Controllers.Backend.AccountType;
-import Controllers.Backend.NetworkObjects.User;
-import Controllers.Backend.NetworkObjects.UserInfo;
+import Controllers.BackEnd.NetworkObjects.UserInfo;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
-import Controllers.Utils.UtilLoginSecurity;
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.Backend.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -65,46 +64,40 @@ public class AdminCreateUserTabController implements Initializable, Observer {
      */
     public void CreateUser(ActionEvent CreateUser) {
 
+        String clientResponse = "";
+
         try {
-            UtilLoginSecurity utilLoginSecurity = new UtilLoginSecurity();
-            String salt = utilLoginSecurity.generateSalt();
+            AdminProcessing adminProcessing = new AdminProcessing();
+            clientResponse = adminProcessing.createUser(CreateUserAccountType.getText(),
+                    CreateUserUsername.getText(),
+                    CreateUserPassword.getText(),
+                    CreateUserOrgUnit.getText());
 
-            AccountType type = null;
-
-            try {
-                type = AccountType.valueOf(CreateUserAccountType.getText());
-            } catch (IllegalArgumentException e) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("ACCOUNT TYPES ARE:");
-                AccountType accountTypes[] = AccountType.values();
-                for (AccountType accountType: accountTypes) {
-                    sb.append(" " + accountType.toString());
-                }
-                CreateUserErrorText.setText(sb.toString());
-                return;
-            }
-
-            //Create a new user with a new password with the salt passed through it as well
-            User newUser = new User(CreateUserUsername.getText(),
-                    utilLoginSecurity.hashPassword(CreateUserPassword.getText(), salt),
-                    type,
-                    CreateUserOrgUnit.getText(),
-                    salt);
-
-            String success = MockSocket.getInstance().AddUser(LoginController.GetToken(), newUser);
-            CreateUserErrorText.setText(success);
+            CreateUserErrorText.setTextFill(Color.GREEN);
             UpdateUserInfoTable();
         } catch (Exception e) {
-            CreateUserErrorText.setText(e.getMessage());
+            CreateUserErrorText.setTextFill(Color.RED);
+            clientResponse = e.getMessage();
         }
 
-        System.out.println(CreateUser.getSource());
-
+        CreateUserErrorText.setText(clientResponse);
 
     }
 
     private void UpdateUserInfoTable() {
-        List<UserInfo> users = MockSocket.getInstance().GetAllUsers(LoginController.GetToken());
+
+        String clientResponse = CreateUserErrorText.getText();
+
+        List<UserInfo> users = new ArrayList<>();
+
+        try {
+            users = ClientSocket.getInstance().GetAllUsers(LoginController.GetToken());
+        } catch (Exception e) {
+            CreateUserErrorText.setTextFill(Color.RED);
+            clientResponse = e.getMessage();
+        }
+
+        CreateUserErrorText.setText(clientResponse);
         CreateUserTable.getItems().setAll(users);
     }
 

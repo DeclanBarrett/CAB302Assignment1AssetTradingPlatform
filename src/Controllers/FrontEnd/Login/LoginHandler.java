@@ -1,7 +1,7 @@
 package Controllers.FrontEnd.Login;
 
-import Controllers.Backend.AccountType;
-import Controllers.Exceptions.LoginException;
+import Controllers.BackEnd.AccountType;
+import Controllers.Exceptions.AuthenticationException;
 import Controllers.Utils.UtilSceneChanger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,10 +46,10 @@ public class LoginHandler implements Initializable {
                     LoginController.GetUser().getAccountType() == AccountType.UnitLeader) {
                 UtilSceneChanger.getInstance().ChangeToScene(UtilSceneChanger.SceneType.USER);
             } else {
-                throw new LoginException("UNEXPECTED ERROR");
+                throw new AuthenticationException("UNEXPECTED ERROR");
             }
 
-        } catch(LoginException e) {
+        } catch(AuthenticationException e) {
             LoginErrorText.setTextFill(Color.RED);
             LoginErrorText.setText(e.getMessage());
         } catch (Exception e) {

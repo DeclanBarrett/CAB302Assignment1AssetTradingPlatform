@@ -1,10 +1,10 @@
 package Controllers.FrontEnd.Login;
 
 
-import Controllers.Backend.NetworkObjects.LoginToken;
-import Controllers.Backend.NetworkObjects.UserInfo;
-import Controllers.Backend.Socket.MockSocket;
-import Controllers.Exceptions.LoginException;
+import Controllers.BackEnd.NetworkObjects.UserInfo;
+import Controllers.BackEnd.Socket.ClientSocket;
+import Controllers.Exceptions.AuthenticationException;
+import Controllers.Exceptions.ServerException;
 import Controllers.Utils.UtilLoginSecurity;
 import Controllers.Utils.UtilSceneChanger;
 
@@ -13,15 +13,15 @@ import Controllers.Utils.UtilSceneChanger;
  */
 public class LoginController {
 
-    public static final String LOGIN_ERROR_USERNAME_PASSWORD_1 = "USERNAME OR PASSWORD INCORRECT";
-    private static LoginToken currentLogin;
+    public static final java.lang.String LOGIN_ERROR_USERNAME_PASSWORD_1 = "USERNAME OR PASSWORD INCORRECT";
+    private static String currentLogin;
     private static UserInfo currentUser;
 
     public static UserInfo GetUser() {
         return currentUser;
     }
 
-    public static LoginToken GetToken() {
+    public static String GetToken() {
         return currentLogin;
     }
 
@@ -37,27 +37,23 @@ public class LoginController {
     /**
      * Global Utility for attempting to login to the server
      */
-    public void AttemptLogin(String username, String password) throws LoginException {
+    public void AttemptLogin(String username, String password) throws AuthenticationException, ServerException {
 
         //Get the hashed password
         UtilLoginSecurity loginSecurity = new UtilLoginSecurity();
         String hashPassword = loginSecurity.generateHashedPassword(username, password);
 
-        currentLogin = MockSocket.getInstance().AttemptLogin(username, hashPassword);
+        currentLogin = ClientSocket.getInstance().AttemptLogin(username, hashPassword);
 
         if (isCurrentLogin()) {
-            currentUser = MockSocket.getInstance().GetUser(GetToken(), username);
+            currentUser = ClientSocket.getInstance().GetUser(GetToken(), username);
             return;
         }
 
-        throw new LoginException(LOGIN_ERROR_USERNAME_PASSWORD_1);
+        throw new AuthenticationException(LOGIN_ERROR_USERNAME_PASSWORD_1);
     }
 
     private boolean isCurrentLogin() {
         return currentLogin != null;
     }
-
-
-
-
 }
