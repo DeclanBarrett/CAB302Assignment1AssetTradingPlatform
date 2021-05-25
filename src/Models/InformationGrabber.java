@@ -34,6 +34,7 @@ public class  InformationGrabber {
     private static final String UPDATE_USER_ORGANISATION = "UPDATE Users SET OrganisationalUnit = ? WHERE UserName = ?";
     private static final String UPDATE_ORGANISATION_ASSET = "UPDATE OrgHasQuantity SET AssetName = ?, AssetQuantity = ? " +
             "WHERE OrganisationalUnitName = ?";
+    private static final String UPDATE_ORGANISATION_CREDITS = "UPDATE OrganisationalUnit SET AmountCredits = ? WHERE OrganisationalUnitName = ?";
 
     private static final String GET_NONCE = "SELECT Salt FROM Users WHERE UserName=?";
     private static final String GET_PASSWORD = "SELECT HashedPassword FROM Users WHERE UserName=?";
@@ -67,6 +68,7 @@ public class  InformationGrabber {
     private PreparedStatement updateUserAccountType;
     private PreparedStatement updateUserOrganisation;
     private PreparedStatement updateOrganisationAsset;
+    private PreparedStatement updateOrganisationCredits;
 
     private PreparedStatement getNonce;
     private PreparedStatement getPassword;
@@ -479,8 +481,6 @@ public class  InformationGrabber {
             getOrganisation = connection.prepareStatement(GET_ORGANISATION);
             getOrganisation.setString(1, orgName);
 
-
-
             if(getOrganisation != null)
             {
                 ResultSet rs = getOrganisation.executeQuery();
@@ -751,5 +751,27 @@ public class  InformationGrabber {
      * @return a success message
      */
     public String deleteOrder(int OrderID) {return null;}
+
+    /**
+     * Updates the amount of credits held by an organisational unit.
+     * @param organisationName - the organisational units name
+     * @param creditAmount - the amount of credits the organisation will possess after change.
+     */
+    public void updateOrganisationCredits(String organisationName, int creditAmount)
+    {
+        try
+        {
+            updateOrganisationCredits = connection.prepareStatement(UPDATE_ORGANISATION_CREDITS);
+            updateOrganisationCredits.setString(1,organisationName);
+            updateOrganisationCredits.setInt(2, creditAmount);
+
+            if(updateOrganisationCredits != null)
+            {
+                updateOrganisationCredits.executeQuery();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
 }

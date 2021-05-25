@@ -9,9 +9,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-import Controllers.BackEnd.NetworkObjects.Order;
-import Controllers.BackEnd.NetworkObjects.OrganisationalUnit;
-import Controllers.BackEnd.NetworkObjects.User;
+import Controllers.BackEnd.AccountType;
+import Controllers.BackEnd.NetworkObjects.*;
 import Controllers.BackEnd.Processing.JWTHandler;
 import Controllers.BackEnd.Processing.LoginChecker;
 import Controllers.BackEnd.RequestType;
@@ -19,6 +18,7 @@ import Controllers.Exceptions.AuthenticationException;
 import Controllers.Exceptions.ServerException;
 import Models.DatabaseConnection;
 import Models.InformationGrabber;
+import com.auth0.jwt.JWT;
 import com.mysql.cj.log.Log;
 
 /**
@@ -92,25 +92,25 @@ public class ClientHandle implements Runnable
                     final String username = (String) inputStream.readObject();
 
                     synchronized (dbRequest) {
-                        try
-                        {
-                            String salt = dbRequest.getSalt(username);
+                        String salt = dbRequest.getSalt(username);
 
-                            outputStream.writeObject(RequestType.SendSalt);
-                            outputStream.writeObject(salt);
-                            System.out.println(String.format("Gathered '%s' from database", salt));
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            outputStream.writeObject(RequestType.SendErrorCode);
-                            outputStream.writeObject("Salt not found.");
-                        }
+                        outputStream.writeObject(RequestType.SendSalt);
+                        outputStream.writeObject(salt);
+                        System.out.println(String.format("Gathered '%s' from database", salt));
                     }
                 }
-                catch (IOException e) {
+                catch (Exception e) {
                     e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Salt not found.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                 }
 
             }
@@ -126,27 +126,26 @@ public class ClientHandle implements Runnable
                     LoginChecker checkLogin = new LoginChecker(dbRequest);
                     synchronized (dbRequest)
                     {
-                        try
-                        {
-                            String token = checkLogin.compareLogin(username, password);
-                            outputStream.writeObject(RequestType.SendLoginToken);
-                            outputStream.writeObject(token);
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                            outputStream.writeObject(RequestType.SendErrorCode);
-                            outputStream.writeObject("Login failed");
-                        }
-
-
+                        String token = checkLogin.compareLogin(username, password);
+                        outputStream.writeObject(RequestType.SendLoginToken);
+                        outputStream.writeObject(token);
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
+                }
+                catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Login failed");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                     e.printStackTrace();
                 }
             }
+            break;
 
             // Will also hold off on this one until meeting
                 // Issue mainly revolves around the Update password in information grabber
@@ -161,27 +160,27 @@ public class ClientHandle implements Runnable
 
                     synchronized (dbRequest)
                     {
-                        try
-                        {
-                            handle.verifyToken(token);
-                            dbRequest.updatePassword(username, password);
-                            outputStream.writeObject(RequestType.SendSuccessMessage);
-                            outputStream.writeObject("Reset password successful");
 
-                        } catch (Exception e) {
-                            outputStream.writeObject(RequestType.SendErrorCode);
-                            outputStream.writeObject("Reset password failed");
-                            e.printStackTrace();
-                        }
-
+                        handle.verifyToken(token);
+                        dbRequest.updatePassword(username, password);
+                        outputStream.writeObject(RequestType.SendSuccessMessage);
+                        outputStream.writeObject("Reset password successful");
                     }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Reset password failed");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                     e.printStackTrace();
                 }
             }
+            break;
 
             case RequestUserInfo: {
                 try
@@ -192,27 +191,26 @@ public class ClientHandle implements Runnable
 
                     synchronized (dbRequest)
                     {
-                        try
-                        {
                             handle.verifyToken(token);
                             User user = dbRequest.getUser(username);
                             outputStream.writeObject(RequestType.SendUserInfo);
                             outputStream.writeObject(user);
-
-                        } catch (Exception e) {
-                            outputStream.writeObject(RequestType.SendErrorCode);
-                            outputStream.writeObject("User Info request failed");
-                            e.printStackTrace();
-                        }
-
-
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("User Info request failed");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                     e.printStackTrace();
                 }
             }
+            break;
 
             case RequestOrganisation: {
                 try
@@ -223,29 +221,29 @@ public class ClientHandle implements Runnable
                     String orgName = (String) inputStream.readObject();
 
                     //Synchronise to keep thread safe.
-                    synchronized (dbRequest)
-                    {
-                        try
-                        {
-                            handle.verifyToken(token);
-                            OrganisationalUnit orgUnit = dbRequest.getOrganisation(orgName);
-                            outputStream.writeObject(RequestType.SendOrganisation);
-                            outputStream.writeObject(orgUnit);
+                    synchronized (dbRequest) {
 
-                        } catch (Exception e) {
-                            outputStream.writeObject(RequestType.SendErrorCode);
-                            outputStream.writeObject("Organisation info request failed.");
-                            e.printStackTrace();
-                        }
+                        handle.verifyToken(token);
+                        OrganisationalUnit orgUnit = dbRequest.getOrganisation(orgName);
+                        outputStream.writeObject(RequestType.SendOrganisation);
+                        outputStream.writeObject(orgUnit);
                     }
 
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Organisation info request failed.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                     e.printStackTrace();
                 }
             }
+            break;
 
             case RequestOrganisationOrders: {
                 try
@@ -257,25 +255,566 @@ public class ClientHandle implements Runnable
 
                     synchronized (dbRequest)
                     {
-                        try
-                        {
-                            handle.verifyToken(token);
-                            List<Order> orders = dbRequest.getOrganisationOrders(orgName);
-                            outputStream.writeObject(RequestType.SendOrders);
-                            outputStream.writeObject(orders);
-                        }
-                        catch (Exception e) {
-                            outputStream.writeObject(RequestType.SendErrorCode);
-                            outputStream.writeObject("Organisation order request failed.");
-                            e.printStackTrace();
-                        }
+                        handle.verifyToken(token);
+                        List<Order> orders = dbRequest.getOrganisationOrders(orgName);
+                        outputStream.writeObject(RequestType.SendOrders);
+                        outputStream.writeObject(orders);
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Organisation order request failed.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                     e.printStackTrace();
                 }
             }
+            break;
+
+            case RequestAllOrders: {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+
+                    synchronized (dbRequest)
+                    {
+
+                        handle.verifyToken(token);
+                        List<Order> orders = dbRequest.getAllOrders();
+                        outputStream.writeObject((RequestType.SendOrders));
+                        outputStream.writeObject(orders);
+
+                    }
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Get all orders request failed");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestBuyOrders:
+            {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+
+                    synchronized (dbRequest) {
+                        handle.verifyToken(token);
+                        List<Order> orders = dbRequest.getBuyOrders();
+                        outputStream.writeObject(RequestType.SendOrders);
+                        outputStream.writeObject(orders);
+                    }
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Get all buy orders request failed");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestSellOrders:
+            {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+
+                    synchronized (dbRequest)
+                    {
+                        handle.verifyToken(token);
+                        List<Order> orders = dbRequest.getSellOrders();
+                        outputStream.writeObject(RequestType.SendOrders);
+                        outputStream.writeObject(orders);
+
+                    }
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Get all sell orders request failed");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestAddOrder: {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+                    Order order = (Order)  inputStream.readObject();
+
+                    synchronized (dbRequest)
+                    {
+
+                        handle.verifyToken(token);
+                        dbRequest.insertOrder(order);
+                        outputStream.writeObject(RequestType.SendSuccessMessage);
+                        outputStream.writeObject("Order added");
+                    }
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Add order request failed");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestRemoveOrder:
+            {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+                    int orderID = (Integer) inputStream.readObject();
+
+                    synchronized (dbRequest)
+                    {
+                        handle.verifyToken(token);
+                        dbRequest.deleteOrder(orderID);
+                        outputStream.writeObject(RequestType.SendSuccessMessage);
+                        outputStream.writeObject("Order deleted");
+                    }
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Remove order request failed");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestAssetTypes:
+            {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+
+                    synchronized (dbRequest)
+                    {
+                        handle.verifyToken(token);
+                        List<String> assetTypes = dbRequest.getAssetTypes();
+                        outputStream.writeObject(RequestType.SendAssetTypes);
+                        outputStream.writeObject(assetTypes);
+                    }
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Failed to get asset types.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestTradeHistory: {
+                try {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+                    String assetType = (String) inputStream.readObject();
+
+                    synchronized (dbRequest) {
+
+                        handle.verifyToken(token);
+                        List<Trade> tradeHistory = dbRequest.getTradeHistory(assetType);
+                        outputStream.writeObject(RequestType.SendTradeHistory);
+                        outputStream.writeObject(tradeHistory);
+                    }
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Failed to get trade history.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestAddUser:
+            {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+                    User user = (User) inputStream.readObject();
+
+                    synchronized (dbRequest)
+                    {
+                        handle.verifyToken(token);
+                        dbRequest.insertUser(user);
+                        outputStream.writeObject(RequestType.SendSuccessMessage);
+                        outputStream.writeObject("User was successfully added to the database.");
+                    }
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Failed to add user.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestAllUsers:
+            {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+
+                    synchronized (dbRequest)
+                    {
+                        handle.verifyToken(token);
+                        List<UserInfo> userInfo = dbRequest.getAllUserInfo();
+                        outputStream.writeObject(RequestType.SendAllUsers);
+                        outputStream.writeObject(userInfo);
+                    }
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("User request failed.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestUpdateUserPassword:
+            {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+                    String username = (String) inputStream.readObject();
+                    String hashedPassword = (String) inputStream.readObject();
+
+                    // leaving this in temporarily so it doesnt mess up the read objects later down the track.
+                    String salt = (String) inputStream.readObject();
+
+                    synchronized (dbRequest)
+                    {
+
+                        handle.verifyToken(token);
+                        dbRequest.updatePassword(username, hashedPassword);
+                        outputStream.writeObject(RequestType.SendSuccessMessage);
+                        outputStream.writeObject("Users password was updated successfully.");
+
+                    }
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Failed to update user's password.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestUpdateUserAccountType:
+            {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+                    String username = (String) inputStream.readObject();
+                    AccountType accountType = (AccountType) inputStream.readObject();
+
+                    synchronized (dbRequest)
+                    {
+                        handle.verifyToken(token);
+                        dbRequest.updateUserAccountType(username, accountType);
+                        outputStream.writeObject(RequestType.SendSuccessMessage);
+                        outputStream.writeObject("Users account type was updated successfully.");
+
+                    }
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Failed to update user account type.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestUpdateUserOrganisation:
+            {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+                    String username = (String) inputStream.readObject();
+                    String organisationName = (String)  inputStream.readObject();
+
+                    synchronized (dbRequest)
+                    {
+                        handle.verifyToken(token);
+                        dbRequest.updateUserOrganisation(username, organisationName);
+                        outputStream.writeObject(RequestType.SendSuccessMessage);
+                        outputStream.writeObject("Users organisational unit was updated successfully.");
+                    }
+                } catch (Exception e)
+                {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Failed to update user's organisational unit.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestAddAsset:
+            {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+                    String assetName = (String)  inputStream.readObject();
+
+                    synchronized (dbRequest)
+                    {
+                        handle.verifyToken(token);
+                        dbRequest.insertAsset(assetName);
+                        outputStream.writeObject(RequestType.SendSuccessMessage);
+                        outputStream.writeObject("Successfully added new asset to the database.");
+                    }
+                } catch (Exception e)
+                {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Successfully added new asset type");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestAddOrganisation:
+            {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+                    OrganisationalUnit OrgUnit = (OrganisationalUnit) inputStream.readObject();
+
+                    synchronized (dbRequest)
+                    {
+                        handle.verifyToken(token);
+                        dbRequest.insertOrganisation(OrgUnit);
+                        outputStream.writeObject(RequestType.SendSuccessMessage);
+                        outputStream.writeObject("Successfully added new organisational unit to the database.");
+                    }
+                } catch (Exception e)
+                {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Failed to add new organisational unit.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestAllOrganisations:
+            {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+
+                    synchronized (dbRequest)
+                    {
+                        handle.verifyToken(token);
+                        List<OrganisationalUnit> OrgUnitList = dbRequest.getAllOrganisations();
+                        outputStream.writeObject(RequestType.SendAllOrganisations);
+                        outputStream.writeObject(OrgUnitList);
+                    }
+                }
+                catch (Exception e)
+                {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("All organisational units are returned.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestUpdateOrganisationAsset:
+            {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+                    String organisationName = (String) inputStream.readObject();
+                    String assetType = (String) inputStream.readObject();
+                    int assetQuantity = (Integer) inputStream.readObject();
+
+                    synchronized (dbRequest)
+                    {
+                        handle.verifyToken(token);
+                        dbRequest.updateOrganisationAsset(organisationName,assetType,assetQuantity);
+                        outputStream.writeObject(RequestType.SendSuccessMessage);
+                        outputStream.writeObject("Successfully added new organisational unit to the database.");
+                    }
+                }
+                catch (Exception e)
+                {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Failed to update user's organisational unit.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
+            case RequestUpdateOrganisationCredit:
+            {
+                try
+                {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+                    String orgName = (String) inputStream.readObject();
+                    int creditAmount = (Integer) inputStream.readObject();
+
+                    synchronized (dbRequest)
+                    {
+                        handle.verifyToken(token);
+                        dbRequest.updateOrganisationCredits(orgName, creditAmount);
+                        outputStream.writeObject(RequestType.SendSuccessMessage);
+                        outputStream.writeObject("Successfully added new credit amount to organisational unit");
+                    }
+                } catch (Exception e)
+                {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Failed to update user's organisational unit.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
         }
 
     }
