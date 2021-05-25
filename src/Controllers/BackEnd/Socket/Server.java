@@ -1,17 +1,23 @@
 package Controllers.BackEnd.Socket;
 
+import Models.InformationGrabber;
+
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
 
 /**
- * Server socket class.
+ * TestServer socket class.
  */
 public class Server
 {
     final private int PORT = 6066;
     final private int BACKLOG = 50;
 
-    // Start and run the Server
+    private static final int SOCKET_ACCEPT_TIMEOUT = 100;
+
+    // Start and run the TestServer
     public static void main(String[] args)
     {
         Server server = new Server();
@@ -30,13 +36,20 @@ public class Server
     public void startServer() throws IOException, ClassNotFoundException
     {
         // Create ENDPOINT
+        InformationGrabber database = new InformationGrabber();
         ServerSocket serverSocket = new ServerSocket(PORT, BACKLOG);
-
+        serverSocket.setSoTimeout(SOCKET_ACCEPT_TIMEOUT);
         System.out.println("Starting Loop");
 
         while (true) {
             // Accept new Endpoint for single Client
-            new Thread(new ClientHandle(serverSocket.accept())).start();
+            try {
+                Socket socket = serverSocket.accept();
+                new Thread(new ClientHandle(socket, database)).start();
+            } catch (SocketTimeoutException timeout) {
+
+            }
+
         }
     }
 } // End of Class

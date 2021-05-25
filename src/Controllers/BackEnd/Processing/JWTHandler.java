@@ -65,6 +65,7 @@ public class JWTHandler {
                     .build(); //Reusable verifier instance
             DecodedJWT jwt = verifier.verify(token);
             System.out.println("Verified Token " + jwt);
+            return;
         } catch (JWTVerificationException exception){
             //Invalid signature/claims
             throw new AuthenticationException("Invalid Login Token");

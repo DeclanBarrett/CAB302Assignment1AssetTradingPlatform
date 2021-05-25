@@ -5,16 +5,21 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
+import java.sql.SQLException;
 import java.util.List;
 
 
 import Controllers.BackEnd.AccountType;
-
 import Controllers.BackEnd.NetworkObjects.*;
 import Controllers.BackEnd.Processing.JWTHandler;
 import Controllers.BackEnd.Processing.LoginChecker;
 import Controllers.BackEnd.RequestType;
+import Controllers.Exceptions.AuthenticationException;
+import Controllers.Exceptions.ServerException;
+import Models.DatabaseConnection;
 import Models.InformationGrabber;
+import com.mysql.cj.log.Log;
 
 /**
  * @author Brad Kent
@@ -28,11 +33,10 @@ public class ClientHandle implements Runnable
     final Socket connection;
     private int thisId;
     private InformationGrabber dbRequest;
-    private Controllers.BackEnd.Socket.ClientSocket clSocket;
 
-    public ClientHandle(Socket connection)
-
+    public ClientHandle(Socket connection, InformationGrabber grabber)
     {
+        dbRequest = grabber;
         thisId = id++;
         System.out.println("New Obj");
         this.connection = connection;
@@ -50,13 +54,14 @@ public class ClientHandle implements Runnable
 
         try {
             ObjectInputStream in = new ObjectInputStream(connection.getInputStream());
+            ObjectOutputStream out = new ObjectOutputStream(connection.getOutputStream());
             while(!connection.isClosed()) {
-            //while(in.read() != -1) {
-                if (connection.getInputStream().available() > 0) {
-                    System.out.println("Received: " + in.readObject() + " : " + i++);
-                } else{
-                    System.out.println("Just Waiting for: " + thisId + "...");
-                    Thread.sleep(500);
+                try {
+                    // read the command, this tells us what to send the client back
+                    final RequestType command = (RequestType) in.readObject();
+                    handleCommand(in, out, command);
+                } catch (SocketTimeoutException e) {
+                    continue;
                 }
             }
             System.out.println("Loop-----");
@@ -68,16 +73,14 @@ public class ClientHandle implements Runnable
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             System.out.println("IO or  Class");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            System.out.println("Interrupted");
         } finally {
             System.out.println("Exit");
         }
 
     }
 
-    public void handleCommand(Socket socket, ObjectInputStream inputStream, ObjectOutputStream outputStream, RequestType command)  {
+    public void handleCommand(ObjectInputStream inputStream, ObjectOutputStream outputStream, RequestType command)  {
+        System.out.println("NEW HANDLE COMMAND: " + command.toString());
         switch(command)
         {
             case RequestSalt: {
@@ -87,25 +90,25 @@ public class ClientHandle implements Runnable
                     final String username = (String) inputStream.readObject();
 
                     synchronized (dbRequest) {
-                        String salt = dbRequest.getSalt(username);
+                        try
+                        {
+                            String salt = dbRequest.getSalt(username);
 
-                        outputStream.writeObject(RequestType.SendSalt);
-                        outputStream.writeObject(salt);
-                        System.out.println(String.format("Gathered '%s' from database", salt));
+                            outputStream.writeObject(RequestType.SendSalt);
+                            outputStream.writeObject(salt);
+                            System.out.println(String.format("Gathered '%s' from database", salt));
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            outputStream.writeObject(RequestType.SendErrorCode);
+                            outputStream.writeObject("Salt not found.");
+                        }
                     }
                 }
-                catch (Exception e) {
+                catch (IOException e) {
                     e.printStackTrace();
-                    try {
-                        outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
-                        outputStream.writeObject("Salt not found.");
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
 
             }
@@ -123,10 +126,13 @@ public class ClientHandle implements Runnable
                     {
                         String token = checkLogin.compareLogin(username, password);
                         outputStream.writeObject(RequestType.SendLoginToken);
+                        System.out.println("Send the login token");
                         outputStream.writeObject(token);
+                        System.out.println("Finished sending the token");
                     }
                 }
                 catch (Exception e) {
+                    e.printStackTrace();
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
                     } catch (IOException ioException) {
@@ -146,9 +152,9 @@ public class ClientHandle implements Runnable
                 try
                 {
                     JWTHandler handle = new JWTHandler();
-                    String token = (String) inputStream.readObject();
-                    String username = (String) inputStream.readObject();
-                    String password = (String) inputStream.readObject();
+                    final String token = (String) inputStream.readObject();
+                    final String username = (String) inputStream.readObject();
+                    final String password = (String) inputStream.readObject();
 
                     synchronized (dbRequest)
                     {
@@ -177,19 +183,23 @@ public class ClientHandle implements Runnable
             case RequestUserInfo: {
                 try
                 {
-
+                    System.out.println("Request User Info");
                     JWTHandler handle = new JWTHandler();
                     String token = (String) inputStream.readObject();
                     String username = (String) inputStream.readObject();
 
                     synchronized (dbRequest)
                     {
-                            handle.verifyToken(token);
-                            User user = dbRequest.getUser(username);
-                            outputStream.writeObject(RequestType.SendUserInfo);
-                            outputStream.writeObject(user);
+
+                        handle.verifyToken(token);
+
+                        UserInfo user = dbRequest.getUserInfo(username);
+                        outputStream.writeObject(RequestType.SendUserInfo);
+                        outputStream.writeObject(user);
+
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
                     } catch (IOException ioException) {
@@ -200,7 +210,6 @@ public class ClientHandle implements Runnable
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }
-                    e.printStackTrace();
                 }
             }
             break;
@@ -208,6 +217,7 @@ public class ClientHandle implements Runnable
             case RequestOrganisation: {
                 try
                 {
+                    System.out.println("Request Organisation");
                     // initialise JWT handler
                     JWTHandler handle = new JWTHandler();
                     String token = (String) inputStream.readObject();

@@ -34,10 +34,11 @@ public class ClientSocket implements IDataSource
         return ClientSocket.ClientSocketHolder.INSTANCE;
     }
 
-    public void ClientSocket()
+    protected ClientSocket()
     {
+        System.out.println("Constructing Client Socket");
         try {
-            // Connect to Server
+            // Connect to TestServer
             clientSocket = new Socket(HOSTNAME, PORT);
             System.out.println("Client Connected: " + clientSocket.getRemoteSocketAddress());
 
@@ -46,7 +47,7 @@ public class ClientSocket implements IDataSource
             inputStream  = new ObjectInputStream(clientSocket.getInputStream());
 
         } catch (IOException e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         System.out.println("Client End...");
@@ -55,15 +56,19 @@ public class ClientSocket implements IDataSource
     @Override
     public String GetSalt(String username) throws ServerException {
         try {
+            System.out.println("Request Salt");
             //Tell the server we need it to pass the salt
             outputStream.writeObject(RequestType.RequestSalt);
-
+            System.out.println("REQUEST TYPE: SALT");
             //Tell the server the username
             outputStream.writeObject(username);
+            System.out.println("Wrote the username");
             outputStream.flush();
+            System.out.println("Flush");
 
             //Get the return type
             RequestType response = (RequestType) inputStream.readObject();
+            System.out.println("Retrieved: " + response.toString());
 
             //Either get a salt or send the error code
             if (response == RequestType.SendSalt ) {
@@ -75,6 +80,7 @@ public class ClientSocket implements IDataSource
         } catch (ServerException e) {
             throw new ServerException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -84,6 +90,7 @@ public class ClientSocket implements IDataSource
     public String AttemptLogin(String username, String password) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to handle login
+            System.out.println("Attempting Login");
             outputStream.writeObject(RequestType.RequestLogin);
 
             //Tell the server the username and hashed password
@@ -93,10 +100,13 @@ public class ClientSocket implements IDataSource
 
             //Get the return type
             RequestType response = (RequestType) inputStream.readObject();
-
+            System.out.println("Response is: " + response.toString());
             //Either get a token or send the error code
-            if (response == RequestType.SendLoginToken) {
-                return (String) inputStream.readObject();
+            if (RequestType.SendLoginToken.equals(response)) {
+                System.out.println("Get the Login Token");
+                String jwt = (String) inputStream.readObject();
+                System.out.println(jwt);
+                return jwt;
             }
 
             errorHandling(response);
@@ -114,6 +124,7 @@ public class ClientSocket implements IDataSource
     @Override
     public String AttemptResetPassword(String token, String username, String newPassword) throws AuthenticationException, ServerException {
         try {
+            System.out.println("Attempting Reset Password");
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestResetPassword);
 
@@ -146,6 +157,7 @@ public class ClientSocket implements IDataSource
     @Override
     public UserInfo GetUser(String token, String username) throws AuthenticationException, ServerException {
         try {
+            System.out.println("Request User Info");
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestUserInfo);
 
@@ -156,9 +168,10 @@ public class ClientSocket implements IDataSource
 
             //Get the return type
             RequestType response = (RequestType) inputStream.readObject();
-
+            System.out.println("Oopsie");
             //Either get some information or send the error code
             if (response == RequestType.SendUserInfo) {
+                System.out.println("Send User Info");
                 return (UserInfo) inputStream.readObject();
             }
 

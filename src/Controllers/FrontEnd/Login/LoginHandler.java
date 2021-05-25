@@ -40,10 +40,10 @@ public class LoginHandler implements Initializable {
             LoginController loginController = new LoginController();
             loginController.AttemptLogin(LoginUsername.getText(), LoginPassword.getText());
 
-            if (LoginController.GetUser().getAccountType() == AccountType.SystemAdmin) {
+            if (LoginController.GetUser().getAccountType().equals(AccountType.SystemAdmin)) {
                 UtilSceneChanger.getInstance().ChangeToScene(UtilSceneChanger.SceneType.ADMIN);
-            } else if (LoginController.GetUser().getAccountType() == AccountType.User ||
-                    LoginController.GetUser().getAccountType() == AccountType.UnitLeader) {
+            } else if (LoginController.GetUser().getAccountType().equals(AccountType.User) ||
+                    LoginController.GetUser().getAccountType().equals(AccountType.UnitLeader)) {
                 UtilSceneChanger.getInstance().ChangeToScene(UtilSceneChanger.SceneType.USER);
             } else {
                 throw new AuthenticationException("UNEXPECTED ERROR");
@@ -53,6 +53,7 @@ public class LoginHandler implements Initializable {
             LoginErrorText.setTextFill(Color.RED);
             LoginErrorText.setText(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             LoginErrorText.setTextFill(Color.ORANGE);
             LoginErrorText.setText(e.getMessage());
         }

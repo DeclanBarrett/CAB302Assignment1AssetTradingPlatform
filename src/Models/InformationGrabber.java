@@ -364,6 +364,7 @@ public class  InformationGrabber {
             if(getUser != null)
             {
                 rs = getUser.executeQuery();
+                rs.next();
                 user.setUsername(rs.getString("UserName"));
                 user.setPassword(rs.getString("HashedPassword"));
                 //Unsure about getting the account Type, will ask soon
@@ -417,7 +418,26 @@ public class  InformationGrabber {
      * @return the User with no login info included
      */
     public UserInfo getUserInfo(String username) {
-        //UserInfo userinfo = new UserInfo();
+        UserInfo user;
+        try
+        {
+            getUser = connection.prepareStatement(GET_USER);
+            getUser.setString(1,username);
+
+            if(getUser != null)
+            {
+                ResultSet rs = getUser.executeQuery();
+                rs.next();
+                user = new UserInfo(rs.getString("UserName"),
+                        AccountType.valueOf(rs.getString("AccountType")),
+                        rs.getString("OrganisationalUnit"));
+                return user;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         return null;
     }
 
