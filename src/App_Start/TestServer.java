@@ -13,7 +13,7 @@ public class TestServer {
     {
         Connection connection = DatabaseConnection.getInstance();
         SQL sql = new SQL(connection);
-        //sql.populateDatabase();
+        sql.populateDatabase();
 
         InformationGrabber a = new InformationGrabber();
        // a.getSalt("User 1");

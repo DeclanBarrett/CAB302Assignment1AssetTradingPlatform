@@ -47,7 +47,7 @@ public class ClientSocket implements IDataSource
             inputStream  = new ObjectInputStream(clientSocket.getInputStream());
 
         } catch (IOException e){
-            //e.printStackTrace();
+            e.printStackTrace();
         }
 
         System.out.println("Client End...");
@@ -78,6 +78,7 @@ public class ClientSocket implements IDataSource
             }
 
         } catch (ServerException e) {
+            e.printStackTrace();
             throw new ServerException(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,6 +117,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -149,6 +151,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -182,6 +185,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -213,6 +217,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -244,6 +249,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -274,6 +280,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -304,6 +311,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -334,6 +342,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -347,6 +356,7 @@ public class ClientSocket implements IDataSource
 
             //Tell the server the information
             outputStream.writeObject(token);
+            outputStream.writeObject(organisationName);
             outputStream.flush();
 
             //Get the return type
@@ -361,6 +371,7 @@ public class ClientSocket implements IDataSource
                         buyOrders.add(order);
                     }
                 }
+                return buyOrders;
             }
 
             errorHandling(response);
@@ -370,6 +381,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -383,6 +395,7 @@ public class ClientSocket implements IDataSource
 
             //Tell the server the information
             outputStream.writeObject(token);
+            outputStream.writeObject(organisationName);
             outputStream.flush();
 
             //Get the return type
@@ -397,6 +410,7 @@ public class ClientSocket implements IDataSource
                         sellOrders.add(order);
                     }
                 }
+                return sellOrders;
             }
 
             errorHandling(response);
@@ -406,6 +420,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -437,6 +452,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -468,6 +484,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -498,6 +515,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -529,6 +547,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -560,6 +579,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -590,6 +610,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -623,6 +644,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -655,6 +677,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -687,6 +710,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -718,6 +742,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -749,6 +774,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -779,6 +805,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -812,6 +839,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -844,6 +872,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;
@@ -862,7 +891,7 @@ public class ClientSocket implements IDataSource
         } else if (response == RequestType.SendAuthenticationError) {
             throw new AuthenticationException((String) inputStream.readObject());
         } else {
-            throw new Exception();
+            throw new Exception("Something has gone wrong");
         }
     }
 

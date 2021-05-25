@@ -262,6 +262,7 @@ public class ClientHandle implements Runnable
                         List<Order> orders = dbRequest.getOrganisationOrders(orgName);
                         outputStream.writeObject(RequestType.SendOrders);
                         outputStream.writeObject(orders);
+                        System.out.println("Why");
                     }
                 } catch (Exception e) {
                     try {

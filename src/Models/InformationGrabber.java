@@ -23,7 +23,7 @@ public class  InformationGrabber {
     private static final String INSERT_NEW_USER = "INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES (?, ?, ?, ?, ?)";
     private static final String INSERT_ASSET = "INSERT INTO Assets VALUES (?);";
     private static final String INSERT_ORGANISATION = "INSERT INTO OrganisationalUnit VALUES (?, ?);";
-    private static final String INSERT_ORDER = "INSERT INTO Order1 (OrganisationalUnitName, PlaceDateMilSecs, AssetQuantity, AssetName, OrderType) " +
+    private static final String INSERT_ORDER = "INSERT INTO Orders (OrganisationalUnitName, PlaceDateMilSecs, AssetQuantity, AssetName, OrderType) " +
                                                "VALUES ('?', '?', '?', '?', '?');";
     private static final String INSERT_TRADE = "INSERT INTO Trades (BuyerOrgName, SellerOrgName, TradeDateMilSecs, AssetQuantity, AssetName) " +
                                                "VALUES ('?', '?', '?', '?', '?');";
@@ -43,19 +43,19 @@ public class  InformationGrabber {
 
     private static final String GET_ALL_USERS = "SELECT * FROM Users";
     private static final String GET_SALT = "SELECT Salt FROM Users WHERE UserName=?";
-    private static final String GET_ORGANISATION = "SELECT * FROM OrganisationUnit WHERE OrganisationalUnitName=?";
-    private static final String GET_ALL_ORGANISATIONS = "SELECT * FROM OrganisationUnit";
+    private static final String GET_ORGANISATION = "SELECT * FROM OrganisationalUnit WHERE OrganisationalUnitName=?";
+    private static final String GET_ALL_ORGANISATIONS = "SELECT * FROM OrganisationalUnit";
     private static final String GET_ORGANISATION_ASSETS = "SELECT * FROM OrgHasQuantity WHERE OrganisationalUnitName=?";
-    private static final String GET_ORGANISATION_ORDERS = "SELECT * FROM Order WHERE OrganisationalUnitName=?";
-    private static final String GET_BUY_ORDERS = "SELECT * FROM Order1 WHERE OrderType = BUY";
-    private static final String GET_SELL_ORDERS = "SELECT * FROM Order1 WHERE OrderType = SELL";
-    private static final String GET_ORDER_LIST = "SELECT * FROM Order1";
-    private static final String GET_ALL_ORDERS = "SELECT * FROM Order1"; //fix to be diff from prev
+    private static final String GET_ORGANISATION_ORDERS = "SELECT * FROM Orders WHERE OrganisationalUnitName=?";
+    private static final String GET_BUY_ORDERS = "SELECT * FROM Orders WHERE OrderType='BUY'";
+    private static final String GET_SELL_ORDERS = "SELECT * FROM Orders WHERE OrderType='SELL'";
+    private static final String GET_ORDER_LIST = "SELECT * FROM Orders";
+    private static final String GET_ALL_ORDERS = "SELECT * FROM Orders"; //fix to be diff from prev
 
     private static final String GET_ASSET_TYPES = "SELECT * FROM Assets"; // is this correct?
     private static final String GET_TRADE_HISTORY = "SELECT * FROM Trade WHERE AssetName=?"; // is this correct? what is assettype?
 
-    private static final String DELETE_ORDER = "DELETE FROM Order1 WHERE OrderID = ?";
+    private static final String DELETE_ORDER = "DELETE FROM Orders WHERE OrderID = ?";
 
     // Prepared statements for all previous queries + Connection
     private PreparedStatement addUser;
@@ -445,7 +445,29 @@ public class  InformationGrabber {
      * Gets list of user info for all users from the database
      * @return the list of user information
      */
-    public List<UserInfo> getAllUserInfo() {return null;}
+    public List<UserInfo> getAllUserInfo() {
+        List<UserInfo> users = new ArrayList<>();
+        try
+        {
+            connection = DatabaseConnection.getInstance();
+            getAllUsers = connection.prepareStatement(GET_ALL_USERS);
+
+            if(getAllUsers != null)
+            {
+                ResultSet rs = getAllUsers.executeQuery();
+                while (rs.next()) {
+                    UserInfo user = new UserInfo(rs.getString("UserName"),
+                            AccountType.valueOf(rs.getString("AccountType")),
+                            rs.getString("OrganisationalUnit"));
+
+                    users.add(user);
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
+    }
 
     /**
      * Retrieve salt from database
@@ -508,7 +530,7 @@ public class  InformationGrabber {
                 // Order is different from Database Order
                 organisationalunit = new OrganisationalUnit(
                         orgName,
-                        rs.getInt(""),
+                        rs.getInt("amountCredits"),
                         orgAssets
                 );
                 return organisationalunit;
@@ -521,9 +543,49 @@ public class  InformationGrabber {
 
     /**
      * Gets a list of all organisational units with info in the database
-     * @return a list of organisationa unit objects
+     * @return a list of organisational unit objects
      */
-    public List<OrganisationalUnit> getAllOrganisations() {return null;}
+    public List<OrganisationalUnit> getAllOrganisations() {
+        List<OrganisationalUnit> organisationalUnits = new ArrayList<>();
+
+        try
+        {
+            connection = DatabaseConnection.getInstance();
+
+            getAllOrganisations = connection.prepareStatement(GET_ALL_ORGANISATIONS);
+
+            if(getAllOrganisations != null)
+            {
+                ResultSet rs = getAllOrganisations.executeQuery();
+                while (rs.next()) {
+                    getOrganisationAssets = connection.prepareStatement(GET_ORGANISATION_ASSETS);
+                    String orgName = rs.getString("OrganisationalUnitName");
+                    getOrganisationAssets.setString(1, orgName);
+
+                    HashMap<String, Integer> orgAssets = new HashMap<>();
+
+                    if(getOrganisationAssets != null)
+                    {
+                        ResultSet assetsRs = getOrganisationAssets.executeQuery();
+                        while (assetsRs.next()) {
+                            // Order is different from Database Order
+                            orgAssets.put(assetsRs.getString("AssetName"), rs.getInt("AssetQuantity"));
+                        }
+                    }
+
+                    // Order is different from Database Order
+                    organisationalUnits.add(new OrganisationalUnit(
+                            orgName,
+                            rs.getInt("amountCredits"),
+                            orgAssets
+                    ));
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return organisationalUnits;
+    }
 
     /**
      * Gets a list of all orders that an organisation currently has active in the database
@@ -536,7 +598,7 @@ public class  InformationGrabber {
         {
             connection = DatabaseConnection.getInstance();
             getOrganisationOrders = connection.prepareStatement(GET_ORGANISATION_ORDERS);
-
+            getOrganisationOrders.setString(1,orgName);
             if(getOrganisationOrders != null)
             {
                 ResultSet rs = getOrganisationOrders.executeQuery();
