@@ -5,21 +5,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
-import java.sql.SQLException;
 import java.util.List;
 
 
 import Controllers.BackEnd.AccountType;
+
 import Controllers.BackEnd.NetworkObjects.*;
 import Controllers.BackEnd.Processing.JWTHandler;
 import Controllers.BackEnd.Processing.LoginChecker;
 import Controllers.BackEnd.RequestType;
-import Controllers.Exceptions.AuthenticationException;
-import Controllers.Exceptions.ServerException;
-import Models.DatabaseConnection;
 import Models.InformationGrabber;
-import com.auth0.jwt.JWT;
-import com.mysql.cj.log.Log;
 
 /**
  * @author Brad Kent
@@ -33,7 +28,7 @@ public class ClientHandle implements Runnable
     final Socket connection;
     private int thisId;
     private InformationGrabber dbRequest;
-    private ClientSocket clSocket;
+    private Controllers.BackEnd.Socket.ClientSocket clSocket;
 
     public ClientHandle(Socket connection)
 
@@ -147,9 +142,6 @@ public class ClientHandle implements Runnable
             }
             break;
 
-            // Will also hold off on this one until meeting
-                // Issue mainly revolves around the Update password in information grabber
-                // Need to fully understand these login/JWT tokens first.
             case RequestResetPassword: {
                 try
                 {
@@ -185,6 +177,7 @@ public class ClientHandle implements Runnable
             case RequestUserInfo: {
                 try
                 {
+
                     JWTHandler handle = new JWTHandler();
                     String token = (String) inputStream.readObject();
                     String username = (String) inputStream.readObject();
