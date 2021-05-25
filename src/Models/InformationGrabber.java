@@ -226,14 +226,12 @@ public class  InformationGrabber {
      * Update users password
      * @param username - users username
      * @param password - users password
-     * @param salt - salt attached to users password
      */
-    public void updatePassword(String username, String password, String salt){
+    public void updatePassword(String username, String password){
         try
         {
             updatePassword = connection.prepareStatement(UPDATE_PASSWORD);
             updatePassword.setString(1, password);
-            updatePassword.setString(2, salt);
             updatePassword.setString(3, username);
 
             if(updatePassword != null)
@@ -612,6 +610,7 @@ public class  InformationGrabber {
         }
         return sellOrders;
     }
+
     /**
      * Get the list of Orders
      * @return the list of orders

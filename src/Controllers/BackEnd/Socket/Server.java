@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 /**
- * @author Brad Kent
- * @author n10632999@qut.edu.au
- * @version 1.0
- * @since 0.1
+ * Server socket class.
  */
 public class Server
 {
@@ -25,6 +22,11 @@ public class Server
         }
     }
 
+    /**
+     * Method to start the server.
+     * @throws IOException - Throws file in out exception
+     * @throws ClassNotFoundException - Throws exception if  a class is not found.
+     */
     public void startServer() throws IOException, ClassNotFoundException
     {
         // Create ENDPOINT
