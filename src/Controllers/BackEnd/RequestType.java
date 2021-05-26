@@ -5,22 +5,26 @@ public enum RequestType {
     SendSalt,
 
     SendErrorCode,
+    SendAuthenticationError,
     SendSuccessMessage,
 
     RequestLogin,
     SendLoginToken,
 
     RequestResetPassword,
-    RequestNewUser,
+
+    RequestUserInfo,
+    SendUserInfo,
+
+    RequestBuyOrders,
+    SendOrders,
 
     RequestOrganisation,
     SendOrganisation,
 
     RequestOrganisationOrders,
-    SendOrganisationOrders,
 
     RequestAllOrders,
-    SendAllOrders,
 
     RequestAddOrder,
 
@@ -35,6 +39,7 @@ public enum RequestType {
     RequestAddUser,
 
     RequestAllUsers,
+    SendAllUsers,
 
     RequestUpdateUserPassword,
 
@@ -49,6 +54,9 @@ public enum RequestType {
     RequestAllOrganisations,
     SendAllOrganisations,
 
-    RequestUpdateOrganisationAsset
+    RequestSellOrders,
+    RequestUpdateOrganisationAsset,
+
+    RequestUpdateOrganisationCredit
 
 }

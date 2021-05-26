@@ -3,7 +3,7 @@ package Controllers.FrontEnd.User;
 import Controllers.BackEnd.NetworkObjects.Order;
 import Controllers.BackEnd.NetworkObjects.OrganisationalUnit;
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.BackEnd.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
 import javafx.collections.FXCollections;
@@ -86,7 +86,7 @@ public class UserOrganisationTabController implements Initializable, Observer {
 
         //Attempt to set the organisation assets and quantities via casting to a map
         try {
-            OrganisationalUnit org = MockSocket.getInstance().GetOrganisation(LoginController.GetToken(), LoginController.GetUser().getOrganisationalUnit());//LoginController.GetUser().getOrganisationalUnit()
+            OrganisationalUnit org = ClientSocket.getInstance().GetOrganisation(LoginController.GetToken(), LoginController.GetUser().getOrganisationalUnit());//LoginController.GetUser().getOrganisationalUnit()
 
             OrgName.setText(org.getUnitName());
 
@@ -108,10 +108,10 @@ public class UserOrganisationTabController implements Initializable, Observer {
 
             OrgAssetQuantityTable.getItems().setAll(items);
 
-            List<Order> buyOrders = MockSocket.getInstance().GetOrganisationBuyOrders(LoginController.GetToken(), LoginController.GetUser().getOrganisationalUnit());
+            List<Order> buyOrders = ClientSocket.getInstance().GetOrganisationBuyOrders(LoginController.GetToken(), LoginController.GetUser().getOrganisationalUnit());
             OrgBuyOrdersTable.getItems().setAll(buyOrders);
 
-            List<Order> sellOrders = MockSocket.getInstance().GetOrganisationSellOrders(LoginController.GetToken(), LoginController.GetUser().getOrganisationalUnit());
+            List<Order> sellOrders = ClientSocket.getInstance().GetOrganisationSellOrders(LoginController.GetToken(), LoginController.GetUser().getOrganisationalUnit());
             OrgSellOrdersTable.getItems().setAll(sellOrders);
             userOrgErrorText.setTextFill(Color.GREEN);
         } catch (Exception e) {

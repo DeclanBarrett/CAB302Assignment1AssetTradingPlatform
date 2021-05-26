@@ -1,6 +1,6 @@
 package Controllers.FrontEnd.Login;
 
-import Controllers.BackEnd.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.Exceptions.AuthenticationException;
 import Controllers.Utils.UtilFieldCheckers;
 import Controllers.Utils.UtilLoginSecurity;
@@ -54,7 +54,7 @@ public class ResetHandler implements Initializable {
                     UtilLoginSecurity loginSecurity = new UtilLoginSecurity();
                     String hashPassword = loginSecurity.generateHashedPassword(UsernameTextArea.getText(), NewPasswordText.getText());
                     //Attempts the password reset
-                    ErrorText.setText(MockSocket.getInstance().AttemptResetPassword(LoginController.GetToken(), UsernameTextArea.getText(), hashPassword));
+                    ErrorText.setText(ClientSocket.getInstance().AttemptResetPassword(LoginController.GetToken(), UsernameTextArea.getText(), hashPassword));
                     loginController.Logout();
                 } else {
                     throw new AuthenticationException(ERROR_TEXT_RESET_PASSWORD);

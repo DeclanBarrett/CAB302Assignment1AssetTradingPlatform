@@ -6,6 +6,7 @@ import Models.InformationGrabber;
 public class LoginChecker {
 
     InformationGrabber database;
+
     public LoginChecker(InformationGrabber database) {
         this.database = database;
     }
@@ -17,14 +18,16 @@ public class LoginChecker {
      * @return a JWT token
      */
     public String compareLogin(String username, String hashedPassword) throws AuthenticationException {
-
-        String newToken = "";
         try {
-            if (hashedPassword.equals(database.getPassword(username)))
-            return newToken;
+            if (hashedPassword.equals(database.getPassword(username))) {
+                JWTHandler jwtHandler = new JWTHandler();
+                String token = jwtHandler.createToken(username);
+                return token;
+            }
         } catch (Exception e) {
             throw new AuthenticationException("Incorrect Username of Password");
         }
         throw new AuthenticationException("Incorrect Username of Password");
+
     }
 }

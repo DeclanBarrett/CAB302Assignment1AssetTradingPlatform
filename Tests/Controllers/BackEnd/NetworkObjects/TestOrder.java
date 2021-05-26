@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestOrder {
 
@@ -15,7 +15,18 @@ public class TestOrder {
 
     @BeforeEach
     public void ConstructOrder(){
-        order = null;//new Order(OrderType.BUY, "Paper", 50, 3.5, "Sales", new Date());
+        order = new Order(123456, OrderType.BUY, "Paper", 50, 3.5, "Sales", new Date());
+    }
+
+    @Test
+    public void TestOrderConstruction() {
+        order = new Order(123456, OrderType.BUY, "Paper", 50, 3.5, new OrganisationalUnit("Sales", 0, null), new Date());
+    }
+
+    @Test
+    public void TestOrderID() {
+        Integer orderID = order.getOrderID();
+        assertEquals(123456, orderID);
     }
 
     @Test
@@ -52,6 +63,26 @@ public class TestOrder {
     public void TestGetDate() {
         Date date = order.getDate();
         assertEquals(new Date(), date);
+    }
+
+    @Test
+    public void TestOrderEquals() {
+        assertTrue(order.equals(order));
+    }
+
+    @Test
+    public void TestOrderDoesntEquals() {
+        assertFalse(order.equals(new Order(123457, OrderType.BUY, "Paper", 50, 3.5, "Sales", new Date())));
+    }
+
+    @Test
+    public void TestOrderClassDoesntEquals() {
+        assertFalse(order.equals(new Object()));
+    }
+
+    @Test
+    public void TestCompareOrder() {
+        assertTrue(0 == order.compareTo(order));
     }
 
 }

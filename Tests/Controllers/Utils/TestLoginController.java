@@ -1,9 +1,11 @@
-import Controllers.Backend.AccountType;
-import Controllers.Backend.NetworkObjects.LoginToken;
-import Controllers.Backend.NetworkObjects.UserInfo;
-import Controllers.FrontEnd.Login.LoginController;
-import Controllers.Exceptions.LoginException;
-import Controllers.Backend.Socket.MockSocket;
+package Controllers.FrontEnd.Login;
+
+import Controllers.BackEnd.AccountType;
+import Controllers.BackEnd.NetworkObjects.UserInfo;
+import Controllers.BackEnd.Processing.JWTHandler;
+import Controllers.Exceptions.AuthenticationException;
+import Controllers.Exceptions.ServerException;
+import Controllers.BackEnd.Socket.ClientSocket;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +21,7 @@ public class TestLoginController {
     @BeforeAll
     public static void ConstructMock() {
         //Create socket information
-        MockSocket mockSocket = MockSocket.getInstance();
+        ClientSocket clientSocket = ClientSocket.getInstance();
     }
 
     @BeforeEach
@@ -28,17 +30,20 @@ public class TestLoginController {
     }
 
     @Test
-    public void TestStandardLoginToken() throws LoginException {
+    public void TestStandardLoginToken() throws AuthenticationException, ServerException {
 
         loginController.AttemptLogin("User 1", "qwerty");
 
-        LoginToken loginToken = new LoginToken("User 1", new Date());
 
-        assertEquals(loginToken.getUsername(), LoginController.GetToken().getUsername());
+        JWTHandler jwtHandler = new JWTHandler();
+
+        String string = jwtHandler.createToken("User 1");
+
+        assertEquals(jwtHandler.getUser(string), jwtHandler.getUser(LoginController.GetToken()));
     }
 
     @Test
-    public void TestStandardLoginUser() throws LoginException {
+    public void TestStandardLoginUser() throws AuthenticationException, ServerException {
 
         loginController.AttemptLogin("User 1", "qwerty");
 
@@ -50,7 +55,7 @@ public class TestLoginController {
     @Test
     public void TestBadLoginException() {
 
-        assertThrows(LoginException.class, () -> {
+        assertThrows(AuthenticationException.class, () -> {
             loginController.AttemptLogin("User 1", "q");
         });
     }
@@ -58,7 +63,7 @@ public class TestLoginController {
     @Test
     public void TestBadLoginUser(){
 
-        assertThrows(LoginException.class, () -> {
+        assertThrows(AuthenticationException.class, () -> {
             loginController.AttemptLogin("User 1", "q");
         });
 
@@ -68,7 +73,7 @@ public class TestLoginController {
     @Test
     public void TestBadLoginToken(){
 
-        assertThrows(LoginException.class, () -> {
+        assertThrows(AuthenticationException.class, () -> {
             loginController.AttemptLogin("User 1", "q");
         });
 
@@ -78,7 +83,7 @@ public class TestLoginController {
     @Test
     public void TestIncorrectPassword(){
 
-        assertThrows(LoginException.class, () -> {
+        assertThrows(AuthenticationException.class, () -> {
             loginController.AttemptLogin("User 1", "sandwhich");
         });
 
@@ -86,27 +91,7 @@ public class TestLoginController {
     }
 
     @Test
-    public void TestLogoutUser() throws LoginException{
-
-        loginController.AttemptLogin("User 1", "qwerty");
-
-        loginController.Logout();
-
-        assertEquals(null, LoginController.GetUser());
-    }
-
-    @Test
-    public void TestLogoutToken() throws LoginException {
-
-        loginController.AttemptLogin("User 1", "qwerty");
-
-        loginController.Logout();
-
-        assertEquals(null, LoginController.GetToken());
-    }
-
-    @Test
-    public void TestTwoLogins() throws LoginException {
+    public void TestTwoLogins() throws AuthenticationException, ServerException {
 
         loginController.AttemptLogin("User 1", "qwerty");
         loginController.AttemptLogin("User 4", "1234");
@@ -117,7 +102,7 @@ public class TestLoginController {
     }
 
     @Test
-    public void TestAllLogins() throws LoginException {
+    public void TestAllLogins() throws AuthenticationException, ServerException {
         loginController.AttemptLogin("User 1","qwerty");
         loginController.AttemptLogin("User 2","qwerty");
         loginController.AttemptLogin("User 3","1234");
@@ -137,5 +122,6 @@ public class TestLoginController {
         loginController.AttemptLogin("User 13","qwerty");
     }
 
+    //CANNOT TEST LOGOUT SINCE LOGOUT USES THE SCENE CHANGER UTIL
 
 }

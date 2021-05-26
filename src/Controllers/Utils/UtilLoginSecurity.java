@@ -1,5 +1,5 @@
 package Controllers.Utils;
-import Controllers.BackEnd.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.Exceptions.AuthenticationException;
 import Controllers.Exceptions.ServerException;
 
@@ -80,7 +80,7 @@ public class UtilLoginSecurity {
     public String generateHashedPassword(String username, String password) throws AuthenticationException, ServerException {
 
         //Get the salt for the password
-        String salt = MockSocket.getInstance().GetSalt(username);
+        String salt = ClientSocket.getInstance().GetSalt(username);
 
         //Make sure the salt isn't blank
         if (salt == null) {
@@ -90,9 +90,6 @@ public class UtilLoginSecurity {
         // Generates salted and hashed password using md5 algorithm.
         //String salt = securityManager.generateSalt();
         String hashedPassword = hashPassword(password, salt);
-
-        System.out.println("Password: " + password + ", Salt: " + salt);
-        System.out.println("Hashed Password: " + hashedPassword);
 
         return hashedPassword;
     }

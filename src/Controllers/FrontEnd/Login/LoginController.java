@@ -1,9 +1,8 @@
 package Controllers.FrontEnd.Login;
 
 
-import Controllers.BackEnd.NetworkObjects.LoginToken;
 import Controllers.BackEnd.NetworkObjects.UserInfo;
-import Controllers.BackEnd.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.Exceptions.AuthenticationException;
 import Controllers.Exceptions.ServerException;
 import Controllers.Utils.UtilLoginSecurity;
@@ -14,15 +13,15 @@ import Controllers.Utils.UtilSceneChanger;
  */
 public class LoginController {
 
-    public static final String LOGIN_ERROR_USERNAME_PASSWORD_1 = "USERNAME OR PASSWORD INCORRECT";
-    private static LoginToken currentLogin;
+    public static final java.lang.String LOGIN_ERROR_USERNAME_PASSWORD_1 = "USERNAME OR PASSWORD INCORRECT";
+    private static String currentLogin;
     private static UserInfo currentUser;
 
     public static UserInfo GetUser() {
         return currentUser;
     }
 
-    public static LoginToken GetToken() {
+    public static String GetToken() {
         return currentLogin;
     }
 
@@ -44,10 +43,10 @@ public class LoginController {
         UtilLoginSecurity loginSecurity = new UtilLoginSecurity();
         String hashPassword = loginSecurity.generateHashedPassword(username, password);
 
-        currentLogin = MockSocket.getInstance().AttemptLogin(username, hashPassword);
+        currentLogin = ClientSocket.getInstance().AttemptLogin(username, hashPassword);
 
         if (isCurrentLogin()) {
-            currentUser = MockSocket.getInstance().GetUser(GetToken(), username);
+            currentUser = ClientSocket.getInstance().GetUser(GetToken(), username);
             return;
         }
 
@@ -57,8 +56,4 @@ public class LoginController {
     private boolean isCurrentLogin() {
         return currentLogin != null;
     }
-
-
-
-
 }

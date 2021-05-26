@@ -4,7 +4,7 @@ import Controllers.BackEnd.NetworkObjects.Order;
 import Controllers.BackEnd.NetworkObjects.Trade;
 import Controllers.BackEnd.OrderType;
 import Controllers.FrontEnd.Login.LoginController;
-import Controllers.BackEnd.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
 import Controllers.Utils.UtilFieldCheckers;
@@ -81,7 +81,7 @@ public class UserSellTabController implements Initializable, Observer {
             Integer quantity = Integer.parseInt(SellAssetQuantity.getText());
             Float price = Float.parseFloat(SellPriceCredits.getText());
 
-            clientResponse = MockSocket.getInstance().AddOrder(LoginController.GetToken(),
+            clientResponse = ClientSocket.getInstance().AddOrder(LoginController.GetToken(),
                     new Order(-1, OrderType.SELL, SellAssetType.getValue(), quantity, price, LoginController.GetUser().getOrganisationalUnit(), null));
             SellErrorText.setTextFill(Color.GREEN);
         } catch (NumberFormatException formatException) {
@@ -109,7 +109,7 @@ public class UserSellTabController implements Initializable, Observer {
      */
     private void UpdateAssetTypeText() {
         try {
-            SellAssetType.getItems().setAll(MockSocket.getInstance().GetAssetTypes(LoginController.GetToken()));
+            SellAssetType.getItems().setAll(ClientSocket.getInstance().GetAssetTypes(LoginController.GetToken()));
         } catch (Exception e) {
             SellErrorText.setText(e.getMessage());
             SellErrorText.setTextFill(Color.RED);
@@ -127,9 +127,9 @@ public class UserSellTabController implements Initializable, Observer {
 
         String clientResponse = SellErrorText.getText();
         try {
-            sellOrders = MockSocket.getInstance().GetBuyOrders(LoginController.GetToken());
+            sellOrders = ClientSocket.getInstance().GetBuyOrders(LoginController.GetToken());
 
-            List<Trade> trades = MockSocket.getInstance().GetTradeHistory(LoginController.GetToken(), SellAssetType.getValue());
+            List<Trade> trades = ClientSocket.getInstance().GetTradeHistory(LoginController.GetToken(), SellAssetType.getValue());
 
             tradeData.setName("Price of " + SellAssetType.getValue());
 

@@ -4,52 +4,106 @@ import Controllers.BackEnd.AccountType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-class TestUser {
+public class TestUser {
+
     User user;
 
     @BeforeEach
-    public void ConstructUser() { user = new User("TestUser", "qwerty", AccountType.User, "Finance", "12345678"); }
-
-    @Test
-    void getUsername() { assertEquals("TestUser", user.getPassword());
-    }
-
-    // Dont think we need to test setters as Declan mentioned setters arent necessary, Will ask again about this today
-    @Test
-    void setUsername() {
+    public void ConstructUser(){
+        user = new User("Jack",  "b717415eb5e699e4989ef3e2c4e9cbf7", AccountType.User, "Sales", "12345");
     }
 
     @Test
-    void getPassword() { assertEquals("qwerty", user.getPassword());
+    public void TestConstructBlankUsername() {
+        user = new User();
     }
 
     @Test
-    void setPassword() {
+    public void TestGetUsername() {
+        String username = user.getUsername();
+        assertEquals("Jack", username);
     }
 
     @Test
-    void getAccountType() { assertEquals(AccountType.User, user.getAccountType());
+    public void TestGetAccountType() {
+        AccountType type = user.getAccountType();
+        assertEquals(AccountType.User, type);
     }
 
     @Test
-    void setAccountType() {
+    public void TestGetOrganisationalUnit() {
+        String unit = user.getOrganisationalUnit();
+        assertEquals("Sales", unit);
     }
 
     @Test
-    void getOrganisationalUnit() { assertEquals("Finance", user.getAccountType());
+    public void TestPassword() {
+        String password = user.getPassword();
+        assertEquals("b717415eb5e699e4989ef3e2c4e9cbf7", password);
     }
 
     @Test
-    void setOrganisationalType() {
+    public void TestSalt() {
+        String salt = user.getSalt();
+        assertEquals("12345", salt);
     }
 
     @Test
-    void getSalt() { assertEquals("12335678", user.getSalt());
+    public void TestSetUsername() {
+        user.setUsername("Jack Ma");
+        String username = user.getUsername();
+        assertEquals("Jack Ma", username);
     }
 
     @Test
-    void setSalt() {
+    public void TestSetAccountType() {
+        user.setAccountType(AccountType.SystemAdmin);
+        AccountType type = user.getAccountType();
+        assertEquals(AccountType.SystemAdmin, type);
+    }
+
+    @Test
+    public void TestSetOrganisationalUnit() {
+        user.setOrganisationalType("Finance");
+        String unit = user.getOrganisationalUnit();
+        assertEquals("Finance", unit);
+    }
+
+    @Test
+    public void TestSetPassword() {
+        user.setPassword("OompaLoompa");
+        String password = user.getPassword();
+        assertEquals("OompaLoompa", password);
+    }
+
+    @Test
+    public void TestSetSalt() {
+        user.setSalt("qwerty");
+        String salt = user.getSalt();
+        assertEquals("qwerty", salt);
+    }
+
+    @Test
+    public void TestIfEqual() {
+        assertTrue(user.equals(user));
+    }
+
+    @Test
+    public void TestEqualWithIncorrectObject() {
+        assertFalse(user.equals(new User("Jack Ma",  "b717415eb5e699e4989ef3e2c4e9cbf7", AccountType.User, "Sales", "12345")));
+    }
+
+    @Test
+    public void TestEqualWithIncorrectClass() {
+        assertFalse(user.equals(new Date()));
+    }
+
+    @Test
+    public void TestCompareOrg() {
+        assertTrue(0 == user.compareTo(user));
     }
 }

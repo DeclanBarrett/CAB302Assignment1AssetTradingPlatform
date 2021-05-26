@@ -2,7 +2,7 @@ package Controllers.Exceptions;
 
 public class ServerException extends Exception {
     /**
-     * Server exception message.
+     * TestServer exception message.
      * @param message
      */
     public ServerException(String message) {

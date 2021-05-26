@@ -2,7 +2,7 @@ package Controllers.FrontEnd.Admin;
 
 import Controllers.BackEnd.AccountType;
 import Controllers.BackEnd.NetworkObjects.User;
-import Controllers.BackEnd.Socket.MockSocket;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.FrontEnd.Login.LoginController;
 import Controllers.Utils.UtilFieldCheckers;
 import Controllers.Utils.UtilLoginSecurity;
@@ -44,7 +44,7 @@ public class AdminProcessing {
                 organisationalUnit,
                 salt);
 
-        return MockSocket.getInstance().AddUser(LoginController.GetToken(), newUser);
+        return ClientSocket.getInstance().AddUser(LoginController.GetToken(), newUser);
     }
 
     /**
@@ -62,7 +62,7 @@ public class AdminProcessing {
         UtilLoginSecurity utilLoginSecurity = new UtilLoginSecurity();
         String salt = utilLoginSecurity.generateSalt();
 
-        return MockSocket.getInstance().UpdateUserPassword(LoginController.GetToken(),
+        return ClientSocket.getInstance().UpdateUserPassword(LoginController.GetToken(),
                 username,
                 utilLoginSecurity.hashPassword(password, salt),
                 salt);

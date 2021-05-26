@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestTrade {
 
@@ -50,5 +50,25 @@ public class TestTrade {
     @Test
     public void TestGetDate() {
         assertEquals(new Date(), trade.getTradeDateMilSecs());
+    }
+
+    @Test
+    public void TestIfEqual() {
+        assertTrue(trade.equals(trade));
+    }
+
+    @Test
+    public void TestEqualWithIncorrectTrade() {
+        assertFalse(trade.equals(new Trade(69, "Juice", 1, 1.0, "Rick", "Morty", new Date())));
+    }
+
+    @Test
+    public void TestEqualWithIncorrectClass() {
+        assertFalse(trade.equals(new Date()));
+    }
+
+    @Test
+    public void TestCompareOrg() {
+        assertTrue(0 == trade.compareTo(trade));
     }
 }
