@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="AdminEditOrganisationAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.Admin.AdminEditOrganisationHandler">
+<AnchorPane fx:id="adminEditOrganisationTab" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.Admin.AdminEditOrganisationTabController">
    <children>
       <Label alignment="CENTER" layoutX="268.0" layoutY="24.0" prefHeight="74.0" prefWidth="492.0" text="Edit Organisational Unit" textAlignment="CENTER">
          <font>
@@ -25,7 +25,7 @@
             <TableColumn fx:id="EditOrgAssetQuantityColumn" minWidth="0.0" prefWidth="117.0" text="Quantity" />
          </columns>
       </TableView>
-      <Label fx:id="EditOrgErrorText" layoutX="343.0" layoutY="345.0" prefHeight="22.0" prefWidth="363.0" text="ErrorText" textAlignment="CENTER">
+      <Label fx:id="EditOrgErrorText" alignment="CENTER" layoutX="249.0" layoutY="343.0" prefHeight="30.0" prefWidth="551.0" text="ErrorText" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>

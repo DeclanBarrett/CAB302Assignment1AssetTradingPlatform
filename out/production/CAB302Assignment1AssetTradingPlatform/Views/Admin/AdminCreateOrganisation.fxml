@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="AdminCreateOrganisationAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.Admin.AdminCreateOrganisationHandler">
+<AnchorPane fx:id="adminCreateOrganisationTab" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.Admin.AdminCreateOrganisationTabController">
    <children>
       <Label alignment="CENTER" layoutX="268.0" layoutY="24.0" prefHeight="74.0" prefWidth="492.0" text="Create Organisational Unit" textAlignment="CENTER">
          <font>
@@ -46,7 +46,7 @@
             </HBox>
          </children>
       </VBox>
-      <Label fx:id="CreateOrgErrorText" layoutX="332.0" layoutY="233.0" prefHeight="22.0" prefWidth="363.0" text="ErrorText" textAlignment="CENTER">
+      <Label fx:id="CreateOrgErrorText" alignment="CENTER" layoutX="247.0" layoutY="230.0" prefHeight="30.0" prefWidth="535.0" text="ErrorText" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>

@@ -1,6 +1,7 @@
 package Controllers.FrontEnd;
 
-import Controllers.Backend.Order;
+import Controllers.BackEnd.NetworkObjects.User;
+import Controllers.BackEnd.NetworkObjects.Order;
 import Controllers.Backend.OrganisationalUnit;
 
 /**

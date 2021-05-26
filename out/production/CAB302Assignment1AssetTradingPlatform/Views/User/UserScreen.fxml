@@ -4,33 +4,33 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.User.UserScreenHandler">
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.User.UserScreenController">
    <children>
       <TabPane prefHeight="692.0" prefWidth="871.0" stylesheets="@../StyleSheets/Root.css" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab text="Organisation">
                <content>
-                  <fx:include fx:id="UserOrganisationAnchor" source="UserOrganisation.fxml" />
+                  <fx:include fx:id="userOrganisationTab" source="UserOrganisation.fxml" />
                </content>
             </Tab>
             <Tab text="Buy">
                <content>
-                  <fx:include fx:id="UserBuyAnchor" source="UserBuy.fxml" />
+                  <fx:include fx:id="userBuyTab" source="UserBuy.fxml" />
                </content>
             </Tab>
             <Tab text="Sell">
                <content>
-                  <fx:include fx:id="UserSellAnchor" source="UserSell.fxml" />
+                  <fx:include fx:id="userSellTab" source="UserSell.fxml" />
                </content>
             </Tab>
             <Tab text="Remove">
                <content>
-                  <fx:include fx:id="UserRemoveAnchor" source="UserRemove.fxml" />
+                  <fx:include fx:id="userRemoveTab" source="UserRemove.fxml" />
                </content>
             </Tab>
             <Tab text="User">
                <content>
-                  <fx:include fx:id="UserUserAnchor" source="UserUser.fxml" />
+                  <fx:include fx:id="userUserTab" source="UserUser.fxml" />
                </content>
             </Tab>
          </tabs>

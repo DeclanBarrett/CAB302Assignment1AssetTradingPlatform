@@ -1,25 +1,19 @@
 package Controllers.BackEnd.Socket;
 
+import Controllers.BackEnd.AccountType;
+import Controllers.BackEnd.NetworkObjects.*;
+import Controllers.BackEnd.Processing.JWTHandler;
+import Controllers.BackEnd.Processing.LoginChecker;
+import Controllers.BackEnd.RequestType;
+import Models.InformationGrabber;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
-import java.sql.SQLException;
 import java.util.List;
-
-
-import Controllers.BackEnd.AccountType;
-import Controllers.BackEnd.NetworkObjects.*;
-import Controllers.BackEnd.Processing.JWTHandler;
-import Controllers.BackEnd.Processing.LoginChecker;
-import Controllers.BackEnd.RequestType;
-import Controllers.Exceptions.AuthenticationException;
-import Controllers.Exceptions.ServerException;
-import Models.DatabaseConnection;
-import Models.InformationGrabber;
-import com.mysql.cj.log.Log;
 
 /**
  * @author Brad Kent

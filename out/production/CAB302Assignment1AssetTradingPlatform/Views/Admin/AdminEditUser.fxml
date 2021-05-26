@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="AdminEditUserAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.Admin.AdminEditUserHandler">
+<AnchorPane fx:id="adminEditUserTab" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.Admin.AdminEditUserTabController">
    <children>
       <Label alignment="CENTER" layoutX="388.0" layoutY="24.0" prefHeight="74.0" prefWidth="254.0" text="Edit User" textAlignment="CENTER">
          <font>
@@ -100,7 +100,7 @@
             <Font size="19.0" />
          </font>
       </Button>
-      <Label fx:id="EditUserErrorText" layoutX="333.0" layoutY="379.0" prefHeight="22.0" prefWidth="363.0" text="ErrorText" textAlignment="CENTER">
+      <Label fx:id="EditUserErrorText" alignment="CENTER" layoutX="222.0" layoutY="379.0" prefHeight="30.0" prefWidth="586.0" text="ErrorText" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>

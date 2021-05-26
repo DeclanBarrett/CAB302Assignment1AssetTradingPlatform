@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="AdminAssetTypeAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.Admin.AdminAssetTypesHandler">
+<AnchorPane fx:id="adminAssetTypesTab" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.Admin.AdminAssetTypesTabController">
    <children>
       <Label alignment="CENTER" layoutX="328.0" layoutY="24.0" prefHeight="74.0" prefWidth="372.0" text="Create Asset Type" textAlignment="CENTER">
          <font>
@@ -35,13 +35,13 @@
             </HBox>
          </children>
       </VBox>
-      <Label fx:id="CreateAssetErrorText" layoutX="332.0" layoutY="186.0" prefHeight="22.0" prefWidth="363.0" text="ErrorText" textAlignment="CENTER">
+      <Label fx:id="CreateAssetErrorText" alignment="CENTER" layoutX="240.0" layoutY="186.0" prefHeight="30.0" prefWidth="549.0" text="ErrorText" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <ListView fx:id="CreateAssetTable" layoutX="333.0" layoutY="324.0" prefHeight="291.0" prefWidth="363.0" />
-      <Label alignment="CENTER" layoutX="329.0" layoutY="298.0" prefHeight="23.0" prefWidth="372.0" text="Asset Types" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="329.0" layoutY="294.0" prefHeight="23.0" prefWidth="372.0" text="Asset Types" textAlignment="CENTER">
          <font>
             <Font name="Cambria" size="20.0" />
          </font>
