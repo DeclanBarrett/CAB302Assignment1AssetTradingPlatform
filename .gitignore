@@ -1,4 +1,5 @@
 #Ignore the props file
 /src/Models/db.props
 
-
+#Ignore the out files
+/out/
