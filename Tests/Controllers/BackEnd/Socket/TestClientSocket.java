@@ -1,5 +1,7 @@
 package Controllers.BackEnd.Socket;
 
+import App_Start.Server;
+import App_Start.SetupServer;
 import Controllers.BackEnd.AccountType;
 import Controllers.BackEnd.NetworkObjects.Order;
 import Controllers.BackEnd.NetworkObjects.OrganisationalUnit;
@@ -7,32 +9,42 @@ import Controllers.BackEnd.NetworkObjects.User;
 import Controllers.BackEnd.OrderType;
 import Controllers.Exceptions.AuthenticationException;
 import Controllers.Exceptions.ServerException;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 public class TestClientSocket{
 
-    String token;
-
-    //TODO: NEED TO ADD A BEFORE ALL WITH A SERVER INSTANCE
+    static String token;
+    static String token2;
 
     //TODO: ADD WHITEBOX TESTING
-    /*
+
     @BeforeAll
     public static void ServerInstance() {
+        SetupServer setup = new SetupServer();
+        setup.setsUpTheServer();
         Server server = new Server();
         try {
-            server.startServer();
+            new Thread(() -> {
+                try {
+                    server.startServer();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+
+            token = ClientSocket.getInstance().AttemptLogin("User 1", "b717415eb5e699e4989ef3e2c4e9cbf7");
+            token2 = ClientSocket.getInstance().AttemptLogin("User 3", "8d421e892a47dff539f46142eb09e56b");
         } catch (Exception e) {
             System.out.println("Someones poisoned the waterhole");
         }
 
-    }
 
-     */
-    @BeforeEach
-    public void ConstructToken()throws ServerException, AuthenticationException {
-        token = ClientSocket.getInstance().AttemptLogin("User 1", "b717415eb5e699e4989ef3e2c4e9cbf7");
+
     }
 
     @Test
@@ -43,11 +55,6 @@ public class TestClientSocket{
     @Test
     public void AttemptLogin() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().AttemptLogin("User 1", "b717415eb5e699e4989ef3e2c4e9cbf7");
-    }
-
-    @Test
-    public void AttemptResetPassword() throws AuthenticationException, ServerException {
-        ClientSocket.getInstance().AttemptResetPassword(token, "User 1", "ooga booga");
     }
 
     @Test
@@ -127,12 +134,12 @@ public class TestClientSocket{
 
     @Test
     public void UpdateUserAccountType() throws AuthenticationException, ServerException {
-        ClientSocket.getInstance().UpdateUserAccountType(token, "User 1", AccountType.SystemAdmin);
+        ClientSocket.getInstance().UpdateUserAccountType(token, "User 2", AccountType.SystemAdmin);
     }
 
     @Test
     public void UpdateUserOrganisation() throws AuthenticationException, ServerException {
-        ClientSocket.getInstance().UpdateUserOrganisation(token, "User 1", "Finance");
+        ClientSocket.getInstance().UpdateUserOrganisation(token, "User 2", "Finance");
     }
 
     @Test
@@ -158,5 +165,10 @@ public class TestClientSocket{
     @Test
     public void UpdateOrganisationCredit() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().UpdateOrganisationCredit(token, "Sales", 1);
+    }
+
+    @Test
+    public void AttemptResetPassword() throws AuthenticationException, ServerException {
+        ClientSocket.getInstance().AttemptResetPassword(token2, "User 3", "086e1b7e1c12ba37cd473670b3a15214");
     }
 }

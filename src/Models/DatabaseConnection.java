@@ -58,16 +58,4 @@ public class DatabaseConnection
         return instance;
     }
 
-    public static void closeDbConnection()
-    {
-        if(instance != null)
-        {
-            try{
-                instance.close();
-            } catch (SQLException throwables)
-            {
-                throwables.printStackTrace();
-            }
-        }
-    }
 }

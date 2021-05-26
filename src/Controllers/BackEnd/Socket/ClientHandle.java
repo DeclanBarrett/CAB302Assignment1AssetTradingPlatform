@@ -118,9 +118,10 @@ public class ClientHandle implements Runnable
                 {
                     final String username = (String) inputStream.readObject();
                     final String password = (String) inputStream.readObject();
-                    LoginChecker checkLogin = new LoginChecker(dbRequest);
+
                     synchronized (dbRequest)
                     {
+                        LoginChecker checkLogin = new LoginChecker(dbRequest);
                         String token = checkLogin.compareLogin(username, password);
                         outputStream.writeObject(RequestType.SendLoginToken);
                         System.out.println("Send the login token");
@@ -155,7 +156,6 @@ public class ClientHandle implements Runnable
 
                     synchronized (dbRequest)
                     {
-
                         handle.verifyToken(token);
                         dbRequest.updatePassword(username, password);
                         outputStream.writeObject(RequestType.SendSuccessMessage);

@@ -5,7 +5,7 @@ import Controllers.BackEnd.NetworkObjects.OrganisationalUnit;
 import Controllers.BackEnd.NetworkObjects.UserInfo;
 
 /**
- * Generates an order from UI data and attempts to send it to the TestServer to execute
+ * Generates an order from UI data and attempts to send it to the SetupServer to execute
  */
 
 // TODO Figure out why this is here

@@ -22,31 +22,37 @@ public class  InformationGrabber {
 
     private static final String INSERT_NEW_USER = "INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES (?, ?, ?, ?, ?)";
     private static final String INSERT_ASSET = "INSERT INTO Assets VALUES (?);";
-    private static final String INSERT_ORGANISATION = "INSERT INTO OrganisationalUnit VALUES (?, ?);";
-    private static final String INSERT_ORDER = "INSERT INTO Orders (OrganisationalUnitName, PlaceDateMilSecs, AssetQuantity, AssetName, OrderType) " +
-                                               "VALUES ('?', '?', '?', '?', '?');";
+    private static final String INSERT_ORGANISATION = "INSERT INTO OrganisationalUnit (OrganisationalUnitName, AmountCredits) VALUES (?, ?);";
+    private static final String INSERT_ORDER = "INSERT INTO Orders (OrganisationalUnitName, PlaceDateMilSecs, AssetQuantity, AssetName, AssetPrice, OrderType) " +
+                                               "VALUES (?, ?, ?, ?, ?, ?);";
     private static final String INSERT_TRADE = "INSERT INTO Trades (BuyerOrgName, SellerOrgName, TradeDateMilSecs, AssetQuantity, AssetName) " +
-                                               "VALUES ('?', '?', '?', '?', '?');";
+                                               "VALUES (?, ?, ?, ?, ?);";
+    private static final String INSERT_ORGANISATION_ASSETS = "INSERT INTO orghasquantity (OrganisationalUnitName, AssetName, AssetQuantity) VALUES (?, ?, ?)";
 
 
-    private static final String UPDATE_PASSWORD = "UPDATE Users SET HashedPassword=?, Salt=? WHERE UserName=?";
+    private static final String UPDATE_PASSWORD = "UPDATE Users SET HashedPassword=? WHERE UserName=?";
     private static final String UPDATE_USER_ACCOUNT_TYPE = "UPDATE Users SET AccountType = ? WHERE UserName = ?";
     private static final String UPDATE_USER_ORGANISATION = "UPDATE Users SET OrganisationalUnit = ? WHERE UserName = ?";
     private static final String UPDATE_ORGANISATION_ASSET = "UPDATE OrgHasQuantity SET AssetName = ?, AssetQuantity = ? " +
             "WHERE OrganisationalUnitName = ?";
     private static final String UPDATE_ORGANISATION_CREDITS = "UPDATE OrganisationalUnit SET AmountCredits = ? WHERE OrganisationalUnitName = ?";
+    private static final String UPDATE_ORDER = "UPDATE Orders SET AssetPrice = ? WHERE OrderID = ?";
 
     private static final String GET_NONCE = "SELECT Salt FROM Users WHERE UserName=?";
     private static final String GET_PASSWORD = "SELECT HashedPassword FROM Users WHERE UserName=?";
     private static final String GET_USER = "SELECT * FROM Users WHERE UserName=?";
-    private static final String GET_USER_INFO = "SELECT * FROM Users WHERE UserName=?"; //Fix to be diff from prev
 
     private static final String GET_ALL_USERS = "SELECT * FROM Users";
     private static final String GET_SALT = "SELECT Salt FROM Users WHERE UserName=?";
     private static final String GET_ORGANISATION = "SELECT * FROM OrganisationalUnit WHERE OrganisationalUnitName=?";
     private static final String GET_ALL_ORGANISATIONS = "SELECT * FROM OrganisationalUnit";
     private static final String GET_ORGANISATION_ASSETS = "SELECT * FROM OrgHasQuantity WHERE OrganisationalUnitName=?";
+    private static final String GET_ORGANISATION_INDIVIDUAL_ASSETS = "SELECT AssetQuantity FROM OrgHasQuantity WHERE OrganisationalUnitName=? AND AssetName=? ";
     private static final String GET_ORGANISATION_ORDERS = "SELECT * FROM Orders WHERE OrganisationalUnitName=?";
+    private static final String GET_ORGANISATION_BUY_ORDERS = "SELECT * FROM Orders WHERE OrganisationalUnitName=? AND OrderType='BUY'";
+    private static final String GET_ORGANISATION_SELL_ORDERS = "SELECT * FROM Orders WHERE OrganisationalUnitName=? AND OrderType='SELL'";
+
+
     private static final String GET_BUY_ORDERS = "SELECT * FROM Orders WHERE OrderType='BUY'";
     private static final String GET_SELL_ORDERS = "SELECT * FROM Orders WHERE OrderType='SELL'";
     private static final String GET_ORDER_LIST = "SELECT * FROM Orders";
@@ -57,27 +63,30 @@ public class  InformationGrabber {
 
     private static final String DELETE_ORDER = "DELETE FROM Orders WHERE OrderID = ?";
 
+
     // Prepared statements for all previous queries + Connection
     private PreparedStatement addUser;
     private PreparedStatement addAsset;
     private PreparedStatement addOrganisation;
     private PreparedStatement addOrder;
     private PreparedStatement addTrade;
+    private PreparedStatement addOrganisationAsset;
 
     private PreparedStatement updatePassword;
     private PreparedStatement updateUserAccountType;
     private PreparedStatement updateUserOrganisation;
     private PreparedStatement updateOrganisationAsset;
     private PreparedStatement updateOrganisationCredits;
+    private PreparedStatement updateOrder;
 
     private PreparedStatement getNonce;
     private PreparedStatement getPassword;
     private PreparedStatement getUser;
-    private PreparedStatement getUserInfo;
     private PreparedStatement getAllUsers;
     private PreparedStatement getSalt;
     private PreparedStatement getOrganisation;
     private PreparedStatement getOrganisationAssets;
+    private PreparedStatement getOrganisationIndividualAssets;
     private PreparedStatement getAllOrganisations;
     private PreparedStatement getOrganisationOrders;
     private PreparedStatement getBuyOrders;
@@ -86,6 +95,9 @@ public class  InformationGrabber {
     private PreparedStatement getAllOrders;
     private PreparedStatement getAssetTypes;
     private PreparedStatement getTradeHistory;
+
+    private PreparedStatement getOrganisationBuyOrders;
+    private PreparedStatement getOrganisationSellOrders;
 
     private PreparedStatement deleteOrder;
 
@@ -157,12 +169,13 @@ public class  InformationGrabber {
         {
             connection = DatabaseConnection.getInstance();
             addOrganisation = connection.prepareStatement(INSERT_ORGANISATION);
-            //addOrganisation.setString(1, organisation);
-
+            addOrganisation.setString(1, organisation.getUnitName());
+            addOrganisation.setDouble(2, organisation.getCredits());
 
             if(addOrganisation != null)
             {
                 addOrganisation.executeQuery();
+                return "Success Insert Organisation";
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -179,11 +192,16 @@ public class  InformationGrabber {
         try {
             connection = DatabaseConnection.getInstance();
             addOrder = connection.prepareStatement(INSERT_ORDER);
-            //addOrganisation.setString(1, organisation);
-
+            addOrder.setString(1, newOrder.getOrganisationalUnit());
+            addOrder.setLong(2, new Date().getTime());
+            addOrder.setInt(3, newOrder.getAssetQuantity());
+            addOrder.setString(4, newOrder.getAssetType());
+            addOrder.setDouble(5, newOrder.getRequestPrice());
+            addOrder.setString(6, newOrder.getOrderType().toString());
 
             if (addOrder != null) {
                 addOrder.executeQuery();
+                return "Success";
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -234,7 +252,7 @@ public class  InformationGrabber {
         {
             updatePassword = connection.prepareStatement(UPDATE_PASSWORD);
             updatePassword.setString(1, password);
-            updatePassword.setString(3, username);
+            updatePassword.setString(2, username);
 
             if(updatePassword != null)
             {
@@ -244,6 +262,7 @@ public class  InformationGrabber {
             throwables.printStackTrace();
         }
     }
+
 
     /**
      * Updates the account type of the user in the database
@@ -255,13 +274,36 @@ public class  InformationGrabber {
         try
         {
             updateUserAccountType = connection.prepareStatement(UPDATE_USER_ACCOUNT_TYPE);
-            //updateUserAccountType.setString(1, password);
-            //updateUserAccountType.setString(2, salt);
-            //updateUserAccountType.setString(3, username);
+            updateUserAccountType.setString(1, accountType.toString());
+            updateUserAccountType.setString(2, username);
 
             if(updateUserAccountType != null)
             {
                 updateUserAccountType.executeQuery();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+
+    /**
+     * Updates the order to change its asset quantity
+     * @param orderID - order ID to identify it by
+     * @param assetQuantity - the asset quantity to change it to
+     * @return a success message
+     */
+    public String updateOrder(Integer orderID, Integer assetQuantity) {
+        try
+        {
+            updateOrder = connection.prepareStatement(UPDATE_ORDER);
+            updateOrder.setInt(1, assetQuantity);
+            updateOrder.setInt(2, orderID);
+
+            if(updateOrder != null)
+            {
+                updateOrder.executeQuery();
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -304,15 +346,21 @@ public class  InformationGrabber {
     public String updateOrganisationAsset(String organisationName, String assetType, int assetQuantity) {
         try
         {
-            updateOrganisationAsset = connection.prepareStatement(UPDATE_ORGANISATION_ASSET);
-            //updateOrganisationAsset.setString(1, password);
-            //updateOrganisationAsset.setString(2, salt);
-            //updateOrganisationAsset.setString(3, username);
-
-            if(updateOrganisationAsset != null)
-            {
-                updateOrganisationAsset.executeQuery();
+            if (getOrganisationIndividualAsset(organisationName, assetType) == null) {
+                addOrganisationAsset = connection.prepareStatement(INSERT_ORGANISATION_ASSETS);
+                addOrganisationAsset.setString(1, organisationName);
+                addOrganisationAsset.setString(2, assetType);
+                addOrganisationAsset.setInt(3, assetQuantity);
+                addOrganisationAsset.execute();
+            } else {
+                updateOrganisationAsset = connection.prepareStatement(UPDATE_ORGANISATION_ASSET);
+                updateOrganisationAsset.setString(1, organisationName);
+                updateOrganisationAsset.setString(2, assetType);
+                updateOrganisationAsset.setInt(3, assetQuantity);
+                updateOrganisationAsset.execute();
             }
+
+            return "Successfully updated organisation asset";
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -395,15 +443,15 @@ public class  InformationGrabber {
             {
                 ResultSet rs = getAllUsers.executeQuery();
                 while (rs.next()) {
-                    /* User user = new User(
+                     User user = new User(
                             rs.getString("UserName"),
                             rs.getString("HashedPassword"),
-                            new AccountType(rs.getString("AccountType")),
+                             AccountType.valueOf(rs.getString("AccountType")),
                             rs.getString("OrganisationalUnit"),
                             rs.getString("Salt")
-                    ); */
+                    );
 
-                    //users.add(user);
+                    users.add(user);
                 }
             }
         } catch (SQLException throwables) {
@@ -492,6 +540,33 @@ public class  InformationGrabber {
             throwables.printStackTrace();
         }
         return result;
+    }
+
+    /**
+     * Gets the organisation quantity of an asset type
+     * @param orgName
+     * @param assetType
+     * @return
+     */
+    public Integer getOrganisationIndividualAsset(String orgName, String assetType) {
+        try {
+            connection = DatabaseConnection.getInstance();
+
+            getOrganisationIndividualAssets = connection.prepareStatement(GET_ORGANISATION_INDIVIDUAL_ASSETS);
+            getOrganisationIndividualAssets.setString(1, orgName);
+            getOrganisationIndividualAssets.setString(2, assetType);
+
+
+            if (getOrganisationIndividualAssets != null) {
+                ResultSet rs = getOrganisationIndividualAssets.executeQuery();
+                rs.next();
+                return rs.getInt("AssetQuantity");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     /**
@@ -611,7 +686,7 @@ public class  InformationGrabber {
                             rs.getInt("AssetQuantity"),
                             rs.getDouble("AssetPrice"),
                             rs.getString("OrganisationalUnitName"),
-                            new Date(rs.getInt("PlaceDateMilSecs"))
+                            new Date(rs.getLong("PlaceDateMilSecs"))
                     );
 
                     orgOrders.add(order);
@@ -646,7 +721,7 @@ public class  InformationGrabber {
                             rs.getInt("AssetQuantity"),
                             rs.getDouble("AssetPrice"),
                             rs.getString("OrganisationalUnitName"),
-                            new Date(rs.getInt("PlaceDateMilSecs"))
+                            new Date(rs.getLong("PlaceDateMilSecs"))
                     );
 
                     buyOrders.add(order);
@@ -681,7 +756,7 @@ public class  InformationGrabber {
                             rs.getInt("AssetQuantity"),
                             rs.getDouble("AssetPrice"),
                             rs.getString("OrganisationalUnitName"),
-                            new Date(rs.getInt("PlaceDateMilSecs"))
+                            new Date(rs.getLong("PlaceDateMilSecs"))
                     );
 
                     sellOrders.add(order);
@@ -691,6 +766,78 @@ public class  InformationGrabber {
             throwables.printStackTrace();
         }
         return sellOrders;
+    }
+
+    /**
+     * Gets all of an organisations sell orders that are currently active in the database
+     * @return a list of all orders with the orderType SELL
+     */
+    public List<Order> getOrganisationSellOrders(String organisationName) {
+        List<Order> sellOrders = new ArrayList<>();
+        try
+        {
+            connection = DatabaseConnection.getInstance();
+            getOrganisationSellOrders = connection.prepareStatement(GET_ORGANISATION_SELL_ORDERS);
+            getOrganisationSellOrders.setString(1, organisationName);
+
+            if(getOrganisationSellOrders != null)
+            {
+                ResultSet rs = getOrganisationSellOrders.executeQuery();
+                while (rs.next()) {
+                    // Order is different from Database Order
+                    Order order = new Order(
+                            rs.getInt("OrderID"),
+                            OrderType.valueOf(rs.getString("OrderType")),
+                            rs.getString("AssetName"),
+                            rs.getInt("AssetQuantity"),
+                            rs.getDouble("AssetPrice"),
+                            rs.getString("OrganisationalUnitName"),
+                            new Date(rs.getLong("PlaceDateMilSecs"))
+                    );
+
+                    sellOrders.add(order);
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return sellOrders;
+    }
+
+    /**
+     * Gets all of an organisations buy orders that are currently active in the database
+     * @return a list of all orders with the orderType SELL
+     */
+    public List<Order> getOrganisationBuyOrders(String organisationName) {
+        List<Order> buyOrders = new ArrayList<>();
+        try
+        {
+            connection = DatabaseConnection.getInstance();
+            getOrganisationBuyOrders = connection.prepareStatement(GET_ORGANISATION_BUY_ORDERS);
+            getOrganisationBuyOrders.setString(1, organisationName);
+
+            if(getOrganisationBuyOrders != null)
+            {
+                ResultSet rs = getOrganisationBuyOrders.executeQuery();
+                while (rs.next()) {
+                    // Order is different from Database Order
+                    Order order = new Order(
+                            rs.getInt("OrderID"),
+                            OrderType.valueOf(rs.getString("OrderType")),
+                            rs.getString("AssetName"),
+                            rs.getInt("AssetQuantity"),
+                            rs.getDouble("AssetPrice"),
+                            rs.getString("OrganisationalUnitName"),
+                            new Date(rs.getLong("PlaceDateMilSecs"))
+                    );
+
+                    buyOrders.add(order);
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return buyOrders;
     }
 
     /**
@@ -716,7 +863,7 @@ public class  InformationGrabber {
                             rs.getInt("AssetQuantity"),
                             rs.getDouble("AssetPrice"),
                             rs.getString("OrganisationalUnitName"),
-                            new Date(rs.getInt("PlaceDateMilSecs"))
+                            new Date(rs.getLong("PlaceDateMilSecs"))
                     );
 
                     orders.add(order);
@@ -751,7 +898,7 @@ public class  InformationGrabber {
                             rs.getInt("AssetQuantity"),
                             rs.getDouble("AssetPrice"),
                             rs.getString("OrganisationalUnitName"),
-                            new Date(rs.getInt("PlaceDateMilSecs"))
+                            new Date(rs.getLong("PlaceDateMilSecs"))
                     );
 
                     orders.add(order);
@@ -814,7 +961,7 @@ public class  InformationGrabber {
                             rs.getDouble("AssetPrice"),
                             rs.getString("BuyerOrgName"),
                             rs.getString("SellerOrgName"),
-                            new Date(rs.getInt("TradeDateMilSecs"))
+                            new Date(rs.getLong("TradeDateMilSecs"))
 
                     );
 
@@ -839,13 +986,13 @@ public class  InformationGrabber {
      * @param organisationName - the organisational units name
      * @param creditAmount - the amount of credits the organisation will possess after change.
      */
-    public void updateOrganisationCredits(String organisationName, int creditAmount)
+    public void updateOrganisationCredits(String organisationName, double creditAmount)
     {
         try
         {
             updateOrganisationCredits = connection.prepareStatement(UPDATE_ORGANISATION_CREDITS);
             updateOrganisationCredits.setString(1,organisationName);
-            updateOrganisationCredits.setInt(2, creditAmount);
+            updateOrganisationCredits.setDouble(2, creditAmount);
 
             if(updateOrganisationCredits != null)
             {
@@ -854,6 +1001,20 @@ public class  InformationGrabber {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public void beginTransaction() throws SQLException {
+        connection.setAutoCommit(false);
+    }
+
+    public void commitTransaction() throws SQLException {
+        connection.commit();
+        connection.setAutoCommit(true);
+    }
+
+    public void rollBackTransaction() throws SQLException {
+        connection.rollback();
+        connection.setAutoCommit(true);
     }
 
 }

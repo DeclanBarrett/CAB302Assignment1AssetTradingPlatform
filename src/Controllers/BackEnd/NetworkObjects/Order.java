@@ -117,7 +117,8 @@ public class Order implements Comparable<Order>, Serializable  {
 
     @Override
     public int compareTo(Order o) {
-        return ((Integer) orderID).compareTo(o.orderID);
+        return (this.getRequestPrice() < o.getRequestPrice() ? -1 :
+                (this.getRequestPrice() == o.getRequestPrice() ? 0 : 1));
     }
 
     @Override

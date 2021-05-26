@@ -9,7 +9,7 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 
 /**
- * TestServer socket class.
+ * SetupServer socket class.
  */
 public class Server
 {
@@ -18,7 +18,7 @@ public class Server
 
     private static final int SOCKET_ACCEPT_TIMEOUT = 100;
 
-    // Start and run the TestServer
+    // Start and run the SetupServer
     public static void main(String[] args)
     {
         Server server = new Server();

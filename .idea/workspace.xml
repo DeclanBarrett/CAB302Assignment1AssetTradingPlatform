@@ -4,11 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Refactoring to fix multiple errors that are not occurring to everyone but occurring to me.">
+    <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Some minor client handling tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Socket/TestClientHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Socket/TestClientHandle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Socket/TestClientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Socket/TestClientSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App_Start/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Start/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App_Start/TestServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App_Start/SetupServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/NetworkObjects/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/NetworkObjects/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/Processing/OrderExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/Processing/OrderExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/ClientHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/ClientHandle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/ClientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/ClientSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Exceptions/ServerException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Exceptions/ServerException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/OrderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/OrderManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/Database.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/DatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/DatabaseDummyValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/DatabaseDummyValues.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/DatabaseSchema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/DatabaseSchema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/InformationGrabber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/InformationGrabber.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +130,7 @@
       <command value="ClientStart" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestClientHandle">
+  <component name="RunManager" selected="Application.ClientStart">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -158,25 +169,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in CAB302Assignment1AssetTradingPlatform" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CAB302Assignment1AssetTradingPlatform" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestClientHandle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SetupServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="App_Start.SetupServer" />
       <module name="CAB302Assignment1AssetTradingPlatform" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Controllers.BackEnd.Socket.*" />
+          <option name="PATTERN" value="App_Start.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Controllers.BackEnd.Socket" />
-      <option name="MAIN_CLASS_NAME" value="Controllers.BackEnd.Socket.TestClientHandle" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -196,20 +197,35 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controllers.BackEnd.NetworkObjects.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Controllers.BackEnd.NetworkObjects" />
+      <option name="MAIN_CLASS_NAME" value="Controllers.BackEnd.NetworkObjects.TestOrder" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="Application.ClientStart" />
       <item itemvalue="Application.Server" />
-      <item itemvalue="JUnit.All in CAB302Assignment1AssetTradingPlatform" />
+      <item itemvalue="Application.SetupServer" />
+      <item itemvalue="Application.ClientStart" />
       <item itemvalue="JUnit.TestClientSocket" />
-      <item itemvalue="JUnit.TestClientHandle" />
+      <item itemvalue="JUnit.TestOrder" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestClientHandle" />
-        <item itemvalue="Application.Server" />
         <item itemvalue="Application.ClientStart" />
+        <item itemvalue="Application.Server" />
         <item itemvalue="JUnit.TestClientSocket" />
-        <item itemvalue="JUnit.All in CAB302Assignment1AssetTradingPlatform" />
+        <item itemvalue="Application.SetupServer" />
+        <item itemvalue="JUnit.TestOrder" />
       </list>
     </recent_temporary>
   </component>
@@ -490,7 +506,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622008409039</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Some minor client handling tests">
+      <created>1622017718853</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1622017718854</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -522,7 +545,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Initial Commit (Brad Barebones)" />
     <MESSAGE value="Project Setup w/ Test Folder" />
     <MESSAGE value="Project Setup w/ MVC &amp; Test Folder" />
     <MESSAGE value="Entire GUI Built, Just needs events to be added &amp; backend" />
@@ -547,7 +569,8 @@
     <MESSAGE value="Removed Unwanted file" />
     <MESSAGE value="Test Files Marked as Test Root (Green)" />
     <MESSAGE value="Refactoring to fix multiple errors that are not occurring to everyone but occurring to me." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring to fix multiple errors that are not occurring to everyone but occurring to me." />
+    <MESSAGE value="Some minor client handling tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some minor client handling tests" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

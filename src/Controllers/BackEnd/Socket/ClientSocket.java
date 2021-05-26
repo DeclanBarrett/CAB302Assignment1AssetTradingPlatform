@@ -38,7 +38,7 @@ public class ClientSocket implements IDataSource
     {
         System.out.println("Constructing Client Socket");
         try {
-            // Connect to TestServer
+            // Connect to SetupServer
             clientSocket = new Socket(HOSTNAME, PORT);
             System.out.println("Client Connected: " + clientSocket.getRemoteSocketAddress());
 
