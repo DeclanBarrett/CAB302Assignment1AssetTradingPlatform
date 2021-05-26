@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FrontEnd.User.UserScreenHandler">
+   <children>
+      <TabPane prefHeight="692.0" prefWidth="871.0" stylesheets="@../StyleSheets/Root.css" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Organisation">
+               <content>
+                  <fx:include fx:id="UserOrganisationAnchor" source="UserOrganisation.fxml" />
+               </content>
+            </Tab>
+            <Tab text="Buy">
+               <content>
+                  <fx:include fx:id="UserBuyAnchor" source="UserBuy.fxml" />
+               </content>
+            </Tab>
+            <Tab text="Sell">
+               <content>
+                  <fx:include fx:id="UserSellAnchor" source="UserSell.fxml" />
+               </content>
+            </Tab>
+            <Tab text="Remove">
+               <content>
+                  <fx:include fx:id="UserRemoveAnchor" source="UserRemove.fxml" />
+               </content>
+            </Tab>
+            <Tab text="User">
+               <content>
+                  <fx:include fx:id="UserUserAnchor" source="UserUser.fxml" />
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
