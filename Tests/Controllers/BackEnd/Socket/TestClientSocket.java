@@ -1,7 +1,9 @@
 package Controllers.BackEnd.Socket;
 
 import Controllers.BackEnd.AccountType;
-import Controllers.BackEnd.NetworkObjects.*;
+import Controllers.BackEnd.NetworkObjects.Order;
+import Controllers.BackEnd.NetworkObjects.OrganisationalUnit;
+import Controllers.BackEnd.NetworkObjects.User;
 import Controllers.BackEnd.OrderType;
 import Controllers.Exceptions.AuthenticationException;
 import Controllers.Exceptions.ServerException;
@@ -15,7 +17,19 @@ public class TestClientSocket{
     //TODO: NEED TO ADD A BEFORE ALL WITH A SERVER INSTANCE
 
     //TODO: ADD WHITEBOX TESTING
+    /*
+    @BeforeAll
+    public static void ServerInstance() {
+        Server server = new Server();
+        try {
+            server.startServer();
+        } catch (Exception e) {
+            System.out.println("Someones poisoned the waterhole");
+        }
 
+    }
+
+     */
     @BeforeEach
     public void ConstructToken()throws ServerException, AuthenticationException {
         token = ClientSocket.getInstance().AttemptLogin("User 1", "b717415eb5e699e4989ef3e2c4e9cbf7");

@@ -4,52 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Test Files Marked as Test Root (Green)">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/com_auth0_java_jwt_3_9_02.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/App_Start/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/org_json_json_20210307.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_05_2021_10_25_am__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_05_2021_10_25_am__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_05_2021_12_22_pm__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_05_2021_12_22_pm__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2021_10_23_am__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2021_10_23_am__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_5_39_pm__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_5_39_pm__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_05_2021_12_24_pm__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_05_2021_12_24_pm__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Refactoring to fix multiple errors that are not occurring to everyone but occurring to me.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Models/SQL.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Views/Admin/AdminAssetTypes.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Views/Admin/AdminCreateOrganisation.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Views/Admin/AdminCreateUser.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Views/Admin/AdminEditOrganisation.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Views/Admin/AdminEditUser.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Views/Admin/AdminScreen.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Views/Login/Login.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Views/Login/Reset.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Views/StyleSheets/Root.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Views/User/UserBuy.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Views/User/UserOrganisation.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Views/User/UserRemove.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Views/User/UserScreen.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Views/User/UserSell.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CAB302Assignment1AssetTradingPlatform/Views/User/UserUser.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App_Start/ServerStart.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/ClientHandle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/NetworkObjects/BradsPacket.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/OrganisationalUnit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/Server.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/Server.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/AdminController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/LoginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/OrderManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/ResetController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/Socket/Client.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/Socket/Server.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Assets.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/IDatabase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/UserDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Socket/TestClientHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Socket/TestClientHandle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Socket/TestClientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Socket/TestClientSocket.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +24,7 @@
         <option value="CSS File" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -119,7 +79,10 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/.gitignore" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/Tests/Controllers/BackEnd/NetworkObjects" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Week 9/prac08" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -138,8 +101,14 @@
       <recent name="C:\Users\Battl\IdeaProjects\CAB302Assignment1AssetTradingPlatform\src\Testing\ModelTest" />
       <recent name="C:\Users\Battl\IdeaProjects\CAB302Assignment1AssetTradingPlatform\src\Testing" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="Controllers.BackEnd.Socket" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -150,7 +119,7 @@
       <command value="ClientStart" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.ClientStart">
+  <component name="RunManager" selected="JUnit.TestClientHandle">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -189,16 +158,58 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="All in CAB302Assignment1AssetTradingPlatform" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestClientHandle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controllers.BackEnd.Socket.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Controllers.BackEnd.Socket" />
+      <option name="MAIN_CLASS_NAME" value="Controllers.BackEnd.Socket.TestClientHandle" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestClientSocket" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controllers.BackEnd.Socket.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Controllers.BackEnd.Socket" />
+      <option name="MAIN_CLASS_NAME" value="Controllers.BackEnd.Socket.TestClientSocket" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.ClientStart" />
       <item itemvalue="Application.Server" />
+      <item itemvalue="JUnit.All in CAB302Assignment1AssetTradingPlatform" />
+      <item itemvalue="JUnit.TestClientSocket" />
+      <item itemvalue="JUnit.TestClientHandle" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ClientStart" />
+        <item itemvalue="JUnit.TestClientHandle" />
         <item itemvalue="Application.Server" />
         <item itemvalue="Application.ClientStart" />
-        <item itemvalue="Application.ServerStart" />
+        <item itemvalue="JUnit.TestClientSocket" />
+        <item itemvalue="JUnit.All in CAB302Assignment1AssetTradingPlatform" />
       </list>
     </recent_temporary>
   </component>
@@ -472,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621989297408</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Refactoring to fix multiple errors that are not occurring to everyone but occurring to me.">
+      <created>1622008409039</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1622008409039</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -528,7 +546,8 @@
     <MESSAGE value="Added JSON Objects, Java 15 does not include oracles JOSN objects (Depreciated).&#10;&#10;Found Suitable replacement on github, resolved via maven.&#10;&#10;JSON as network medium are far superior than Serial .class files." />
     <MESSAGE value="Removed Unwanted file" />
     <MESSAGE value="Test Files Marked as Test Root (Green)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Test Files Marked as Test Root (Green)" />
+    <MESSAGE value="Refactoring to fix multiple errors that are not occurring to everyone but occurring to me." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring to fix multiple errors that are not occurring to everyone but occurring to me." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
@@ -538,11 +557,11 @@
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestUtilLoginSecurity.ic" NAME="TestUtilLoginSecurity Coverage Results" MODIFIED="1621866664561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controllers.Utils.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$ClientStart.ic" NAME="ClientStart Coverage Results" MODIFIED="1619236936087" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Client.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestUtilFieldCheckers.ic" NAME="TestUtilFieldCheckers Coverage Results" MODIFIED="1621864830453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controllers.Utils.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$ClientStart.ic" NAME="ClientStart Coverage Results" MODIFIED="1622011882912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>App_Start.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestTrade.ic" NAME="TestTrade Coverage Results" MODIFIED="1621852677502" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controllers.BackEnd.NetworkObjects.*</FILTER>
@@ -566,10 +585,13 @@
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestUserInfo.ic" NAME="TestUserInfo Coverage Results" MODIFIED="1621852699528" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controllers.BackEnd.NetworkObjects.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestClientHandle.ic" NAME="TestClientHandle Coverage Results" MODIFIED="1622011902259" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.Socket.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$Controllers_BackEnd_Processing_in_CAB302Assignment1AssetTradingPlatform.ic" NAME="Controllers.BackEnd.Processing in CAB302Assignment1AssetTradingPlatform Coverage Results" MODIFIED="1621861381286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controllers.BackEnd.Processing.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestClientSocket.ic" NAME="TestClientSocket Coverage Results" MODIFIED="1621873654372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestClientSocket.ic" NAME="TestClientSocket Coverage Results" MODIFIED="1622009997181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controllers.BackEnd.Socket.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$ModelTest_in_CAB302Assignment1AssetTradingPlatform.ic" NAME="ModelTest in CAB302Assignment1AssetTradingPlatform Coverage Results" MODIFIED="1621866714174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
