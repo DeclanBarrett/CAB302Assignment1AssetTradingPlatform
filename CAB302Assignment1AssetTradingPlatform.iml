@@ -5,6 +5,15 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/Tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Tests/Controllers" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Tests/Controllers/BackEnd" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Tests/Controllers/BackEnd/NetworkObjects" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Tests/Controllers/BackEnd/Processing" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Tests/Controllers/BackEnd/Socket" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Tests/Controllers/FrontEnd" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Tests/Controllers/FrontEnd/Admin" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Tests/Controllers/Utils" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Tests/ModelTest" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -10,10 +10,12 @@ import java.util.List;
 /**
  * Interface for data source.
  */
-public interface IDataSource {
+public interface IDataSource
+{
 
     /**
      * Gets the salt for a user from the server
+     *
      * @param username - username for the user that's to be retrieved
      * @return a string that is the salt
      */
@@ -22,6 +24,7 @@ public interface IDataSource {
     /**
      * Attempt to login to the server so that the user can be authenticated
      * and the user can then have a token to prove authentication
+     *
      * @param username - username of user to login
      * @param password - the client side hashed password
      * @return a login token that can be stored client side and given to the server
@@ -31,6 +34,7 @@ public interface IDataSource {
 
     /**
      * Attempts to reset the password of the user on the server
+     *
      * @param newPassword - the new password of the user which is to replace the old password
      * @return a success message, or failure message
      */
@@ -38,7 +42,8 @@ public interface IDataSource {
 
     /**
      * Gets the user information (without login details) from the server
-     * @param token - token to be used for authentication
+     *
+     * @param token    - token to be used for authentication
      * @param username - the user to gather the information on
      * @return a user info object with the users information in it
      */
@@ -46,7 +51,8 @@ public interface IDataSource {
 
     /**
      * Gets an organisation from the server
-     * @param token - token to be used for authentication
+     *
+     * @param token   - token to be used for authentication
      * @param orgName - organisation name for the organisation to gather
      * @return an organisation unit object with organisation information within it
      */
@@ -54,7 +60,8 @@ public interface IDataSource {
 
     /**
      * Gets all orders for an organisation from the server
-     * @param token - token to be used for authentication
+     *
+     * @param token   - token to be used for authentication
      * @param orgName - organisation which orders will be gathered
      * @return a list of orders that have been placed by an organisation
      */
@@ -62,6 +69,7 @@ public interface IDataSource {
 
     /**
      * Get all orders from the server
+     *
      * @param token - token to be used for authentication
      * @return List of all orders
      */
@@ -69,6 +77,7 @@ public interface IDataSource {
 
     /**
      * Get buy orders from the server
+     *
      * @param token - token to be used for authentication
      * @return List of all orders
      */
@@ -76,6 +85,7 @@ public interface IDataSource {
 
     /**
      * Get sell orders from the server
+     *
      * @param token - token to be used for authentication
      * @return List of all orders
      */
@@ -83,7 +93,8 @@ public interface IDataSource {
 
     /**
      * Get buy orders from the server for an organisation
-     * @param token - token to be used for authentication
+     *
+     * @param token            - token to be used for authentication
      * @param organisationName - organisation to get buy orders
      * @return List of all orders
      */
@@ -91,7 +102,8 @@ public interface IDataSource {
 
     /**
      * Get sell orders from the server for an organisation
-     * @param token - token to be used for authentication
+     *
+     * @param token            - token to be used for authentication
      * @param organisationName - organisation to get buy orders
      * @return List of all orders
      */
@@ -101,7 +113,8 @@ public interface IDataSource {
      * Attempts to add an order to the server, with it either being executed,
      * stored for later execution or rejected since it would put the organisation
      * at risk of going into negative credits
-     * @param token - token to be used for authentication
+     *
+     * @param token    - token to be used for authentication
      * @param newOrder - order to attempt to be added and executed
      * @return a success or failure message
      */
@@ -109,7 +122,8 @@ public interface IDataSource {
 
     /**
      * Attempts to remove an order from the server
-     * @param token - token to be used for authentication
+     *
+     * @param token   - token to be used for authentication
      * @param orderID - orderID of the order to be removed
      * @return a success or failure message
      */
@@ -117,6 +131,7 @@ public interface IDataSource {
 
     /**
      * Gets the asset types which are currently allowed from the server
+     *
      * @param token - token to be used for authentication
      * @return a list of asset types
      */
@@ -125,7 +140,8 @@ public interface IDataSource {
     /**
      * Gets the history of all trades that have occurred for a type of asset
      * from the server
-     * @param token - token to be used for authentication
+     *
+     * @param token     - token to be used for authentication
      * @param AssetType - the type of asset that the history is retrieved for
      * @return a list of trades for a type of asset
      */
@@ -133,14 +149,16 @@ public interface IDataSource {
 
     /**
      * Attempts to add a new user to the server
+     *
      * @param token - token to be used for authentication
-     * @param user - user object with all information to be added to the database
+     * @param user  - user object with all information to be added to the database
      * @return a success or failure message
      */
     java.lang.String AddUser(String token, User user) throws AuthenticationException, ServerException;
 
     /**
      * Gets all the user info from the server
+     *
      * @param token - token to be used for authentication
      * @return a list of user information in user info objects
      */
@@ -148,18 +166,20 @@ public interface IDataSource {
 
     /**
      * Change a users password on the server
-     * @param token - token to be used for authentication
-     * @param username - username for user to have their password changed
+     *
+     * @param token          - token to be used for authentication
+     * @param username       - username for user to have their password changed
      * @param hashedPassword - password to change to
-     * @param salt - client side salt to store with it
+     * @param salt           - client side salt to store with it
      * @return a success or failure message
      */
     java.lang.String UpdateUserPassword(String token, java.lang.String username, java.lang.String hashedPassword, java.lang.String salt) throws AuthenticationException, ServerException;
 
     /**
      * Change a users account type on the server
-     * @param token - token to be used for authentication
-     * @param username - username for user to have their account type changed
+     *
+     * @param token       - token to be used for authentication
+     * @param username    - username for user to have their account type changed
      * @param accountType - account type to change to
      * @return a success or failure message
      */
@@ -167,8 +187,9 @@ public interface IDataSource {
 
     /**
      * Change a users organisation they are part of on the server
-     * @param token - token to be used for authentication
-     * @param username - username for user to have their organisation changed
+     *
+     * @param token            - token to be used for authentication
+     * @param username         - username for user to have their organisation changed
      * @param organisationName - organisation to change to
      * @return a success or failure message
      */
@@ -178,7 +199,8 @@ public interface IDataSource {
      * Attempt to add an asset that is allowed to the server which
      * doesn't actually add any instances it just allows for the asset type
      * to be used
-     * @param token - token to be used for authentication
+     *
+     * @param token     - token to be used for authentication
      * @param assetName - asset to be added
      * @return a success or failure message
      */
@@ -186,7 +208,8 @@ public interface IDataSource {
 
     /**
      * Attempt to add a new organisation to the server
-     * @param token - token to be used for authentication
+     *
+     * @param token        - token to be used for authentication
      * @param organisation - organisation object with all information regarding organisation
      * @return a success or failure message
      */
@@ -194,6 +217,7 @@ public interface IDataSource {
 
     /**
      * Gets all organisations with information from the server
+     *
      * @param token - token to be used for authentication
      * @return a list of all organisations with internal information from the server
      */
@@ -201,19 +225,21 @@ public interface IDataSource {
 
     /**
      * Change an organisations asset and quantity on the server
-     * @param token - token to be used for authentication
+     *
+     * @param token            - token to be used for authentication
      * @param organisationName - organisation to have their assets edited
-     * @param AssetType - asset to add or edit
-     * @param AssetQuantity - quantity to set the asset to
+     * @param AssetType        - asset to add or edit
+     * @param AssetQuantity    - quantity to set the asset to
      * @return a success or failure message
      */
     java.lang.String UpdateOrganisationAsset(String token, java.lang.String organisationName, java.lang.String AssetType, int AssetQuantity) throws AuthenticationException, ServerException;
 
     /**
      * Change an organisations credit
-     * @param token - token to be used for authentication
+     *
+     * @param token            - token to be used for authentication
      * @param organisationName - organisation to have their credit edited
-     * @param creditAmount - credit amount to change to
+     * @param creditAmount     - credit amount to change to
      * @return a success or failure message
      */
     java.lang.String UpdateOrganisationCredit(String token, java.lang.String organisationName, int creditAmount) throws AuthenticationException, ServerException;

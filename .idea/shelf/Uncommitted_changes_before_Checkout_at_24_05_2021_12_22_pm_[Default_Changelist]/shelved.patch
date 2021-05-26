@@ -1,0 +1,176 @@
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"JavadocGenerationManager\">\r\n    <option name=\"OUTPUT_DIRECTORY\" value=\"$PROJECT_DIR$/../Javadoc\" />\r\n  </component>\r\n  <component name=\"ProjectKey\">\r\n    <option name=\"state\" value=\"project://e2804f05-5315-4fc6-a121-c522a6c26470\" />\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_15\" default=\"true\" project-jdk-name=\"corretto-15\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 73ef29560e449d1ac8382e6ce9aba38878f7c64d)
++++ b/.idea/misc.xml	(date 1621755608221)
+@@ -6,7 +6,7 @@
+   <component name="ProjectKey">
+     <option name="state" value="project://e2804f05-5315-4fc6-a121-c522a6c26470" />
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" default="true" project-jdk-name="corretto-15" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" default="true" project-jdk-name="15" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/Models/InformationGrabber.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Models;\r\n\r\nimport Controllers.Backend.AccountType;\r\nimport Controllers.Backend.NetworkObjects.*;\r\n\r\nimport javax.xml.crypto.Data;\r\nimport java.sql.Connection;\r\nimport java.sql.PreparedStatement;\r\nimport java.sql.ResultSet;\r\nimport java.sql.SQLException;\r\nimport java.util.Date;\r\nimport java.util.List;\r\n\r\n/**\r\n * Finds information from the backend\r\n */\r\npublic class  InformationGrabber {\r\n\r\n    //PopulateDatabase queries\r\n\r\n    private static final String INSERT_NEW_USER = \"INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES (?, ?, ?, ?, ?)\";\r\n    private static final String INSERT_ASSET = \"INSERT INTO Assets VALUES ('?');\";\r\n    private static final String INSERT_ORGANISATION = \"INSERT INTO OrganisationalUnit VALUES ('?', '?');\";\r\n    private static final String INSERT_ORDER = \"INSERT INTO Order1 (OrganisationalUnitName, PlaceDateMilSecs, AssetQuantity, AssetName, OrderType) \" +\r\n                                               \"VALUES ('?', '?', '?', '?', '?');\";\r\n    private static final String INSERT_TRADE = \"INSERT INTO Trades (BuyerOrgName, SellerOrgName, TradeDateMilSecs, AssetQuantity, AssetName) \" +\r\n                                               \"VALUES ('?', '?', '?', '?', '?');\";\r\n\r\n\r\n    private static final String UPDATE_PASSWORD = \"UPDATE Users SET HashedPassword=?, Salt=? WHERE UserName=?\";\r\n    private static final String UPDATE_USER_ACCOUNT_TYPE = \"UPDATE Users SET AccountType = ? WHERE UserName = ?\";\r\n    private static final String UPDATE_USER_ORGANISATION = \"UPDATE Users SET OrganisationalUnit = ? WHERE UserName = ?\";\r\n    private static final String UPDATE_ORGANISATION_ASSET = \"UPDATE OrgHasQuantity SET AssetName = ?, AssetQuantity = ? \" +\r\n            \"WHERE OrganisationalUnitName = ?\";\r\n\r\n    private static final String GET_NONCE = \"SELECT Salt FROM Users WHERE UserName=?\";\r\n    private static final String GET_PASSWORD = \"SELECT HashedPassword FROM Users WHERE UserName=?\";\r\n    private static final String GET_USER = \"SELECT * FROM Users WHERE UserName=?\";\r\n    private static final String GET_USER_INFO = \"SELECT * FROM Users WHERE UserName=?\"; //Fix to be diff from prev\r\n\r\n    private static final String GET_ALL_USERS = \"SELECT * FROM Users\";\r\n    private static final String GET_SALT = \"SELECT Salt FROM Users WHERE UserName=?\";\r\n    private static final String GET_ORGANISATION = \"SELECT * FROM OrganisationUnit WHERE OrganisationalUnitName=?\";\r\n    private static final String GET_ALL_ORGANISATIONS = \"SELECT * FROM OrganisationUnit\";\r\n    private static final String GET_ORGANISATION_ORDERS = \"SELECT * FROM Order WHERE OrganisationalUnitName=?\";\r\n    private static final String GET_BUY_ORDERS = \"SELECT * FROM Order1 WHERE OrderType = BUY\";\r\n    private static final String GET_SELL_ORDERS = \"SELECT * FROM Order1 WHERE OrderType = SELL\";\r\n    private static final String GET_ORDERS = \"SELECT * FROM Order1\";\r\n    private static final String GET_ASSET_TYPES = \"SELECT * FROM Assets\"; // is this correct?\r\n    private static final String GET_TRADE_HISTORY = \"SELECT * FROM Trade WHERE AssetName=?\"; // is this correct? what is assettype?\r\n\r\n    private static final String DELETE_ORDER = \"DELETE FROM Order1 WHERE OrderID = ?\";\r\n\r\n    // Prepared statements for all previous queries + Connection\r\n    private PreparedStatement addUser;\r\n    private PreparedStatement addAsset;\r\n    private PreparedStatement addOrganisation;\r\n    private PreparedStatement addOrder;\r\n    private PreparedStatement addTrade;\r\n\r\n    private PreparedStatement updatePassword;\r\n    private PreparedStatement updateUserAccountType;\r\n    private PreparedStatement updateUserOrganisation;\r\n    private PreparedStatement updateOrganisationAsset;\r\n\r\n    private PreparedStatement getNonce;\r\n    private PreparedStatement getPassword;\r\n    private PreparedStatement getUser;\r\n    private PreparedStatement getAllUsers;\r\n    private PreparedStatement getSalt;\r\n    private PreparedStatement getOrganisation;\r\n    private PreparedStatement getAllOrganisations;\r\n    private PreparedStatement getOrganisationOrders;\r\n    private PreparedStatement getOrders;\r\n    private PreparedStatement getAssetTypes;\r\n    private PreparedStatement getTradeHistory;\r\n\r\n    private PreparedStatement deleteOrder;\r\n\r\n    private Connection connection;\r\n\r\n\r\n\r\n    /**\r\n     * Inserts user into the database.\r\n     * @param username - users username\r\n     * @param orgUnit - organisational unit user belongs too\r\n     * @param accType - Account type user has\r\n     * @param hashedPW - hashed password attached to the user\r\n     * @param salt - salt attached to users password\r\n     */\r\n    public void insertUser(String username, String orgUnit, String accType, String hashedPW, String salt)\r\n    {\r\n        try\r\n        {\r\n            connection = DatabaseConnection.getInstance();\r\n            addUser = connection.prepareStatement(INSERT_NEW_USER);\r\n            addUser.setString(1, username);\r\n            addUser.setString(2, orgUnit);\r\n            addUser.setString(3, accType);\r\n            addUser.setString(4,hashedPW);\r\n            addUser.setString(5, salt);\r\n\r\n            if(addUser != null)\r\n            {\r\n                addUser.executeQuery();\r\n            }\r\n        } catch (SQLException throwables) {\r\n            throwables.printStackTrace();\r\n        }\r\n    }\r\n\r\n    /**\r\n     * Retrieves password from database\r\n     * @param username username to retrieve password for\r\n     * @return the hashed password\r\n     */\r\n    public String getPassword(String username)\r\n    {\r\n        ResultSet rs = null;\r\n        try\r\n        {\r\n            connection = DatabaseConnection.getInstance();\r\n            getPassword = connection.prepareStatement(GET_PASSWORD);\r\n            getPassword.setString(1, username);\r\n            rs = getPassword.executeQuery();\r\n\r\n        } catch (SQLException throwables) {\r\n            throwables.printStackTrace();\r\n        }\r\n        return \"\";\r\n    }\r\n\r\n    /**\r\n     * Retrieve salt from database\r\n     * @param username salt attached to this users password\r\n     */\r\n    public String getSalt(String username)\r\n    {\r\n        String result = null;\r\n        try\r\n        {\r\n            connection = DatabaseConnection.getInstance();\r\n            getNonce = connection.prepareStatement(GET_NONCE);\r\n            getNonce.setString(1, username);\r\n\r\n            if(getNonce != null)\r\n            {\r\n                ResultSet rs = getNonce.executeQuery();\r\n                rs.next();\r\n                result = rs.getString(1);\r\n            }\r\n        } catch (SQLException throwables) {\r\n            throwables.printStackTrace();\r\n        }\r\n        return result;\r\n    }\r\n\r\n    /**\r\n     * Update users password\r\n     * @param username - users username\r\n     * @param password - users password\r\n     * @param salt - salt attached to users password\r\n     */\r\n    public void updatePassword(String username, String password, String salt){\r\n        try\r\n        {\r\n            updatePassword = connection.prepareStatement(UPDATE_PASSWORD);\r\n            updatePassword.setString(1, password);\r\n            updatePassword.setString(2, salt);\r\n            updatePassword.setString(3, username);\r\n\r\n            if(updatePassword != null)\r\n            {\r\n                updatePassword.executeQuery();\r\n            }\r\n        } catch (SQLException throwables) {\r\n            throwables.printStackTrace();\r\n        }\r\n    }\r\n\r\n    /**\r\n     * Gets user from the database\r\n     * @param username - username of requested user.\r\n     * @return the User with login info included\r\n     */\r\n    public User getUser(String username)\r\n    {\r\n        ResultSet rs = null;\r\n        User user = new User();\r\n\r\n        try\r\n        {\r\n            getUser = connection.prepareStatement(GET_USER);\r\n            getUser.setString(1,username);\r\n\r\n            if(getUser != null)\r\n            {\r\n                rs = getUser.executeQuery();\r\n                user.setUsername(rs.getString(\"UserName\"));\r\n                user.setPassword(rs.getString(\"HashedPassword\"));\r\n                //Unsure about getting the account Type, will ask soon\r\n                // user.setAccountType(rs.getEn(\"AccountType\"));\r\n                user.setOrganisationalType(rs.getString(\"OrganisationalUnit\"));\r\n                user.setSalt(rs.getString(\"Salt\"));\r\n            }\r\n\r\n        } catch (SQLException throwables) {\r\n            throwables.printStackTrace();\r\n        }\r\n\r\n        return user;\r\n    }\r\n    /**\r\n     * Get the list of Orders\r\n     * @return the list of orders\r\n     */\r\n    public List<Order> GetOrderList() {\r\n        return null;\r\n    }\r\n\r\n    /**\r\n     * Gets user info from the database\r\n     * @param username - username of requested user.\r\n     * @return the User with no login info included\r\n     */\r\n    public UserInfo getUserInfo(String username) {return null;}\r\n\r\n    /**\r\n     * Gets list of user info for all users from the database\r\n     * @return the list of user information\r\n     */\r\n    public List<UserInfo> getAllUserInfo() {return null;}\r\n\r\n    /**\r\n     * Gets list of users for all users from the database\r\n     * @return the list of users with login info\r\n     */\r\n    public List<User> getAllUsers() {return null;}\r\n\r\n    /**\r\n     * Inserts a new user into the database\r\n     * (Warning - Users cannot be removed from the database)\r\n     * (BUT they can have their Account Type be changed to inactive)\r\n     * @param user - the user to be inserted (with login info)\r\n     * @return a success message\r\n     */\r\n    public String insertUser(User user) {return null;}\r\n\r\n    /**\r\n     * Updates the account type of the user in the database\r\n     * @param username - username of updated user.\r\n     * @param accountType - account type to change the users account type to\r\n     * @return a success message\r\n     */\r\n    public String updateUserAccountType(String username, AccountType accountType) {return null;}\r\n\r\n    /**\r\n     * Updates the organisation of the user in the database\r\n     * @param username - username of the updated user.\r\n     * @param organisationName - organisation to change the users organisation to\r\n     * @return a success message\r\n     */\r\n    public String updateUserOrganisation(String username, String organisationName) {return null;}\r\n\r\n    /**\r\n     * Gets the organisational unit object in the database\r\n     * @param orgName - organisation name of the organisation\r\n     * @return the organisation unit object with all included information\r\n     */\r\n    public OrganisationalUnit getOrganisation(String orgName) {return null;}\r\n\r\n    /**\r\n     * Gets a list of all organisational units with info in the database\r\n     * @return a list of organisationa unit objects\r\n     */\r\n    public List<OrganisationalUnit> getAllOrganisations() {return null;}\r\n\r\n    /**\r\n     * Insert a new organisation into the database\r\n     * (Warning - Organisations cannot be removed from the database)\r\n     * (Warning - All asset types must be valid asset types)\r\n     * @param organisation - organisation with all information to be inserted\r\n     * @return a success message\r\n     */\r\n    public String insertOrganisation(OrganisationalUnit organisation) {return null;}\r\n\r\n    /**\r\n     * Update the quantity of an asset in an organisation, either by inserting a new\r\n     * asset or updating an existing asset in the database\r\n     * @param organisationName - organisation to have its asset changed\r\n     * @param assetType - the asset type to be added or updated\r\n     * @param assetQuantity - quantity to set the asset to\r\n     * @return a success message\r\n     */\r\n    public String updateOrganisationAsset(String organisationName, String assetType, int assetQuantity) {return null;}\r\n\r\n    /**\r\n     * Gets a list of all orders that an organisation currently has active in the database\r\n     * @param orgName - the organisation to retrieve orders for\r\n     * @return a list of orders both buy and sell\r\n     */\r\n    public List<Order> getOrganisationOrders(String orgName) {return null;}\r\n\r\n    /**\r\n     * Gets all buy orders that are currently active in the database\r\n     * @return a list of all orders with the orderType BUY\r\n     */\r\n    public List<Order> getBuyOrders() {return null;}\r\n\r\n    /**\r\n     * Gets all sell orders that are currently active in the database\r\n     * @return a list of all orders with the orderType SELL\r\n     */\r\n    public List<Order> getSellOrders() {return null;}\r\n\r\n    /**\r\n     * Gets all orders that are currently active in the database\r\n     * @return a list of all orders, regardless of type\r\n     */\r\n    public List<Order> getAllOrders() {return null;}\r\n\r\n    /**\r\n     * Inserts a new order into the database\r\n     * @param newOrder - the order with all information to be inserted\r\n     * @return a success message\r\n     */\r\n    public String insertOrder(Order newOrder) {return null;}\r\n\r\n    /**\r\n     * Deletes an order in the database\r\n     * @param OrderID - the orderID of the order to be deleted\r\n     * @return a success message\r\n     */\r\n    public String deleteOrder(int OrderID) {return null;}\r\n\r\n    /**\r\n     * Gets a list of all the asset types that are in the database\r\n     * @return a list of asset types\r\n     */\r\n    public List<String> getAssetTypes() {return null;}\r\n\r\n    /**\r\n     * Inserts a new asset type into the database, so that orders etc\r\n     * cannot be placed with an invalid asset type\r\n     * (Warning - asset types cannot be removed from the database)\r\n     * @param assetName - asset to be added\r\n     * @return a success message\r\n     */\r\n    public String insertAsset(String assetName) {return null;}\r\n\r\n    /**\r\n     * Inserts a new trade into the database\r\n     * (Warning - a trade is a measure of history thus they cannot\r\n     * be removed from the database)\r\n     * @param trade - trade to be added\r\n     * @return a success message\r\n     */\r\n    public String insertTrade(Trade trade) {return null;}\r\n\r\n    /**\r\n     * Gets a list of all previous trades that occurred for an asset type\r\n     * @param AssetName - asset that was traded\r\n     * @return a list of trades\r\n     */\r\n    public List<Trade> getTradeHistory(String AssetName) {\r\n        List<Trade> trades = null;\r\n        try\r\n        {\r\n            connection = DatabaseConnection.getInstance();\r\n            getTradeHistory = connection.prepareStatement(GET_TRADE_HISTORY);\r\n            getTradeHistory.setString(1, AssetName);\r\n\r\n            if(getTradeHistory != null)\r\n            {\r\n                ResultSet rs = getTradeHistory.executeQuery();\r\n                while (rs.next()) {\r\n                    Trade trade = new Trade(\r\n                            rs.getInt(\"TradeID\"),\r\n                            rs.getString(\"AssetName\"),\r\n                            rs.getInt(\"AssetQuantity\"),\r\n                            rs.getDouble(\"AssetPrice\"),\r\n                            rs.getString(\"BuyerOrgName\"),\r\n                            rs.getString(\"SellerOrgName\"),\r\n                            new Date(rs.getInt(\"TradeDateMilSecs\"))\r\n\r\n                    );\r\n\r\n                    trades.add(trade);\r\n                }\r\n            }\r\n        } catch (SQLException throwables) {\r\n            throwables.printStackTrace();\r\n        }\r\n        return trades;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Models/InformationGrabber.java b/src/Models/InformationGrabber.java
+--- a/src/Models/InformationGrabber.java	(revision 73ef29560e449d1ac8382e6ce9aba38878f7c64d)
++++ b/src/Models/InformationGrabber.java	(date 1621755608173)
+@@ -8,7 +8,6 @@
+ import java.sql.PreparedStatement;
+ import java.sql.ResultSet;
+ import java.sql.SQLException;
+-import java.util.Date;
+ import java.util.List;
+ 
+ /**
+@@ -16,7 +15,7 @@
+  */
+ public class  InformationGrabber {
+ 
+-    //PopulateDatabase queries
++    //SQL queries
+ 
+     private static final String INSERT_NEW_USER = "INSERT INTO Users (UserName, OrganisationalUnit, AccountType, HashedPassword, Salt) VALUES (?, ?, ?, ?, ?)";
+     private static final String INSERT_ASSET = "INSERT INTO Assets VALUES ('?');";
+@@ -33,7 +32,7 @@
+     private static final String UPDATE_ORGANISATION_ASSET = "UPDATE OrgHasQuantity SET AssetName = ?, AssetQuantity = ? " +
+             "WHERE OrganisationalUnitName = ?";
+ 
+-    private static final String GET_NONCE = "SELECT Salt FROM Users WHERE UserName=?";
++    private static final String GET_NONCE = "SELECT Salt FROM User WHERE UserName=?";
+     private static final String GET_PASSWORD = "SELECT HashedPassword FROM Users WHERE UserName=?";
+     private static final String GET_USER = "SELECT * FROM Users WHERE UserName=?";
+     private static final String GET_USER_INFO = "SELECT * FROM Users WHERE UserName=?"; //Fix to be diff from prev
+@@ -47,7 +46,7 @@
+     private static final String GET_SELL_ORDERS = "SELECT * FROM Order1 WHERE OrderType = SELL";
+     private static final String GET_ORDERS = "SELECT * FROM Order1";
+     private static final String GET_ASSET_TYPES = "SELECT * FROM Assets"; // is this correct?
+-    private static final String GET_TRADE_HISTORY = "SELECT * FROM Trade WHERE AssetName=?"; // is this correct? what is assettype?
++    private static final String GET_TRADE_HISTORY = "SELECT * FROM Trade"; // is this correct? what is assettype?
+ 
+     private static final String DELETE_ORDER = "DELETE FROM Order1 WHERE OrderID = ?";
+ 
+@@ -105,6 +104,8 @@
+             {
+                 addUser.executeQuery();
+             }
++
++
+         } catch (SQLException throwables) {
+             throwables.printStackTrace();
+         }
+@@ -137,23 +138,23 @@
+      */
+     public String getSalt(String username)
+     {
+-        String result = null;
+         try
+         {
+             connection = DatabaseConnection.getInstance();
+             getNonce = connection.prepareStatement(GET_NONCE);
+             getNonce.setString(1, username);
+ 
++
+             if(getNonce != null)
+             {
+                 ResultSet rs = getNonce.executeQuery();
+-                rs.next();
+-                result = rs.getString(1);
+             }
++
++
+         } catch (SQLException throwables) {
+             throwables.printStackTrace();
+         }
+-        return result;
++        return "";
+     }
+ 
+     /**
+@@ -186,9 +187,6 @@
+      */
+     public User getUser(String username)
+     {
+-        ResultSet rs = null;
+-        User user = new User();
+-
+         try
+         {
+             getUser = connection.prepareStatement(GET_USER);
+@@ -196,20 +194,14 @@
+ 
+             if(getUser != null)
+             {
+-                rs = getUser.executeQuery();
+-                user.setUsername(rs.getString("UserName"));
+-                user.setPassword(rs.getString("HashedPassword"));
+-                //Unsure about getting the account Type, will ask soon
+-                // user.setAccountType(rs.getEn("AccountType"));
+-                user.setOrganisationalType(rs.getString("OrganisationalUnit"));
+-                user.setSalt(rs.getString("Salt"));
++                getUser.executeQuery();
+             }
+ 
+         } catch (SQLException throwables) {
+             throwables.printStackTrace();
+         }
+ 
+-        return user;
++        return null;
+     }
+     /**
+      * Get the list of Orders
+@@ -360,38 +352,8 @@
+ 
+     /**
+      * Gets a list of all previous trades that occurred for an asset type
+-     * @param AssetName - asset that was traded
++     * @param AssetType - asset type of the trades
+      * @return a list of trades
+      */
+-    public List<Trade> getTradeHistory(String AssetName) {
+-        List<Trade> trades = null;
+-        try
+-        {
+-            connection = DatabaseConnection.getInstance();
+-            getTradeHistory = connection.prepareStatement(GET_TRADE_HISTORY);
+-            getTradeHistory.setString(1, AssetName);
+-
+-            if(getTradeHistory != null)
+-            {
+-                ResultSet rs = getTradeHistory.executeQuery();
+-                while (rs.next()) {
+-                    Trade trade = new Trade(
+-                            rs.getInt("TradeID"),
+-                            rs.getString("AssetName"),
+-                            rs.getInt("AssetQuantity"),
+-                            rs.getDouble("AssetPrice"),
+-                            rs.getString("BuyerOrgName"),
+-                            rs.getString("SellerOrgName"),
+-                            new Date(rs.getInt("TradeDateMilSecs"))
+-
+-                    );
+-
+-                    trades.add(trade);
+-                }
+-            }
+-        } catch (SQLException throwables) {
+-            throwables.printStackTrace();
+-        }
+-        return trades;
+-    }
++    public List<Trade> getTradeHistory(String AssetType) {return null;}
+ }

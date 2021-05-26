@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1007.0" rotateGraphic="true" styleClass="background" stylesheets="@../StyleSheets/Root.css" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Create User">
+               <content>
+                  <fx:include fx:id="AdminCreateUserAnchor" source="AdminCreateUser.fxml" />
+               </content>
+          </Tab>
+            <Tab text="Edit User">
+               <content>
+                  <fx:include fx:id="AdminEditUserAnchor" source="AdminEditUser.fxml" />
+               </content>
+            </Tab>
+            <Tab text="Asset Types">
+               <content>
+                  <fx:include fx:id="AdminAssetTypesAnchor" source="AdminAssetTypes.fxml" />
+               </content>
+            </Tab>
+            <Tab text="Create Organisation">
+               <content>
+                  <fx:include fx:id="AdminCreateOrganisationAnchor" source="AdminCreateOrganisation.fxml" />
+               </content>
+            </Tab>
+            <Tab text="Edit Organisation">
+               <content>
+                  <fx:include fx:id="AdminEditOrganisationAnchor" source="AdminEditOrganisation.fxml" />
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

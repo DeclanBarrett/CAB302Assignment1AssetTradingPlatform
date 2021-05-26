@@ -1,0 +1,20 @@
+.background {
+    -fx-background-color: rgb(234, 224, 224);
+}
+.tab {
+    -fx-pref-width: 100
+}
+.tabs {
+    -fx-background-color: rgb(233, 228, 228);
+}
+.label {
+
+}
+
+.text-field {
+    -fx-background-color: rgb(243, 207, 207);
+}
+
+.text-area {
+    -fx-background-color: rgb(243, 207, 207);
+}
