@@ -42,6 +42,9 @@ public class ClientHandle implements Runnable
         this.connection = connection;
     }
 
+    /**
+     * Runs a new thread when a new connection comes in
+     */
     @Override
     public void run()
     {
