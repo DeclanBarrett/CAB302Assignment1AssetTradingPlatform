@@ -1,8 +1,8 @@
 package Models;
 
-import Controllers.Backend.Order;
+import Controllers.BackEnd.NetworkObjects.Order;
+import Controllers.BackEnd.NetworkObjects.User;
 import Controllers.Backend.OrganisationalUnit;
-import Controllers.Backend.User;
 
 import java.util.Date;
 import java.util.List;

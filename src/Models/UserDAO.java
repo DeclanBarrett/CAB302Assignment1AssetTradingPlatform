@@ -1,8 +1,10 @@
 package Models;
 
-import Controllers.Backend.AccountType;
-import Controllers.Backend.NetworkObjects.User;
-import java.sql.*;
+import Controllers.BackEnd.AccountType;
+import Controllers.BackEnd.NetworkObjects.User;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -2,7 +2,6 @@ package Controllers.FrontEnd;
 
 import Controllers.Backend.Order;
 import Controllers.Backend.OrganisationalUnit;
-import Controllers.Backend.User;
 
 /**
  * Generates an order from UI data and attempts to send it to the Server to execute
