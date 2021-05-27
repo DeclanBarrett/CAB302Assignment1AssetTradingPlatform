@@ -8,10 +8,7 @@ import Controllers.Exceptions.ServerException;
 import Models.InformationGrabber;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Updates order lists, generates new trades and executes orders
@@ -24,15 +21,23 @@ public class OrderExecutor
         this.database = database;
     }
 
-    private ArrayList<Order> orderList;
-
     /**
-     * Updates all orders, with new request
      *
+     * @param order
+     * @param quantity
      */
-    private void UpdateOrders()
+    private void generateOrder(Order order, Integer quantity)
     {
+        Order newOrder = new Order(-1,
+                order.getOrderType(),
+                order.getAssetType(),
+                quantity,
+                order.getRequestPrice(),
+                order.getOrganisationalUnit(),
+                new Date()
+        );
 
+        database.insertOrder(newOrder);
     }
 
     /**
@@ -41,7 +46,7 @@ public class OrderExecutor
      * @param buyOrder  contains information relating to the buy order
      * @param sellOrder contains information relating to the sell order
      */
-    private void GenerateTrade(Order buyOrder, Order sellOrder, Integer quantity)
+    private void generateTrade(Order buyOrder, Order sellOrder, Integer quantity)
     {
         Trade newTrade = new Trade(-1,
                 buyOrder.getAssetType(),
@@ -58,28 +63,13 @@ public class OrderExecutor
      *
      * @param order Contains order information
      */
-    public void ExecuteOrder(Order order) throws ServerException
+    public void executeOrder(Order order) throws ServerException
     {
-        //Get the orders organisation
-
-
         if (order.getOrderType() == OrderType.BUY) {
             executeBuyOrder(order);
-
-
         } else if (order.getOrderType() == OrderType.SELL) {
-
+            executeSellOrder(order);
         }
-        //Order is buy, check if the organisation has credits
-            //Get all sell orders
-            //Filter by the asset type
-            //If length 0 return
-
-
-
-        //Order is sell, check if the organisation has the assets
-
-
     }
 
     /**
@@ -103,6 +93,29 @@ public class OrderExecutor
         return credits >= totalAttemptedCredits;
     }
 
+    private boolean checkEnoughAssets(OrganisationalUnit sellOrganisationUnit, Order order) {
+
+        //Retrieve the current amount of credits that the buy organisation has
+        Integer specificAssetQuantity = database.getOrganisationIndividualAsset(sellOrganisationUnit.getUnitName(), order.getAssetType());
+        List<Order> sellOrganisationsSellOrders = database.getOrganisationSellOrders(sellOrganisationUnit.getUnitName());
+        //Calculate the current total cost
+        Integer totalAttemptedQuantity = order.getAssetQuantity();
+
+        //Calculate the total possible cost of the
+        for (Order olderOrder: sellOrganisationsSellOrders) {
+            totalAttemptedQuantity += olderOrder.getAssetQuantity();
+        }
+
+        System.out.println("Specific: " + specificAssetQuantity + ", Attempted: " + totalAttemptedQuantity);
+
+        return specificAssetQuantity >= totalAttemptedQuantity;
+    }
+
+    /**
+     *
+     * @param buyOrder
+     * @throws ServerException
+     */
     private void executeBuyOrder(Order buyOrder) throws ServerException {
         OrganisationalUnit buyOrganisationUnit = database.getOrganisation(buyOrder.getOrganisationalUnit());
 
@@ -137,28 +150,19 @@ public class OrderExecutor
                     //Sell order larger: take the buy order quantity from sell quantity: buy quantity is 0
                     //Sell order same: quantity left is 0 in orders
                     //Sell order smaller: take the sell order quantity from buy quantity: sell order quantity is 0
-                    if (sellOrderQuantity > buyAssetQuantity) {
+                    if (sellOrderQuantity >= buyAssetQuantity) {
                         sellOrderQuantity -= buyAssetQuantity;
-                        ProcessBuyOrderLargerSeller(sellOrderQuantity, buyAssetQuantity, currentSellOrder, buyOrder);
-                        return;
-                    } else if (sellOrderQuantity == buyAssetQuantity) {
-                        sellOrderQuantity = 0;
-                        // Remove assets from sell organisation
-                        // Add assets to buy order organisation
-                        // Add trade to trade history
-                        // Delete the sell order
+                        updateBuyOrderServerInformation(sellOrderQuantity, buyAssetQuantity, currentSellOrder, buyOrder);
                         return;
                     } else if (sellOrderQuantity < buyAssetQuantity) {
-                        // Delete the sell order
-                        // Remove assets from sell organisation
-                        // Add assets to buy organisation
-                        // Add trade to trade history
+                        buyAssetQuantity -= sellOrderQuantity;
+                        updateBuyOrderServerInformation(0, sellOrderQuantity, currentSellOrder, buyOrder);
                     }
                 }
             }
 
             //Add buy order with buyAssetQuantity to database
-
+            generateOrder(buyOrder, buyAssetQuantity);
 
 
         } else {
@@ -169,49 +173,21 @@ public class OrderExecutor
     /**
      * Retrieves the required information and then modifies the existing sell order, removes the assets from the sell organisation,
      * Adds the assets to the buy organisation, adds the money to the sell organisation, take the money from the buy organisation
-     * @param sellOrderQuantity
-     * @param buyAssetQuantity
+     * @param sellOrderQuantityLeft
+     * @param quantityToPurchase
      * @param currentSellOrder
      * @param buyOrder
      */
-    private void ProcessBuyOrderLargerSeller(Integer sellOrderQuantity, Integer buyAssetQuantity, Order currentSellOrder, Order buyOrder) {
-
-        //Retrieve the selling organisation information
-        OrganisationalUnit sellingOrganisation = database.getOrganisation(currentSellOrder.getOrganisationalUnit());
-        Integer sellingOrganisationQuantity = database.getOrganisationIndividualAsset(currentSellOrder.getOrganisationalUnit(), currentSellOrder.getAssetType());
-        Double sellingOrganisationCredits = sellingOrganisation.getCredits();
-
-        //Retrieve the buying organisation information
-        OrganisationalUnit buyingOrganisation = database.getOrganisation(currentSellOrder.getOrganisationalUnit());
-        Integer buyingOrganisationQuantity = database.getOrganisationIndividualAsset(currentSellOrder.getOrganisationalUnit(), currentSellOrder.getAssetType());
-        Double buyingOrganisationCredits = buyingOrganisation.getCredits();
-
-        if (sellingOrganisationQuantity == null) {
-            sellingOrganisationQuantity = 0;
-        }
+    private void updateBuyOrderServerInformation(Integer sellOrderQuantityLeft, Integer quantityToPurchase, Order currentSellOrder, Order buyOrder) {
         try {
             database.beginTransaction();
             // Modify the sell order
-            database.updateOrder(currentSellOrder.getOrderID(), sellOrderQuantity);
-
-            // Remove assets from sell organisation
-            sellingOrganisationQuantity -= buyAssetQuantity;
-            database.updateOrganisationAsset(currentSellOrder.getOrganisationalUnit(), currentSellOrder.getAssetType(), sellingOrganisationQuantity);
-
-            // Add assets to buy order organisation
-            buyingOrganisationQuantity += buyAssetQuantity;
-            database.updateOrganisationAsset(buyOrder.getOrganisationalUnit(), buyOrder.getAssetType(), buyingOrganisationQuantity);
-
-            // Add money to sell organisation
-            sellingOrganisationCredits += buyAssetQuantity * currentSellOrder.getRequestPrice();
-            database.updateOrganisationCredits(currentSellOrder.getOrganisationalUnit(), sellingOrganisationCredits);
-
-            // Remove money from buy organisation
-            buyingOrganisationCredits -= buyAssetQuantity * currentSellOrder.getRequestPrice();
-            database.updateOrganisationCredits(buyOrder.getOrganisationalUnit(), buyingOrganisationCredits);
-
-            // Add trade to trade history
-            GenerateTrade(buyOrder, currentSellOrder, buyAssetQuantity);
+            if (sellOrderQuantityLeft == 0) {
+                database.deleteOrder(currentSellOrder.getOrderID());
+            } else {
+                database.updateOrder(currentSellOrder.getOrderID(), sellOrderQuantityLeft);
+            }
+            assetBuySellTransaction(quantityToPurchase, currentSellOrder, buyOrder);
             database.commitTransaction();
             return;
         } catch (SQLException e) {
@@ -224,5 +200,143 @@ public class OrderExecutor
         }
     }
 
+    /**
+     *
+     * @param sellOrder
+     * @throws ServerException
+     */
+    private void executeSellOrder(Order sellOrder) throws ServerException {
+        OrganisationalUnit sellOrganisationUnit = database.getOrganisation(sellOrder.getOrganisationalUnit());
+
+        if (checkEnoughAssets(sellOrganisationUnit, sellOrder)) {
+
+            //Get the buy orders
+            List<Order> orders = database.getBuyOrders();
+            List<Order> sortedBuyOrders = new ArrayList<>();
+
+            //filter them by the asset and the price, and sort it if there are any
+            for (Order buyOrder: orders) {
+                if (sellOrder.getAssetType().equals(buyOrder.getAssetType()) && sellOrder.getRequestPrice() <= buyOrder.getRequestPrice()) {
+                    sortedBuyOrders.add(buyOrder);
+                }
+            }
+
+            Integer sellAssetQuantity = sellOrder.getAssetQuantity();
+
+            //If there are no sell orders then dont continue
+            if (sortedBuyOrders.size() >= 0) {
+                Collections.sort(sortedBuyOrders);
+
+                //Go through the orders, subtracting the quantity till their is none left
+                for (int buyOrderCounter = 0; buyOrderCounter < sortedBuyOrders.size(); buyOrderCounter++) {
+                    Order currentBuyOrder = sortedBuyOrders.get(buyOrderCounter);
+
+                    Integer buyOrderQuantity = currentBuyOrder.getAssetQuantity();
+
+                    //Sell order larger: take the buy order quantity from sell quantity: buy quantity is 0
+                    //Sell order same: quantity left is 0 in orders
+                    //Sell order smaller: take the sell order quantity from buy quantity: sell order quantity is 0
+                    if (sellAssetQuantity >= buyOrderQuantity) {
+                        sellAssetQuantity -= buyOrderQuantity;
+                        updateSellOrderServerInformation(0, buyOrderQuantity, sellOrder, currentBuyOrder);
+                    } else if (sellAssetQuantity < buyOrderQuantity) {
+                        buyOrderQuantity -= sellAssetQuantity;
+                        updateSellOrderServerInformation(buyOrderQuantity, sellAssetQuantity, sellOrder, currentBuyOrder);
+                        return;
+                    }
+                }
+            }
+
+            //Add buy order with buyAssetQuantity to database
+            generateOrder(sellOrder, sellAssetQuantity);
+
+
+        } else {
+            throw new ServerException("ORGANISATION DOESNT HAVE REQUIRED ASSETS");
+        }
+    }
+
+
+
+    /**
+     * Retrieves the required information and then modifies the existing sell order, removes the assets from the sell organisation,
+     * Adds the assets to the buy organisation, adds the money to the sell organisation, take the money from the buy organisation
+     * @param buyOrderQuantityLeft
+     * @param quantityToPurchase
+     * @param sellOrder
+     * @param currentBuyOrder
+     */
+    private void updateSellOrderServerInformation(Integer buyOrderQuantityLeft, Integer quantityToPurchase, Order sellOrder, Order currentBuyOrder) {
+
+
+        try {
+            database.beginTransaction();
+            // Modify the sell order
+            if (buyOrderQuantityLeft == 0) {
+                database.deleteOrder(currentBuyOrder.getOrderID());
+            } else {
+                database.updateOrder(currentBuyOrder.getOrderID(), buyOrderQuantityLeft);
+            }
+
+            assetBuySellTransaction(quantityToPurchase, sellOrder, currentBuyOrder);
+            database.commitTransaction();
+            return;
+        } catch (SQLException e) {
+            try {
+                database.rollBackTransaction();
+            } catch (SQLException r) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    /**
+     *
+     * @param quantityToPurchase
+     * @param sellOrder
+     * @param buyOrder
+     * @throws SQLException
+     */
+    private void assetBuySellTransaction(Integer quantityToPurchase, Order sellOrder, Order buyOrder) throws SQLException {
+
+        //Gather the information from the database now
+        OrganisationalUnit sellingOrganisation = database.getOrganisation(sellOrder.getOrganisationalUnit());
+        Integer sellingOrganisationQuantity = database.getOrganisationIndividualAsset(sellOrder.getOrganisationalUnit(), sellOrder.getAssetType());
+        Double sellingOrganisationCredits = sellingOrganisation.getCredits();
+
+        //Even if the organisation doesnt have a quantity, state that its 0
+        if (sellingOrganisationQuantity == null) {
+            sellingOrganisationQuantity = 0;
+        }
+
+        // Remove assets from sell organisation
+        sellingOrganisationQuantity -= quantityToPurchase;
+        database.updateOrganisationAsset(sellOrder.getOrganisationalUnit(),sellOrder.getAssetType(), sellingOrganisationQuantity);
+
+        // Add money to sell organisation
+        sellingOrganisationCredits += quantityToPurchase * sellOrder.getRequestPrice();
+        database.updateOrganisationCredits(sellOrder.getOrganisationalUnit(), sellingOrganisationCredits);
+
+        //Gather the information from the database now, since it could produce race condition if placed before
+        OrganisationalUnit buyingOrganisation = database.getOrganisation(buyOrder.getOrganisationalUnit());
+        Integer buyingOrganisationQuantity = database.getOrganisationIndividualAsset(buyOrder.getOrganisationalUnit(), buyOrder.getAssetType());
+        Double buyingOrganisationCredits = buyingOrganisation.getCredits();
+
+        //Even if the organisation doesnt have a quantity, state that its 0
+        if (buyingOrganisationQuantity == null) {
+            buyingOrganisationQuantity = 0;
+        }
+
+        // Add assets to buy order organisation
+        buyingOrganisationQuantity += quantityToPurchase;
+        database.updateOrganisationAsset(buyOrder.getOrganisationalUnit(), buyOrder.getAssetType(), buyingOrganisationQuantity);
+        // Remove money from buy organisation
+        buyingOrganisationCredits -= quantityToPurchase * sellOrder.getRequestPrice();
+        database.updateOrganisationCredits(buyOrder.getOrganisationalUnit(), buyingOrganisationCredits);
+
+        // Add trade to trade history
+        generateTrade(buyOrder, sellOrder, quantityToPurchase);
+    }
 
 }

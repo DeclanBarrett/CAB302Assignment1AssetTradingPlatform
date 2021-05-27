@@ -4,6 +4,7 @@ import Controllers.BackEnd.AccountType;
 import Controllers.BackEnd.NetworkObjects.*;
 import Controllers.BackEnd.Processing.JWTHandler;
 import Controllers.BackEnd.Processing.LoginChecker;
+import Controllers.BackEnd.Processing.OrderExecutor;
 import Controllers.BackEnd.RequestType;
 import Models.InformationGrabber;
 
@@ -379,7 +380,8 @@ public class ClientHandle implements Runnable
                     {
 
                         handle.verifyToken(token);
-                        dbRequest.insertOrder(order);
+                        OrderExecutor executor = new OrderExecutor(dbRequest);
+                        executor.executeOrder(order);
                         outputStream.writeObject(RequestType.SendSuccessMessage);
                         outputStream.writeObject("Order added");
                     }

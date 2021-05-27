@@ -25,8 +25,8 @@ public class  InformationGrabber {
     private static final String INSERT_ORGANISATION = "INSERT INTO OrganisationalUnit (OrganisationalUnitName, AmountCredits) VALUES (?, ?);";
     private static final String INSERT_ORDER = "INSERT INTO Orders (OrganisationalUnitName, PlaceDateMilSecs, AssetQuantity, AssetName, AssetPrice, OrderType) " +
                                                "VALUES (?, ?, ?, ?, ?, ?);";
-    private static final String INSERT_TRADE = "INSERT INTO Trades (BuyerOrgName, SellerOrgName, TradeDateMilSecs, AssetQuantity, AssetName) " +
-                                               "VALUES (?, ?, ?, ?, ?);";
+    private static final String INSERT_TRADE = "INSERT INTO Trade (BuyerOrgName, SellerOrgName, TradeDateMilSecs, AssetQuantity, AssetName, AssetPrice) " +
+                                               "VALUES (?, ?, ?, ?, ?, ?);";
     private static final String INSERT_ORGANISATION_ASSETS = "INSERT INTO orghasquantity (OrganisationalUnitName, AssetName, AssetQuantity) VALUES (?, ?, ?)";
 
 
@@ -220,8 +220,14 @@ public class  InformationGrabber {
         try {
             connection = DatabaseConnection.getInstance();
             addTrade = connection.prepareStatement(INSERT_TRADE);
-            //addOrganisation.setString(1, organisation);
+            addTrade.setString(1, trade.getBuyerOrgName());
+            addTrade.setString(2, trade.getSellerOrgName());
+            addTrade.setLong(3, trade.getTradeDateMilSecs().getTime());
+            addTrade.setInt(4, trade.getAssetQuantity());
+            addTrade.setString(5, trade.getAssetName());
+            addTrade.setDouble(6, trade.getAssetPrice());
 
+            //BuyerOrgName, SellerOrgName, TradeDateMilSecs, AssetQuantity, AssetName
 
             if (addTrade != null) {
                 addTrade.executeQuery();
@@ -979,7 +985,22 @@ public class  InformationGrabber {
      * @param OrderID - the orderID of the order to be deleted
      * @return a success message
      */
-    public String deleteOrder(int OrderID) {return null;}
+    public String deleteOrder(int OrderID) {
+        try
+        {
+            deleteOrder = connection.prepareStatement(DELETE_ORDER);
+            deleteOrder.setInt(1, OrderID);
+
+            if(deleteOrder != null)
+            {
+                deleteOrder.executeUpdate();
+            }
+            return "Successfully Deleted";
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 
     /**
      * Updates the amount of credits held by an organisational unit.
@@ -991,8 +1012,8 @@ public class  InformationGrabber {
         try
         {
             updateOrganisationCredits = connection.prepareStatement(UPDATE_ORGANISATION_CREDITS);
-            updateOrganisationCredits.setString(1,organisationName);
-            updateOrganisationCredits.setDouble(2, creditAmount);
+            updateOrganisationCredits.setString(2,organisationName);
+            updateOrganisationCredits.setDouble(1, creditAmount);
 
             if(updateOrganisationCredits != null)
             {

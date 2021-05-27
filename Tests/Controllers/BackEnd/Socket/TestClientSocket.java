@@ -98,8 +98,43 @@ public class TestClientSocket{
     }
 
     @Test
-    public void AddOrder() throws AuthenticationException, ServerException {
+    public void AddOrderBuyPaper() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.BUY, "Paper", 50, 50, "Sales", null));
+    }
+
+    @Test
+    public void AddOrderBuyTooHighPrice() throws AuthenticationException, ServerException {
+        ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.BUY, "Paper", 5000, 99999, "Sales", null));
+    }
+
+    @Test
+    public void AddOrderBuyTooLowPrice() throws AuthenticationException, ServerException {
+        ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.BUY, "Paper", 50, 1, "Sales", null));
+    }
+
+    @Test
+    public void AddOrderBuySmallQuantity() throws AuthenticationException, ServerException {
+        ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.BUY, "Paper", 1, 50, "Sales", null));
+    }
+
+    @Test
+    public void AddOrderSellPaper() throws AuthenticationException, ServerException {
+        ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.SELL, "Paper", 50, 50, "Sales", null));
+    }
+
+    @Test
+    public void AddOrderSellTooHighPrice() throws AuthenticationException, ServerException {
+        ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.SELL, "Paper", 50000, 99999, "Sales", null));
+    }
+
+    @Test
+    public void AddOrderSellTooLowPrice() throws AuthenticationException, ServerException {
+        ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.SELL, "Paper", 50, 1, "Sales", null));
+    }
+
+    @Test
+    public void AddOrderSellSmallQuantity() throws AuthenticationException, ServerException {
+        ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.SELL, "Paper", 1, 50, "Sales", null));
     }
 
     @Test
