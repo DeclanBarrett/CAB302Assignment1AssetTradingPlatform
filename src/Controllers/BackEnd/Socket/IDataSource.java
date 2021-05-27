@@ -148,6 +148,15 @@ public interface IDataSource
     List<Trade> GetTradeHistory(String token, java.lang.String AssetType) throws AuthenticationException, ServerException;
 
     /**
+     * Gets the history of all trades that have occurred
+     * from the server
+     *
+     * @param token - token to be used for authentication
+     * @return a list of trades
+     */
+    List<Trade> GetAllTradeHistory(String token) throws AuthenticationException, ServerException;
+
+    /**
      * Attempts to add a new user to the server
      *
      * @param token - token to be used for authentication

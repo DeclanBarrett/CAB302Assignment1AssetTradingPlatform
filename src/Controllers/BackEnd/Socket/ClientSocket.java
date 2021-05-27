@@ -554,6 +554,37 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
+    public List<Trade> GetAllTradeHistory(String token) throws AuthenticationException, ServerException {
+        try {
+            //Tell the server we need it to perform a request type function
+            outputStream.writeObject(RequestType.RequestAllTradeHistory);
+
+            //Tell the server the information
+            outputStream.writeObject(token);
+            outputStream.flush();
+
+            //Get the return type
+            RequestType response = (RequestType) inputStream.readObject();
+
+            //Either get some information or send the error code
+            if (response == RequestType.SendTradeHistory) {
+                return (List<Trade>) inputStream.readObject();
+            }
+
+            errorHandling(response);
+
+        } catch (ServerException e) {
+            throw new ServerException(e.getMessage());
+        } catch (AuthenticationException e) {
+            throw new AuthenticationException(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ServerException(NETWORK_ERROR_MESSAGE);
+        }
+        return null;
+    }
+
+    @Override
     public String AddUser(String token, User user) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function

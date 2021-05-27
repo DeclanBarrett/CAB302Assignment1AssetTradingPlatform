@@ -33,8 +33,7 @@ public class  InformationGrabber {
     private static final String UPDATE_PASSWORD = "UPDATE Users SET HashedPassword=? WHERE UserName=?";
     private static final String UPDATE_USER_ACCOUNT_TYPE = "UPDATE Users SET AccountType = ? WHERE UserName = ?";
     private static final String UPDATE_USER_ORGANISATION = "UPDATE Users SET OrganisationalUnit = ? WHERE UserName = ?";
-    private static final String UPDATE_ORGANISATION_ASSET = "UPDATE OrgHasQuantity SET AssetName = ?, AssetQuantity = ? " +
-            "WHERE OrganisationalUnitName = ?";
+    private static final String UPDATE_ORGANISATION_ASSET = "UPDATE OrgHasQuantity SET AssetQuantity = ? WHERE OrganisationalUnitName = ? AND AssetName = ? ";
     private static final String UPDATE_ORGANISATION_CREDITS = "UPDATE OrganisationalUnit SET AmountCredits = ? WHERE OrganisationalUnitName = ?";
     private static final String UPDATE_ORDER = "UPDATE Orders SET AssetPrice = ? WHERE OrderID = ?";
 
@@ -59,7 +58,8 @@ public class  InformationGrabber {
     private static final String GET_ALL_ORDERS = "SELECT * FROM Orders"; //fix to be diff from prev
 
     private static final String GET_ASSET_TYPES = "SELECT * FROM Assets"; // is this correct?
-    private static final String GET_TRADE_HISTORY = "SELECT * FROM Trade WHERE AssetName=?"; // is this correct? what is assettype?
+    private static final String GET_TRADE_HISTORY = "SELECT * FROM Trade WHERE AssetName=?";
+    private static final String GET_ALL_TRADE_HISTORY = "SELECT * FROM Trade";
 
     private static final String DELETE_ORDER = "DELETE FROM Orders WHERE OrderID = ?";
 
@@ -327,9 +327,8 @@ public class  InformationGrabber {
         try
         {
             updateUserOrganisation = connection.prepareStatement(UPDATE_USER_ORGANISATION);
-            //updateUserOrganisation.setString(1, password);
-            //updateUserOrganisation.setString(2, salt);
-            //updateUserOrganisation.setString(3, username);
+            updateUserOrganisation.setString(1, organisationName);
+            updateUserOrganisation.setString(2, username);
 
             if(updateUserOrganisation != null)
             {
@@ -360,9 +359,9 @@ public class  InformationGrabber {
                 addOrganisationAsset.execute();
             } else {
                 updateOrganisationAsset = connection.prepareStatement(UPDATE_ORGANISATION_ASSET);
-                updateOrganisationAsset.setString(1, organisationName);
-                updateOrganisationAsset.setString(2, assetType);
-                updateOrganisationAsset.setInt(3, assetQuantity);
+                updateOrganisationAsset.setInt(1, assetQuantity);
+                updateOrganisationAsset.setString(2, organisationName);
+                updateOrganisationAsset.setString(3, assetType);
                 updateOrganisationAsset.execute();
             }
 
@@ -570,6 +569,7 @@ public class  InformationGrabber {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
 
         return null;
@@ -955,6 +955,41 @@ public class  InformationGrabber {
             connection = DatabaseConnection.getInstance();
             getTradeHistory = connection.prepareStatement(GET_TRADE_HISTORY);
             getTradeHistory.setString(1, AssetName);
+
+            if(getTradeHistory != null)
+            {
+                ResultSet rs = getTradeHistory.executeQuery();
+                while (rs.next()) {
+                    Trade trade = new Trade(
+                            rs.getInt("TradeID"),
+                            rs.getString("AssetName"),
+                            rs.getInt("AssetQuantity"),
+                            rs.getDouble("AssetPrice"),
+                            rs.getString("BuyerOrgName"),
+                            rs.getString("SellerOrgName"),
+                            new Date(rs.getLong("TradeDateMilSecs"))
+
+                    );
+
+                    trades.add(trade);
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return trades;
+    }
+
+    /**
+     * Gets a list of all previous trades that occurred
+     * @return a list of trades
+     */
+    public List<Trade> getAllTradeHistory() {
+        List<Trade> trades = new ArrayList<>();
+        try
+        {
+            connection = DatabaseConnection.getInstance();
+            getTradeHistory = connection.prepareStatement(GET_ALL_TRADE_HISTORY);
 
             if(getTradeHistory != null)
             {

@@ -491,6 +491,34 @@ public class ClientHandle implements Runnable
             }
             break;
 
+            case RequestAllTradeHistory: {
+                try {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+
+                    synchronized (dbRequest) {
+
+                        handle.verifyToken(token);
+                        List<Trade> tradeHistory = dbRequest.getAllTradeHistory();
+                        outputStream.writeObject(RequestType.SendTradeHistory);
+                        outputStream.writeObject(tradeHistory);
+                    }
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Failed to get trade history.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
             case RequestAddUser:
             {
                 try

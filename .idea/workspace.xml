@@ -4,12 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Huge work done on the order executor however it is nowhere near finished. Discovered a huge amount on the server side still had not been done. Brads database connection merge has been cleaned and refactored since it didnt connect to the existing code.">
+    <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Order Executor is now working to an extent">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_controlsfx_controlsfx_11_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/Controllers/FrontEnd/User/TestClientOrderManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/controlsfx-11.1.0.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Processing/TestOrderExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Processing/TestOrderExecutor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Socket/TestClientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Socket/TestClientSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/ModelTest/TestClientOrderManager.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/Processing/OrderExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/Processing/OrderExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/RequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/RequestType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/ClientHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/ClientHandle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/ClientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/ClientSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/IDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/IDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/MockSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/MockSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/OrderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/OrderManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/UserBuyTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/UserBuyTabController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/UserOrganisationTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/UserOrganisationTabController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/UserRemoveTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/UserRemoveTabController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/DatabaseDummyValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/DatabaseDummyValues.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/InformationGrabber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/InformationGrabber.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +85,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mariadb" />
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
@@ -87,7 +101,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.38557693" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -107,6 +121,7 @@
       <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="Controllers.FrontEnd.User" />
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
@@ -121,7 +136,7 @@
       <command value="ClientStart" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestOrderExecutor">
+  <component name="RunManager" selected="Application.ClientStart">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -173,33 +188,31 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestOrderExecutor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Controllers.FrontEnd.Admin in CAB302Assignment1AssetTradingPlatform" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CAB302Assignment1AssetTradingPlatform" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Controllers.BackEnd.Processing.*" />
+          <option name="PATTERN" value="Controllers.FrontEnd.Admin.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Controllers.BackEnd.Processing" />
-      <option name="MAIN_CLASS_NAME" value="Controllers.BackEnd.Processing.TestOrderExecutor" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="Controllers.FrontEnd.Admin" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestOrderExecutor.TestExecuteStandardSellOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestClientOrderManager" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CAB302Assignment1AssetTradingPlatform" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Controllers.BackEnd.Processing.*" />
+          <option name="PATTERN" value="Controllers.FrontEnd.User.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Controllers.BackEnd.Processing" />
-      <option name="MAIN_CLASS_NAME" value="Controllers.BackEnd.Processing.TestOrderExecutor" />
-      <option name="METHOD_NAME" value="TestExecuteStandardSellOrder" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="Controllers.FrontEnd.User" />
+      <option name="MAIN_CLASS_NAME" value="Controllers.FrontEnd.User.TestClientOrderManager" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -208,16 +221,16 @@
       <item itemvalue="Application.Server" />
       <item itemvalue="Application.SetupServer" />
       <item itemvalue="Application.ClientStart" />
-      <item itemvalue="JUnit.TestOrderExecutor.TestExecuteStandardSellOrder" />
-      <item itemvalue="JUnit.TestOrderExecutor" />
+      <item itemvalue="JUnit.TestClientOrderManager" />
+      <item itemvalue="JUnit.Controllers.FrontEnd.Admin in CAB302Assignment1AssetTradingPlatform" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestOrderExecutor" />
-        <item itemvalue="JUnit.TestOrderExecutor.TestExecuteStandardSellOrder" />
-        <item itemvalue="Application.SetupServer" />
-        <item itemvalue="Application.Server" />
         <item itemvalue="Application.ClientStart" />
+        <item itemvalue="Application.Server" />
+        <item itemvalue="JUnit.TestClientOrderManager" />
+        <item itemvalue="JUnit.Controllers.FrontEnd.Admin in CAB302Assignment1AssetTradingPlatform" />
+        <item itemvalue="Application.SetupServer" />
       </list>
     </recent_temporary>
   </component>
@@ -512,7 +525,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622048455720</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Order Executor is now working to an extent">
+      <created>1622108364237</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1622108364237</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -544,7 +564,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Project Setup w/ MVC &amp; Test Folder" />
     <MESSAGE value="Entire GUI Built, Just needs events to be added &amp; backend" />
     <MESSAGE value="Entire Project Refactored back to MVC, App_Start &amp; Testing; Architecture. &#10;&#10;&#10;I reverted the entire project to conform to MVC design pattern. This will allow for Team Development, Scalable code and logical organisation. &#10;&#10;Please use the testing folder for all tests and testing, i have linked it with a ID within IntelliJ so it knows all unit test are in this folder.&#10;&#10;Thanks,&#10;Brad." />
     <MESSAGE value="Basic Networking is now Live with Sockets. I will just expand from the current code once we get Backend and Frontend Pathing organised." />
@@ -569,15 +588,16 @@
     <MESSAGE value="Refactoring to fix multiple errors that are not occurring to everyone but occurring to me." />
     <MESSAGE value="Some minor client handling tests" />
     <MESSAGE value="Huge work done on the order executor however it is nowhere near finished. Discovered a huge amount on the server side still had not been done. Brads database connection merge has been cleaned and refactored since it didnt connect to the existing code." />
-    <option name="LAST_COMMIT_MESSAGE" value="Huge work done on the order executor however it is nowhere near finished. Discovered a huge amount on the server side still had not been done. Brads database connection merge has been cleaned and refactored since it didnt connect to the existing code." />
+    <MESSAGE value="Order Executor is now working to an extent" />
+    <option name="LAST_COMMIT_MESSAGE" value="Order Executor is now working to an extent" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Controllers/BackEnd/Processing/OrderExecutor.java</url>
-          <line>208</line>
-          <option name="timeStamp" value="3" />
+          <line>349</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -590,11 +610,17 @@
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestUtilLoginSecurity.ic" NAME="TestUtilLoginSecurity Coverage Results" MODIFIED="1621866664561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controllers.Utils.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestOrderExecutor_TestIfBuyLargeQuantity.ic" NAME="TestOrderExecutor.TestIfBuyLargeQuantity Coverage Results" MODIFIED="1622119718198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.Processing.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestUtilFieldCheckers.ic" NAME="TestUtilFieldCheckers Coverage Results" MODIFIED="1621864830453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controllers.Utils.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$ClientStart.ic" NAME="ClientStart Coverage Results" MODIFIED="1622011882912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>App_Start.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestClientOrderManager.ic" NAME="TestClientOrderManager Coverage Results" MODIFIED="1622128290288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.FrontEnd.User.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestTrade.ic" NAME="TestTrade Coverage Results" MODIFIED="1621852677502" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controllers.BackEnd.NetworkObjects.*</FILTER>
@@ -609,6 +635,9 @@
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestOrder.ic" NAME="TestOrder Coverage Results" MODIFIED="1621852659082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controllers.BackEnd.NetworkObjects.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestOrderExecutor_TestExecuteMoreAssetsBuyOrder.ic" NAME="TestOrderExecutor.TestExecuteMoreAssetsBuyOrder Coverage Results" MODIFIED="1622110228007" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.Processing.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestAdminProcessing.ic" NAME="TestAdminProcessing Coverage Results" MODIFIED="1621849852306" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controllers.FrontEnd.Admin.*</FILTER>
     </SUITE>
@@ -622,6 +651,9 @@
       <FILTER>Controllers.BackEnd.Socket.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$Controllers_BackEnd_Processing_in_CAB302Assignment1AssetTradingPlatform.ic" NAME="Controllers.BackEnd.Processing in CAB302Assignment1AssetTradingPlatform Coverage Results" MODIFIED="1621861381286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.Processing.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestOrderExecutor.ic" NAME="TestOrderExecutor Coverage Results" MODIFIED="1622119726820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controllers.BackEnd.Processing.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestClientSocket.ic" NAME="TestClientSocket Coverage Results" MODIFIED="1622009997181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -641,6 +673,9 @@
     </SUITE>
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestUser.ic" NAME="TestUser Coverage Results" MODIFIED="1621852688003" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controllers.BackEnd.NetworkObjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestOrderExecutor_TestExecuteSmallBuyOrder.ic" NAME="TestOrderExecutor.TestExecuteSmallBuyOrder Coverage Results" MODIFIED="1622110106550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.Processing.*</FILTER>
     </SUITE>
   </component>
 </project>

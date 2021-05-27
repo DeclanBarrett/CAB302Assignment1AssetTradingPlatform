@@ -31,10 +31,10 @@ public class DatabaseDummyValues
 
     //=========== Organisational Unit Dummy Data =============//
     private static final String[] orgData = {
-            "INSERT INTO OrganisationalUnit VALUES ('Sales'   , 3000.50)",
-            "INSERT INTO OrganisationalUnit VALUES ('Finance' , 100)",
-            "INSERT INTO OrganisationalUnit VALUES ('Research', 90)",
-            "INSERT INTO OrganisationalUnit VALUES ('Admin'   , 0)"
+            "INSERT INTO OrganisationalUnit VALUES ('Sales'   , 10000)",
+            "INSERT INTO OrganisationalUnit VALUES ('Finance' , 10000)",
+            "INSERT INTO OrganisationalUnit VALUES ('Research', 10000)",
+            "INSERT INTO OrganisationalUnit VALUES ('Admin'   , 10000)"
     };
 
     //=========== Asset Dummy Data =============//
@@ -50,59 +50,76 @@ public class DatabaseDummyValues
 
     //=========== Org Asset  Dummy Data =============//
     private static final String[] orgAssetData = {
-            "INSERT INTO orghasquantity VALUES ('Sales', 'Paper', 6000)",
+            "INSERT INTO orghasquantity VALUES ('Sales', 'Paper', 600)",
             "INSERT INTO orghasquantity VALUES ('Sales', 'CPU hours', 600)",
             "INSERT INTO orghasquantity VALUES ('Sales', 'Pickles', 600)",
-            "INSERT INTO orghasquantity VALUES ('Sales', 'RTX 3090TI', 60000)",
-            "INSERT INTO orghasquantity VALUES ('Finance', 'Paper', 60)",
-            "INSERT INTO orghasquantity VALUES ('Finance', 'Pickles', 9000)",
-            "INSERT INTO orghasquantity VALUES ('Finance', 'Casino Chips', 690)",
-            "INSERT INTO orghasquantity VALUES ('Research', 'Paper', 6)",
-            "INSERT INTO orghasquantity VALUES ('Research', 'CPU hours', 9)",
+            "INSERT INTO orghasquantity VALUES ('Sales', 'RTX 3090TI', 600)",
+            "INSERT INTO orghasquantity VALUES ('Sales', 'Casino Chips', 600)",
+            "INSERT INTO orghasquantity VALUES ('Finance', 'Paper', 600)",
+            "INSERT INTO orghasquantity VALUES ('Finance', 'CPU hours', 600)",
+            "INSERT INTO orghasquantity VALUES ('Finance', 'Pickles', 600)",
+            "INSERT INTO orghasquantity VALUES ('Finance', 'RTX 3090TI', 600)",
+            "INSERT INTO orghasquantity VALUES ('Finance', 'Casino Chips', 600)",
+            "INSERT INTO orghasquantity VALUES ('Research', 'Paper', 600)",
+            "INSERT INTO orghasquantity VALUES ('Research', 'CPU hours', 600)",
+            "INSERT INTO orghasquantity VALUES ('Research', 'Pickles', 600)",
+            "INSERT INTO orghasquantity VALUES ('Research', 'RTX 3090TI', 600)",
+            "INSERT INTO orghasquantity VALUES ('Research', 'Casino Chips', 600)",
     };
 
     //=========== Trade Dummy Data =============//
     private static final String[] tradeData = {
-            "INSERT INTO Trade VALUES (1, 'Sales', 'Finance', 1, 10, 'Paper', 6.00)",
-            "INSERT INTO Trade VALUES (2, 'Sales', 'Finance', 2, 10, 'Paper', 7.00)",
-            "INSERT INTO Trade VALUES (3, 'Sales', 'Finance', 3, 10, 'Paper', 9.00)",
-            "INSERT INTO Trade VALUES (4, 'Sales', 'Finance', 4, 10, 'Paper', 10.00)",
-            "INSERT INTO Trade VALUES (5, 'Sales', 'Finance', 5, 10, 'Paper', 11.00)",
-            "INSERT INTO Trade VALUES (6, 'Sales', 'Finance', 6, 10, 'Paper', 12.00)",
-            "INSERT INTO Trade VALUES (7, 'Sales', 'Finance', 7, 10, 'Paper', 13.00)",
-            "INSERT INTO Trade VALUES (8, 'Sales', 'Finance', 6, 133, 'CPU hours', 6.00)",
-            "INSERT INTO Trade VALUES (9, 'Sales', 'Finance', 7, 101, 'CPU hours', 10.00)",
-            "INSERT INTO Trade VALUES (10, 'Sales', 'Finance', 1, 102, 'CPU hours', 15.00)",
-            "INSERT INTO Trade VALUES (11, 'Sales', 'Finance', 3, 100, 'CPU hours', 16.00)",
-            "INSERT INTO Trade VALUES (12, 'Sales', 'Finance', 4, 15, 'CPU hours', 17.00)",
-            "INSERT INTO Trade VALUES (13, 'Sales', 'Finance', 5, 13, 'CPU hours', 18.00)",
-            "INSERT INTO Trade VALUES (14, 'Sales', 'Finance', 2, 12, 'CPU hours', 19.00)",
-            "INSERT INTO Trade VALUES (15, 'Sales', 'Finance', 64, 6, 'CPU hours', 20.00)",
-            "INSERT INTO Trade VALUES (16, 'Sales', 'Finance', 600, 10, 'CPU hours', 21.00)",
-            "INSERT INTO Trade VALUES (17, 'Finance', 'Research', 6, 10, 'RTX 2070TI', 1.00)",
-            "INSERT INTO Trade VALUES (18, 'Finance', 'Research', 6, 10, 'RTX 2070TI', 2.00)",
-            "INSERT INTO Trade VALUES (19, 'Finance', 'Research', 6, 10, 'RTX 2070TI', 3.00)",
-            "INSERT INTO Trade VALUES (20, 'Finance', 'Research', 6, 10, 'RTX 2070TI', 4.00)",
-            "INSERT INTO Trade VALUES (21, 'Finance', 'Research', 6, 10, 'RTX 2070TI', 5.00)",
-            "INSERT INTO Trade VALUES (22, 'Finance', 'Research', 6, 10, 'RTX 2070TI', 6.00)",
-            "INSERT INTO Trade VALUES (23, 'Finance', 'Research', 6, 10, 'RTX 2070TI', 7.00)",
-            "INSERT INTO Trade VALUES (24, 'Finance', 'Research', 6, 10, 'RTX 2070TI', 8.00)",
-            "INSERT INTO Trade VALUES (25, 'Finance', 'Research', 6, 10, 'RTX 2070TI', 9.00)",
-            "INSERT INTO Trade VALUES (26, 'Sales', 'Finance', 1000, 9, 'Casino Chips', 100.00)",
-            "INSERT INTO Trade VALUES (27, 'Sales', 'Finance', 3000, 10, 'Casino Chips', 104.00)",
-            "INSERT INTO Trade VALUES (28, 'Research', 'Finance', 2000, 1, 'Casino Chips', 105.00)"
+            "INSERT INTO Trade VALUES (1, 'Sales', 'Finance',  1622119729015, 10, 'Paper', 6.00)",
+            "INSERT INTO Trade VALUES (2, 'Sales', 'Finance',  1622119729016, 10, 'Paper', 7.00)",
+            "INSERT INTO Trade VALUES (3, 'Sales', 'Finance',  1622119729017, 10, 'Paper', 9.00)",
+            "INSERT INTO Trade VALUES (4, 'Sales', 'Finance',  1622119729018, 10, 'Paper', 10.00)",
+            "INSERT INTO Trade VALUES (5, 'Sales', 'Finance',  1622119729019, 10, 'Paper', 11.00)",
+            "INSERT INTO Trade VALUES (6, 'Sales', 'Finance',  1622119729020, 10, 'Paper', 12.00)",
+            "INSERT INTO Trade VALUES (7, 'Sales', 'Finance',  1622119729021, 10, 'Paper', 13.00)",
+            "INSERT INTO Trade VALUES (8, 'Sales', 'Finance',  1622119729022, 133, 'CPU hours', 6.00)",
+            "INSERT INTO Trade VALUES (9, 'Sales', 'Finance',  1622119729023, 101, 'CPU hours', 10.00)",
+            "INSERT INTO Trade VALUES (10, 'Sales', 'Finance', 1622119729024, 102, 'CPU hours', 15.00)",
+            "INSERT INTO Trade VALUES (11, 'Sales', 'Finance', 1622119729025, 100, 'CPU hours', 16.00)",
+            "INSERT INTO Trade VALUES (12, 'Sales', 'Finance', 1622119729026, 15, 'CPU hours', 17.00)",
+            "INSERT INTO Trade VALUES (13, 'Sales', 'Finance', 1622119729027, 13, 'CPU hours', 18.00)",
+            "INSERT INTO Trade VALUES (14, 'Sales', 'Finance', 1622119729028, 12, 'CPU hours', 19.00)",
+            "INSERT INTO Trade VALUES (15, 'Sales', 'Finance', 1622119729029, 6, 'CPU hours', 20.00)",
+            "INSERT INTO Trade VALUES (16, 'Sales', 'Finance', 1622119729030, 10, 'CPU hours', 21.00)",
+            "INSERT INTO Trade VALUES (17, 'Finance', 'Research', 1622119729031, 10, 'RTX 2070TI', 1.00)",
+            "INSERT INTO Trade VALUES (18, 'Finance', 'Research', 1622119729032, 10, 'RTX 2070TI', 2.00)",
+            "INSERT INTO Trade VALUES (19, 'Finance', 'Research', 1622119729033, 10, 'RTX 2070TI', 3.00)",
+            "INSERT INTO Trade VALUES (20, 'Finance', 'Research', 1622119729034, 10, 'RTX 2070TI', 4.00)",
+            "INSERT INTO Trade VALUES (21, 'Finance', 'Research', 1622119729035, 10, 'RTX 2070TI', 5.00)",
+            "INSERT INTO Trade VALUES (22, 'Finance', 'Research', 1622119729036, 10, 'RTX 2070TI', 6.00)",
+            "INSERT INTO Trade VALUES (23, 'Finance', 'Research', 1622119729037, 10, 'RTX 2070TI', 7.00)",
+            "INSERT INTO Trade VALUES (24, 'Finance', 'Research', 1622119729038, 10, 'RTX 2070TI', 8.00)",
+            "INSERT INTO Trade VALUES (25, 'Finance', 'Research', 1622119729039, 10, 'RTX 2070TI', 9.00)",
+            "INSERT INTO Trade VALUES (26, 'Sales', 'Finance', 1622119729040, 9, 'Casino Chips', 100.00)",
+            "INSERT INTO Trade VALUES (27, 'Sales', 'Finance', 1622119729041, 10, 'Casino Chips', 104.00)",
+            "INSERT INTO Trade VALUES (28, 'Research', 'Finance', 1622119729042, 1, 'Casino Chips', 105.00)"
     };
 
     //=========== Trade Dummy Data =============//
     private static final String[] orderData = {
-            "INSERT INTO Orders VALUES (1,  'Finance',  2, 1,    'Paper',        1,    'BUY')",
-            "INSERT INTO Orders VALUES (2,  'Finance',  3, 2,    'Paper',        2,    'SELL')",
-            "INSERT INTO Orders VALUES (15, 'Finance',  4, 64,   'CPU hours',    64,   'BUY')",
-            "INSERT INTO Orders VALUES (16, 'Finance',  5, 600,  'CPU hours',    600,  'SELL')",
-            "INSERT INTO Orders VALUES (25, 'Research', 6, 6,    'RTX 2070TI',   6,    'BUY')",
-            "INSERT INTO Orders VALUES (26, 'Finance',  7, 1000, 'Casino Chips', 1000, 'BUY')",
-            "INSERT INTO Orders VALUES (27, 'Finance',  8, 3000, 'Casino Chips', 3000, 'BUY')",
-            "INSERT INTO Orders VALUES (28, 'Finance',  9, 2000, 'Casino Chips', 2000, 'BUY')"
+            "INSERT INTO Orders VALUES (1,  'Finance',   1, 10, 'Paper',        100, 'SELL')",
+            "INSERT INTO Orders VALUES (2,  'Finance',   3, 10, 'Paper',        100, 'SELL')",
+            "INSERT INTO Orders VALUES (3,  'Finance',   4, 10, 'CPU hours',    100, 'SELL')",
+            "INSERT INTO Orders VALUES (4,  'Finance',   7, 20, 'Casino Chips', 100, 'BUY')",
+            "INSERT INTO Orders VALUES (5,  'Finance',   8, 20, 'Casino Chips', 100, 'BUY')",
+            "INSERT INTO Orders VALUES (6,  'Finance',   9, 30, 'Casino Chips', 100, 'BUY')",
+            "INSERT INTO Orders VALUES (7,  'Sales',     1, 10, 'Paper',        100, 'SELL')",
+            "INSERT INTO Orders VALUES (8,  'Sales',     3, 10, 'Paper',        100, 'SELL')",
+            "INSERT INTO Orders VALUES (9,  'Sales',     4, 10, 'CPU hours',    100, 'SELL')",
+            "INSERT INTO Orders VALUES (10, 'Sales',     7, 20, 'Casino Chips', 100, 'BUY')",
+            "INSERT INTO Orders VALUES (11, 'Sales',     8, 20, 'Casino Chips', 100, 'BUY')",
+            "INSERT INTO Orders VALUES (12, 'Sales',     9, 30, 'Casino Chips', 100, 'BUY')",
+            "INSERT INTO Orders VALUES (13, 'Research',  1, 10, 'Paper',        100, 'SELL')",
+            "INSERT INTO Orders VALUES (14, 'Research',  3, 10, 'Paper',        100, 'SELL')",
+            "INSERT INTO Orders VALUES (15, 'Research',  4, 10, 'CPU hours',    100, 'SELL')",
+            "INSERT INTO Orders VALUES (16, 'Research',  7, 20, 'Casino Chips', 100, 'BUY')",
+            "INSERT INTO Orders VALUES (17, 'Research',  8, 20, 'Casino Chips', 100, 'BUY')",
+            "INSERT INTO Orders VALUES (18, 'Research',  9, 30, 'Casino Chips', 100, 'BUY')",
+
     };
 
     //=========== Trade Delete Data =============//

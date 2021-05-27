@@ -264,6 +264,11 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
+    public List<Trade> GetAllTradeHistory(String token) throws AuthenticationException, ServerException {
+        return null;
+    }
+
+    @Override
     public java.lang.String AddUser(String token, User user) throws AuthenticationException, ServerException {
         userTable.add(user);
         return "Success";

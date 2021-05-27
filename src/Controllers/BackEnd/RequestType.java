@@ -34,6 +34,7 @@ public enum RequestType {
     SendAssetTypes,
 
     RequestTradeHistory,
+    RequestAllTradeHistory,
     SendTradeHistory,
 
     RequestAddUser,

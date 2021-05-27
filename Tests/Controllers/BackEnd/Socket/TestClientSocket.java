@@ -42,9 +42,6 @@ public class TestClientSocket{
         } catch (Exception e) {
             System.out.println("Someones poisoned the waterhole");
         }
-
-
-
     }
 
     @Test

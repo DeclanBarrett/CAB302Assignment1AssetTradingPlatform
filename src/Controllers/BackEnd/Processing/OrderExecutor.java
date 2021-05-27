@@ -22,9 +22,9 @@ public class OrderExecutor
     }
 
     /**
-     *
-     * @param order
-     * @param quantity
+     * Generates an order from a previous order and a new quantity, then add it to the database
+     * @param order - the order
+     * @param quantity - quantity to set in it
      */
     private void generateOrder(Order order, Integer quantity)
     {
@@ -56,11 +56,17 @@ public class OrderExecutor
                 sellOrder.getOrganisationalUnit(),
                 new Date());
         database.insertTrade(newTrade);
+        System.out.println("TRADE OCCURRED:");
+        System.out.println("BUYER: " + buyOrder.getOrganisationalUnit());
+        System.out.println("SELLER: " + sellOrder.getOrganisationalUnit());
+        System.out.println("ASSET: " + buyOrder.getAssetType());
+        System.out.println("QUANTITY: " + quantity);
+        System.out.println("PRICE: " + sellOrder.getRequestPrice());
+        System.out.println("----------------------------------------");
     }
 
     /**
      * Collates the order information and executes it with the server
-     *
      * @param order Contains order information
      */
     public void executeOrder(Order order) throws ServerException
@@ -75,6 +81,9 @@ public class OrderExecutor
     /**
      * Checks if there is enough credits to make the order by comparing the total cost of all orders the organisation
      * has currently and the current order to the total credits the organisation has
+     * @param buyOrganisationUnit
+     * @param order
+     * @return
      */
     private boolean checkEnoughCredits(OrganisationalUnit buyOrganisationUnit, Order order) {
 
@@ -93,6 +102,12 @@ public class OrderExecutor
         return credits >= totalAttemptedCredits;
     }
 
+    /**
+     * Check if there are enough assets in a target organisation to sustain an order and its previous orders
+     * @param sellOrganisationUnit - the organisation to target
+     * @param order - the order attempting to be made
+     * @return - a boolean to say whether it does or not
+     */
     private boolean checkEnoughAssets(OrganisationalUnit sellOrganisationUnit, Order order) {
 
         //Retrieve the current amount of credits that the buy organisation has
@@ -106,15 +121,13 @@ public class OrderExecutor
             totalAttemptedQuantity += olderOrder.getAssetQuantity();
         }
 
-        System.out.println("Specific: " + specificAssetQuantity + ", Attempted: " + totalAttemptedQuantity);
-
         return specificAssetQuantity >= totalAttemptedQuantity;
     }
 
     /**
-     *
-     * @param buyOrder
-     * @throws ServerException
+     * Executes a buy order
+     * @param buyOrder - the order to be executed
+     * @throws ServerException - if something goes wrong with executing the order
      */
     private void executeBuyOrder(Order buyOrder) throws ServerException {
         OrganisationalUnit buyOrganisationUnit = database.getOrganisation(buyOrder.getOrganisationalUnit());
@@ -173,12 +186,12 @@ public class OrderExecutor
     /**
      * Retrieves the required information and then modifies the existing sell order, removes the assets from the sell organisation,
      * Adds the assets to the buy organisation, adds the money to the sell organisation, take the money from the buy organisation
-     * @param sellOrderQuantityLeft
-     * @param quantityToPurchase
-     * @param currentSellOrder
-     * @param buyOrder
+     * @param sellOrderQuantityLeft - the quantity of the sell order left
+     * @param quantityToPurchase - the quantity being purchased
+     * @param currentSellOrder - the sell order
+     * @param buyOrder - the buy order
      */
-    private void updateBuyOrderServerInformation(Integer sellOrderQuantityLeft, Integer quantityToPurchase, Order currentSellOrder, Order buyOrder) {
+    private void updateBuyOrderServerInformation(Integer sellOrderQuantityLeft, Integer quantityToPurchase, Order currentSellOrder, Order buyOrder) throws ServerException {
         try {
             database.beginTransaction();
             // Modify the sell order
@@ -209,7 +222,6 @@ public class OrderExecutor
         OrganisationalUnit sellOrganisationUnit = database.getOrganisation(sellOrder.getOrganisationalUnit());
 
         if (checkEnoughAssets(sellOrganisationUnit, sellOrder)) {
-
             //Get the buy orders
             List<Order> orders = database.getBuyOrders();
             List<Order> sortedBuyOrders = new ArrayList<>();
@@ -266,7 +278,7 @@ public class OrderExecutor
      * @param sellOrder
      * @param currentBuyOrder
      */
-    private void updateSellOrderServerInformation(Integer buyOrderQuantityLeft, Integer quantityToPurchase, Order sellOrder, Order currentBuyOrder) {
+    private void updateSellOrderServerInformation(Integer buyOrderQuantityLeft, Integer quantityToPurchase, Order sellOrder, Order currentBuyOrder) throws ServerException {
 
 
         try {
@@ -298,7 +310,7 @@ public class OrderExecutor
      * @param buyOrder
      * @throws SQLException
      */
-    private void assetBuySellTransaction(Integer quantityToPurchase, Order sellOrder, Order buyOrder) throws SQLException {
+    private void assetBuySellTransaction(Integer quantityToPurchase, Order sellOrder, Order buyOrder) throws SQLException, ServerException {
 
         //Gather the information from the database now
         OrganisationalUnit sellingOrganisation = database.getOrganisation(sellOrder.getOrganisationalUnit());
@@ -308,6 +320,11 @@ public class OrderExecutor
         //Even if the organisation doesnt have a quantity, state that its 0
         if (sellingOrganisationQuantity == null) {
             sellingOrganisationQuantity = 0;
+        }
+
+        if (sellingOrganisationQuantity < quantityToPurchase) {
+            database.deleteOrder(sellOrder.getOrderID());
+            throw new ServerException("Admins Have Edited Assets");
         }
 
         // Remove assets from sell organisation
