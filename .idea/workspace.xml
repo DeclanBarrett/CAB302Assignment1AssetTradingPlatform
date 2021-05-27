@@ -4,28 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Order Executor is now working to an extent">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_controlsfx_controlsfx_11_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/Controllers/FrontEnd/User/TestClientOrderManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/controlsfx-11.1.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Processing/TestOrderExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Processing/TestOrderExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Socket/TestClientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Controllers/BackEnd/Socket/TestClientSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/ModelTest/TestClientOrderManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/Processing/OrderExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/Processing/OrderExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/RequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/RequestType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/ClientHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/ClientHandle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/ClientSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/ClientSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/IDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/IDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/MockSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/BackEnd/Socket/MockSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/OrderManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/OrderManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/UserBuyTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/UserBuyTabController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/UserOrganisationTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/UserOrganisationTabController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/UserRemoveTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/User/UserRemoveTabController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/DatabaseDummyValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/DatabaseDummyValues.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/InformationGrabber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/InformationGrabber.java" afterDir="false" />
-    </list>
+    <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Order executor is now fully working with only 1 known minor bug (where if an organisation buys there own order it generates a trade with 0 quantity. Notifications are now working. If the admins edit assets, and an order goes to execute - it will delete the order that cannot fit into the current asset amount. Some testing has been done but it isnt complete" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -532,7 +511,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622108364237</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Order executor is now fully working with only 1 known minor bug (where if an organisation buys there own order it generates a trade with 0 quantity. Notifications are now working. If the admins edit assets, and an order goes to execute - it will delete the order that cannot fit into the current asset amount. Some testing has been done but it isnt complete">
+      <created>1622131700486</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1622131700486</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -564,7 +550,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Entire GUI Built, Just needs events to be added &amp; backend" />
     <MESSAGE value="Entire Project Refactored back to MVC, App_Start &amp; Testing; Architecture. &#10;&#10;&#10;I reverted the entire project to conform to MVC design pattern. This will allow for Team Development, Scalable code and logical organisation. &#10;&#10;Please use the testing folder for all tests and testing, i have linked it with a ID within IntelliJ so it knows all unit test are in this folder.&#10;&#10;Thanks,&#10;Brad." />
     <MESSAGE value="Basic Networking is now Live with Sockets. I will just expand from the current code once we get Backend and Frontend Pathing organised." />
     <MESSAGE value="Updated Testing Directory Structure to Organise into BlackBox &amp; ClearBox.&#10;&#10;Notes:&#10; - Deleted Un-Used Test Classes with no Tests &#10; - No Clearbox tests yet :(" />
@@ -589,7 +574,8 @@
     <MESSAGE value="Some minor client handling tests" />
     <MESSAGE value="Huge work done on the order executor however it is nowhere near finished. Discovered a huge amount on the server side still had not been done. Brads database connection merge has been cleaned and refactored since it didnt connect to the existing code." />
     <MESSAGE value="Order Executor is now working to an extent" />
-    <option name="LAST_COMMIT_MESSAGE" value="Order Executor is now working to an extent" />
+    <MESSAGE value="Order executor is now fully working with only 1 known minor bug (where if an organisation buys there own order it generates a trade with 0 quantity. Notifications are now working. If the admins edit assets, and an order goes to execute - it will delete the order that cannot fit into the current asset amount. Some testing has been done but it isnt complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="Order executor is now fully working with only 1 known minor bug (where if an organisation buys there own order it generates a trade with 0 quantity. Notifications are now working. If the admins edit assets, and an order goes to execute - it will delete the order that cannot fit into the current asset amount. Some testing has been done but it isnt complete" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
