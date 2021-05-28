@@ -108,7 +108,7 @@ public class OrderExecutor
      * @param order - the order attempting to be made
      * @return - a boolean to say whether it does or not
      */
-    private boolean checkEnoughAssets(OrganisationalUnit sellOrganisationUnit, Order order) {
+    private boolean checkEnoughAssets(OrganisationalUnit sellOrganisationUnit, Order order) throws ServerException {
 
         //Retrieve the current amount of credits that the buy organisation has
         Integer specificAssetQuantity = database.getOrganisationIndividualAsset(sellOrganisationUnit.getUnitName(), order.getAssetType());

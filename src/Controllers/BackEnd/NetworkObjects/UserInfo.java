@@ -15,9 +15,7 @@ public class UserInfo implements Comparable<UserInfo>, Serializable {
     private String organisationalType;
 
     /**
-     *
      * @param username Username of the user
-     * //@param password Password of the user
      * @param accountType Account type of the use
      * @param organisationalUnit Organisational Unit that the user belongs to
      */
@@ -29,21 +27,13 @@ public class UserInfo implements Comparable<UserInfo>, Serializable {
     }
 
     /**
-     *
-     * @return username of the User
+     ** @return username of the User
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     *
-     * @return password of the User
-     */
-    //public String GetPassword() { return password; }
-
-    /**
-     *
      * @return account type of the User
      */
     public AccountType getAccountType() {
@@ -51,7 +41,6 @@ public class UserInfo implements Comparable<UserInfo>, Serializable {
     }
 
     /**
-     *
      * @return organisational unit of the User
      */
     public String getOrganisationalUnit() {

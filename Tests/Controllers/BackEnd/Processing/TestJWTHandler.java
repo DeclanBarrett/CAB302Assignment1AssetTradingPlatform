@@ -1,7 +1,6 @@
 package Controllers.BackEnd.Processing;
 
 import Controllers.Exceptions.AuthenticationException;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +24,7 @@ public class TestJWTHandler {
     @Test
     public void TestCreateTokenStandard() throws AuthenticationException {
         String jwt = jwtHandler.createToken(user);
+        assertEquals(user, jwtHandler.getUser(jwt));
     }
 
     @Test

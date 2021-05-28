@@ -84,6 +84,9 @@ public class AdminCreateUserTabController implements Initializable, Observer {
 
     }
 
+    /**
+     * Updates user info table.
+     */
     private void UpdateUserInfoTable() {
 
         String clientResponse = CreateUserErrorText.getText();

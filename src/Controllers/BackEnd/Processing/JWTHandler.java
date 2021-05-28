@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
+/**
+ * Creates and handles JWT tokens
+ */
 public class JWTHandler {
 
     public static final String ISSUER = "Unnamed Corporation";

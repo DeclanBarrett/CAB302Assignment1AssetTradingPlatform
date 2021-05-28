@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class TestClientSocket{
 
     static String token;
@@ -47,8 +49,14 @@ public class TestClientSocket{
     @Test
     public void GetSalt() throws ServerException {
         ClientSocket.getInstance().GetSalt("User 1");
-    }
 
+    }
+    @Test
+    public void GetSaltException() {
+        ServerException exception = assertThrows(ServerException.class, () -> {
+            ClientSocket.getInstance().GetSalt("testytest");
+        });
+    }
     @Test
     public void AttemptLogin() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().AttemptLogin("User 1", "b717415eb5e699e4989ef3e2c4e9cbf7");
