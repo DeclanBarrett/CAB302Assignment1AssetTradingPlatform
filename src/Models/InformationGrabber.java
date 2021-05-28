@@ -247,6 +247,7 @@ public class  InformationGrabber {
     public void updatePassword(String username, String password){
         try
         {
+            connection = DatabaseConnection.getInstance();
             updatePassword = connection.prepareStatement(UPDATE_PASSWORD);
             updatePassword.setString(1, password);
             updatePassword.setString(2, username);
@@ -270,6 +271,7 @@ public class  InformationGrabber {
     public String updateUserAccountType(String username, AccountType accountType) {
         try
         {
+            connection = DatabaseConnection.getInstance();
             updateUserAccountType = connection.prepareStatement(UPDATE_USER_ACCOUNT_TYPE);
             updateUserAccountType.setString(1, accountType.toString());
             updateUserAccountType.setString(2, username);
@@ -294,6 +296,7 @@ public class  InformationGrabber {
     public String updateOrder(Integer orderID, Integer assetQuantity) {
         try
         {
+            connection = DatabaseConnection.getInstance();
             updateOrder = connection.prepareStatement(UPDATE_ORDER);
             updateOrder.setInt(1, assetQuantity);
             updateOrder.setInt(2, orderID);
@@ -317,6 +320,7 @@ public class  InformationGrabber {
     public String updateUserOrganisation(String username, String organisationName) {
         try
         {
+            connection = DatabaseConnection.getInstance();
             updateUserOrganisation = connection.prepareStatement(UPDATE_USER_ORGANISATION);
             updateUserOrganisation.setString(1, organisationName);
             updateUserOrganisation.setString(2, username);
@@ -342,6 +346,7 @@ public class  InformationGrabber {
     public String updateOrganisationAsset(String organisationName, String assetType, int assetQuantity) {
         try
         {
+            connection = DatabaseConnection.getInstance();
             if (getOrganisationIndividualAsset(organisationName, assetType) == null) {
                 addOrganisationAsset = connection.prepareStatement(INSERT_ORGANISATION_ASSETS);
                 addOrganisationAsset.setString(1, organisationName);
@@ -416,13 +421,14 @@ public class  InformationGrabber {
                         rs.getString("OrganisationalUnit"),
                         rs.getString("Salt")
                 );
+                return user;
             }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return user;
+        return null;
     }
 
     /**
@@ -466,6 +472,7 @@ public class  InformationGrabber {
         UserInfo user;
         try
         {
+            connection = DatabaseConnection.getInstance();
             getUser = connection.prepareStatement(GET_USER);
             getUser.setString(1,username);
 

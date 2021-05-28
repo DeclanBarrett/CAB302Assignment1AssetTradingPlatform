@@ -1,5 +1,6 @@
 package ModelTest;
 
+import App_Start.SetupServer;
 import Controllers.BackEnd.AccountType;
 import Controllers.BackEnd.NetworkObjects.*;
 import Controllers.BackEnd.OrderType;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,7 +26,8 @@ public class TestInformationGrabber
 
     @BeforeEach
     public void CleanDatabase() {
-
+        SetupServer setupServer = new SetupServer();
+        setupServer.setsUpTheServer();
     }
 
     @Test
@@ -37,10 +40,9 @@ public class TestInformationGrabber
     }
     @Test
     void TestInsertUser(){
-        User user = new User("Ethan", "")
-        database.insertUser();
-        database.getUser("Ethan");
-        assertEquals()
+        User user = new User("Ethan", "xx", AccountType.SystemAdmin, "Admin", "12345");
+        database.insertUser("Ethan", "Admin", AccountType.SystemAdmin, "xx", "12345");
+        assertEquals(user, database.getUser("Ethan"));
     }
     @Test
     void TestInsertAsset(){
@@ -51,34 +53,52 @@ public class TestInformationGrabber
 
     @Test
     void TestInsertOrder() {
-        // Sql order column doesnt match order object ???
         Order order = new Order(19, OrderType.BUY, "Paper", 50, 3.5, "Sales", new Date());
         database.insertOrder(order);
-        boolean contains = database.getAllOrders().contains(order);
-        assertTrue(contains);
+        List<Order> orders = database.getAllOrders();
+        for (Order neworder:orders){
+            if (neworder.getAssetQuantity() == 50 && neworder.getRequestPrice() == 3.5) {
+                assertTrue(true);
+                return;
+            }
+        }
+        assertTrue(false);
     }
     @Test
     void TestInsertTrade() {
-        Trade trade = new Trade(11111111, "Paper", 500, 9.00, "Sales", "Finance", new Date());
+        Trade trade = new Trade(37, "Paper", 500, 9.00, "Sales", "Finance", new Date());
         database.insertTrade(trade);
-        boolean contains = database.getTradeHistory("Paper").contains(trade);
-        assertTrue(contains);
+        List<Trade> trades = database.getTradeHistory("Paper");
+        for (Trade newtrade:trades){
+            if (newtrade.getAssetQuantity() == 500 && newtrade.getAssetPrice() == 9.00) {
+                assertTrue(true);
+                return;
+            }
+        }
+        assertTrue(false);
     }
     @Test
     void TestUpdatePassword() {
-        database.updatePassword("Ethan", "Admin1");
+        database.updatePassword("Ethan Testing", "Admin");
+        assertEquals(database.getPassword("Ethan Testing"), "Admin");
     }
     @Test
     void TestUpdateUserAccountType() {
-
+        database.updateUserAccountType("Ethan Testing", AccountType.User);
+        UserInfo user = database.getUserInfo("Ethan Testing");
+        assertEquals(user.getAccountType(), AccountType.User);
     }
     @Test
     void TestUpdateUserOrganisation() {
-
+        database.updateUserOrganisation("Ethan Testing", "Admin");
+        UserInfo user = database.getUserInfo("Ethan Testing");
+        assertEquals(user.getOrganisationalUnit(), "Admin");
     }
     @Test
     void TestUpdateOrganisationAsset() {
-
+        database.updateOrganisationAsset("Finance", "Casino Chips", 599);
+        int assetQuantity = database.getOrganisationIndividualAsset("Finance", "Casino Chips");
+        assertEquals(assetQuantity, 599);
     }
     @Test
     void TestGetNonce() {
