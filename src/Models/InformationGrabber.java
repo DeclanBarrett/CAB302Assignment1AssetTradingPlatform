@@ -111,7 +111,7 @@ public class  InformationGrabber {
      * @param hashedPW - hashed password attached to the user
      * @param salt - salt attached to users password
      */
-    public void insertUser(String username, String orgUnit, String accType, String hashedPW, String salt)
+    public void insertUser(String username, String orgUnit, AccountType accType, String hashedPW, String salt)
     {
         try
         {
@@ -119,7 +119,7 @@ public class  InformationGrabber {
             addUser = connection.prepareStatement(INSERT_NEW_USER);
             addUser.setString(1, username);
             addUser.setString(2, orgUnit);
-            addUser.setString(3, accType);
+            addUser.setString(3, accType.toString());
             addUser.setString(4, hashedPW);
             addUser.setString(5, salt);
 
@@ -238,15 +238,6 @@ public class  InformationGrabber {
         return null;
     }
 
-
-    /**
-     * Inserts a new user into the database
-     * (Warning - Users cannot be removed from the database)
-     * (BUT they can have their Account Type be changed to inactive)
-     * @param user - the user to be inserted (with login info)
-     * @return a success message
-     */
-    public String insertUser(User user) {return null;} ////what is thiiiiiiiiiiiis
 
     /**
      * Update users password
@@ -418,12 +409,13 @@ public class  InformationGrabber {
             {
                 rs = getUser.executeQuery();
                 rs.next();
-                user.setUsername(rs.getString("UserName"));
-                user.setPassword(rs.getString("HashedPassword"));
-                //Unsure about getting the account Type, will ask soon
-                // user.setAccountType(rs.getEn("AccountType"));
-                user.setOrganisationalType(rs.getString("OrganisationalUnit"));
-                user.setSalt(rs.getString("Salt"));
+                user = new User (
+                        rs.getString("UserName"),
+                        rs.getString("HashedPassword"),
+                        AccountType.valueOf(rs.getString("AccountType")),
+                        rs.getString("OrganisationalUnit"),
+                        rs.getString("Salt")
+                );
             }
 
         } catch (SQLException throwables) {

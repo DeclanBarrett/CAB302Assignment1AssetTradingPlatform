@@ -530,7 +530,8 @@ public class ClientHandle implements Runnable
                     synchronized (dbRequest)
                     {
                         handle.verifyToken(token);
-                        dbRequest.insertUser(user);
+                        dbRequest.insertUser(user.getUsername(), user.getOrganisationalUnit(), user.getAccountType(),
+                                             user.getPassword(), user.getSalt());
                         outputStream.writeObject(RequestType.SendSuccessMessage);
                         outputStream.writeObject("User was successfully added to the database.");
                     }

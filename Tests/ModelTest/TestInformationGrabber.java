@@ -1,47 +1,72 @@
 package ModelTest;
 
+import Controllers.BackEnd.AccountType;
+import Controllers.BackEnd.NetworkObjects.*;
+import Controllers.BackEnd.OrderType;
 import Models.InformationGrabber;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Date;
+import java.util.HashMap;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestInformationGrabber
 {
-    InformationGrabber a;
+    static InformationGrabber database;
+    @BeforeAll
+    public static void ConstructDatabaseConnection() {
+        database = new InformationGrabber();
+    }
+
     @BeforeEach
-    void newInformationGrabber()
-    {
-        a = new InformationGrabber();
+    public void CleanDatabase() {
+
     }
 
     @Test
     void TestInsertOrganisation() {
-        //a.insertOrganisation("");
+        HashMap<String, Integer> hm1 = new HashMap<>(10);
+        OrganisationalUnit organisationalUnit = new OrganisationalUnit("Admin", 0, hm1);
+        database.insertOrganisation(organisationalUnit);
 
+        assertEquals(database.getOrganisation("Admin"), organisationalUnit);
     }
     @Test
     void TestInsertUser(){
-        a.insertUser("Ethan1", "Admin", "SystemAdmin", "xx", "12345");
-
-        // Will return an error if it doesnt work, so if no error -> pass
+        User user = new User("Ethan", "")
+        database.insertUser();
+        database.getUser("Ethan");
+        assertEquals()
     }
     @Test
     void TestInsertAsset(){
-        a.insertAsset("Paper");
-
+        database.insertAsset("Paper");
+        boolean contains = database.getAssetTypes().contains("Paper");
+        assertTrue(contains);
     }
 
     @Test
     void TestInsertOrder() {
+        // Sql order column doesnt match order object ???
+        Order order = new Order(19, OrderType.BUY, "Paper", 50, 3.5, "Sales", new Date());
+        database.insertOrder(order);
+        boolean contains = database.getAllOrders().contains(order);
+        assertTrue(contains);
     }
     @Test
     void TestInsertTrade() {
-
+        Trade trade = new Trade(11111111, "Paper", 500, 9.00, "Sales", "Finance", new Date());
+        database.insertTrade(trade);
+        boolean contains = database.getTradeHistory("Paper").contains(trade);
+        assertTrue(contains);
     }
     @Test
     void TestUpdatePassword() {
-
+        database.updatePassword("Ethan", "Admin1");
     }
     @Test
     void TestUpdateUserAccountType() {
