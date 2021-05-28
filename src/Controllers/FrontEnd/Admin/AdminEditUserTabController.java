@@ -59,6 +59,7 @@ public class AdminEditUserTabController implements Initializable, Observer {
         EditUserNameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         EditUserAccountTypeColumn.setCellValueFactory(new PropertyValueFactory<>("accountType"));
         EditUserOrgUnitColumn.setCellValueFactory(new PropertyValueFactory<>("organisationalUnit"));
+        EditUserErrorText.setText("");
         UpdateUserInfoTable();
     }
 

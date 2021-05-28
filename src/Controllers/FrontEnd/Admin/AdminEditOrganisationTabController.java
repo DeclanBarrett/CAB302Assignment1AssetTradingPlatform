@@ -1,9 +1,8 @@
 package Controllers.FrontEnd.Admin;
 
 import Controllers.BackEnd.NetworkObjects.OrganisationalUnit;
-import Controllers.BackEnd.Socket.MockSocket;
-import Controllers.FrontEnd.Login.LoginController;
 import Controllers.BackEnd.Socket.ClientSocket;
+import Controllers.FrontEnd.Login.LoginController;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
 import Controllers.Utils.UtilFieldCheckers;
@@ -57,6 +56,7 @@ public class AdminEditOrganisationTabController implements Initializable, Observ
         EditOrgCreditColumn.setCellValueFactory(new PropertyValueFactory<>("credits"));
         EditOrgAssetNameColumn.setCellValueFactory(new PropertyValueFactory<>("assetName"));
         EditOrgAssetQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("assetQuantity"));
+        EditOrgErrorText.setText("");
         UpdateOrganisationTable();
     }
 
@@ -101,10 +101,10 @@ public class AdminEditOrganisationTabController implements Initializable, Observ
 
         Integer assetQuantity = 0;
         try {
-            UtilFieldCheckers.checkMissingValues(new ArrayList<>(Arrays.asList(EditOrgName.getText())));
+            UtilFieldCheckers.checkMissingValues(new ArrayList<>(Arrays.asList(EditOrgName.getText(), EditOrgSetCreditAmount.getText())));
 
             //Attempt to parse and then update the organisation values
-            assetQuantity = Integer.parseInt(EditOrgSetAssetQuantity.getText());
+            assetQuantity = Integer.parseInt(EditOrgSetCreditAmount.getText());
 
             clientResponse = ClientSocket.getInstance().UpdateOrganisationCredit(LoginController.GetToken(),
                     EditOrgName.getText(),
@@ -112,8 +112,13 @@ public class AdminEditOrganisationTabController implements Initializable, Observ
 
             EditOrgErrorText.setTextFill(Color.GREEN);
 
+        } catch (NumberFormatException e) {
+            EditOrgErrorText.setTextFill(Color.RED);
+            e.printStackTrace();
+            clientResponse = "INPUT INCORRECT";
         } catch (Exception e) {
             EditOrgErrorText.setTextFill(Color.RED);
+            e.printStackTrace();
             clientResponse = e.getMessage();
         }
 

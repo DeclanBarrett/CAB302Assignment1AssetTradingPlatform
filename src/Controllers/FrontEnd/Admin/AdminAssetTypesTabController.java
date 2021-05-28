@@ -31,6 +31,8 @@ public class AdminAssetTypesTabController implements Initializable, Observer {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        CreateAssetErrorText.setText("");
         UpdateAssetTypes();
     }
 

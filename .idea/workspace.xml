@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Order executor is now fully working with only 1 known minor bug (where if an organisation buys there own order it generates a trade with 0 quantity. Notifications are now working. If the admins edit assets, and an order goes to execute - it will delete the order that cannot fit into the current asset amount. Some testing has been done but it isnt complete" />
+    <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Order executor is now fully working with only 1 known minor bug (where if an organisation buys there own order it generates a trade with 0 quantity. Notifications are now working. If the admins edit assets, and an order goes to execute - it will delete the order that cannot fit into the current asset amount. Some testing has been done but it isnt complete">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_05_2021_10_25_am__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_05_2021_10_25_am__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_05_2021_12_22_pm__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_05_2021_12_22_pm__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2021_10_23_am__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2021_10_23_am__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_5_39_pm__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_5_39_pm__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_05_2021_12_24_pm__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_05_2021_12_24_pm__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/Admin/AdminAssetTypesTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/Admin/AdminAssetTypesTabController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/Admin/AdminEditOrganisationTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/Admin/AdminEditOrganisationTabController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/FrontEnd/Admin/AdminEditUserTabController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/FrontEnd/Admin/AdminEditUserTabController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -115,7 +125,7 @@
       <command value="ClientStart" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.ClientStart">
+  <component name="RunManager" selected="Application.Server">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -205,8 +215,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ClientStart" />
         <item itemvalue="Application.Server" />
+        <item itemvalue="Application.ClientStart" />
         <item itemvalue="JUnit.TestClientOrderManager" />
         <item itemvalue="JUnit.Controllers.FrontEnd.Admin in CAB302Assignment1AssetTradingPlatform" />
         <item itemvalue="Application.SetupServer" />
