@@ -133,8 +133,6 @@ public class SQL {
 
     }
 
-
-
     // Create and Populate prepare statements in here
     public void populateDatabase() {
         connection = DatabaseConnection.getInstance();
@@ -174,7 +172,6 @@ public class SQL {
             addTrade.execute(INSERT_NEW_TRADE_3);
             addTrade.execute(INSERT_NEW_TRADE_4);
             addTrade.execute(INSERT_NEW_TRADE_6);
-
 
         } catch (SQLException ex) {
             ex.printStackTrace();

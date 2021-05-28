@@ -1,67 +1,61 @@
 package Controllers.FrontEnd.User;
 
-import Controllers.BackEnd.NetworkObjects.Order;
-import Controllers.BackEnd.NetworkObjects.OrganisationalUnit;
-import Controllers.BackEnd.NetworkObjects.UserInfo;
+import Controllers.BackEnd.NetworkObjects.Trade;
+import Controllers.FrontEnd.Login.LoginController;
+import javafx.geometry.Pos;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Generates an order from UI data and attempts to send it to the TestServer to execute
+ * Generates an order from UI data and attempts to send it to the SetupServer to execute
  */
 
 // TODO Figure out why this is here
 public class OrderManager {
 
-    private UserInfo loggedInUserInfo;
-    private OrganisationalUnit orgUnit;
+    private List<Trade> trades;
 
+    public OrderManager(List<Trade> trades) {
+        this.trades = trades;
+    }
     /**
-     * Sends an Order to the server
-     *
-     * @param order The Order object to be sent
+     * Creates a notification
+     * @param orderString - the string to display in the notification
      */
-    private void SendOrder(Order order) {
-
+    private void generateTradeNotification(String orderString) {
+        Notifications notificationsBuilder = Notifications.create()
+                .title("CAB302 UNKNOWN COMPANY: ORGANISATION TRADE FULFILLED")
+                .text(orderString)
+                .graphic(null)
+                .hideAfter(Duration.seconds(5))
+                .position(Pos.TOP_RIGHT);
+        notificationsBuilder.showConfirm();
     }
 
     /**
-     * Gets organisational unit object associated with the current
-     *
-     * @return
+     * Checks through the new trades and if their are new ones then it sends a notification
+     * @param newTrades - list of new trades
      */
-    private OrganisationalUnit GetOrgUnit() {
-        return null;
-    }
+    public void checkTrades(List<Trade> newTrades) {
 
-    /**
-     * Updates UI with new information
-     */
-    private void UpdateUI() {
+        List<Trade> nonPersistingTrades = new ArrayList<>(newTrades);
 
-    }
+        if (!trades.equals(nonPersistingTrades)) {
+            nonPersistingTrades.removeAll(trades);
 
-    /**
-     * Set user as 'owner' of the order
-     *
-     * @param userInfo User attached to the order
-     */
-    public void SetUser(UserInfo userInfo) {
-        loggedInUserInfo = userInfo;
-    }
-
-    /**
-     * Set organisational unit as 'owner' of the Organisational Unit
-     *
-     * @param unit Organisational unit attached to the order.
-     */
-    public void SetOrgUnit(OrganisationalUnit unit) {
-        orgUnit = unit;
-    }
-
-    /**
-     * Checks validity of the submitted order
-     *
-     * @param order Order to be checked.
-     */
-    public void CheckOrderValidity(Order order) {
+            for (Trade trade: nonPersistingTrades) {
+                if (trade.getBuyerOrgName().equals(LoginController.GetUser().getOrganisationalUnit())) {
+                    String tradeMessage = "Bought " + trade.getAssetQuantity() + " of the asset " + trade.getAssetName() + " at price of " + trade.getAssetPrice();
+                    generateTradeNotification(tradeMessage);
+                } else if (trade.getSellerOrgName().equals(LoginController.GetUser().getOrganisationalUnit())) {
+                    String tradeMessage = "Sold " + trade.getAssetQuantity() + " of the asset " + trade.getAssetName() + " at price of " + trade.getAssetPrice();;
+                    generateTradeNotification(tradeMessage);
+                }
+            }
+        }
+        trades = new ArrayList<>(newTrades);
     }
 }

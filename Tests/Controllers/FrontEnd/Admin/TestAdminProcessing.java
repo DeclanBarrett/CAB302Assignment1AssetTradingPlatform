@@ -89,5 +89,6 @@ public class TestAdminProcessing {
         processing.editUserPassword("User 1", "12345");
         LoginController controller = new LoginController();
         controller.AttemptLogin("User 1", "12345");
+
     }
 }

@@ -1,16 +1,14 @@
 package Controllers.FrontEnd.User;
 
 import Controllers.BackEnd.NetworkObjects.Order;
-import Controllers.FrontEnd.Login.LoginController;
 import Controllers.BackEnd.Socket.ClientSocket;
+import Controllers.FrontEnd.Login.LoginController;
 import Controllers.FrontEnd.Observer;
 import Controllers.FrontEnd.Subject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
@@ -43,6 +41,8 @@ public class UserRemoveTabController implements Initializable, Observer {
     TableColumn<Order, String> RemoveDateColumn;
     @FXML
     TableColumn<Order, Void> RemoveButtonColumn;
+
+
 
     /**
      * Initialise User Remove Handler
@@ -83,12 +83,12 @@ public class UserRemoveTabController implements Initializable, Observer {
      */
     private void UpdateRemoveTable() {
 
-        List<Order> buyOrders = new ArrayList<>();
+        List<Order> allOrders = new ArrayList<>();
 
         String clientResponse = userRemoveErrorText.getText();;
 
         try {
-            buyOrders = ClientSocket.getInstance().GetOrganisationOrders(LoginController.GetToken(), LoginController.GetUser().getOrganisationalUnit());
+            allOrders = ClientSocket.getInstance().GetOrganisationOrders(LoginController.GetToken(), LoginController.GetUser().getOrganisationalUnit());
             userRemoveErrorText.setTextFill(Color.GREEN);
         } catch (Exception e) {
             userRemoveErrorText.setTextFill(Color.RED);
@@ -96,7 +96,7 @@ public class UserRemoveTabController implements Initializable, Observer {
         }
 
         userRemoveErrorText.setText(clientResponse);
-        RemoveTable.getItems().setAll(buyOrders);
+        RemoveTable.getItems().setAll(allOrders);
     }
 
     /**
@@ -146,6 +146,8 @@ public class UserRemoveTabController implements Initializable, Observer {
 
         RemoveButtonColumn.setCellFactory(cellFactory);
     }
+
+
 
     @Override
     public void update(Subject s) {

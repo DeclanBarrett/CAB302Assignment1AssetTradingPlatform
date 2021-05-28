@@ -12,13 +12,16 @@ import java.util.Properties;
  * Database connection, allows creation and grants global access to the singleton instance
  * of url set.
  */
-public class DatabaseConnection {
+public class DatabaseConnection
+{
     private static Connection instance = null;
 
-    private DatabaseConnection() {
+    private DatabaseConnection()
+    {
         Properties props = new Properties();
         FileInputStream in = null;
-        try {
+        try
+        {
             in = new FileInputStream("src/Models/db.props");
             props.load(in);
             in.close();
@@ -31,9 +34,11 @@ public class DatabaseConnection {
 
             // get a connection
             instance = DriverManager.getConnection(url + "/" + schema, username, password);
-        } catch (SQLException | FileNotFoundException sqle) {
+        } catch (SQLException | FileNotFoundException sqle)
+        {
             System.err.println(sqle);
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
@@ -44,12 +49,13 @@ public class DatabaseConnection {
      *
      * @return a handle to the singleton instance of the UrlSet.
      */
-    public static Connection getInstance() {
-        if (instance == null) {
+    public static Connection getInstance()
+    {
+        if (instance == null)
+        {
             new DatabaseConnection();
         }
         return instance;
     }
-
 
 }

@@ -23,8 +23,7 @@ public class MockSocket implements IDataSource {
     private ArrayList<java.lang.String> assetTypesTable = new ArrayList<>();
     private ArrayList<Trade> tradesTable = new ArrayList<>();
 
-    /**
-     * TODO finish implementing IDataSource
+    /*
      * Populating the mock database with values
      */
     protected MockSocket() {
@@ -261,6 +260,11 @@ public class MockSocket implements IDataSource {
         }
 
         return trades;
+    }
+
+    @Override
+    public List<Trade> GetAllTradeHistory(String token) throws AuthenticationException, ServerException {
+        return null;
     }
 
     @Override

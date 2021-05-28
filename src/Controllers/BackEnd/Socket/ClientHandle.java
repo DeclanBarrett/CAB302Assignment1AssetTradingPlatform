@@ -1,31 +1,23 @@
 package Controllers.BackEnd.Socket;
 
+import Controllers.BackEnd.AccountType;
+import Controllers.BackEnd.NetworkObjects.*;
+import Controllers.BackEnd.Processing.JWTHandler;
+import Controllers.BackEnd.Processing.LoginChecker;
+import Controllers.BackEnd.Processing.OrderExecutor;
+import Controllers.BackEnd.RequestType;
+import Models.InformationGrabber;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
-import java.sql.SQLException;
 import java.util.List;
 
-
-import Controllers.BackEnd.AccountType;
-import Controllers.BackEnd.NetworkObjects.*;
-import Controllers.BackEnd.Processing.JWTHandler;
-import Controllers.BackEnd.Processing.LoginChecker;
-import Controllers.BackEnd.RequestType;
-import Controllers.Exceptions.AuthenticationException;
-import Controllers.Exceptions.ServerException;
-import Models.DatabaseConnection;
-import Models.InformationGrabber;
-import com.mysql.cj.log.Log;
-
 /**
- * @author Brad Kent
- * @author n10632999@qut.edu.au
- * @version 1.2
- * @since 0.3
+ * Handles information sent by the client on the server side.
  */
 public class ClientHandle implements Runnable
 {
@@ -33,6 +25,7 @@ public class ClientHandle implements Runnable
     final Socket connection;
     private int thisId;
     private InformationGrabber dbRequest;
+
 
     public ClientHandle(Socket connection, InformationGrabber grabber)
     {
@@ -52,9 +45,6 @@ public class ClientHandle implements Runnable
         int i = 0;
         System.out.println(connection.toString());
 
-        //TODO: Put socket.getInputStream().available in a while for threads!
-        //TODO: BufferedInputStream
-
         try {
             ObjectInputStream in = new ObjectInputStream(connection.getInputStream());
             ObjectOutputStream out = new ObjectOutputStream(connection.getOutputStream());
@@ -71,7 +61,7 @@ public class ClientHandle implements Runnable
             in.close();
             connection.close();
         } catch (SocketException g) {
-            System.out.println("Socket is fucked");
+            System.out.println("Socket is not working");
             System.exit(1);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -82,6 +72,12 @@ public class ClientHandle implements Runnable
 
     }
 
+    /**
+     * Handle commands recieved from the client socket.
+     * @param inputStream - information from the client socket
+     * @param outputStream - information to send to the client socket
+     * @param command - the request type sent by the client socket.
+     */
     public void handleCommand(ObjectInputStream inputStream, ObjectOutputStream outputStream, RequestType command)  {
         System.out.println("NEW HANDLE COMMAND: " + command.toString());
         switch(command)
@@ -117,16 +113,15 @@ public class ClientHandle implements Runnable
             }
             break;
 
-            // Not too sure the protocol with these login tokens, to complete later.
             case RequestLogin: {
-
                 try
                 {
                     final String username = (String) inputStream.readObject();
                     final String password = (String) inputStream.readObject();
-                    LoginChecker checkLogin = new LoginChecker(dbRequest);
+
                     synchronized (dbRequest)
                     {
+                        LoginChecker checkLogin = new LoginChecker(dbRequest);
                         String token = checkLogin.compareLogin(username, password);
                         outputStream.writeObject(RequestType.SendLoginToken);
                         System.out.println("Send the login token");
@@ -137,7 +132,7 @@ public class ClientHandle implements Runnable
                 catch (Exception e) {
                     e.printStackTrace();
                     try {
-                        outputStream.writeObject(RequestType.SendErrorCode);
+                        outputStream.writeObject(RequestType.SendAuthenticationError);
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }
@@ -161,7 +156,6 @@ public class ClientHandle implements Runnable
 
                     synchronized (dbRequest)
                     {
-
                         handle.verifyToken(token);
                         dbRequest.updatePassword(username, password);
                         outputStream.writeObject(RequestType.SendSuccessMessage);
@@ -291,12 +285,10 @@ public class ClientHandle implements Runnable
 
                     synchronized (dbRequest)
                     {
-
                         handle.verifyToken(token);
                         List<Order> orders = dbRequest.getAllOrders();
                         outputStream.writeObject((RequestType.SendOrders));
                         outputStream.writeObject(orders);
-
                     }
                 } catch (Exception e) {
                     try {
@@ -385,7 +377,8 @@ public class ClientHandle implements Runnable
                     {
 
                         handle.verifyToken(token);
-                        dbRequest.insertOrder(order);
+                        OrderExecutor executor = new OrderExecutor(dbRequest);
+                        executor.executeOrder(order);
                         outputStream.writeObject(RequestType.SendSuccessMessage);
                         outputStream.writeObject("Order added");
                     }
@@ -495,6 +488,34 @@ public class ClientHandle implements Runnable
             }
             break;
 
+            case RequestAllTradeHistory: {
+                try {
+                    JWTHandler handle = new JWTHandler();
+                    String token = (String) inputStream.readObject();
+
+                    synchronized (dbRequest) {
+
+                        handle.verifyToken(token);
+                        List<Trade> tradeHistory = dbRequest.getAllTradeHistory();
+                        outputStream.writeObject(RequestType.SendTradeHistory);
+                        outputStream.writeObject(tradeHistory);
+                    }
+                } catch (Exception e) {
+                    try {
+                        outputStream.writeObject(RequestType.SendErrorCode);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    try {
+                        outputStream.writeObject("Failed to get trade history.");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                    e.printStackTrace();
+                }
+            }
+            break;
+
             case RequestAddUser:
             {
                 try
@@ -506,7 +527,8 @@ public class ClientHandle implements Runnable
                     synchronized (dbRequest)
                     {
                         handle.verifyToken(token);
-                        dbRequest.insertUser(user);
+                        dbRequest.insertUser(user.getUsername(), user.getOrganisationalUnit(), user.getAccountType(),
+                                             user.getPassword(), user.getSalt());
                         outputStream.writeObject(RequestType.SendSuccessMessage);
                         outputStream.writeObject("User was successfully added to the database.");
                     }

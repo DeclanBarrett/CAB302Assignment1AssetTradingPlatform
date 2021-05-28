@@ -84,7 +84,6 @@ public class AdminCreateOrganisationTabController implements Initializable, Obse
         }
 
         CreateOrgErrorText.setText(clientResponse);
-
     }
 
     /**

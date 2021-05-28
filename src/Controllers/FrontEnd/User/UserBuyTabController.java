@@ -73,6 +73,7 @@ public class UserBuyTabController implements Initializable, Observer {
         xAxis.setLabel("Time");
         yAxis.setLabel("Price");
 
+
         BuyErrorText.setText("");
         UpdateAssetTypeText();
         UpdateBuyInformation();

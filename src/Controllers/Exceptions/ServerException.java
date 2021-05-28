@@ -1,8 +1,11 @@
 package Controllers.Exceptions;
 
+/**
+ * Exception thrown when server fails.
+ */
 public class ServerException extends Exception {
     /**
-     * TestServer exception message.
+     * SetupServer exception message.
      * @param message
      */
     public ServerException(String message) {

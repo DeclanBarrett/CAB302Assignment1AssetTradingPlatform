@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Order executor is now fully working with only 1 known minor bug (where if an organisation buys there own order it generates a trade with 0 quantity. Notifications are now working. If the admins edit assets, and an order goes to execute - it will delete the order that cannot fit into the current asset amount. Some testing has been done but it isnt complete" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="Brads-Branch" />
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Brads-Branch" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Models/SQL.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Controllers/BackEnd/NetworkObjects/Order.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Models/InformationGrabber.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="1qoyBDtoSUT10ozznKhI69mkQcv" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mariadb" />
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/.gitignore" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/Tests/Controllers/BackEnd/NetworkObjects" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.38557693" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Battl\IdeaProjects\CAB302Assignment1AssetTradingPlatform\src\main\Controller" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Battl\IdeaProjects\CAB302Assignment1AssetTradingPlatform\src\Testing\BlackBox\Model" />
+      <recent name="C:\Users\Battl\IdeaProjects\CAB302Assignment1AssetTradingPlatform\src\Testing\BlackBox\Controller" />
+      <recent name="C:\Users\Battl\IdeaProjects\CAB302Assignment1AssetTradingPlatform\src\Testing\ControllerTest" />
+      <recent name="C:\Users\Battl\IdeaProjects\CAB302Assignment1AssetTradingPlatform\src\Testing\ModelTest" />
+      <recent name="C:\Users\Battl\IdeaProjects\CAB302Assignment1AssetTradingPlatform\src\Testing" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="Controllers.FrontEnd.User" />
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="Controllers.BackEnd.Socket" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="ServerStart" />
+      <command value="Server" />
+      <command value="client" />
+      <command value="ClientStart" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.ClientStart">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientStart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="App_Start.ClientStart" />
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;\Users\Decla\Documents\QUT\Information Systems\3rd Semester\CAB302 - Software Development\Tools\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="App_Start.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="App_Start.Server" />
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="App_Start.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SetupServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="App_Start.SetupServer" />
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="App_Start.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Controllers.FrontEnd.Admin in CAB302Assignment1AssetTradingPlatform" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controllers.FrontEnd.Admin.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Controllers.FrontEnd.Admin" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestClientOrderManager" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controllers.FrontEnd.User.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Controllers.FrontEnd.User" />
+      <option name="MAIN_CLASS_NAME" value="Controllers.FrontEnd.User.TestClientOrderManager" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Application.SetupServer" />
+      <item itemvalue="Application.ClientStart" />
+      <item itemvalue="JUnit.TestClientOrderManager" />
+      <item itemvalue="JUnit.Controllers.FrontEnd.Admin in CAB302Assignment1AssetTradingPlatform" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ClientStart" />
+        <item itemvalue="Application.Server" />
+        <item itemvalue="JUnit.TestClientOrderManager" />
+        <item itemvalue="JUnit.Controllers.FrontEnd.Admin in CAB302Assignment1AssetTradingPlatform" />
+        <item itemvalue="Application.SetupServer" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Test Files Marked as Test Root (Green)" />
+      <created>1617760099571</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1617760099571</updated>
+      <workItem from="1617760100725" duration="286000" />
+      <workItem from="1618358517512" duration="1563000" />
+      <workItem from="1618531459240" duration="1813000" />
+      <workItem from="1618534605228" duration="1119000" />
+      <workItem from="1618535852187" duration="359000" />
+      <workItem from="1618536229242" duration="233000" />
+      <workItem from="1618536481339" duration="3222000" />
+      <workItem from="1618622721412" duration="1311000" />
+      <workItem from="1618634362390" duration="3213000" />
+      <workItem from="1618890159330" duration="833000" />
+      <workItem from="1618891796505" duration="152000" />
+      <workItem from="1618891968722" duration="160000" />
+      <workItem from="1618892152152" duration="291000" />
+      <workItem from="1618964068260" duration="584000" />
+      <workItem from="1618964699912" duration="1426000" />
+      <workItem from="1618966269280" duration="1064000" />
+      <workItem from="1619231766816" duration="1586000" />
+      <workItem from="1619233396871" duration="1904000" />
+      <workItem from="1619235364978" duration="863000" />
+      <workItem from="1619236516030" duration="218000" />
+      <workItem from="1619236750209" duration="101000" />
+      <workItem from="1619236867576" duration="3179000" />
+      <workItem from="1619346588405" duration="517000" />
+      <workItem from="1619347125300" duration="116000" />
+      <workItem from="1619347253230" duration="4408000" />
+      <workItem from="1619353060325" duration="2912000" />
+      <workItem from="1619356714352" duration="51000" />
+      <workItem from="1619356779679" duration="594000" />
+      <workItem from="1619400378435" duration="2309000" />
+      <workItem from="1619402738784" duration="1379000" />
+      <workItem from="1619414126336" duration="1000" />
+      <workItem from="1619741203841" duration="444000" />
+      <workItem from="1619741716100" duration="1146000" />
+      <workItem from="1619743512348" duration="1004000" />
+      <workItem from="1619744549223" duration="70000" />
+      <workItem from="1620173194188" duration="762000" />
+      <workItem from="1620174060356" duration="2235000" />
+      <workItem from="1620177056140" duration="601000" />
+      <workItem from="1620346122909" duration="1032000" />
+      <workItem from="1620347174441" duration="1696000" />
+      <workItem from="1620366595148" duration="595000" />
+      <workItem from="1620430594175" duration="158000" />
+      <workItem from="1620430907587" duration="156000" />
+      <workItem from="1620444955429" duration="4400000" />
+      <workItem from="1620520182340" duration="10549000" />
+      <workItem from="1620547155796" duration="670000" />
+      <workItem from="1620605750889" duration="2145000" />
+      <workItem from="1620607941513" duration="8154000" />
+      <workItem from="1620623791548" duration="624000" />
+      <workItem from="1620624432090" duration="81000" />
+      <workItem from="1621403761490" duration="6207000" />
+    </task>
+    <task id="LOCAL-00001" summary="Initial Commit (Brad Barebones)">
+      <created>1617760354635</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1617760354635</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Project Setup w/ Test Folder">
+      <created>1618359924035</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1618359924035</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Project Setup w/ MVC &amp; Test Folder">
+      <created>1618531659163</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1618531659163</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Project Setup w/ MVC &amp; Test Folder">
+      <created>1618531677739</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1618531677739</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Project Setup w/ MVC &amp; Test Folder">
+      <created>1618532162644</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1618532162644</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Entire GUI Built, Just needs events to be added &amp; backend">
+      <created>1618640229227</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1618640229227</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Entire Project Refactored back to MVC, App_Start &amp; Testing; Architecture. &#10;&#10;&#10;I reverted the entire project to conform to MVC design pattern. This will allow for Team Development, Scalable code and logical organisation. &#10;&#10;Please use the testing folder for all tests and testing, i have linked it with a ID within IntelliJ so it knows all unit test are in this folder.&#10;&#10;Thanks,&#10;Brad.">
+      <created>1619351894023</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1619351894023</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Entire Project Refactored back to MVC, App_Start &amp; Testing; Architecture. &#10;&#10;&#10;I reverted the entire project to conform to MVC design pattern. This will allow for Team Development, Scalable code and logical organisation. &#10;&#10;Please use the testing folder for all tests and testing, i have linked it with a ID within IntelliJ so it knows all unit test are in this folder.&#10;&#10;Thanks,&#10;Brad.">
+      <created>1619352581055</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1619352581055</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Basic Networking is now Live with Sockets. I will just expand from the current code once we get Backend and Frontend Pathing organised.">
+      <created>1619355855110</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1619355855110</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Updated Testing Directory Structure to Organise into BlackBox &amp; ClearBox.&#10;&#10;Notes:&#10; - Deleted Un-Used Test Classes with no Tests &#10; - No Clearbox tests yet :(">
+      <created>1620445300421</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1620445300421</updated>
+    </task>
+    <task id="LOCAL-00011" summary="H">
+      <created>1620446704165</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1620446704165</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :).">
+      <created>1620447292878</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1620447292878</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :).">
+      <created>1620447493972</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1620447493972</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :).">
+      <created>1620447553226</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1620447553226</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Refactored Server Code to backed end controller">
+      <created>1620447940931</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1620447940931</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Added Networking structure and intermediate socket program( client &amp; server">
+      <created>1620538905715</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1620538905715</updated>
+    </task>
+    <task id="LOCAL-00017" summary="New Sub-Branch. Added BradsPacket.java to experiment with using a class as a packet for seamless transition :)">
+      <created>1620538973860</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1620538973860</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Sever And Client Sockets Established">
+      <created>1620611087735</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1620611087735</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Added Threading for Server to handle multiple clients.">
+      <created>1620611118163</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1620611118163</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Added Threading for Server to handle multiple clients.">
+      <created>1620611233305</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1620611233305</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Added Threading for Server to handle multiple clients.">
+      <created>1620611275414</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1620611275414</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Fixed issues with GUI not loading, fixed pathing as well.">
+      <created>1620615567929</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1620615567929</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Added User Controller. Fixed LoginController.java">
+      <created>1620616485003</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1620616485003</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Fixed Merge errors &amp; project base not established.">
+      <created>1621403245103</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1621403245103</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Finally Got the database hooked up!!! &#10;&#10;- Team had bad dependencies and imported 4 wrong maven modules. &#10;- Cleaned up unused imports (Could not compile after removing bad maven imports)&#10;&#10;Note -&gt; Need to create the Database on local system and use the correct jdbc driver. team had mySQL driver instead of Mariadb.">
+      <created>1621404377036</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1621404377036</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Issues with Creating SQL Tables.&#10;&#10;SolN: Create the tables in SQL order, i.e. tables need to be present in DB before creating Foreign keys. &#10;&#10;Notes:&#10;Had to create DB Manually">
+      <created>1621405295299</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1621405295299</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Issues with Creating SQL Tables.&#10;&#10;SolN: &#10;- Create the tables in SQL order, i.e. tables need to be present in DB before creating Foreign keys. &#10;- Need to Fix SQL syntax, giving exceptions based on bad syntax of SQL statements.&#10;Notes:&#10;Had to create DB Manually">
+      <created>1621405504213</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1621405504213</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Added JSON Objects, Java 15 does not include oracles JOSN objects (Depreciated).&#10;&#10;Found Suitable replacement on github, resolved via maven.&#10;&#10;JSON as network medium are far superior than Serial .class files.">
+      <created>1621407886148</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1621407886148</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Removed Unwanted file">
+      <created>1621989165845</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1621989165845</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Test Files Marked as Test Root (Green)">
+      <created>1621989297408</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1621989297408</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Refactoring to fix multiple errors that are not occurring to everyone but occurring to me.">
+      <created>1622008409039</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1622008409039</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Some minor client handling tests">
+      <created>1622017718853</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1622017718854</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Huge work done on the order executor however it is nowhere near finished. Discovered a huge amount on the server side still had not been done. Brads database connection merge has been cleaned and refactored since it didnt connect to the existing code.">
+      <created>1622048455720</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1622048455720</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Order Executor is now working to an extent">
+      <created>1622108364237</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1622108364237</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Order executor is now fully working with only 1 known minor bug (where if an organisation buys there own order it generates a trade with 0 quantity. Notifications are now working. If the admins edit assets, and an order goes to execute - it will delete the order that cannot fit into the current asset amount. Some testing has been done but it isnt complete">
+      <created>1622131700486</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1622131700486</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Brads-Branch" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Entire Project Refactored back to MVC, App_Start &amp; Testing; Architecture. &#10;&#10;&#10;I reverted the entire project to conform to MVC design pattern. This will allow for Team Development, Scalable code and logical organisation. &#10;&#10;Please use the testing folder for all tests and testing, i have linked it with a ID within IntelliJ so it knows all unit test are in this folder.&#10;&#10;Thanks,&#10;Brad." />
+    <MESSAGE value="Basic Networking is now Live with Sockets. I will just expand from the current code once we get Backend and Frontend Pathing organised." />
+    <MESSAGE value="Updated Testing Directory Structure to Organise into BlackBox &amp; ClearBox.&#10;&#10;Notes:&#10; - Deleted Un-Used Test Classes with no Tests &#10; - No Clearbox tests yet :(" />
+    <MESSAGE value="H" />
+    <MESSAGE value="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :)." />
+    <MESSAGE value="Refactored Server Code to backed end controller" />
+    <MESSAGE value="Added Networking structure and intermediate socket program( client &amp; server" />
+    <MESSAGE value="New Sub-Branch. Added BradsPacket.java to experiment with using a class as a packet for seamless transition :)" />
+    <MESSAGE value="Sever And Client Sockets Established" />
+    <MESSAGE value="Added Threading for Server to handle multiple clients." />
+    <MESSAGE value="Fixed issues with GUI not loading, fixed pathing as well." />
+    <MESSAGE value="Added User Controller. Fixed LoginController.java" />
+    <MESSAGE value="Merged Development -&gt; Brads" />
+    <MESSAGE value="Fixed Merge errors &amp; project base not established." />
+    <MESSAGE value="Finally Got the database hooked up!!! &#10;&#10;- Team had bad dependencies and imported 4 wrong maven modules. &#10;- Cleaned up unused imports (Could not compile after removing bad maven imports)&#10;&#10;Note -&gt; Need to create the Database on local system and use the correct jdbc driver. team had mySQL driver instead of Mariadb." />
+    <MESSAGE value="Issues with Creating SQL Tables.&#10;&#10;SolN: Create the tables in SQL order, i.e. tables need to be present in DB before creating Foreign keys. &#10;&#10;Notes:&#10;Had to create DB Manually" />
+    <MESSAGE value="Issues with Creating SQL Tables.&#10;&#10;SolN: &#10;- Create the tables in SQL order, i.e. tables need to be present in DB before creating Foreign keys. &#10;- Need to Fix SQL syntax, giving exceptions based on bad syntax of SQL statements.&#10;Notes:&#10;Had to create DB Manually" />
+    <MESSAGE value="Added JSON Objects, Java 15 does not include oracles JOSN objects (Depreciated).&#10;&#10;Found Suitable replacement on github, resolved via maven.&#10;&#10;JSON as network medium are far superior than Serial .class files." />
+    <MESSAGE value="Removed Unwanted file" />
+    <MESSAGE value="Test Files Marked as Test Root (Green)" />
+    <MESSAGE value="Refactoring to fix multiple errors that are not occurring to everyone but occurring to me." />
+    <MESSAGE value="Some minor client handling tests" />
+    <MESSAGE value="Huge work done on the order executor however it is nowhere near finished. Discovered a huge amount on the server side still had not been done. Brads database connection merge has been cleaned and refactored since it didnt connect to the existing code." />
+    <MESSAGE value="Order Executor is now working to an extent" />
+    <MESSAGE value="Order executor is now fully working with only 1 known minor bug (where if an organisation buys there own order it generates a trade with 0 quantity. Notifications are now working. If the admins edit assets, and an order goes to execute - it will delete the order that cannot fit into the current asset amount. Some testing has been done but it isnt complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="Order executor is now fully working with only 1 known minor bug (where if an organisation buys there own order it generates a trade with 0 quantity. Notifications are now working. If the admins edit assets, and an order goes to execute - it will delete the order that cannot fit into the current asset amount. Some testing has been done but it isnt complete" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Controllers/BackEnd/Processing/OrderExecutor.java</url>
+          <line>349</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestUtilLoginSecurity.ic" NAME="TestUtilLoginSecurity Coverage Results" MODIFIED="1621866664561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.Utils.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestOrderExecutor_TestIfBuyLargeQuantity.ic" NAME="TestOrderExecutor.TestIfBuyLargeQuantity Coverage Results" MODIFIED="1622119718198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.Processing.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestUtilFieldCheckers.ic" NAME="TestUtilFieldCheckers Coverage Results" MODIFIED="1621864830453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.Utils.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$ClientStart.ic" NAME="ClientStart Coverage Results" MODIFIED="1622011882912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>App_Start.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestClientOrderManager.ic" NAME="TestClientOrderManager Coverage Results" MODIFIED="1622128290288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.FrontEnd.User.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestTrade.ic" NAME="TestTrade Coverage Results" MODIFIED="1621852677502" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.NetworkObjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$Controllers_Utils_in_CAB302Assignment1AssetTradingPlatform.ic" NAME="Controllers.Utils in CAB302Assignment1AssetTradingPlatform Coverage Results" MODIFIED="1621865398412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.Utils.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestLoginToken.ic" NAME="TestLoginToken Coverage Results" MODIFIED="1621852600195" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.NetworkObjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$All_in_CAB302Assignment1AssetTradingPlatform.ic" NAME="All in CAB302Assignment1AssetTradingPlatform Coverage Results" MODIFIED="1621852781657" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestOrder.ic" NAME="TestOrder Coverage Results" MODIFIED="1621852659082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.NetworkObjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestOrderExecutor_TestExecuteMoreAssetsBuyOrder.ic" NAME="TestOrderExecutor.TestExecuteMoreAssetsBuyOrder Coverage Results" MODIFIED="1622110228007" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.Processing.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestAdminProcessing.ic" NAME="TestAdminProcessing Coverage Results" MODIFIED="1621849852306" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.FrontEnd.Admin.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestJWTHandler.ic" NAME="TestJWTHandler Coverage Results" MODIFIED="1621852770018" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.Processing.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestUserInfo.ic" NAME="TestUserInfo Coverage Results" MODIFIED="1621852699528" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.NetworkObjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestClientHandle.ic" NAME="TestClientHandle Coverage Results" MODIFIED="1622011902259" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.Socket.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$Controllers_BackEnd_Processing_in_CAB302Assignment1AssetTradingPlatform.ic" NAME="Controllers.BackEnd.Processing in CAB302Assignment1AssetTradingPlatform Coverage Results" MODIFIED="1621861381286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.Processing.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestOrderExecutor.ic" NAME="TestOrderExecutor Coverage Results" MODIFIED="1622119726820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.Processing.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestClientSocket.ic" NAME="TestClientSocket Coverage Results" MODIFIED="1622009997181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.Socket.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$ModelTest_in_CAB302Assignment1AssetTradingPlatform.ic" NAME="ModelTest in CAB302Assignment1AssetTradingPlatform Coverage Results" MODIFIED="1621866714174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>ModelTest.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestOrganisationalUnit.ic" NAME="TestOrganisationalUnit Coverage Results" MODIFIED="1621852669123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.NetworkObjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestLoginController.ic" NAME="TestLoginController Coverage Results" MODIFIED="1621850553412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.FrontEnd.Login.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$Controllers_BackEnd_NetworkObjects_in_CAB302Assignment1AssetTradingPlatform.ic" NAME="Controllers.BackEnd.NetworkObjects in CAB302Assignment1AssetTradingPlatform Coverage Results" MODIFIED="1621860094818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.NetworkObjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestUser.ic" NAME="TestUser Coverage Results" MODIFIED="1621852688003" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.NetworkObjects.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestOrderExecutor_TestExecuteSmallBuyOrder.ic" NAME="TestOrderExecutor.TestExecuteSmallBuyOrder Coverage Results" MODIFIED="1622110106550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Controllers.BackEnd.Processing.*</FILTER>
+    </SUITE>
+  </component>
+</project>

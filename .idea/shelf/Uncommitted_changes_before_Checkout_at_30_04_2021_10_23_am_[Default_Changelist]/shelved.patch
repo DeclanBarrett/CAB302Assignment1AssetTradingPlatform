@@ -1,0 +1,78 @@
+Index: src/App_Start/ClientStart.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package App_Start;\r\n\r\nimport javafx.application.Application;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.stage.Stage;\r\n\r\n\r\npublic class ClientStart extends Application\r\n{\r\n    public static void main(String[] args) {\r\n        launch(args);\r\n    }\r\n\r\n    /**\r\n     * Initialise GUI screen, make visible\r\n     * @param primaryStage Handles creation of main GUI screen\r\n     * @throws Exception To stop GUI breaking\r\n     */\r\n    @Override\r\n    public void start(Stage primaryStage) throws Exception\r\n    {\r\n\r\n        primaryStage.setTitle(\"Unnamed Client Organisation Trading System\");\r\n\r\n        Parent root;\r\n\r\n        // Admin\r\n        //root = FXMLLoader.load(getClass().getResource(\"/Client/FXMLPages/Admin.fxml\"));\r\n        // User\r\n        //root = FXMLLoader.load(getClass().getResource(\"/Client/FXMLPages/User.fxml\"));\r\n        // Login\r\n        root = FXMLLoader.load(getClass().getResource(\"/Views/Login/Login.fxml\"));\r\n        // Reset\r\n        //root = FXMLLoader.load(getClass().getResource(\"/Client/FXMLPages/Reset.fxml\"));\r\n\r\n\r\n        primaryStage.setScene(new Scene(root));\r\n        primaryStage.show();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/App_Start/ClientStart.java b/src/App_Start/ClientStart.java
+--- a/src/App_Start/ClientStart.java	
++++ b/src/App_Start/ClientStart.java	
+@@ -9,6 +9,9 @@
+ 
+ public class ClientStart extends Application
+ {
++    private String path;
++
++
+     public static void main(String[] args) {
+         launch(args);
+     }
+@@ -26,14 +29,15 @@
+ 
+         Parent root;
+ 
++
+         // Admin
+-        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/Admin.fxml"));
++        //root = FXMLLoader.load(getClass().getResource("/Views/Admin/Admin.fxml"));
+         // User
+-        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/User.fxml"));
++        //root = FXMLLoader.load(getClass().getResource("/Views/User/User.fxml"));
+         // Login
+         root = FXMLLoader.load(getClass().getResource("/Views/Login/Login.fxml"));
+         // Reset
+-        //root = FXMLLoader.load(getClass().getResource("/Client/FXMLPages/Reset.fxml"));
++        //root = FXMLLoader.load(getClass().getResource("/Views/Login/Reset.fxml"));
+ 
+ 
+         primaryStage.setScene(new Scene(root));
+Index: src/Views/Login/Login.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.Label?>\r\n<?import javafx.scene.control.TextField?>\r\n<?import javafx.scene.layout.VBox?>\r\n<?import javafx.scene.text.Font?>\r\n\r\n<VBox alignment=\"CENTER\" maxHeight=\"-Infinity\" maxWidth=\"-Infinity\" minHeight=\"-Infinity\" minWidth=\"-Infinity\" prefHeight=\"770.0\" prefWidth=\"550.0\" spacing=\"20.0\" styleClass=\"background\" stylesheets=\"@../StyleSheets/Root.css\" xmlns=\"http://javafx.com/javafx/16\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"Controllers.FrontEnd.LoginController\">\r\n   <children>\r\n      <Label text=\"UNNAMED ORGANISATIONAL TRADING\">\r\n         <font>\r\n            <Font name=\"Cambria Bold\" size=\"29.0\" />\r\n         </font>\r\n      </Label>\r\n      <Label text=\"Log In\">\r\n         <font>\r\n            <Font name=\"Cambria Bold\" size=\"29.0\" />\r\n         </font>\r\n      </Label>\r\n      <Label text=\"Username:\" />\r\n      <TextField maxWidth=\"300.0\" prefHeight=\"25.0\" prefWidth=\"659.0\" />\r\n      <Label text=\"Password:\" />\r\n      <TextField accessibleRole=\"PASSWORD_FIELD\" maxWidth=\"300.0\" />\r\n      <Button fx:id=\"loginBtn\" mnemonicParsing=\"false\" onAction=\"#HandleLoginPress\" prefHeight=\"25.0\" prefWidth=\"100.0\" text=\"Login\" />\r\n      <Button fx:id=\"ResetBtn\" mnemonicParsing=\"false\" onAction=\"#TriggerResetPassword\" text=\"Reset Password\" />\r\n   </children>\r\n</VBox>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Views/Login/Login.fxml b/src/Views/Login/Login.fxml
+--- a/src/Views/Login/Login.fxml	
++++ b/src/Views/Login/Login.fxml	
+@@ -22,7 +22,7 @@
+       <TextField maxWidth="300.0" prefHeight="25.0" prefWidth="659.0" />
+       <Label text="Password:" />
+       <TextField accessibleRole="PASSWORD_FIELD" maxWidth="300.0" />
+-      <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#HandleLoginPress" prefHeight="25.0" prefWidth="100.0" text="Login" />
++      <Button fx:id="loginBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Login" />
+       <Button fx:id="ResetBtn" mnemonicParsing="false" onAction="#TriggerResetPassword" text="Reset Password" />
+    </children>
+ </VBox>
+Index: src/App_Start/Test.java
+===================================================================
+diff --git a/src/App_Start/Test.java b/src/App_Start/Test.java
+new file mode 100644
+--- /dev/null	
++++ b/src/App_Start/Test.java	
+@@ -0,0 +1,13 @@
++package App_Start;
++
++import java.nio.file.Paths;
++
++public class Test
++{
++    public static void main(String[] args)
++    {
++        System.out.println(Paths.get(System.getProperty("user.dir")));
++        System.out.println(System.getProperty("user.dir"));
++
++    }
++}

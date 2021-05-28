@@ -1,5 +1,8 @@
 package Controllers.BackEnd;
 
+/**
+ * Types of requests
+ */
 public enum RequestType {
     RequestSalt,
     SendSalt,
@@ -34,6 +37,7 @@ public enum RequestType {
     SendAssetTypes,
 
     RequestTradeHistory,
+    RequestAllTradeHistory,
     SendTradeHistory,
 
     RequestAddUser,

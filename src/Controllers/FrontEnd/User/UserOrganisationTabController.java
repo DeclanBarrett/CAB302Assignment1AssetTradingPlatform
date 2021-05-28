@@ -56,6 +56,7 @@ public class UserOrganisationTabController implements Initializable, Observer {
     @FXML
     TableColumn<Order, String> OrgOrderSellPriceColumn;
 
+    OrderManager orderManager;
     /**
      * Initialise User Organisation Handler
      * @param url
@@ -74,6 +75,13 @@ public class UserOrganisationTabController implements Initializable, Observer {
         OrgOrderSellQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("assetQuantity"));
         OrgOrderSellPriceColumn.setCellValueFactory(new PropertyValueFactory<>("requestPrice"));
 
+        try {
+            orderManager = new OrderManager(ClientSocket.getInstance().GetAllTradeHistory(LoginController.GetToken()));
+        } catch (Exception e) {
+            userOrgErrorText.setTextFill(Color.RED);
+            userOrgErrorText.setText("TRADE HISTORY NOTIFICATIONS DISABLED");
+        }
+
         UpdateOrganisationInformation();
     }
 
@@ -86,6 +94,8 @@ public class UserOrganisationTabController implements Initializable, Observer {
 
         //Attempt to set the organisation assets and quantities via casting to a map
         try {
+            orderManager.checkTrades(ClientSocket.getInstance().GetAllTradeHistory(LoginController.GetToken()));
+
             OrganisationalUnit org = ClientSocket.getInstance().GetOrganisation(LoginController.GetToken(), LoginController.GetUser().getOrganisationalUnit());//LoginController.GetUser().getOrganisationalUnit()
 
             OrgName.setText(org.getUnitName());
@@ -121,6 +131,8 @@ public class UserOrganisationTabController implements Initializable, Observer {
         userOrgErrorText.setText(clientResponse);
 
     }
+
+
 
     @Override
     public void update(Subject s) {
