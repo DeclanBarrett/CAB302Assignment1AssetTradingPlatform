@@ -26,8 +26,12 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="org.mariadb.jdbc:mariadb-java-client:2.7.2" level="project" />
-    <orderEntry type="library" name="org.junit.jupiter:junit-jupiter:5.4.2" level="project" />
-    <orderEntry type="library" name="org.controlsfx:controlsfx:11.1.0" level="project" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="org.junit.jupiter:junit-jupiter:5.4.2" level="project" />
+    <orderEntry type="library" name="controlsfx-11.1.01" level="project" />
+    <orderEntry type="library" name="mariadb-java-client-2.7.21" level="project" />
+    <orderEntry type="library" name="jwt" level="project" />
+    <orderEntry type="library" name="controlsfx-11.1.0" level="project" />
+    <orderEntry type="library" name="org.controlsfx:controlsfx:11.1.0" level="project" />
   </component>
 </module>

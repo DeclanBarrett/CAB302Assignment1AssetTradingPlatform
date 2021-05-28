@@ -50,7 +50,6 @@ public class Server
             } catch (SocketTimeoutException timeout) {
 
             }
-
         }
     }
 } // End of Class

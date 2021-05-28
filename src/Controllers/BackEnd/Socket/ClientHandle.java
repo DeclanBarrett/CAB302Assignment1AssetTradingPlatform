@@ -17,10 +17,7 @@ import java.net.SocketTimeoutException;
 import java.util.List;
 
 /**
- * @author Brad Kent
- * @author n10632999@qut.edu.au
- * @version 1.2
- * @since 0.3
+ * Handles information sent by the client on the server side.
  */
 public class ClientHandle implements Runnable
 {
@@ -28,6 +25,7 @@ public class ClientHandle implements Runnable
     final Socket connection;
     private int thisId;
     private InformationGrabber dbRequest;
+
 
     public ClientHandle(Socket connection, InformationGrabber grabber)
     {
@@ -47,9 +45,6 @@ public class ClientHandle implements Runnable
         int i = 0;
         System.out.println(connection.toString());
 
-        //TODO: Put socket.getInputStream().available in a while for threads!
-        //TODO: BufferedInputStream
-
         try {
             ObjectInputStream in = new ObjectInputStream(connection.getInputStream());
             ObjectOutputStream out = new ObjectOutputStream(connection.getOutputStream());
@@ -66,7 +61,7 @@ public class ClientHandle implements Runnable
             in.close();
             connection.close();
         } catch (SocketException g) {
-            System.out.println("Socket is fucked");
+            System.out.println("Socket is not working");
             System.exit(1);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -77,6 +72,12 @@ public class ClientHandle implements Runnable
 
     }
 
+    /**
+     * Handle commands recieved from the client socket.
+     * @param inputStream - information from the client socket
+     * @param outputStream - information to send to the client socket
+     * @param command - the request type sent by the client socket.
+     */
     public void handleCommand(ObjectInputStream inputStream, ObjectOutputStream outputStream, RequestType command)  {
         System.out.println("NEW HANDLE COMMAND: " + command.toString());
         switch(command)
@@ -112,9 +113,7 @@ public class ClientHandle implements Runnable
             }
             break;
 
-            // Not too sure the protocol with these login tokens, to complete later.
             case RequestLogin: {
-
                 try
                 {
                     final String username = (String) inputStream.readObject();
@@ -133,7 +132,7 @@ public class ClientHandle implements Runnable
                 catch (Exception e) {
                     e.printStackTrace();
                     try {
-                        outputStream.writeObject(RequestType.SendErrorCode);
+                        outputStream.writeObject(RequestType.SendAuthenticationError);
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }
@@ -286,12 +285,10 @@ public class ClientHandle implements Runnable
 
                     synchronized (dbRequest)
                     {
-
                         handle.verifyToken(token);
                         List<Order> orders = dbRequest.getAllOrders();
                         outputStream.writeObject((RequestType.SendOrders));
                         outputStream.writeObject(orders);
-
                     }
                 } catch (Exception e) {
                     try {

@@ -109,7 +109,6 @@ public class ClientSocket implements IDataSource
                 System.out.println(jwt);
                 return jwt;
             }
-
             errorHandling(response);
 
         } catch (ServerException e) {
@@ -117,7 +116,7 @@ public class ClientSocket implements IDataSource
         } catch (AuthenticationException e) {
             throw new AuthenticationException(e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
         return null;

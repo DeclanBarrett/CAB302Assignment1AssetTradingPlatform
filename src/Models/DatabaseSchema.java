@@ -63,7 +63,6 @@ public class DatabaseSchema
 
     public DatabaseSchema(Connection connection) {
         try {
-
             Statement st = connection.createStatement();
             st.execute(CREATE_TABLE_Assets);
             st.execute(CREATE_TABLE_OrganisationalUnit);

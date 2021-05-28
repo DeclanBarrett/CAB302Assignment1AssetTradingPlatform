@@ -3,6 +3,9 @@ package Controllers.BackEnd.Processing;
 import Controllers.Exceptions.AuthenticationException;
 import Models.InformationGrabber;
 
+/**
+ * Authenticates login requests and ensure correct values are entered.
+ */
 public class LoginChecker {
 
     InformationGrabber database;

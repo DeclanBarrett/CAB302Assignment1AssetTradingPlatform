@@ -1,5 +1,8 @@
 package Controllers.BackEnd;
 
+/**
+ * Types of requests
+ */
 public enum RequestType {
     RequestSalt,
     SendSalt,

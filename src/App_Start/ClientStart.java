@@ -2,13 +2,10 @@ package App_Start;
 
 import Controllers.Utils.UtilSceneChanger;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Creates st age for the UI, contains basic stage information
+ * Creates stage for the UI, contains basic stage information
  */
 public class ClientStart extends Application
 {

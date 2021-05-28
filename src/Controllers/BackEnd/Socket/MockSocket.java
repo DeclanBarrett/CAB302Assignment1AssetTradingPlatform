@@ -23,8 +23,7 @@ public class MockSocket implements IDataSource {
     private ArrayList<java.lang.String> assetTypesTable = new ArrayList<>();
     private ArrayList<Trade> tradesTable = new ArrayList<>();
 
-    /**
-     * TODO finish implementing IDataSource
+    /*
      * Populating the mock database with values
      */
     protected MockSocket() {

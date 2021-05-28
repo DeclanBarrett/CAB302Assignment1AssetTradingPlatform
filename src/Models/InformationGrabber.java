@@ -3,6 +3,7 @@ package Models;
 import Controllers.BackEnd.AccountType;
 import Controllers.BackEnd.NetworkObjects.*;
 import Controllers.BackEnd.OrderType;
+import Controllers.Exceptions.ServerException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -127,6 +128,7 @@ public class  InformationGrabber {
             {
                 addUser.executeQuery();
             }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -357,7 +359,7 @@ public class  InformationGrabber {
             }
 
             return "Successfully updated organisation asset";
-        } catch (SQLException throwables) {
+        } catch (SQLException | ServerException throwables) {
             throwables.printStackTrace();
         }
         return null;
@@ -518,8 +520,7 @@ public class  InformationGrabber {
      * Retrieve salt from database
      * @param username salt attached to this users password
      */
-    public String getSalt(String username)
-    {
+    public String getSalt(String username) throws ServerException {
         String result = null;
         try
         {
@@ -535,7 +536,10 @@ public class  InformationGrabber {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            throw new ServerException("No salt found.");
+
         }
+
         return result;
     }
 
@@ -545,7 +549,7 @@ public class  InformationGrabber {
      * @param assetType
      * @return
      */
-    public Integer getOrganisationIndividualAsset(String orgName, String assetType) {
+    public Integer getOrganisationIndividualAsset(String orgName, String assetType) throws ServerException {
         try {
             connection = DatabaseConnection.getInstance();
 
@@ -561,7 +565,8 @@ public class  InformationGrabber {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            throw new ServerException("Get organisational assets not found.");
+
         }
 
         return null;
@@ -642,7 +647,7 @@ public class  InformationGrabber {
                         ResultSet assetsRs = getOrganisationAssets.executeQuery();
                         while (assetsRs.next()) {
                             // Order is different from Database Order
-                            orgAssets.put(assetsRs.getString("AssetName"), rs.getInt("AssetQuantity"));
+                            orgAssets.put(assetsRs.getString("AssetName"), assetsRs.getInt("AssetQuantity"));
                         }
                     }
 
@@ -1064,5 +1069,4 @@ public class  InformationGrabber {
         connection.rollback();
         connection.setAutoCommit(true);
     }
-
 }

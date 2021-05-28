@@ -119,7 +119,6 @@ public class DatabaseDummyValues
             "INSERT INTO Orders VALUES (16, 'Research',  7, 20, 'Casino Chips', 100, 'BUY')",
             "INSERT INTO Orders VALUES (17, 'Research',  8, 20, 'Casino Chips', 100, 'BUY')",
             "INSERT INTO Orders VALUES (18, 'Research',  9, 30, 'Casino Chips', 100, 'BUY')",
-
     };
 
     //=========== Trade Delete Data =============//

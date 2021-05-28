@@ -1,5 +1,8 @@
 package Controllers.Exceptions;
 
+/**
+ * Exception thrown when server fails.
+ */
 public class ServerException extends Exception {
     /**
      * SetupServer exception message.
