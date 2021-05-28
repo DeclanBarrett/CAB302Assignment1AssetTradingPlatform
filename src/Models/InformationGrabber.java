@@ -409,6 +409,7 @@ public class  InformationGrabber {
 
         try
         {
+            connection = DatabaseConnection.getInstance();
             getUser = connection.prepareStatement(GET_USER);
             getUser.setString(1,username);
 
@@ -1027,6 +1028,7 @@ public class  InformationGrabber {
     public String deleteOrder(int OrderID) {
         try
         {
+            connection = DatabaseConnection.getInstance();
             deleteOrder = connection.prepareStatement(DELETE_ORDER);
             deleteOrder.setInt(1, OrderID);
 
