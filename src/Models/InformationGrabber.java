@@ -5,10 +5,7 @@ import Controllers.BackEnd.NetworkObjects.*;
 import Controllers.BackEnd.OrderType;
 import Controllers.Exceptions.ServerException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -471,7 +468,7 @@ public class  InformationGrabber {
      * @param username - username of requested user.
      * @return the User with no login info included
      */
-    public UserInfo getUserInfo(String username) {
+    public UserInfo getUserInfo(String username)  {
         UserInfo user;
         try
         {
@@ -489,7 +486,8 @@ public class  InformationGrabber {
                 return user;
             }
 
-        } catch (SQLException throwables) {
+        }
+        catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
@@ -574,7 +572,6 @@ public class  InformationGrabber {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new ServerException("Get organisational assets not found.");
-
         }
 
         return null;

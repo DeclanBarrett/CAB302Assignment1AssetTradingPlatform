@@ -6,6 +6,9 @@ import Models.DatabaseSchema;
 
 import java.sql.Connection;
 
+/**
+ *
+ */
 public class SetupServer {
     public static void main(String[] args)
     {

@@ -6,6 +6,7 @@ import Controllers.BackEnd.Processing.JWTHandler;
 import Controllers.BackEnd.Processing.LoginChecker;
 import Controllers.BackEnd.Processing.OrderExecutor;
 import Controllers.BackEnd.RequestType;
+import Controllers.Exceptions.AuthenticationException;
 import Models.InformationGrabber;
 
 import java.io.IOException;
@@ -78,7 +79,7 @@ public class ClientHandle implements Runnable
      * @param outputStream - information to send to the client socket
      * @param command - the request type sent by the client socket.
      */
-    public void handleCommand(ObjectInputStream inputStream, ObjectOutputStream outputStream, RequestType command)  {
+    public void handleCommand(ObjectInputStream inputStream, ObjectOutputStream outputStream, RequestType command) throws IOException {
         System.out.println("NEW HANDLE COMMAND: " + command.toString());
         switch(command)
         {
@@ -109,7 +110,6 @@ public class ClientHandle implements Runnable
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-
             }
             break;
 
@@ -128,19 +128,11 @@ public class ClientHandle implements Runnable
                         outputStream.writeObject(token);
                         System.out.println("Finished sending the token");
                     }
-                }
-                catch (Exception e) {
+                } catch (AuthenticationException e) {
                     e.printStackTrace();
-                    try {
-                        outputStream.writeObject(RequestType.SendAuthenticationError);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
-                        outputStream.writeObject("Login failed");
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
+                    outputStream.writeObject(RequestType.SendAuthenticationError);
+                    outputStream.writeObject("Login could not be authenticated");
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -161,13 +153,14 @@ public class ClientHandle implements Runnable
                         outputStream.writeObject(RequestType.SendSuccessMessage);
                         outputStream.writeObject("Reset password successful");
                     }
-                } catch (Exception e) {
+                } catch(AuthenticationException a)
+                {
+                    outputStream.writeObject(RequestType.SendAuthenticationError);
+                    outputStream.writeObject("Login could not be authenticated for password reset");
+                }
+                catch (Exception e) {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Reset password failed");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -178,31 +171,25 @@ public class ClientHandle implements Runnable
             break;
 
             case RequestUserInfo: {
-                try
-                {
+                try {
                     System.out.println("Request User Info");
                     JWTHandler handle = new JWTHandler();
                     String token = (String) inputStream.readObject();
                     String username = (String) inputStream.readObject();
 
-                    synchronized (dbRequest)
-                    {
+                    synchronized (dbRequest) {
 
                         handle.verifyToken(token);
 
                         UserInfo user = dbRequest.getUserInfo(username);
                         outputStream.writeObject(RequestType.SendUserInfo);
                         outputStream.writeObject(user);
-
                     }
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     e.printStackTrace();
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("User Info request failed");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -229,13 +216,14 @@ public class ClientHandle implements Runnable
                         outputStream.writeObject(orgUnit);
                     }
 
-                } catch (Exception e) {
+                }catch(AuthenticationException f)
+                {
+                    outputStream.writeObject(RequestType.SendAuthenticationError);
+                    outputStream.writeObject("Authentication failed");
+                }
+                catch (Exception e) {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Organisation info request failed.");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -264,10 +252,6 @@ public class ClientHandle implements Runnable
                 } catch (Exception e) {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Organisation order request failed.");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -293,10 +277,6 @@ public class ClientHandle implements Runnable
                 } catch (Exception e) {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Get all orders request failed");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -322,10 +302,6 @@ public class ClientHandle implements Runnable
                 } catch (Exception e) {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Get all buy orders request failed");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -353,10 +329,6 @@ public class ClientHandle implements Runnable
                 } catch (Exception e) {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Get all sell orders request failed");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -382,13 +354,14 @@ public class ClientHandle implements Runnable
                         outputStream.writeObject(RequestType.SendSuccessMessage);
                         outputStream.writeObject("Order added");
                     }
-                } catch (Exception e) {
+                }catch (AuthenticationException e)
+                {
+                    outputStream.writeObject(RequestType.SendAuthenticationError);
+                    outputStream.writeObject("Could not be authenticated");
+                }
+                catch (Exception e) {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Add order request failed");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -413,17 +386,9 @@ public class ClientHandle implements Runnable
                         outputStream.writeObject(RequestType.SendSuccessMessage);
                         outputStream.writeObject("Order deleted");
                     }
-                } catch (Exception e) {
-                    try {
-                        outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
-                        outputStream.writeObject("Remove order request failed");
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
+                } catch (AuthenticationException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
             }
@@ -443,13 +408,15 @@ public class ClientHandle implements Runnable
                         outputStream.writeObject(RequestType.SendAssetTypes);
                         outputStream.writeObject(assetTypes);
                     }
-                } catch (Exception e) {
+                } catch (AuthenticationException f)
+                {
+                    outputStream.writeObject(RequestType.SendAuthenticationError);
+                    outputStream.writeObject("Could not authenticate");
+                }
+
+                catch (Exception e) {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Failed to get asset types.");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -472,13 +439,15 @@ public class ClientHandle implements Runnable
                         outputStream.writeObject(RequestType.SendTradeHistory);
                         outputStream.writeObject(tradeHistory);
                     }
-                } catch (Exception e) {
+                }catch(AuthenticationException exception)
+                {
+                    outputStream.writeObject(RequestType.SendAuthenticationError);
+                    outputStream.writeObject("Could not authenticate.");
+                }
+
+                catch (Exception e) {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Failed to get trade history.");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -503,10 +472,6 @@ public class ClientHandle implements Runnable
                 } catch (Exception e) {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Failed to get trade history.");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -532,13 +497,13 @@ public class ClientHandle implements Runnable
                         outputStream.writeObject(RequestType.SendSuccessMessage);
                         outputStream.writeObject("User was successfully added to the database.");
                     }
-                } catch (Exception e) {
+                }catch(AuthenticationException exception){
+                    outputStream.writeObject(RequestType.SendAuthenticationError);
+                    outputStream.writeObject("Could not authenticate.");
+                }
+                catch (Exception e) {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Failed to add user.");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -565,10 +530,6 @@ public class ClientHandle implements Runnable
                 } catch (Exception e) {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("User request failed.");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -599,13 +560,14 @@ public class ClientHandle implements Runnable
                         outputStream.writeObject("Users password was updated successfully.");
 
                     }
-                } catch (Exception e) {
+                } catch(AuthenticationException f)
+                {
+                    outputStream.writeObject(RequestType.SendAuthenticationError);
+                    outputStream.writeObject("Authentication failed");
+                }
+                catch (Exception e) {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Failed to update user's password.");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -630,15 +592,15 @@ public class ClientHandle implements Runnable
                         dbRequest.updateUserAccountType(username, accountType);
                         outputStream.writeObject(RequestType.SendSuccessMessage);
                         outputStream.writeObject("Users account type was updated successfully.");
-
                     }
-                } catch (Exception e) {
+                } catch(AuthenticationException exception)
+                {
+                    outputStream.writeObject(RequestType.SendAuthenticationError);
+                    outputStream.writeObject("Authentication failed");
+                }
+                catch (Exception e) {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Failed to update user account type.");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -696,7 +658,12 @@ public class ClientHandle implements Runnable
                         outputStream.writeObject(RequestType.SendSuccessMessage);
                         outputStream.writeObject("Successfully added new asset to the database.");
                     }
-                } catch (Exception e)
+                } catch(AuthenticationException exception)
+                {
+                    outputStream.writeObject(RequestType.SendAuthenticationError);
+                    outputStream.writeObject("Authentication failed");
+                }
+                catch (Exception e)
                 {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
@@ -728,14 +695,15 @@ public class ClientHandle implements Runnable
                         outputStream.writeObject(RequestType.SendSuccessMessage);
                         outputStream.writeObject("Successfully added new organisational unit to the database.");
                     }
-                } catch (Exception e)
+                } catch(AuthenticationException exception)
+                {
+                    outputStream.writeObject(RequestType.SendAuthenticationError);
+                    outputStream.writeObject("Authentication failed");
+                }
+                catch (Exception e)
                 {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Failed to add new organisational unit.");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -759,15 +727,15 @@ public class ClientHandle implements Runnable
                         outputStream.writeObject(RequestType.SendAllOrganisations);
                         outputStream.writeObject(OrgUnitList);
                     }
+                } catch(AuthenticationException exception)
+                {
+                    outputStream.writeObject(RequestType.SendAuthenticationError);
+                    outputStream.writeObject("Authentication failed");
                 }
                 catch (Exception e)
                 {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("All organisational units are returned.");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -795,19 +763,19 @@ public class ClientHandle implements Runnable
                         outputStream.writeObject("Successfully added new organisational unit to the database.");
                     }
                 }
+                catch(AuthenticationException exception)
+                {
+                    outputStream.writeObject(RequestType.SendAuthenticationError);
+                    outputStream.writeObject("Authentication failed");
+                }
                 catch (Exception e)
                 {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Failed to update user's organisational unit.");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }
-                    e.printStackTrace();
                 }
             }
             break;
@@ -828,14 +796,15 @@ public class ClientHandle implements Runnable
                         outputStream.writeObject(RequestType.SendSuccessMessage);
                         outputStream.writeObject("Successfully added new credit amount to organisational unit");
                     }
-                } catch (Exception e)
+                }catch(AuthenticationException exception)
+                {
+                    outputStream.writeObject(RequestType.SendAuthenticationError);
+                    outputStream.writeObject("Authentication failed");
+                }
+                catch (Exception e)
                 {
                     try {
                         outputStream.writeObject(RequestType.SendErrorCode);
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
                         outputStream.writeObject("Failed to update user's organisational unit.");
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
@@ -845,6 +814,5 @@ public class ClientHandle implements Runnable
             }
             break;
         }
-
     }
 }

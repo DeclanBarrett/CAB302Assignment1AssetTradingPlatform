@@ -78,9 +78,9 @@ public class ClientSocket implements IDataSource
             }
 
         } catch (ServerException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             throw new ServerException(e.getMessage());
-        } catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
             throw new ServerException(NETWORK_ERROR_MESSAGE);
         }
@@ -208,7 +208,6 @@ public class ClientSocket implements IDataSource
             if (response == RequestType.SendOrganisation) {
                 return (OrganisationalUnit) inputStream.readObject();
             }
-
             errorHandling(response);
 
         } catch (ServerException e) {
@@ -538,7 +537,6 @@ public class ClientSocket implements IDataSource
             if (response == RequestType.SendTradeHistory) {
                 return (List<Trade>) inputStream.readObject();
             }
-
             errorHandling(response);
 
         } catch (ServerException e) {
@@ -894,7 +892,6 @@ public class ClientSocket implements IDataSource
             if (response == RequestType.SendSuccessMessage) {
                 return (String) inputStream.readObject();
             }
-
             errorHandling(response);
 
         } catch (ServerException e) {
