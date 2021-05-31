@@ -4,6 +4,7 @@ import App_Start.SetupServer;
 import Controllers.BackEnd.AccountType;
 import Controllers.BackEnd.NetworkObjects.*;
 import Controllers.BackEnd.OrderType;
+import Controllers.Exceptions.ServerException;
 import Models.InformationGrabber;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +14,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestInformationGrabber
 {
@@ -95,9 +97,13 @@ public class TestInformationGrabber
     }
     @Test
     void TestUpdateOrganisationAsset() {
-        database.updateOrganisationAsset("Finance", "Casino Chips", 599);
-        //int assetQuantity = database.getOrganisationIndividualAsset("Finance", "Casino Chips");
-        //assertEquals(assetQuantity, 599);
+        try {
+            database.updateOrganisationAsset("Finance", "Casino Chips", 599);
+            int assetQuantity = database.getOrganisationIndividualAsset("Finance", "Casino Chips");
+            assertEquals(assetQuantity, 599);
+        } catch (ServerException e) {
+            e.printStackTrace();
+        }
     }
     @Test
     void TestGetNonce() {
@@ -130,7 +136,11 @@ public class TestInformationGrabber
     }
     @Test
     void TestGetSalt() {
-        //assertEquals(database.getSalt("Ethan Testing"), "123456");
+        try {
+            assertEquals(database.getSalt("Ethan Testing"), "123456");
+        } catch (ServerException e) {
+            e.printStackTrace();
+        }
     }
     @Test
     void TestGetOrganisation() {
