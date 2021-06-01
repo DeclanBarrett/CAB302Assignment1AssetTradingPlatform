@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * The database schema SQL queries
+ */
 public class DatabaseSchema
 {
     private static final String CREATE_TABLE_OrganisationalUnit =

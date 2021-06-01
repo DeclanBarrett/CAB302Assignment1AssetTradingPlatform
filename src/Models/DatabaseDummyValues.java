@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Base database values to allow for database testing.
+ */
 public class DatabaseDummyValues
 {
     //=========== User Dummy Data =============//

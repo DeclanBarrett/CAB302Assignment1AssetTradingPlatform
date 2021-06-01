@@ -18,7 +18,9 @@ public class Server
 
     private static final int SOCKET_ACCEPT_TIMEOUT = 100;
 
-    // Start and run the SetupServer
+    /**
+     * Start and run the SetupServer
+      */
     public static void main(String[] args)
     {
         Server server = new Server();

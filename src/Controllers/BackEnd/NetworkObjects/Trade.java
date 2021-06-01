@@ -16,6 +16,16 @@ public class Trade implements Serializable, Comparable<Trade> {
     String SellerOrgName;
     Date TradeDateMilSecs;
 
+    /**
+     * Trade constructor
+     * @param tradeID - Identification number of the trade.
+     * @param assetName - name of the asset being traded.
+     * @param assetQuantity - quantity of the asset being traded
+     * @param assetPrice - price of the asset being traded
+     * @param buyerOrgName - name of the buying organisational unit
+     * @param sellerOrgName - name of the selling organisational unit.
+     * @param tradeDateMilSecs - the trade date in milliseconds
+     */
     public Trade(Integer tradeID, String assetName, Integer assetQuantity, Double assetPrice, String buyerOrgName, String sellerOrgName, Date tradeDateMilSecs) {
         TradeID = tradeID;
         AssetName = assetName;
