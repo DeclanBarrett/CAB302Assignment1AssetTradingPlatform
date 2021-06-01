@@ -11,7 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
+/**
+ * Tests the Order Executor class
+ */
 public class TestOrderExecutor {
 
     static InformationGrabber database;

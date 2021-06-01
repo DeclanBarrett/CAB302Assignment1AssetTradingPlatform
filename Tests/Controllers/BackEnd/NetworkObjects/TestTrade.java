@@ -1,6 +1,5 @@
 package Controllers.BackEnd.NetworkObjects;
 
-import Controllers.BackEnd.NetworkObjects.Trade;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +7,9 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests the trade class
+ */
 public class TestTrade {
 
     Trade trade;

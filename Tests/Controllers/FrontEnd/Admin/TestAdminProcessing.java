@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+/**
+ * Tests the Admin Processing class
+ */
 public class TestAdminProcessing {
 
     AdminProcessing processing;

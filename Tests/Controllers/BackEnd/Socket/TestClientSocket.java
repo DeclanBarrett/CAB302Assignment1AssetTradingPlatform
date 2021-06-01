@@ -17,6 +17,9 @@ import java.io.OutputStream;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * Tests the Client Socket class
+ */
 public class TestClientSocket{
 
     static String token;

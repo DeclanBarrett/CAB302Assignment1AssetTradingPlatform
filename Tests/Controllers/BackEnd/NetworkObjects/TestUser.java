@@ -8,6 +8,9 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests the user class
+ */
 public class TestUser {
 
     User user;

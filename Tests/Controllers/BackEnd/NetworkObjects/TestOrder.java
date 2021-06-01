@@ -8,6 +8,9 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests the order class
+ */
 public class TestOrder {
 
     Order order;

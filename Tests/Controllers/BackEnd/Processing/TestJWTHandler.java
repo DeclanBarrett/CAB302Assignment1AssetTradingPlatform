@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests the JWT Handler class
+ */
 public class TestJWTHandler {
 
     JWTHandler jwtHandler;

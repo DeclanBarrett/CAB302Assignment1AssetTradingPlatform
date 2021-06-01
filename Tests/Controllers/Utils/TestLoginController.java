@@ -3,17 +3,19 @@ package Controllers.FrontEnd.Login;
 import Controllers.BackEnd.AccountType;
 import Controllers.BackEnd.NetworkObjects.UserInfo;
 import Controllers.BackEnd.Processing.JWTHandler;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.Exceptions.AuthenticationException;
 import Controllers.Exceptions.ServerException;
-import Controllers.BackEnd.Socket.ClientSocket;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Tests the Login Controller class
+ */
 public class TestLoginController {
 
     LoginController loginController;
