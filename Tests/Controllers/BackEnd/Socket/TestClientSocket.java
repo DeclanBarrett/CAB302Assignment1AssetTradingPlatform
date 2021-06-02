@@ -343,13 +343,13 @@ public class TestClientSocket{
 
     @Test
     public void UpdateUserPassword() throws AuthenticationException, ServerException {
-        ClientSocket.getInstance().UpdateUserPassword(token, "User 10", "b717415eb5e699e4989ef3e2c4e9cbf7", "123456");
+        ClientSocket.getInstance().UpdateUserPassword(token, "User 10", "b717415eb5e699e4989ef3e2c4e9cbf7");
     }
 
     @Test
     public void UpdateUserPasswordAuth() {
         AuthenticationException exception = assertThrows(AuthenticationException.class, () ->{
-            ClientSocket.getInstance().UpdateUserPassword("Bad Token", "User 10", "b717415eb5e699e4989ef3e2c4e9cbf7", "123456");
+            ClientSocket.getInstance().UpdateUserPassword("Bad Token", "User 10", "b717415eb5e699e4989ef3e2c4e9cbf7");
         });
     }
 

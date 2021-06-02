@@ -645,7 +645,7 @@ public class ClientSocket implements IDataSource
     }
 
     @Override
-    public String UpdateUserPassword(String token, String username, String hashedPassword, String salt) throws AuthenticationException, ServerException {
+    public String UpdateUserPassword(String token, String username, String hashedPassword) throws AuthenticationException, ServerException {
         try {
             //Tell the server we need it to perform a request type function
             outputStream.writeObject(RequestType.RequestUpdateUserPassword);
@@ -654,7 +654,7 @@ public class ClientSocket implements IDataSource
             outputStream.writeObject(token);
             outputStream.writeObject(username);
             outputStream.writeObject(hashedPassword);
-            outputStream.writeObject(salt);
+            //outputStream.writeObject(salt);
             outputStream.flush();
 
             //Get the return type

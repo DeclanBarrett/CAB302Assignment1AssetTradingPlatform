@@ -43,6 +43,9 @@ public class LoginController {
         UtilLoginSecurity loginSecurity = new UtilLoginSecurity();
         String hashPassword = loginSecurity.generateHashedPassword(username, password);
 
+        currentLogin = null;
+        currentUser = null;
+
         currentLogin = ClientSocket.getInstance().AttemptLogin(username, hashPassword);
 
         if (isCurrentLogin()) {

@@ -79,7 +79,7 @@ public class TestUtilLoginSecurity {
 
     @Test
     public void TestGenerateBadUsername() {
-        AuthenticationException exception = assertThrows(AuthenticationException.class, () -> {
+        ServerException exception = assertThrows(ServerException.class, () -> {
             utilLoginSecurity.generateHashedPassword("Bad User", "qwerty");
         });
 

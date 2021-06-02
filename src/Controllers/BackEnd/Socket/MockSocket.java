@@ -283,10 +283,10 @@ public class MockSocket implements IDataSource {
     }
 
     @Override
-    public java.lang.String UpdateUserPassword(String token, java.lang.String username, java.lang.String hashedPassword, java.lang.String salt) throws AuthenticationException, ServerException {
+    public java.lang.String UpdateUserPassword(String token, java.lang.String username, java.lang.String hashedPassword) throws AuthenticationException, ServerException {
         for (User currentUser: userTable) {
             if (currentUser.getUsername().equals(username)) {
-                User updatedUser = new User(currentUser.getUsername(), hashedPassword, currentUser.getAccountType(), currentUser.getOrganisationalUnit(), salt);
+                User updatedUser = new User(currentUser.getUsername(), hashedPassword, currentUser.getAccountType(), currentUser.getOrganisationalUnit(), currentUser.getSalt());
                 userTable.remove(currentUser);
                 userTable.add(updatedUser);
                 return "Success";

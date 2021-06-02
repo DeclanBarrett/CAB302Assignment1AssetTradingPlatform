@@ -1,8 +1,13 @@
 package Controllers.FrontEnd.Admin;
 
+import App_Start.Server;
+import App_Start.SetupServer;
 import Controllers.FrontEnd.Login.LoginController;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,9 +17,32 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TestAdminProcessing {
 
     AdminProcessing processing;
+    LoginController loginController;
+
+    @BeforeAll
+    public static void ServerInstance() {
+        SetupServer setup = new SetupServer();
+        setup.setsUpTheServer();
+        Server server = new Server();
+        try {
+            new Thread(() -> {
+                try {
+                    server.startServer();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        } catch (Exception e) {
+            System.out.println("Someones poisoned the waterhole");
+        }
+    }
 
     @BeforeEach
-    public void ConstructAdminProcessing() {
+    public void ConstructAdminProcessing() throws Exception {
+        loginController = new LoginController();
+        loginController.AttemptLogin("Ethan Testing", "qwerty");
         processing = new AdminProcessing();
     }
 
@@ -80,16 +108,15 @@ public class TestAdminProcessing {
             processing.editUserPassword("Bad User", "qwerty");
         });
 
-        String actualMessage = exception.getMessage();
+        //String actualMessage = exception.getMessage();
 
-        assertTrue(actualMessage.contains(""));
+        //assertTrue(actualMessage.contains(""));
     }
 
     @Test
     public void TestEditPasswordHash() throws Exception {
         processing.editUserPassword("User 1", "12345");
-        LoginController controller = new LoginController();
-        controller.AttemptLogin("User 1", "12345");
+        loginController.AttemptLogin("User 1", "12345");
 
     }
 }

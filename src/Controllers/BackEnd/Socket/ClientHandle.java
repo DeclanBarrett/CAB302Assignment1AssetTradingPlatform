@@ -101,7 +101,7 @@ public class ClientHandle implements Runnable
                         } catch (Exception e) {
                             e.printStackTrace();
                             outputStream.writeObject(RequestType.SendErrorCode);
-                            outputStream.writeObject("Salt not found.");
+                            outputStream.writeObject("USERNAME OR PASSWORD INCORRECT");
                         }
                     }
                 }
@@ -492,6 +492,9 @@ public class ClientHandle implements Runnable
                     synchronized (dbRequest)
                     {
                         handle.verifyToken(token);
+                        if (null == dbRequest.getOrganisation(user.getOrganisationalUnit())) {
+                            throw new Exception();
+                        }
                         dbRequest.insertUser(user.getUsername(), user.getOrganisationalUnit(), user.getAccountType(),
                                              user.getPassword(), user.getSalt());
                         outputStream.writeObject(RequestType.SendSuccessMessage);
@@ -549,7 +552,7 @@ public class ClientHandle implements Runnable
                     String hashedPassword = (String) inputStream.readObject();
 
                     // leaving this in temporarily so it doesnt mess up the read objects later down the track.
-                    String salt = (String) inputStream.readObject();
+                    //String salt = (String) inputStream.readObject();
 
                     synchronized (dbRequest)
                     {

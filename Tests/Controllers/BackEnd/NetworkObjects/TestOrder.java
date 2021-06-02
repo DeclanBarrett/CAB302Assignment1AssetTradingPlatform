@@ -64,7 +64,7 @@ public class TestOrder {
     @Test
     public void TestGetDate() {
         Date date = order.getDate();
-        assertEquals(new Date(), date);
+        assertTrue(((new Date()).getTime() >= date.getTime()));
     }
 
     @Test
