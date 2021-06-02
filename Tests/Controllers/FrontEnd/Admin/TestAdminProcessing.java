@@ -61,7 +61,6 @@ public class TestAdminProcessing {
     @Test
     public void TestEditPasswordStandard() throws Exception {
         processing.editUserPassword("User 1", "12345");
-
     }
 
     @Test

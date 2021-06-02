@@ -152,7 +152,6 @@ public class OrderExecutor
             if (sortedSellOrder.size() >= 0) {
                 Collections.sort(sortedSellOrder);
 
-
                 //Go through the orders, subtracting the quantity till their is none left
                 for (int sellOrderCounter = 0; sellOrderCounter < sortedSellOrder.size(); sellOrderCounter++) {
 
@@ -173,11 +172,8 @@ public class OrderExecutor
                     }
                 }
             }
-
             //Add buy order with buyAssetQuantity to database
             generateOrder(buyOrder, buyAssetQuantity);
-
-
         } else {
             throw new ServerException("ORGANISATION TOTAL ORDER COST IS TOO HIGH");
         }

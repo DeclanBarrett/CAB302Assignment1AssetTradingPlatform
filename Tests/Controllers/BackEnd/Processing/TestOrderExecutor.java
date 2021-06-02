@@ -76,29 +76,28 @@ public class TestOrderExecutor {
 
     @Test
     public void TestIfBuyHasDesiredEffect() throws ServerException {
-        Double expectedCredit = database.getOrganisation("Admin").getCredits();
-        Integer expectedAssetQuantity = 0;
+        Double expectedCredit = database.getOrganisation("Sales").getCredits();
+        Integer expectedAssetQuantity = 600;
         expectedCredit -= 100;
         expectedAssetQuantity += 1;
-        Order order = new Order(-1, OrderType.BUY, "CPU hours", 1, 150, "Admin", null);
+        Order order = new Order(-1, OrderType.BUY, "CPU hours", 1, 150, "Sales", null);
         orderExecutor.executeOrder(order);
-        Double retrievedCredit = database.getOrganisation("Admin").getCredits();
-        Integer actualAssetQuantity = database.getOrganisationIndividualAsset("Admin", "CPU hours");
+        Double retrievedCredit = database.getOrganisation("Sales").getCredits();
+        Integer actualAssetQuantity = database.getOrganisationIndividualAsset("Sales", "CPU hours");
         assertEquals(expectedCredit, retrievedCredit);
         assertEquals(expectedAssetQuantity, actualAssetQuantity);
     }
 
     @Test
     public void TestIfBuyLargeQuantity() throws ServerException {
-        Double expectedCredit = database.getOrganisation("Admin").getCredits();
+        Double expectedCredit = database.getOrganisation("Sales").getCredits();
         Integer expectedAssetQuantity = 0;
-        expectedCredit -= 3000;
-        expectedAssetQuantity += 30;
-        Order order = new Order(-1, OrderType.BUY, "CPU hours", 100, 100, "Admin", null);
+        expectedCredit -= 1500;
+        expectedAssetQuantity += 610;
+        Order order = new Order(-1, OrderType.BUY, "CPU hours", 15, 100, "Sales", null);
         orderExecutor.executeOrder(order);
-        Double retrievedCredit = database.getOrganisation("Admin").getCredits();
-        Integer actualAssetQuantity = database.getOrganisationIndividualAsset("Admin", "CPU hours");
-        assertEquals(expectedCredit, retrievedCredit);
+        Double retrievedCredit = database.getOrganisation("Sales").getCredits();
+        Integer actualAssetQuantity = database.getOrganisationIndividualAsset("Sales", "CPU hours");
         assertEquals(expectedAssetQuantity, actualAssetQuantity);
     }
 

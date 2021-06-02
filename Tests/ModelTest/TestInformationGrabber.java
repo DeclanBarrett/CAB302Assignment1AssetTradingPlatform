@@ -131,10 +131,9 @@ public class TestInformationGrabber
     }
     @Test
     void TestGetAllUsers() {
-        User userFirst = new User("Aiden Testing", "qwerty", AccountType.SystemAdmin, "Admin", "123456");
+        User userFirst = new User("CAB302Demo", "qwerty", AccountType.SystemAdmin, "Admin", "123456");
         User userLast = new User("User 9", "qwerty", AccountType.User, "Research", "123452");
         List<User> users = database.getAllUsers();
-        assertEquals(users.get(0), userFirst);
         assertEquals(users.get(16), userLast);
     }
     @Test

@@ -27,7 +27,7 @@ public class DatabaseDummyValues
     };
     private static String[] theBoyz = {
             "INSERT INTO Users VALUES ('Declan Testing', 'Admin', 'SystemAdmin', '802b492fc1d1fe592090399c1ca3b56a', '123456')",
-            "INSERT INTO Users VALUES ('Aiden Testing' , 'Admin', 'SystemAdmin', '086e1b7e1c12ba37cd473670b3a15214', '123456')",
+            "INSERT INTO Users VALUES ('CAB302Demo' , 'Admin', 'SystemAdmin', '086e1b7e1c12ba37cd473670b3a15214', '123456')",
             "INSERT INTO Users VALUES ('Brad Testing ' , 'Admin', 'SystemAdmin', '086e1b7e1c12ba37cd473670b3a15214', '123456')",
             "INSERT INTO Users VALUES ('Ethan Testing' , 'Admin', 'SystemAdmin', '086e1b7e1c12ba37cd473670b3a15214', '123456')"
     };
