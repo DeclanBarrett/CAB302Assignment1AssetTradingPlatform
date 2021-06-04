@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Small ant changes">
-      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/db.props" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/db.props" afterDir="false" />
     </list>
     <list id="c6b544b2-9c91-4d1b-b35b-12df5591b860" name="Revert &quot;Small ant changes&quot;" comment="Revert &quot;Small ant changes&quot;&#10;&#10;This reverts commit dac922df" />
@@ -64,19 +63,6 @@
     <setting file="file://$PROJECT_DIR$/src/Models/SQL.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Controllers/BackEnd/NetworkObjects/Order.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Models/InformationGrabber.java" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/build.xml">
-      <ranges>
-        <range start1="54" end1="136" start2="54" end2="54" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
-        <range start1="169" end1="172" start2="87" end2="87" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
-        <range start1="183" end1="184" start2="98" end2="98" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
-        <range start1="215" end1="216" start2="129" end2="129" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
-        <range start1="274" end1="276" start2="187" end2="188" changelist="37d7a831-97d7-4353-8e70-59661f6cf33b" />
-        <range start1="278" end1="279" start2="190" end2="190" changelist="37d7a831-97d7-4353-8e70-59661f6cf33b" />
-        <range start1="291" end1="292" start2="202" end2="203" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
-      </ranges>
-    </file>
   </component>
   <component name="ProjectId" id="1qoyBDtoSUT10ozznKhI69mkQcv" />
   <component name="ProjectLevelVcsManager">
@@ -291,27 +277,6 @@
       <workItem from="1620623791548" duration="624000" />
       <workItem from="1620624432090" duration="81000" />
       <workItem from="1621403761490" duration="6207000" />
-    </task>
-    <task id="LOCAL-00002" summary="Project Setup w/ Test Folder">
-      <created>1618359924035</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1618359924035</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Project Setup w/ MVC &amp; Test Folder">
-      <created>1618531659163</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1618531659163</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Project Setup w/ MVC &amp; Test Folder">
-      <created>1618531677739</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1618531677739</updated>
     </task>
     <task id="LOCAL-00005" summary="Project Setup w/ MVC &amp; Test Folder">
       <created>1618532162644</created>
@@ -635,7 +600,28 @@
       <option name="project" value="LOCAL" />
       <updated>1622796554110</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Small ant changes">
+      <created>1622796980335</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1622796980336</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Small ant changes">
+      <created>1622797161061</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1622797161061</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Small ant changes">
+      <created>1622797238470</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1622797238470</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
