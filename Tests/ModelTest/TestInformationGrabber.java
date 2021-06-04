@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -211,5 +212,15 @@ public class TestInformationGrabber
         Order secondOrder = new Order(2, OrderType.SELL, "Paper", 10, 100, "Finance", new Date());
         List <Order> orders = database.getOrderList();
         assertEquals(orders.get(0), secondOrder);
+    }
+
+    @Test
+    void TestRollbackTransaction() throws SQLException {
+        List <Order> orders = database.getOrderList();
+        database.beginTransaction();
+        database.deleteOrder(1);
+        database.rollBackTransaction();
+        List <Order> orders2 = database.getOrderList();
+        assertEquals(orders, orders2);
     }
 }

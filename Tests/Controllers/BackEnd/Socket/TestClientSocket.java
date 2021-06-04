@@ -132,6 +132,7 @@ public class TestClientSocket{
         });
     }
 
+
     @Test
     public void GetAllOrders() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().GetAllOrders(token);
@@ -299,6 +300,18 @@ public class TestClientSocket{
     public void GetTradeHistoryAuthException() {
         AuthenticationException exception = assertThrows(AuthenticationException.class, () -> {
             ClientSocket.getInstance().GetTradeHistory("Bad Token", "Paper");
+        });
+    }
+
+    @Test
+    public void GetAllTradeHistory() throws AuthenticationException, ServerException {
+        ClientSocket.getInstance().GetAllTradeHistory(token);
+    }
+
+    @Test
+    public void GetAllTradeHistoryAuthException() {
+        ServerException exception = assertThrows(ServerException.class, () -> {
+            ClientSocket.getInstance().GetAllTradeHistory("Bad Token");
         });
     }
 
