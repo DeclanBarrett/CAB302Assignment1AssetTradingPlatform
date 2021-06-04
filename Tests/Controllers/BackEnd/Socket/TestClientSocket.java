@@ -82,15 +82,6 @@ public class TestClientSocket{
         });
     }
 
-   /* @Test
-    public void GetSaltGeneralException() {
-
-        Exception exception = assertThrows(Exception.class, () -> {
-
-        })
-    }
-    */
-
     @Test
     public void AttemptLogin() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().AttemptLogin("User 1", "b717415eb5e699e4989ef3e2c4e9cbf7");
@@ -128,13 +119,6 @@ public class TestClientSocket{
         });
     }
 
-    // This throws an sql exception not a server exception.
-    /*@Test
-    public void GetOrganisationServerException() {
-        ServerException exception = assertThrows(ServerException.class, () -> {
-            ClientSocket.getInstance().GetOrganisation(token, "BadOrgName");
-        });
-    }*/
 
     @Test
     public void GetOrganisationOrders() throws AuthenticationException, ServerException {

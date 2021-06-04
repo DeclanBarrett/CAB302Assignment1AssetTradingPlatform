@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Fix of the main update that was missed a week ago.">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_05_2021_10_25_am_[Default_Changelist]/q" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_05_2021_10_25_am_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_05_2021_10_25_am_[Default_Changelist]1/q" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_05_2021_10_25_am_[Default_Changelist]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_05_2021_10_25_am__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_05_2021_12_22_pm_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_05_2021_12_22_pm__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2021_10_23_am_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2021_10_23_am__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_5_39_pm_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2021_5_39_pm__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_05_2021_12_24_pm_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_05_2021_12_24_pm__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Models/db.props" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/db.props" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +118,7 @@
       <command value="ClientStart" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.ClientStart">
+  <component name="RunManager" selected="JUnit.All in CAB302Assignment1AssetTradingPlatform">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -169,6 +157,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SetupServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="App_Start.SetupServer" />
+      <module name="CAB302Assignment1AssetTradingPlatform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="App_Start.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="All in CAB302Assignment1AssetTradingPlatform" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CAB302Assignment1AssetTradingPlatform" />
       <option name="PACKAGE_NAME" value="" />
@@ -191,35 +192,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestClientOrderManager" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CAB302Assignment1AssetTradingPlatform" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Controllers.FrontEnd.User.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Controllers.FrontEnd.User" />
-      <option name="MAIN_CLASS_NAME" value="Controllers.FrontEnd.User.TestClientOrderManager" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.ClientStart" />
+      <item itemvalue="Application.Server" />
       <item itemvalue="JUnit.Controllers.FrontEnd.Admin in CAB302Assignment1AssetTradingPlatform" />
       <item itemvalue="JUnit.All in CAB302Assignment1AssetTradingPlatform" />
-      <item itemvalue="Application.Server" />
-      <item itemvalue="JUnit.TestClientOrderManager" />
+      <item itemvalue="Application.SetupServer" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in CAB302Assignment1AssetTradingPlatform" />
-        <item itemvalue="JUnit.Controllers.FrontEnd.Admin in CAB302Assignment1AssetTradingPlatform" />
-        <item itemvalue="JUnit.TestClientOrderManager" />
         <item itemvalue="Application.ClientStart" />
         <item itemvalue="Application.Server" />
+        <item itemvalue="Application.SetupServer" />
+        <item itemvalue="JUnit.Controllers.FrontEnd.Admin in CAB302Assignment1AssetTradingPlatform" />
       </list>
     </recent_temporary>
   </component>
@@ -542,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622765994096</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Fix of the main update that was missed a week ago.">
+      <created>1622768912769</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1622768912769</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -594,7 +587,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Controllers/BackEnd/Processing/OrderExecutor.java</url>
-          <line>349</line>
+          <line>345</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
