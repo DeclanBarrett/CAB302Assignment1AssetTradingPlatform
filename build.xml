@@ -52,6 +52,88 @@
     <exclude name="**/?*.aj"/>
   </patternset>
   
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.corretto-15" value="${jdk.home.corretto-15}/bin"/>
+  <path id="jdk.classpath.corretto-15">
+    <fileset dir="${jdk.home.corretto-15}">
+      <include name="../jdk15.0.2_7!/java.base"/>
+      <include name="../jdk15.0.2_7!/java.compiler"/>
+      <include name="../jdk15.0.2_7!/java.datatransfer"/>
+      <include name="../jdk15.0.2_7!/java.desktop"/>
+      <include name="../jdk15.0.2_7!/java.instrument"/>
+      <include name="../jdk15.0.2_7!/java.logging"/>
+      <include name="../jdk15.0.2_7!/java.management"/>
+      <include name="../jdk15.0.2_7!/java.management.rmi"/>
+      <include name="../jdk15.0.2_7!/java.naming"/>
+      <include name="../jdk15.0.2_7!/java.net.http"/>
+      <include name="../jdk15.0.2_7!/java.prefs"/>
+      <include name="../jdk15.0.2_7!/java.rmi"/>
+      <include name="../jdk15.0.2_7!/java.scripting"/>
+      <include name="../jdk15.0.2_7!/java.se"/>
+      <include name="../jdk15.0.2_7!/java.security.jgss"/>
+      <include name="../jdk15.0.2_7!/java.security.sasl"/>
+      <include name="../jdk15.0.2_7!/java.smartcardio"/>
+      <include name="../jdk15.0.2_7!/java.sql"/>
+      <include name="../jdk15.0.2_7!/java.sql.rowset"/>
+      <include name="../jdk15.0.2_7!/java.transaction.xa"/>
+      <include name="../jdk15.0.2_7!/java.xml"/>
+      <include name="../jdk15.0.2_7!/java.xml.crypto"/>
+      <include name="../jdk15.0.2_7!/jdk.accessibility"/>
+      <include name="../jdk15.0.2_7!/jdk.aot"/>
+      <include name="../jdk15.0.2_7!/jdk.attach"/>
+      <include name="../jdk15.0.2_7!/jdk.charsets"/>
+      <include name="../jdk15.0.2_7!/jdk.compiler"/>
+      <include name="../jdk15.0.2_7!/jdk.crypto.cryptoki"/>
+      <include name="../jdk15.0.2_7!/jdk.crypto.ec"/>
+      <include name="../jdk15.0.2_7!/jdk.crypto.mscapi"/>
+      <include name="../jdk15.0.2_7!/jdk.dynalink"/>
+      <include name="../jdk15.0.2_7!/jdk.editpad"/>
+      <include name="../jdk15.0.2_7!/jdk.hotspot.agent"/>
+      <include name="../jdk15.0.2_7!/jdk.httpserver"/>
+      <include name="../jdk15.0.2_7!/jdk.incubator.foreign"/>
+      <include name="../jdk15.0.2_7!/jdk.incubator.jpackage"/>
+      <include name="../jdk15.0.2_7!/jdk.internal.ed"/>
+      <include name="../jdk15.0.2_7!/jdk.internal.jvmstat"/>
+      <include name="../jdk15.0.2_7!/jdk.internal.le"/>
+      <include name="../jdk15.0.2_7!/jdk.internal.opt"/>
+      <include name="../jdk15.0.2_7!/jdk.internal.vm.ci"/>
+      <include name="../jdk15.0.2_7!/jdk.internal.vm.compiler"/>
+      <include name="../jdk15.0.2_7!/jdk.internal.vm.compiler.management"/>
+      <include name="../jdk15.0.2_7!/jdk.jartool"/>
+      <include name="../jdk15.0.2_7!/jdk.javadoc"/>
+      <include name="../jdk15.0.2_7!/jdk.jcmd"/>
+      <include name="../jdk15.0.2_7!/jdk.jconsole"/>
+      <include name="../jdk15.0.2_7!/jdk.jdeps"/>
+      <include name="../jdk15.0.2_7!/jdk.jdi"/>
+      <include name="../jdk15.0.2_7!/jdk.jdwp.agent"/>
+      <include name="../jdk15.0.2_7!/jdk.jfr"/>
+      <include name="../jdk15.0.2_7!/jdk.jlink"/>
+      <include name="../jdk15.0.2_7!/jdk.jshell"/>
+      <include name="../jdk15.0.2_7!/jdk.jsobject"/>
+      <include name="../jdk15.0.2_7!/jdk.jstatd"/>
+      <include name="../jdk15.0.2_7!/jdk.localedata"/>
+      <include name="../jdk15.0.2_7!/jdk.management"/>
+      <include name="../jdk15.0.2_7!/jdk.management.agent"/>
+      <include name="../jdk15.0.2_7!/jdk.management.jfr"/>
+      <include name="../jdk15.0.2_7!/jdk.naming.dns"/>
+      <include name="../jdk15.0.2_7!/jdk.naming.rmi"/>
+      <include name="../jdk15.0.2_7!/jdk.net"/>
+      <include name="../jdk15.0.2_7!/jdk.nio.mapmode"/>
+      <include name="../jdk15.0.2_7!/jdk.sctp"/>
+      <include name="../jdk15.0.2_7!/jdk.security.auth"/>
+      <include name="../jdk15.0.2_7!/jdk.security.jgss"/>
+      <include name="../jdk15.0.2_7!/jdk.unsupported"/>
+      <include name="../jdk15.0.2_7!/jdk.unsupported.desktop"/>
+      <include name="../jdk15.0.2_7!/jdk.xml.dom"/>
+      <include name="../jdk15.0.2_7!/jdk.zipfs"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.corretto-15}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.corretto-15}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.corretto-15"/>
+  
   
   <!-- Project Libraries -->
   
@@ -68,7 +150,7 @@
   </path>
   
   <path id="library.lib.classpath">
-    <fileset dir="${basedir}/../../Tools/javafx-sdk-11.0.2/lib">
+    <fileset dir="${basedir}/lib/javafx-sdk-11.0.2/lib">
       <patternset refid="library.patterns"/>
     </fileset>
   </path>
@@ -85,6 +167,9 @@
   <dirname property="module.cab302assignment1assettradingplatform.basedir" file="${ant.file}"/>
   
   
+  <property name="module.jdk.home.cab302assignment1assettradingplatform" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.cab302assignment1assettradingplatform" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.cab302assignment1assettradingplatform" value="${project.jdk.classpath}"/>
   
   <property name="compiler.args.cab302assignment1assettradingplatform" value="-encoding UTF-8 -source 15 -target 15 ${compiler.args}"/>
   
@@ -96,6 +181,7 @@
   </path>
   
   <path id="cab302assignment1assettradingplatform.module.production.classpath">
+    <path refid="${module.jdk.classpath.cab302assignment1assettradingplatform}"/>
     <path refid="library.com.auth0:java-jwt:3.9.0.classpath"/>
     <pathelement location="${path.variable.maven_repository}/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar"/>
     <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-api/5.4.2/junit-jupiter-api-5.4.2.jar"/>
@@ -127,6 +213,7 @@
   </path>
   
   <path id="cab302assignment1assettradingplatform.module.classpath">
+    <path refid="${module.jdk.classpath.cab302assignment1assettradingplatform}"/>
     <pathelement location="${cab302assignment1assettradingplatform.output.dir}"/>
     <path refid="library.com.auth0:java-jwt:3.9.0.classpath"/>
     <pathelement location="${path.variable.maven_repository}/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar"/>
@@ -185,7 +272,7 @@
   
   <target name="compile.module.cab302assignment1assettradingplatform.production" description="Compile module CAB302Assignment1AssetTradingPlatform; production classes">
     <mkdir dir="${cab302assignment1assettradingplatform.output.dir}"/>
-    <javac destdir="${cab302assignment1assettradingplatform.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+    <javac destdir="${cab302assignment1assettradingplatform.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.cab302assignment1assettradingplatform}/javac">
       <compilerarg line="${compiler.args.cab302assignment1assettradingplatform}"/>
       <bootclasspath refid="cab302assignment1assettradingplatform.module.bootclasspath"/>
       <classpath refid="cab302assignment1assettradingplatform.module.production.classpath"/>
@@ -203,7 +290,7 @@
   
   <target name="compile.module.cab302assignment1assettradingplatform.tests" depends="compile.module.cab302assignment1assettradingplatform.production" description="compile module CAB302Assignment1AssetTradingPlatform; test classes" unless="skip.tests">
     <mkdir dir="${cab302assignment1assettradingplatform.testoutput.dir}"/>
-    <javac destdir="${cab302assignment1assettradingplatform.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+    <javac destdir="${cab302assignment1assettradingplatform.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.cab302assignment1assettradingplatform}/javac">
       <compilerarg line="${compiler.args.cab302assignment1assettradingplatform}"/>
       <bootclasspath refid="cab302assignment1assettradingplatform.module.bootclasspath"/>
       <classpath refid="cab302assignment1assettradingplatform.module.classpath"/>
