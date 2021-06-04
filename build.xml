@@ -273,6 +273,8 @@
   <target name="compile.module.cab302assignment1assettradingplatform.production" description="Compile module CAB302Assignment1AssetTradingPlatform; production classes">
     <mkdir dir="${cab302assignment1assettradingplatform.output.dir}"/>
     <javac destdir="${cab302assignment1assettradingplatform.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.cab302assignment1assettradingplatform}"/>
+      <bootclasspath refid="cab302assignment1assettradingplatform.module.bootclasspath"/>
 
       <src refid="cab302assignment1assettradingplatform.module.sourcepath"/>
       <patternset refid="excluded.from.compilation.cab302assignment1assettradingplatform"/>
