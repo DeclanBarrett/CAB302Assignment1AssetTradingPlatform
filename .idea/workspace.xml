@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Small ant changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/db.props" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/db.props" afterDir="false" />
     </list>
     <list id="c6b544b2-9c91-4d1b-b35b-12df5591b860" name="Revert &quot;Small ant changes&quot;" comment="Revert &quot;Small ant changes&quot;&#10;&#10;This reverts commit dac922df" />
@@ -66,14 +66,15 @@
     <setting file="file://$PROJECT_DIR$/src/Models/InformationGrabber.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/.idea/workspace.xml">
+    <file path="$PROJECT_DIR$/build.xml">
       <ranges>
-        <range start1="7" end1="7" start2="7" end2="8" changelist="37d7a831-97d7-4353-8e70-59661f6cf33b" />
-        <range start1="65" end1="65" start2="66" end2="78" changelist="37d7a831-97d7-4353-8e70-59661f6cf33b" />
-        <range start1="92" end1="93" start2="105" end2="106" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
-        <range start1="95" end1="96" start2="108" end2="109" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
-        <range start1="102" end1="102" start2="115" end2="116" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
-        <range start1="617" end1="618" start2="631" end2="639" changelist="37d7a831-97d7-4353-8e70-59661f6cf33b" />
+        <range start1="54" end1="136" start2="54" end2="54" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
+        <range start1="169" end1="172" start2="87" end2="87" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
+        <range start1="183" end1="184" start2="98" end2="98" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
+        <range start1="215" end1="216" start2="129" end2="129" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
+        <range start1="274" end1="276" start2="187" end2="188" changelist="37d7a831-97d7-4353-8e70-59661f6cf33b" />
+        <range start1="278" end1="279" start2="190" end2="190" changelist="37d7a831-97d7-4353-8e70-59661f6cf33b" />
+        <range start1="291" end1="292" start2="202" end2="203" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
       </ranges>
     </file>
   </component>
@@ -290,13 +291,6 @@
       <workItem from="1620623791548" duration="624000" />
       <workItem from="1620624432090" duration="81000" />
       <workItem from="1621403761490" duration="6207000" />
-    </task>
-    <task id="LOCAL-00001" summary="Initial Commit (Brad Barebones)">
-      <created>1617760354635</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1617760354635</updated>
     </task>
     <task id="LOCAL-00002" summary="Project Setup w/ Test Folder">
       <created>1618359924035</created>
@@ -634,7 +628,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622786433475</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Small ant changes">
+      <created>1622796554109</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1622796554110</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
