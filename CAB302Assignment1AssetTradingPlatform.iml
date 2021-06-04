@@ -33,5 +33,6 @@
     <orderEntry type="library" name="controlsfx-11.1.0" level="project" />
     <orderEntry type="library" name="org.controlsfx:controlsfx:11.1.0" level="project" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="org.apache.ant:ant-junitlauncher:1.10.9" level="project" />
   </component>
 </module>

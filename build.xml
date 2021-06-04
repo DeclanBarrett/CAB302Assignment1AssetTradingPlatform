@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="cab302assignment1assettradingplatform" default="all">
+  
+  
+  <property file="build.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.egg"/>
+    <include name="*.zip"/>
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.ear"/>
+    <include name="*.jar"/>
+    <include name="*.klib"/>
+    <include name="*.ane"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.corretto-15" value="${jdk.home.corretto-15}/bin"/>
+  <path id="jdk.classpath.corretto-15">
+    <fileset dir="${jdk.home.corretto-15}">
+      <include name="../jdk15.0.2_7!/java.base"/>
+      <include name="../jdk15.0.2_7!/java.compiler"/>
+      <include name="../jdk15.0.2_7!/java.datatransfer"/>
+      <include name="../jdk15.0.2_7!/java.desktop"/>
+      <include name="../jdk15.0.2_7!/java.instrument"/>
+      <include name="../jdk15.0.2_7!/java.logging"/>
+      <include name="../jdk15.0.2_7!/java.management"/>
+      <include name="../jdk15.0.2_7!/java.management.rmi"/>
+      <include name="../jdk15.0.2_7!/java.naming"/>
+      <include name="../jdk15.0.2_7!/java.net.http"/>
+      <include name="../jdk15.0.2_7!/java.prefs"/>
+      <include name="../jdk15.0.2_7!/java.rmi"/>
+      <include name="../jdk15.0.2_7!/java.scripting"/>
+      <include name="../jdk15.0.2_7!/java.se"/>
+      <include name="../jdk15.0.2_7!/java.security.jgss"/>
+      <include name="../jdk15.0.2_7!/java.security.sasl"/>
+      <include name="../jdk15.0.2_7!/java.smartcardio"/>
+      <include name="../jdk15.0.2_7!/java.sql"/>
+      <include name="../jdk15.0.2_7!/java.sql.rowset"/>
+      <include name="../jdk15.0.2_7!/java.transaction.xa"/>
+      <include name="../jdk15.0.2_7!/java.xml"/>
+      <include name="../jdk15.0.2_7!/java.xml.crypto"/>
+      <include name="../jdk15.0.2_7!/jdk.accessibility"/>
+      <include name="../jdk15.0.2_7!/jdk.aot"/>
+      <include name="../jdk15.0.2_7!/jdk.attach"/>
+      <include name="../jdk15.0.2_7!/jdk.charsets"/>
+      <include name="../jdk15.0.2_7!/jdk.compiler"/>
+      <include name="../jdk15.0.2_7!/jdk.crypto.cryptoki"/>
+      <include name="../jdk15.0.2_7!/jdk.crypto.ec"/>
+      <include name="../jdk15.0.2_7!/jdk.crypto.mscapi"/>
+      <include name="../jdk15.0.2_7!/jdk.dynalink"/>
+      <include name="../jdk15.0.2_7!/jdk.editpad"/>
+      <include name="../jdk15.0.2_7!/jdk.hotspot.agent"/>
+      <include name="../jdk15.0.2_7!/jdk.httpserver"/>
+      <include name="../jdk15.0.2_7!/jdk.incubator.foreign"/>
+      <include name="../jdk15.0.2_7!/jdk.incubator.jpackage"/>
+      <include name="../jdk15.0.2_7!/jdk.internal.ed"/>
+      <include name="../jdk15.0.2_7!/jdk.internal.jvmstat"/>
+      <include name="../jdk15.0.2_7!/jdk.internal.le"/>
+      <include name="../jdk15.0.2_7!/jdk.internal.opt"/>
+      <include name="../jdk15.0.2_7!/jdk.internal.vm.ci"/>
+      <include name="../jdk15.0.2_7!/jdk.internal.vm.compiler"/>
+      <include name="../jdk15.0.2_7!/jdk.internal.vm.compiler.management"/>
+      <include name="../jdk15.0.2_7!/jdk.jartool"/>
+      <include name="../jdk15.0.2_7!/jdk.javadoc"/>
+      <include name="../jdk15.0.2_7!/jdk.jcmd"/>
+      <include name="../jdk15.0.2_7!/jdk.jconsole"/>
+      <include name="../jdk15.0.2_7!/jdk.jdeps"/>
+      <include name="../jdk15.0.2_7!/jdk.jdi"/>
+      <include name="../jdk15.0.2_7!/jdk.jdwp.agent"/>
+      <include name="../jdk15.0.2_7!/jdk.jfr"/>
+      <include name="../jdk15.0.2_7!/jdk.jlink"/>
+      <include name="../jdk15.0.2_7!/jdk.jshell"/>
+      <include name="../jdk15.0.2_7!/jdk.jsobject"/>
+      <include name="../jdk15.0.2_7!/jdk.jstatd"/>
+      <include name="../jdk15.0.2_7!/jdk.localedata"/>
+      <include name="../jdk15.0.2_7!/jdk.management"/>
+      <include name="../jdk15.0.2_7!/jdk.management.agent"/>
+      <include name="../jdk15.0.2_7!/jdk.management.jfr"/>
+      <include name="../jdk15.0.2_7!/jdk.naming.dns"/>
+      <include name="../jdk15.0.2_7!/jdk.naming.rmi"/>
+      <include name="../jdk15.0.2_7!/jdk.net"/>
+      <include name="../jdk15.0.2_7!/jdk.nio.mapmode"/>
+      <include name="../jdk15.0.2_7!/jdk.sctp"/>
+      <include name="../jdk15.0.2_7!/jdk.security.auth"/>
+      <include name="../jdk15.0.2_7!/jdk.security.jgss"/>
+      <include name="../jdk15.0.2_7!/jdk.unsupported"/>
+      <include name="../jdk15.0.2_7!/jdk.unsupported.desktop"/>
+      <include name="../jdk15.0.2_7!/jdk.xml.dom"/>
+      <include name="../jdk15.0.2_7!/jdk.zipfs"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.corretto-15}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.corretto-15}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.corretto-15"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.com.auth0:java-jwt:3.9.0.classpath">
+    <pathelement location="${path.variable.maven_repository}/com/auth0/java-jwt/3.9.0/java-jwt-3.9.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-annotations/2.10.0.pr3/jackson-annotations-2.10.0.pr3.jar"/>
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-core/2.10.0.pr3/jackson-core-2.10.0.pr3.jar"/>
+    <pathelement location="${path.variable.maven_repository}/com/fasterxml/jackson/core/jackson-databind/2.10.0.pr3/jackson-databind-2.10.0.pr3.jar"/>
+    <pathelement location="${path.variable.maven_repository}/commons-codec/commons-codec/1.12/commons-codec-1.12.jar"/>
+  </path>
+  
+  <path id="library.lib.classpath">
+    <fileset dir="${basedir}/../JAVAFX/javafx-sdk-11.0.2/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="library.org.controlsfx:controlsfx:11.1.0.classpath">
+    <pathelement location="${basedir}/lib/controlsfx-11.1.0.jar"/>
+  </path>
+  
+  <path id="library.org.junit.jupiter:junit-jupiter:5.4.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-api/5.4.2/junit-jupiter-api-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-engine/5.4.2/junit-jupiter-engine-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-params/5.4.2/junit-jupiter-params-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter/5.4.2/junit-jupiter-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-commons/1.4.2/junit-platform-commons-1.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-engine/1.4.2/junit-platform-engine-1.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar"/>
+  </path>
+  
+  <path id="library.org.mariadb.jdbc:mariadb-java-client:2.7.2.classpath">
+    <pathelement location="${path.variable.maven_repository}/org/mariadb/jdbc/mariadb-java-client/2.7.2/mariadb-java-client-2.7.2.jar"/>
+  </path>
+  
+  
+  <!-- Global Libraries -->
+  
+  <path id="library.lib.classpath">
+    <fileset dir="D:/University/2021/CAB302/JAVAFX/javafx-sdk-11.0.2/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <fileset dir="${javac2.home}">
+      <include name="jdom.jar"/>
+      <include name="asm-all*.jar"/>
+      <include name="forms-*.jar"/>
+      <include name="forms_rt.jar"/>
+    </fileset>
+    <fileset dir="${idea.home}/plugins/java/lib">
+      <include name="javac2.jar"/>
+    </fileset>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  <import file="${basedir}/module_cab302assignment1assettradingplatform.xml"/>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.cab302assignment1assettradingplatform" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.cab302assignment1assettradingplatform" description="build all modules"/>
+  
+  <target name="all" depends="build.modules" description="build all"/>
+</project>
