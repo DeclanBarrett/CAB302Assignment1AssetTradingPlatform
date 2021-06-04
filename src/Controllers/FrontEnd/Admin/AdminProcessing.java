@@ -60,12 +60,11 @@ public class AdminProcessing {
 
         //Uses the login security utility to generate a salt
         UtilLoginSecurity utilLoginSecurity = new UtilLoginSecurity();
-        String salt = utilLoginSecurity.generateSalt();
+        String salt = ClientSocket.getInstance().GetSalt(username);
 
         return ClientSocket.getInstance().UpdateUserPassword(LoginController.GetToken(),
                 username,
-                utilLoginSecurity.hashPassword(password, salt),
-                salt);
+                utilLoginSecurity.hashPassword(password, salt));
     }
 
 }

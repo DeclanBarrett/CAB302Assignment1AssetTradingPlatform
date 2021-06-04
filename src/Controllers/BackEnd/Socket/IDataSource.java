@@ -179,10 +179,9 @@ public interface IDataSource
      * @param token          - token to be used for authentication
      * @param username       - username for user to have their password changed
      * @param hashedPassword - password to change to
-     * @param salt           - client side salt to store with it
      * @return a success or failure message
      */
-    java.lang.String UpdateUserPassword(String token, java.lang.String username, java.lang.String hashedPassword, java.lang.String salt) throws AuthenticationException, ServerException;
+    java.lang.String UpdateUserPassword(String token, java.lang.String username, java.lang.String hashedPassword) throws AuthenticationException, ServerException;
 
     /**
      * Change a users account type on the server

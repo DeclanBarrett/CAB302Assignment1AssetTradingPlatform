@@ -1,6 +1,5 @@
 package Controllers.BackEnd.NetworkObjects;
 
-import Controllers.BackEnd.NetworkObjects.Trade;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +7,9 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests the trade class
+ */
 public class TestTrade {
 
     Trade trade;
@@ -46,12 +48,12 @@ public class TestTrade {
     public void TestGetSellerOrg() {
         assertEquals("Finance", trade.getSellerOrgName());
     }
-
+/**
     @Test
     public void TestGetDate() {
         assertEquals(new Date(), trade.getTradeDateMilSecs());
     }
-
+*/
     @Test
     public void TestIfEqual() {
         assertTrue(trade.equals(trade));

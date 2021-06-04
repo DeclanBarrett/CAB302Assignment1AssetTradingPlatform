@@ -1,5 +1,2 @@
-#Dont commit props
-/src/Models/db.props
-
 #Dont commit the out file
 /out/

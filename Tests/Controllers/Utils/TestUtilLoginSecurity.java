@@ -1,8 +1,7 @@
 package Controllers.Utils;
 
-import Controllers.Exceptions.ServerException;
-import Controllers.Utils.UtilLoginSecurity;
 import Controllers.Exceptions.AuthenticationException;
+import Controllers.Exceptions.ServerException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +9,9 @@ import java.security.NoSuchAlgorithmException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests the Util Login Security class
+ */
 public class TestUtilLoginSecurity {
 
     private UtilLoginSecurity utilLoginSecurity;
@@ -77,7 +79,7 @@ public class TestUtilLoginSecurity {
 
     @Test
     public void TestGenerateBadUsername() {
-        AuthenticationException exception = assertThrows(AuthenticationException.class, () -> {
+        ServerException exception = assertThrows(ServerException.class, () -> {
             utilLoginSecurity.generateHashedPassword("Bad User", "qwerty");
         });
 

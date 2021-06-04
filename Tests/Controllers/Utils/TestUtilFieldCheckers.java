@@ -1,8 +1,6 @@
 package Controllers.Utils;
 
 import Controllers.BackEnd.AccountType;
-import Controllers.Exceptions.AuthenticationException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,6 +8,9 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests the Util Field Checkers class
+ */
 public class TestUtilFieldCheckers {
 
     @Test

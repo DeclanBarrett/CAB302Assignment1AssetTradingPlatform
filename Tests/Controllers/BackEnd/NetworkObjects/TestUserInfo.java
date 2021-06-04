@@ -1,7 +1,6 @@
 package Controllers.BackEnd.NetworkObjects;
 
 import Controllers.BackEnd.AccountType;
-import Controllers.BackEnd.NetworkObjects.UserInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +8,9 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests the User Info class
+ */
 public class TestUserInfo {
 
     UserInfo userInfo;

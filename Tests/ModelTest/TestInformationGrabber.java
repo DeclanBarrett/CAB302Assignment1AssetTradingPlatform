@@ -4,6 +4,7 @@ import App_Start.SetupServer;
 import Controllers.BackEnd.AccountType;
 import Controllers.BackEnd.NetworkObjects.*;
 import Controllers.BackEnd.OrderType;
+import Controllers.Exceptions.ServerException;
 import Models.InformationGrabber;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +17,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Tests the Information Grabber class
+ */
 public class TestInformationGrabber
 {
     static InformationGrabber database;
@@ -96,70 +100,116 @@ public class TestInformationGrabber
     }
     @Test
     void TestUpdateOrganisationAsset() {
-        //database.updateOrganisationAsset("Finance", "Casino Chips", 599);
-        //int assetQuantity = database.getOrganisationIndividualAsset("Finance", "Casino Chips");
-        //assertEquals(assetQuantity, 599);
+        try {
+            database.updateOrganisationAsset("Finance", "Casino Chips", 599);
+            int assetQuantity = database.getOrganisationIndividualAsset("Finance", "Casino Chips");
+            assertEquals(assetQuantity, 599);
+        } catch (ServerException e) {
+            e.printStackTrace();
+        }
     }
     @Test
     void TestGetNonce() {
-
+        //database.getNonce()
         // Assert Equals
     }
     @Test
     void TestGetPassword() {
-
+        assertEquals(database.getPassword("Ethan Testing"), "086e1b7e1c12ba37cd473670b3a15214");
     }
     @Test
     void TestGetUser() {
+        User user = new User("Ethan Testing", "qwerty", AccountType.SystemAdmin, "Admin", "123456");
 
+        assertEquals(database.getUser("Ethan Testing"), user);
     }
     @Test
     void TestGetUserInfo() {
+        UserInfo user = new UserInfo("Ethan Testing", AccountType.SystemAdmin, "Admin");
 
+        assertEquals(database.getUserInfo("Ethan Testing"), user);
     }
     @Test
     void TestGetAllUsers() {
-
-        // test first/last in list
+        User userFirst = new User("CAB302Demo", "qwerty", AccountType.SystemAdmin, "Admin", "123456");
+        User userLast = new User("User 9", "qwerty", AccountType.User, "Research", "123452");
+        List<User> users = database.getAllUsers();
+        assertEquals(users.get(16), userLast);
     }
     @Test
     void TestGetSalt() {
-
+        try {
+            assertEquals(database.getSalt("Ethan Testing"), "123456");
+        } catch (ServerException e) {
+            e.printStackTrace();
+        }
     }
     @Test
     void TestGetOrganisation() {
-
+        HashMap<String, Integer> hm1 = new HashMap<>(10);
+        OrganisationalUnit finance = new OrganisationalUnit("Finance", 10000, hm1);
+        assertEquals(database.getOrganisation("Finance"), finance);
     }
     @Test
     void TestGetAllOrganisations() {
-
+        HashMap<String, Integer> hm1 = new HashMap<>(10);
+        OrganisationalUnit admin = new OrganisationalUnit("Admin", 10000, hm1);
+        OrganisationalUnit sales = new OrganisationalUnit("Sales", 10000, hm1);
+        List <OrganisationalUnit> orgUnits = database.getAllOrganisations();
+        assertEquals(orgUnits.get(0), admin);
+        assertEquals(orgUnits.get(3), sales);
     }
     @Test
     void TestGetOrganisationOrders() {
-
+        List <Order> orders = database.getOrganisationOrders("Finance");
+        Order firstOrder = new Order(1, OrderType.SELL, "Paper", 10, 100, "Finance", new Date());
+        Order lastOrder = new Order(6, OrderType.BUY, "Casino Chips", 30, 100, "Finance", new Date());
+        assertEquals(orders.get(0), firstOrder);
+        assertEquals(orders.get(5), lastOrder);
     }
     @Test
-    void TestGetBuyOrder() {
-
+    void TestGetBuyOrders() {
+        List <Order> buyOrders = database.getBuyOrders();
+        Order firstOrder = new Order(4, OrderType.BUY, "Casino Chips", 20, 100, "Finance", new Date());
+        Order lastOrder = new Order(18, OrderType.BUY, "Casino Chips", 30, 100, "Research", new Date());
+        assertEquals(buyOrders.get(0), firstOrder);
+        assertEquals(buyOrders.get(8), lastOrder);
     }
     @Test
     void TestGetSellOrders() {
-
+        List <Order> sellOrders = database.getSellOrders();
+        Order firstOrder = new Order(1, OrderType.SELL, "Paper", 10, 100, "Finance", new Date());
+        Order lastOrder = new Order(15, OrderType.SELL, "CPU hours", 10, 100, "Research", new Date());
+        assertEquals(sellOrders.get(0), firstOrder);
+        assertEquals(sellOrders.get(8), lastOrder);
     }
     @Test
     void TestGetOrders() {
-
+        List <Order> allOrders = database.getAllOrders();
+        Order lastOrder = new Order(18, OrderType.BUY, "Casino Chips", 30, 100, "Research", new Date());
+        Order firstOrder = new Order(1, OrderType.SELL, "Paper", 10, 100, "Finance", new Date());
+        assertEquals(allOrders.get(0), firstOrder);
+        assertEquals(allOrders.get(17), lastOrder);
     }
     @Test
     void TestGetAssetTypes() {
-
+        List<String> assetTypes = database.getAssetTypes();
+        assertEquals(assetTypes.get(0), "Casino Chips");
+        assertEquals(assetTypes.get(6), "RTX 3090TI");
     }
     @Test
     void TestGetTradeHistory() {
-
+        List<Trade> trades = database.getTradeHistory("Paper");
+        Trade firstTrade = new Trade(1, "Paper", 10, 6.0, "Sales", "Finance", new Date());
+        Trade secondTrade = new Trade(7, "Paper", 10, 13.0, "Sales", "Finance", new Date());
+        assertEquals(trades.get(0), firstTrade);
+        assertEquals(trades.get(6), secondTrade);
     }
     @Test
-    void TestDeletePassword() {
-
+    void TestDeleteOrder() {
+        database.deleteOrder(1);
+        Order secondOrder = new Order(2, OrderType.SELL, "Paper", 10, 100, "Finance", new Date());
+        List <Order> orders = database.getOrderList();
+        assertEquals(orders.get(0), secondOrder);
     }
 }

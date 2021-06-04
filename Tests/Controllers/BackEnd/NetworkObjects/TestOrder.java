@@ -1,6 +1,5 @@
 package Controllers.BackEnd.NetworkObjects;
 
-import Controllers.BackEnd.NetworkObjects.Order;
 import Controllers.BackEnd.OrderType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +8,9 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests the order class
+ */
 public class TestOrder {
 
     Order order;
@@ -22,7 +24,7 @@ public class TestOrder {
     public void TestOrderConstruction() {
         order = new Order(123456, OrderType.BUY, "Paper", 50, 3.5, new OrganisationalUnit("Sales", 0, null), new Date());
     }
-
+    
     @Test
     public void TestOrderID() {
         Integer orderID = order.getOrderID();
@@ -62,7 +64,7 @@ public class TestOrder {
     @Test
     public void TestGetDate() {
         Date date = order.getDate();
-        assertEquals(new Date(), date);
+        assertTrue(((new Date()).getTime() >= date.getTime()));
     }
 
     @Test
@@ -85,4 +87,8 @@ public class TestOrder {
         assertTrue(0 == order.compareTo(order));
     }
 
+    @Test
+    public void TestCompareMismatchedOrder() {
+        assertFalse(1 == order.compareTo(order));
+    }
 }

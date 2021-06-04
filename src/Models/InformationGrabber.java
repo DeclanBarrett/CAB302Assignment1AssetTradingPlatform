@@ -5,10 +5,7 @@ import Controllers.BackEnd.NetworkObjects.*;
 import Controllers.BackEnd.OrderType;
 import Controllers.Exceptions.ServerException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -58,7 +55,7 @@ public class  InformationGrabber {
     private static final String GET_ORDER_LIST = "SELECT * FROM Orders";
     private static final String GET_ALL_ORDERS = "SELECT * FROM Orders"; //fix to be diff from prev
 
-    private static final String GET_ASSET_TYPES = "SELECT * FROM Assets"; // is this correct?
+    private static final String GET_ASSET_TYPES = "SELECT * FROM Assets";
     private static final String GET_TRADE_HISTORY = "SELECT * FROM Trade WHERE AssetName=?";
     private static final String GET_ALL_TRADE_HISTORY = "SELECT * FROM Trade";
 
@@ -152,11 +149,12 @@ public class  InformationGrabber {
             if(addAsset != null)
             {
                 addAsset.executeQuery();
+                return "Successfully insert asset";
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return null; //for now
+        return null;
     }
 
     /**
@@ -177,12 +175,12 @@ public class  InformationGrabber {
             if(addOrganisation != null)
             {
                 addOrganisation.executeQuery();
-                return "Success Insert Organisation";
+                return "Successfully insert organisation";
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return null; //for now
+        return null;
     }
 
     /**
@@ -203,7 +201,7 @@ public class  InformationGrabber {
 
             if (addOrder != null) {
                 addOrder.executeQuery();
-                return "Success";
+                return "Successfully inserted order";
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -229,10 +227,9 @@ public class  InformationGrabber {
             addTrade.setString(5, trade.getAssetName());
             addTrade.setDouble(6, trade.getAssetPrice());
 
-            //BuyerOrgName, SellerOrgName, TradeDateMilSecs, AssetQuantity, AssetName
-
             if (addTrade != null) {
                 addTrade.executeQuery();
+                return "Successfully inserted trade";
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -281,6 +278,7 @@ public class  InformationGrabber {
             if(updateUserAccountType != null)
             {
                 updateUserAccountType.executeQuery();
+                return "Successfully updated user account type";
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -306,7 +304,9 @@ public class  InformationGrabber {
             if(updateOrder != null)
             {
                 updateOrder.executeQuery();
+                return "Successfully updated order";
             }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -330,6 +330,7 @@ public class  InformationGrabber {
             if(updateUserOrganisation != null)
             {
                 updateUserOrganisation.executeQuery();
+                return "Successfully updated user organisation";
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -409,6 +410,7 @@ public class  InformationGrabber {
 
         try
         {
+            connection = DatabaseConnection.getInstance();
             getUser = connection.prepareStatement(GET_USER);
             getUser.setString(1,username);
 
@@ -470,7 +472,7 @@ public class  InformationGrabber {
      * @param username - username of requested user.
      * @return the User with no login info included
      */
-    public UserInfo getUserInfo(String username) {
+    public UserInfo getUserInfo(String username)  {
         UserInfo user;
         try
         {
@@ -488,7 +490,8 @@ public class  InformationGrabber {
                 return user;
             }
 
-        } catch (SQLException throwables) {
+        }
+        catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
@@ -573,7 +576,6 @@ public class  InformationGrabber {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new ServerException("Get organisational assets not found.");
-
         }
 
         return null;
@@ -599,7 +601,6 @@ public class  InformationGrabber {
             {
                 ResultSet rs = getOrganisationAssets.executeQuery();
                 while (rs.next()) {
-                    // Order is different from Database Order
                     orgAssets.put(rs.getString("AssetName"), rs.getInt("AssetQuantity"));
                 }
             }
@@ -612,7 +613,6 @@ public class  InformationGrabber {
             {
                 ResultSet rs = getOrganisation.executeQuery();
                 rs.next();
-                // Order is different from Database Order
                 organisationalunit = new OrganisationalUnit(
                         orgName,
                         rs.getInt("amountCredits"),
@@ -653,12 +653,11 @@ public class  InformationGrabber {
                     {
                         ResultSet assetsRs = getOrganisationAssets.executeQuery();
                         while (assetsRs.next()) {
-                            // Order is different from Database Order
                             orgAssets.put(assetsRs.getString("AssetName"), assetsRs.getInt("AssetQuantity"));
                         }
                     }
 
-                    // Order is different from Database Order
+
                     organisationalUnits.add(new OrganisationalUnit(
                             orgName,
                             rs.getInt("amountCredits"),
@@ -688,7 +687,6 @@ public class  InformationGrabber {
             {
                 ResultSet rs = getOrganisationOrders.executeQuery();
                 while (rs.next()) {
-                    // Order is different from Database Order
                     Order order = new Order(
                             rs.getInt("OrderID"),
                             OrderType.valueOf(rs.getString("OrderType")),
@@ -723,7 +721,6 @@ public class  InformationGrabber {
             {
                 ResultSet rs = getBuyOrders.executeQuery();
                 while (rs.next()) {
-                    // Order is different from Database Order
                     Order order = new Order(
                             rs.getInt("OrderID"),
                             OrderType.valueOf(rs.getString("OrderType")),
@@ -758,7 +755,6 @@ public class  InformationGrabber {
             {
                 ResultSet rs = getSellOrders.executeQuery();
                 while (rs.next()) {
-                    // Order is different from Database Order
                     Order order = new Order(
                             rs.getInt("OrderID"),
                             OrderType.valueOf(rs.getString("OrderType")),
@@ -794,7 +790,6 @@ public class  InformationGrabber {
             {
                 ResultSet rs = getOrganisationSellOrders.executeQuery();
                 while (rs.next()) {
-                    // Order is different from Database Order
                     Order order = new Order(
                             rs.getInt("OrderID"),
                             OrderType.valueOf(rs.getString("OrderType")),
@@ -830,7 +825,6 @@ public class  InformationGrabber {
             {
                 ResultSet rs = getOrganisationBuyOrders.executeQuery();
                 while (rs.next()) {
-                    // Order is different from Database Order
                     Order order = new Order(
                             rs.getInt("OrderID"),
                             OrderType.valueOf(rs.getString("OrderType")),
@@ -865,7 +859,6 @@ public class  InformationGrabber {
             {
                 ResultSet rs = getOrderList.executeQuery();
                 while (rs.next()) {
-                    // Order is different from Database Order
                     Order order = new Order(
                             rs.getInt("OrderID"),
                             OrderType.valueOf(rs.getString("OrderType")),
@@ -900,7 +893,6 @@ public class  InformationGrabber {
             {
                 ResultSet rs = getAllOrders.executeQuery();
                 while (rs.next()) {
-                    // Order is different from Database Order
                     Order order = new Order(
                             rs.getInt("OrderID"),
                             OrderType.valueOf(rs.getString("OrderType")),
@@ -960,7 +952,7 @@ public class  InformationGrabber {
             getTradeHistory = connection.prepareStatement(GET_TRADE_HISTORY);
             getTradeHistory.setString(1, AssetName);
 
-            if(getTradeHistory != null)
+            if (getTradeHistory != null)
             {
                 ResultSet rs = getTradeHistory.executeQuery();
                 while (rs.next()) {
@@ -1027,6 +1019,7 @@ public class  InformationGrabber {
     public String deleteOrder(int OrderID) {
         try
         {
+            connection = DatabaseConnection.getInstance();
             deleteOrder = connection.prepareStatement(DELETE_ORDER);
             deleteOrder.setInt(1, OrderID);
 

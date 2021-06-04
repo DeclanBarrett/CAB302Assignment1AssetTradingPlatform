@@ -1,19 +1,22 @@
-package Controllers.FrontEnd.Login;
+package Controllers.Utils;
 
 import Controllers.BackEnd.AccountType;
 import Controllers.BackEnd.NetworkObjects.UserInfo;
 import Controllers.BackEnd.Processing.JWTHandler;
+import Controllers.BackEnd.Socket.ClientSocket;
 import Controllers.Exceptions.AuthenticationException;
 import Controllers.Exceptions.ServerException;
-import Controllers.BackEnd.Socket.ClientSocket;
+import Controllers.FrontEnd.Login.LoginController;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Tests the Login Controller class
+ */
 public class TestLoginController {
 
     LoginController loginController;
@@ -101,6 +104,7 @@ public class TestLoginController {
         assertEquals(userInfo, LoginController.GetUser());
     }
 
+    /**
     @Test
     public void TestAllLogins() throws AuthenticationException, ServerException {
         loginController.AttemptLogin("User 1","qwerty");
@@ -121,7 +125,7 @@ public class TestLoginController {
         loginController.AttemptLogin("User 12","qwerty");
         loginController.AttemptLogin("User 13","qwerty");
     }
-
+*/
     //CANNOT TEST LOGOUT SINCE LOGOUT USES THE SCENE CHANGER UTIL
 
 }

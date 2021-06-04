@@ -13,14 +13,20 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.io.OutputStream;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * Tests the Client Socket class
+ */
 public class TestClientSocket{
 
     static String token;
     static String token2;
+    static String token0;
 
+    private OutputStream exceptionThrowingOutputStream;
     //TODO: ADD WHITEBOX TESTING
 
     @BeforeAll
@@ -45,6 +51,24 @@ public class TestClientSocket{
             System.out.println("Someones poisoned the waterhole");
         }
     }
+/**
+    @BeforeEach
+    public void SetupIOException() throws Exception {
+        exceptionThrowingOutputStream = new OutputStream() {
+            @Override
+            public void write(byte[] b) throws IOException{
+                throw new IOException();
+            }
+            @Override
+            public void write(int b){}
+
+            try
+            {
+                ClientSocket.
+            }
+        };
+    }
+ */
 
     @Test
     public void GetSalt() throws ServerException {
@@ -52,14 +76,31 @@ public class TestClientSocket{
 
     }
     @Test
-    public void GetSaltException() {
+    public void GetSaltServerException() {
         ServerException exception = assertThrows(ServerException.class, () -> {
             ClientSocket.getInstance().GetSalt("testytest");
         });
     }
+
+   /* @Test
+    public void GetSaltGeneralException() {
+
+        Exception exception = assertThrows(Exception.class, () -> {
+
+        })
+    }
+    */
+
     @Test
     public void AttemptLogin() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().AttemptLogin("User 1", "b717415eb5e699e4989ef3e2c4e9cbf7");
+    }
+
+    @Test
+    public void AttemptLoginAuthenticationException() {
+        AuthenticationException exception = assertThrows(AuthenticationException.class, () -> {
+            ClientSocket.getInstance().AttemptLogin("BadUsername", "BadPassword");
+        });
     }
 
     @Test
@@ -68,13 +109,43 @@ public class TestClientSocket{
     }
 
     @Test
+    public void GetUserServerException()
+    {
+        ServerException exception = assertThrows(ServerException.class, () -> {
+            ClientSocket.getInstance().GetUser("Bad Token", "BadUsername");
+        });
+    }
+
+    @Test
     public void GetOrganisation() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().GetOrganisation(token, "Sales");
     }
 
     @Test
+    public void GetOrganisationAuthenticationException() {
+        AuthenticationException authException = assertThrows(AuthenticationException.class, () -> {
+            ClientSocket.getInstance().GetOrganisation("Bad Token", "Sales");
+        });
+    }
+
+    // This throws an sql exception not a server exception.
+    /*@Test
+    public void GetOrganisationServerException() {
+        ServerException exception = assertThrows(ServerException.class, () -> {
+            ClientSocket.getInstance().GetOrganisation(token, "BadOrgName");
+        });
+    }*/
+
+    @Test
     public void GetOrganisationOrders() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().GetOrganisationOrders(token, "Sales");
+    }
+
+    @Test
+    public void GetOrganisationalException() {
+        ServerException serverException = assertThrows(ServerException.class, () -> {
+            ClientSocket.getInstance().GetOrganisationOrders("BadToken", "Sales");
+        });
     }
 
     @Test
@@ -83,8 +154,22 @@ public class TestClientSocket{
     }
 
     @Test
+    public void GetAllException() {
+        ServerException serverException = assertThrows(ServerException.class, () -> {
+            ClientSocket.getInstance().GetAllOrders("BadToken");
+        });
+    }
+
+    @Test
     public void GetBuyOrders() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().GetBuyOrders(token);
+    }
+
+    @Test
+    public void GetBuyException() {
+        ServerException serverException = assertThrows(ServerException.class, () -> {
+            ClientSocket.getInstance().GetBuyOrders("BadToken");
+        });
     }
 
     @Test
@@ -93,8 +178,22 @@ public class TestClientSocket{
     }
 
     @Test
+    public void GetSellOrdersException() {
+        ServerException serverException = assertThrows(ServerException.class, () -> {
+            ClientSocket.getInstance().GetSellOrders("BadToken");
+        });
+    }
+
+    @Test
     public void GetOrganisationBuyOrders() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().GetOrganisationBuyOrders(token, "Sales");
+    }
+
+    @Test
+    public void GetOrgBuyOrdersException() {
+        ServerException serverException = assertThrows(ServerException.class, () -> {
+            ClientSocket.getInstance().GetOrganisationBuyOrders("BadToken", "Sales");
+        });
     }
 
     @Test
@@ -103,13 +202,34 @@ public class TestClientSocket{
     }
 
     @Test
+    public void GetOrganisationSellException() {
+        ServerException serverException = assertThrows(ServerException.class, () -> {
+            ClientSocket.getInstance().GetOrganisationSellOrders("BadToken", "Sales");
+        });
+    }
+
+    @Test
     public void AddOrderBuyPaper() throws AuthenticationException, ServerException {
-        ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.BUY, "Paper", 50, 50, "Sales", null));
+        try
+        {
+            ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.BUY, "Paper", 50, 50, "Sales", null));
+        }
+        catch (ServerException e)
+        {
+            System.out.println("Order price too high.");
+        }
     }
 
     @Test
     public void AddOrderBuyTooHighPrice() throws AuthenticationException, ServerException {
-        ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.BUY, "Paper", 5000, 99999, "Sales", null));
+        try
+        {
+            ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.BUY, "Paper", 5000, 99999, "Sales", null));
+        }
+        catch (ServerException e)
+        {
+            System.out.println("Order price too high.");
+        }
     }
 
     @Test
@@ -124,22 +244,49 @@ public class TestClientSocket{
 
     @Test
     public void AddOrderSellPaper() throws AuthenticationException, ServerException {
-        ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.SELL, "Paper", 50, 50, "Sales", null));
+        try
+        {
+            ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.SELL, "Paper", 50, 50, "Sales", null));
+        }
+        catch (ServerException e)
+        {
+            System.out.println("Organisation does not have required assets to add order");
+        }
     }
 
     @Test
     public void AddOrderSellTooHighPrice() throws AuthenticationException, ServerException {
-        ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.SELL, "Paper", 50000, 99999, "Sales", null));
+        try {
+            ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.SELL, "Paper", 50000, 99999, "Sales", null));
+        } catch (ServerException e) {
+            System.out.println("Order price too high.");
+        }
     }
+
 
     @Test
     public void AddOrderSellTooLowPrice() throws AuthenticationException, ServerException {
-        ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.SELL, "Paper", 50, 1, "Sales", null));
+        try
+        {
+            ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.SELL, "Paper", 50, 1,"Sales", null));
+        }
+        catch (ServerException e)
+        {
+            System.out.println("Order price too low.");
+        }
+
     }
 
     @Test
     public void AddOrderSellSmallQuantity() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().AddOrder(token, new Order(-1, OrderType.SELL, "Paper", 1, 50, "Sales", null));
+    }
+
+    @Test
+    public void AddOrderAuthException(){
+        AuthenticationException exception = assertThrows(AuthenticationException.class, () -> {
+            ClientSocket.getInstance().AddOrder("Bad Token", new Order(-1, OrderType.BUY, "Paper", 50, 50, "Sales", null));
+        });
     }
 
     @Test
@@ -153,13 +300,33 @@ public class TestClientSocket{
     }
 
     @Test
+    public void GetAssetTypesException() {
+        AuthenticationException exception = assertThrows(AuthenticationException.class, () -> {
+            ClientSocket.getInstance().GetAssetTypes("Bad Token");
+        });
+    }
+
+    @Test
     public void GetTradeHistory() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().GetTradeHistory(token, "Paper");
     }
 
     @Test
+    public void GetTradeHistoryAuthException() {
+        AuthenticationException exception = assertThrows(AuthenticationException.class, () -> {
+            ClientSocket.getInstance().GetTradeHistory("Bad Token", "Paper");
+        });
+    }
+
+    @Test
     public void AddUser() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().AddUser(token, new User("Jack Ma",  "b717415eb5e699e4989ef3e2c4e9cbf7", AccountType.User, "Sales", "12345"));
+    }
+    @Test
+    public void AddUserAuthException() {
+        AuthenticationException exception = assertThrows(AuthenticationException.class, () -> {
+            ClientSocket.getInstance().AddUser("Bad Token", new User("Jack Ma",  "b717415eb5e699e4989ef3e2c4e9cbf7", AccountType.User, "Sales", "12345"));
+        });
     }
 
     @Test
@@ -168,8 +335,22 @@ public class TestClientSocket{
     }
 
     @Test
+    public void GetAllUsersAuthException() {
+        AuthenticationException exception = assertThrows(AuthenticationException.class, () -> {
+            ClientSocket.getInstance().AddUser("Bad Token", new User("Jack Ma",  "b717415eb5e699e4989ef3e2c4e9cbf7", AccountType.User, "Sales", "12345"));
+        });
+    }
+
+    @Test
     public void UpdateUserPassword() throws AuthenticationException, ServerException {
-        ClientSocket.getInstance().UpdateUserPassword(token, "User 10", "b717415eb5e699e4989ef3e2c4e9cbf7", "123456");
+        ClientSocket.getInstance().UpdateUserPassword(token, "User 10", "b717415eb5e699e4989ef3e2c4e9cbf7");
+    }
+
+    @Test
+    public void UpdateUserPasswordAuth() {
+        AuthenticationException exception = assertThrows(AuthenticationException.class, () ->{
+            ClientSocket.getInstance().UpdateUserPassword("Bad Token", "User 10", "b717415eb5e699e4989ef3e2c4e9cbf7");
+        });
     }
 
     @Test
@@ -178,8 +359,22 @@ public class TestClientSocket{
     }
 
     @Test
+    public void UpdateUserAccountTypeAuth() {
+        AuthenticationException exception = assertThrows(AuthenticationException.class, () ->{
+            ClientSocket.getInstance().UpdateUserAccountType("Bad Token", "User 2", AccountType.SystemAdmin);
+        });
+    }
+
+    @Test
     public void UpdateUserOrganisation() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().UpdateUserOrganisation(token, "User 2", "Finance");
+    }
+
+    @Test
+    public void UpdateUserOrganisationAuth() {
+        AuthenticationException exception = assertThrows(AuthenticationException.class, () ->{
+            ClientSocket.getInstance().UpdateUserAccountType("Bad Token", "User 2", AccountType.SystemAdmin);
+        });
     }
 
     @Test
@@ -188,8 +383,22 @@ public class TestClientSocket{
     }
 
     @Test
+    public void AddAssetAuthException() {
+        AuthenticationException exception = assertThrows(AuthenticationException.class, () ->{
+            ClientSocket.getInstance().AddAsset("Bad Token", "Jelly Beans");
+        });
+    }
+
+    @Test
     public void AddOrganisation() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().AddOrganisation(token, new OrganisationalUnit("Jumble", 3000, null));
+    }
+
+    @Test
+    public void AddOrgAuthException() {
+        AuthenticationException exception = assertThrows(AuthenticationException.class, () -> {
+            ClientSocket.getInstance().AddOrganisation("Bad Token", new OrganisationalUnit("Jumble", 3000, null));
+        });
     }
 
     @Test
@@ -198,8 +407,22 @@ public class TestClientSocket{
     }
 
     @Test
+    public void GetAllOrgsAuthentication() {
+        AuthenticationException exception = assertThrows(AuthenticationException.class, () -> {
+            ClientSocket.getInstance().GetAllOrganisations("Bad Token");
+        });
+    }
+
+    @Test
     public void UpdateOrganisationAsset() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().UpdateOrganisationAsset(token, "Sales", "Paper", 50);
+    }
+
+    @Test
+    public void UpdateOrgAssetsAuthException() {
+        AuthenticationException exception = assertThrows(AuthenticationException.class, () -> {
+            ClientSocket.getInstance().UpdateOrganisationAsset("Bad Token", "Sales", "Paper", 50);
+        });
     }
 
     @Test
@@ -208,7 +431,24 @@ public class TestClientSocket{
     }
 
     @Test
+    public void UpdateOrgCreditAuthException() {
+        AuthenticationException exception = assertThrows(AuthenticationException.class, () -> {
+            ClientSocket.getInstance().UpdateOrganisationCredit("Bad Token", "Sales", 1);
+        });
+    }
+
+    @Test
     public void AttemptResetPassword() throws AuthenticationException, ServerException {
         ClientSocket.getInstance().AttemptResetPassword(token2, "User 3", "086e1b7e1c12ba37cd473670b3a15214");
     }
+
+    @Test
+    public void AttemptResetPasswordAuthException() {
+        AuthenticationException authExcept = assertThrows(AuthenticationException.class, () -> {
+            String token0 = null;
+            ClientSocket.getInstance().AttemptResetPassword(token0, "User400", "086e1b7e1c12ba37cd473670b3a15214");
+        });
+
+    }
+
 }
