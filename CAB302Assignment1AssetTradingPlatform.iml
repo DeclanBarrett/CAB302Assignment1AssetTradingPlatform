@@ -26,11 +26,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="org.mariadb.jdbc:mariadb-java-client:2.7.2" level="project" />
-    <orderEntry type="library" name="controlsfx-11.1.01" level="project" />
-    <orderEntry type="library" name="mariadb-java-client-2.7.21" level="project" />
-    <orderEntry type="library" name="jwt" level="project" />
     <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="org.apache.ant:ant-junitlauncher:1.10.9" level="project" />
     <orderEntry type="library" name="controlsfx-11.1.0" level="project" />
   </component>
 </module>
