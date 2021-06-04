@@ -274,6 +274,8 @@
     <mkdir dir="${cab302assignment1assettradingplatform.output.dir}"/>
     <javac destdir="${cab302assignment1assettradingplatform.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
 
+      <src refid="cab302assignment1assettradingplatform.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.cab302assignment1assettradingplatform"/>
     </javac>
     
     <copy todir="${cab302assignment1assettradingplatform.output.dir}">
