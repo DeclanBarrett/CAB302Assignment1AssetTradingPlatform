@@ -183,7 +183,17 @@
   <path id="cab302assignment1assettradingplatform.module.production.classpath">
     <path refid="${module.jdk.classpath.cab302assignment1assettradingplatform}"/>
     <path refid="library.com.auth0:java-jwt:3.9.0.classpath"/>
-
+    <pathelement location="${path.variable.maven_repository}/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-api/5.4.2/junit-jupiter-api-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-engine/5.4.2/junit-jupiter-engine-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-params/5.4.2/junit-jupiter-params-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter/5.4.2/junit-jupiter-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-commons/1.4.2/junit-platform-commons-1.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-engine/1.4.2/junit-platform-engine-1.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar"/>
+    <path refid="library.org.mariadb.jdbc:mariadb-java-client:2.7.2.classpath"/>
+    <path refid="library.lib.classpath"/>
+    <path refid="library.controlsfx-11.1.0.classpath"/>
   </path>
   
   <path id="cab302assignment1assettradingplatform.runtime.production.module.classpath">
@@ -263,11 +273,7 @@
   <target name="compile.module.cab302assignment1assettradingplatform.production" description="Compile module CAB302Assignment1AssetTradingPlatform; production classes">
     <mkdir dir="${cab302assignment1assettradingplatform.output.dir}"/>
     <javac destdir="${cab302assignment1assettradingplatform.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
-      <compilerarg line="${compiler.args.cab302assignment1assettradingplatform}"/>
-      <bootclasspath refid="cab302assignment1assettradingplatform.module.bootclasspath"/>
-      <classpath refid="cab302assignment1assettradingplatform.module.production.classpath"/>
-      <src refid="cab302assignment1assettradingplatform.module.sourcepath"/>
-      <patternset refid="excluded.from.compilation.cab302assignment1assettradingplatform"/>
+
     </javac>
     
     <copy todir="${cab302assignment1assettradingplatform.output.dir}">
