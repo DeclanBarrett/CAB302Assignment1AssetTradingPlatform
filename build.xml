@@ -275,7 +275,7 @@
     <javac destdir="${cab302assignment1assettradingplatform.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
       <compilerarg line="${compiler.args.cab302assignment1assettradingplatform}"/>
       <bootclasspath refid="cab302assignment1assettradingplatform.module.bootclasspath"/>
-
+      <classpath refid="cab302assignment1assettradingplatform.module.production.classpath"/>
       <src refid="cab302assignment1assettradingplatform.module.sourcepath"/>
       <patternset refid="excluded.from.compilation.cab302assignment1assettradingplatform"/>
     </javac>
