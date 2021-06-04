@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Fix of the main update that was missed a week ago.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/db.props" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/db.props" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +67,10 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mariadb" />
     <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
+    <property name="GenerateAntBuildDialog.generateIdeaHomeProperty" value="true" />
+    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="build" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
@@ -80,7 +83,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/Tests/Controllers/BackEnd/NetworkObjects" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -195,9 +198,9 @@
     <list>
       <item itemvalue="Application.ClientStart" />
       <item itemvalue="Application.Server" />
+      <item itemvalue="Application.SetupServer" />
       <item itemvalue="JUnit.Controllers.FrontEnd.Admin in CAB302Assignment1AssetTradingPlatform" />
       <item itemvalue="JUnit.All in CAB302Assignment1AssetTradingPlatform" />
-      <item itemvalue="Application.SetupServer" />
     </list>
     <recent_temporary>
       <list>
@@ -643,7 +646,7 @@
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestTrade.ic" NAME="TestTrade Coverage Results" MODIFIED="1621852677502" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controllers.BackEnd.NetworkObjects.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$All_in_CAB302Assignment1AssetTradingPlatform.ic" NAME="All in CAB302Assignment1AssetTradingPlatform Coverage Results" MODIFIED="1622607524533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$All_in_CAB302Assignment1AssetTradingPlatform.ic" NAME="All in CAB302Assignment1AssetTradingPlatform Coverage Results" MODIFIED="1622778181129" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/CAB302Assignment1AssetTradingPlatform$TestOrder.ic" NAME="TestOrder Coverage Results" MODIFIED="1621852659082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Controllers.BackEnd.NetworkObjects.*</FILTER>
     </SUITE>

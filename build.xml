@@ -146,7 +146,7 @@
   </path>
   
   <path id="library.lib.classpath">
-    <fileset dir="${basedir}/../JAVAFX/javafx-sdk-11.0.2/lib">
+    <fileset dir="${basedir}/../../Tools/javafx-sdk-11.0.2/lib">
       <patternset refid="library.patterns"/>
     </fileset>
   </path>
@@ -168,15 +168,6 @@
   
   <path id="library.org.mariadb.jdbc:mariadb-java-client:2.7.2.classpath">
     <pathelement location="${path.variable.maven_repository}/org/mariadb/jdbc/mariadb-java-client/2.7.2/mariadb-java-client-2.7.2.jar"/>
-  </path>
-  
-  
-  <!-- Global Libraries -->
-  
-  <path id="library.lib.classpath">
-    <fileset dir="D:/University/2021/CAB302/JAVAFX/javafx-sdk-11.0.2/lib">
-      <patternset refid="library.patterns"/>
-    </fileset>
   </path>
   <!-- Register Custom Compiler Taskdefs -->
   <property name="javac2.home" value="${idea.home}/lib"/>

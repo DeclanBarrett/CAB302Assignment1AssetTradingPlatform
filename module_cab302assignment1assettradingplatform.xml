@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_cab302assignment1assettradingplatform" default="compile.module.cab302assignment1assettradingplatform">
+  <dirname property="module.cab302assignment1assettradingplatform.basedir" file="${ant.file.module_cab302assignment1assettradingplatform}"/>
+  
+  <property name="module.jdk.home.cab302assignment1assettradingplatform" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.cab302assignment1assettradingplatform" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.cab302assignment1assettradingplatform" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.cab302assignment1assettradingplatform" value="-encoding UTF-8 -source 15 -target 15 ${compiler.args}"/>
+  
+  <property name="cab302assignment1assettradingplatform.output.dir" value="${module.cab302assignment1assettradingplatform.basedir}/out/production/CAB302Assignment1AssetTradingPlatform"/>
+  <property name="cab302assignment1assettradingplatform.testoutput.dir" value="${module.cab302assignment1assettradingplatform.basedir}/out/test/CAB302Assignment1AssetTradingPlatform"/>
+  
+  <path id="cab302assignment1assettradingplatform.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="cab302assignment1assettradingplatform.module.production.classpath">
+    <path refid="${module.jdk.classpath.cab302assignment1assettradingplatform}"/>
+    <path refid="library.com.auth0:java-jwt:3.9.0.classpath"/>
+    <pathelement location="${path.variable.maven_repository}/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-api/5.4.2/junit-jupiter-api-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-engine/5.4.2/junit-jupiter-engine-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-params/5.4.2/junit-jupiter-params-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter/5.4.2/junit-jupiter-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-commons/1.4.2/junit-platform-commons-1.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-engine/1.4.2/junit-platform-engine-1.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar"/>
+    <path refid="library.org.mariadb.jdbc:mariadb-java-client:2.7.2.classpath"/>
+    <path refid="library.org.junit.jupiter:junit-jupiter:5.4.2.classpath"/>
+    <path refid="library.org.controlsfx:controlsfx:11.1.0.classpath"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  <path id="cab302assignment1assettradingplatform.runtime.production.module.classpath">
+    <pathelement location="${cab302assignment1assettradingplatform.output.dir}"/>
+    <path refid="library.com.auth0:java-jwt:3.9.0.classpath"/>
+    <pathelement location="${path.variable.maven_repository}/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-api/5.4.2/junit-jupiter-api-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-engine/5.4.2/junit-jupiter-engine-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-params/5.4.2/junit-jupiter-params-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter/5.4.2/junit-jupiter-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-commons/1.4.2/junit-platform-commons-1.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-engine/1.4.2/junit-platform-engine-1.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar"/>
+    <path refid="library.org.mariadb.jdbc:mariadb-java-client:2.7.2.classpath"/>
+    <path refid="library.org.junit.jupiter:junit-jupiter:5.4.2.classpath"/>
+    <path refid="library.org.controlsfx:controlsfx:11.1.0.classpath"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  <path id="cab302assignment1assettradingplatform.module.classpath">
+    <path refid="${module.jdk.classpath.cab302assignment1assettradingplatform}"/>
+    <pathelement location="${cab302assignment1assettradingplatform.output.dir}"/>
+    <path refid="library.com.auth0:java-jwt:3.9.0.classpath"/>
+    <pathelement location="${path.variable.maven_repository}/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-api/5.4.2/junit-jupiter-api-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-engine/5.4.2/junit-jupiter-engine-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-params/5.4.2/junit-jupiter-params-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter/5.4.2/junit-jupiter-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-commons/1.4.2/junit-platform-commons-1.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-engine/1.4.2/junit-platform-engine-1.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar"/>
+    <path refid="library.org.mariadb.jdbc:mariadb-java-client:2.7.2.classpath"/>
+    <path refid="library.org.junit.jupiter:junit-jupiter:5.4.2.classpath"/>
+    <path refid="library.org.controlsfx:controlsfx:11.1.0.classpath"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  <path id="cab302assignment1assettradingplatform.runtime.module.classpath">
+    <pathelement location="${cab302assignment1assettradingplatform.testoutput.dir}"/>
+    <pathelement location="${cab302assignment1assettradingplatform.output.dir}"/>
+    <path refid="library.com.auth0:java-jwt:3.9.0.classpath"/>
+    <pathelement location="${path.variable.maven_repository}/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-api/5.4.2/junit-jupiter-api-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-engine/5.4.2/junit-jupiter-engine-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter-params/5.4.2/junit-jupiter-params-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/jupiter/junit-jupiter/5.4.2/junit-jupiter-5.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-commons/1.4.2/junit-platform-commons-1.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/junit/platform/junit-platform-engine/1.4.2/junit-platform-engine-1.4.2.jar"/>
+    <pathelement location="${path.variable.maven_repository}/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar"/>
+    <path refid="library.org.mariadb.jdbc:mariadb-java-client:2.7.2.classpath"/>
+    <path refid="library.org.junit.jupiter:junit-jupiter:5.4.2.classpath"/>
+    <path refid="library.org.controlsfx:controlsfx:11.1.0.classpath"/>
+    <path refid="library.lib.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.cab302assignment1assettradingplatform">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.cab302assignment1assettradingplatform">
+    <patternset refid="excluded.from.module.cab302assignment1assettradingplatform"/>
+  </patternset>
+  
+  <path id="cab302assignment1assettradingplatform.module.sourcepath">
+    <dirset dir="${module.cab302assignment1assettradingplatform.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  <path id="cab302assignment1assettradingplatform.module.test.sourcepath">
+    <dirset dir="${module.cab302assignment1assettradingplatform.basedir}">
+      <include name="Tests"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.cab302assignment1assettradingplatform" depends="compile.module.cab302assignment1assettradingplatform.production,compile.module.cab302assignment1assettradingplatform.tests" description="Compile module CAB302Assignment1AssetTradingPlatform"/>
+  
+  <target name="compile.module.cab302assignment1assettradingplatform.production" depends="register.custom.compilers" description="Compile module CAB302Assignment1AssetTradingPlatform; production classes">
+    <mkdir dir="${cab302assignment1assettradingplatform.output.dir}"/>
+    <javac2 destdir="${cab302assignment1assettradingplatform.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.cab302assignment1assettradingplatform}/javac">
+      <compilerarg line="${compiler.args.cab302assignment1assettradingplatform}"/>
+      <bootclasspath refid="cab302assignment1assettradingplatform.module.bootclasspath"/>
+      <classpath refid="cab302assignment1assettradingplatform.module.production.classpath"/>
+      <src refid="cab302assignment1assettradingplatform.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.cab302assignment1assettradingplatform"/>
+    </javac2>
+    
+    <copy todir="${cab302assignment1assettradingplatform.output.dir}">
+      <fileset dir="${module.cab302assignment1assettradingplatform.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.cab302assignment1assettradingplatform.tests" depends="register.custom.compilers,compile.module.cab302assignment1assettradingplatform.production" description="compile module CAB302Assignment1AssetTradingPlatform; test classes" unless="skip.tests">
+    <mkdir dir="${cab302assignment1assettradingplatform.testoutput.dir}"/>
+    <javac2 destdir="${cab302assignment1assettradingplatform.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.cab302assignment1assettradingplatform}/javac">
+      <compilerarg line="${compiler.args.cab302assignment1assettradingplatform}"/>
+      <bootclasspath refid="cab302assignment1assettradingplatform.module.bootclasspath"/>
+      <classpath refid="cab302assignment1assettradingplatform.module.classpath"/>
+      <src refid="cab302assignment1assettradingplatform.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.cab302assignment1assettradingplatform"/>
+    </javac2>
+    
+    <copy todir="${cab302assignment1assettradingplatform.testoutput.dir}">
+      <fileset dir="${module.cab302assignment1assettradingplatform.basedir}/Tests">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.cab302assignment1assettradingplatform" description="cleanup module">
+    <delete dir="${cab302assignment1assettradingplatform.output.dir}"/>
+    <delete dir="${cab302assignment1assettradingplatform.testoutput.dir}"/>
+  </target>
+</project>
