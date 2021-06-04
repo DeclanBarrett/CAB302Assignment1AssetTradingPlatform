@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Small ant changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CAB302Assignment1AssetTradingPlatform.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/db.props" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/db.props" afterDir="false" />
     </list>
@@ -282,13 +281,6 @@
       <workItem from="1620623791548" duration="624000" />
       <workItem from="1620624432090" duration="81000" />
       <workItem from="1621403761490" duration="6207000" />
-    </task>
-    <task id="LOCAL-00012" summary="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :).">
-      <created>1620447292878</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1620447292878</updated>
     </task>
     <task id="LOCAL-00013" summary="Fixed Git with .gitignore, intellij does not like it but i moved it to project root and used Git Terminal to fix it :).">
       <created>1620447493972</created>
@@ -626,7 +618,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622800239197</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Small ant changes">
+      <created>1622802533952</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1622802533952</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
