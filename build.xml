@@ -158,23 +158,6 @@
   <path id="library.org.mariadb.jdbc:mariadb-java-client:2.7.2.classpath">
     <pathelement location="${path.variable.maven_repository}/org/mariadb/jdbc/mariadb-java-client/2.7.2/mariadb-java-client-2.7.2.jar"/>
   </path>
-  <!-- Register Custom Compiler Taskdefs -->
-  <property name="javac2.home" value="${idea.home}/lib"/>
-  <path id="javac2.classpath">
-    <fileset dir="${javac2.home}">
-      <include name="jdom.jar"/>
-      <include name="asm-all*.jar"/>
-      <include name="forms-*.jar"/>
-      <include name="forms_rt.jar"/>
-    </fileset>
-    <fileset dir="${idea.home}/plugins/java/lib">
-      <include name="javac2.jar"/>
-    </fileset>
-  </path>
-  <target name="register.custom.compilers">
-    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
-    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
-  </target>
   
   <!-- Modules -->
   
@@ -287,15 +270,15 @@
   
   <target name="compile.module.cab302assignment1assettradingplatform" depends="compile.module.cab302assignment1assettradingplatform.production,compile.module.cab302assignment1assettradingplatform.tests" description="Compile module CAB302Assignment1AssetTradingPlatform"/>
   
-  <target name="compile.module.cab302assignment1assettradingplatform.production" depends="register.custom.compilers" description="Compile module CAB302Assignment1AssetTradingPlatform; production classes">
+  <target name="compile.module.cab302assignment1assettradingplatform.production" description="Compile module CAB302Assignment1AssetTradingPlatform; production classes">
     <mkdir dir="${cab302assignment1assettradingplatform.output.dir}"/>
-    <javac2 destdir="${cab302assignment1assettradingplatform.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.cab302assignment1assettradingplatform}/javac">
+    <javac destdir="${cab302assignment1assettradingplatform.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.cab302assignment1assettradingplatform}/javac">
       <compilerarg line="${compiler.args.cab302assignment1assettradingplatform}"/>
       <bootclasspath refid="cab302assignment1assettradingplatform.module.bootclasspath"/>
       <classpath refid="cab302assignment1assettradingplatform.module.production.classpath"/>
       <src refid="cab302assignment1assettradingplatform.module.sourcepath"/>
       <patternset refid="excluded.from.compilation.cab302assignment1assettradingplatform"/>
-    </javac2>
+    </javac>
     
     <copy todir="${cab302assignment1assettradingplatform.output.dir}">
       <fileset dir="${module.cab302assignment1assettradingplatform.basedir}/src">
@@ -305,15 +288,15 @@
     </copy>
   </target>
   
-  <target name="compile.module.cab302assignment1assettradingplatform.tests" depends="register.custom.compilers,compile.module.cab302assignment1assettradingplatform.production" description="compile module CAB302Assignment1AssetTradingPlatform; test classes" unless="skip.tests">
+  <target name="compile.module.cab302assignment1assettradingplatform.tests" depends="compile.module.cab302assignment1assettradingplatform.production" description="compile module CAB302Assignment1AssetTradingPlatform; test classes" unless="skip.tests">
     <mkdir dir="${cab302assignment1assettradingplatform.testoutput.dir}"/>
-    <javac2 destdir="${cab302assignment1assettradingplatform.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.cab302assignment1assettradingplatform}/javac">
+    <javac destdir="${cab302assignment1assettradingplatform.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.cab302assignment1assettradingplatform}/javac">
       <compilerarg line="${compiler.args.cab302assignment1assettradingplatform}"/>
       <bootclasspath refid="cab302assignment1assettradingplatform.module.bootclasspath"/>
       <classpath refid="cab302assignment1assettradingplatform.module.classpath"/>
       <src refid="cab302assignment1assettradingplatform.module.test.sourcepath"/>
       <patternset refid="excluded.from.compilation.cab302assignment1assettradingplatform"/>
-    </javac2>
+    </javac>
     
     <copy todir="${cab302assignment1assettradingplatform.testoutput.dir}">
       <fileset dir="${module.cab302assignment1assettradingplatform.basedir}/Tests">
