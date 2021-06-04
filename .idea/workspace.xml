@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37d7a831-97d7-4353-8e70-59661f6cf33b" name="Default Changelist" comment="Small ant changes">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Models/db.props" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/db.props" afterDir="false" />
     </list>
     <list id="c6b544b2-9c91-4d1b-b35b-12df5591b860" name="Revert &quot;Small ant changes&quot;" comment="Revert &quot;Small ant changes&quot;&#10;&#10;This reverts commit dac922df" />
@@ -64,6 +65,18 @@
     <setting file="file://$PROJECT_DIR$/src/Controllers/BackEnd/NetworkObjects/Order.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Models/InformationGrabber.java" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/.idea/workspace.xml">
+      <ranges>
+        <range start1="7" end1="7" start2="7" end2="8" changelist="37d7a831-97d7-4353-8e70-59661f6cf33b" />
+        <range start1="65" end1="65" start2="66" end2="78" changelist="37d7a831-97d7-4353-8e70-59661f6cf33b" />
+        <range start1="92" end1="93" start2="105" end2="106" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
+        <range start1="95" end1="96" start2="108" end2="109" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
+        <range start1="102" end1="102" start2="115" end2="116" changelist="1d66ed2f-80c1-40d0-8b04-d368d753e280" />
+        <range start1="617" end1="618" start2="631" end2="639" changelist="37d7a831-97d7-4353-8e70-59661f6cf33b" />
+      </ranges>
+    </file>
+  </component>
   <component name="ProjectId" id="1qoyBDtoSUT10ozznKhI69mkQcv" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -75,7 +88,6 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mariadb" />
     <property name="Downloaded.Files.Path.Enabled" value="true" />
-    <property name="GenerateAntBuildDialog.generateIdeaHomeProperty" value="true" />
     <property name="GenerateAntBuildDialog.generateSingleFile" value="true" />
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="build" />
     <property name="Repository.Attach.Annotations" value="false" />
@@ -615,7 +627,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622786223249</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Small ant changes">
+      <created>1622786433475</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1622786433475</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
